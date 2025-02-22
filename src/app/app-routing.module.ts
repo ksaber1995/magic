@@ -1,4 +1,3 @@
-import { AuthModule } from './modules/auth/auth.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

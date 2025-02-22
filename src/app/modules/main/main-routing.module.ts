@@ -13,8 +13,17 @@ const routes: Routes = [
       { path: 'list-messages', component: ListMessagesComponent },
       { path: 'send-messages', component: CreateMessageComponent },
       { path: 'settings', component: SettingsComponent },
+
+      //programs
+      { path: 'programs/:id/procedures', component: ListMessagesComponent },
+      { path: 'programs/:id/files', component: CreateMessageComponent },
+      { path: 'programs/:id/members', component: SettingsComponent },
+      { path: 'programs/:id/reports', component: CreateMessageComponent },
+      { path: 'programs/:id/supreme-committee-decisions', component: SettingsComponent },
+
     ],
   },
+
 ];
 
 @NgModule({
