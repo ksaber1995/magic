@@ -1,1 +1,38 @@
-<p>login works!</p>
+<div class="login-container flex items-center justify-center h-screen">
+  <div class="side-right w-1/2 h-screen">
+    <a href="" class="logo">
+      <img src="assets/images/logo.png" alt="بيئة الرياض">
+      <h1 class="title">بوابة البرنامج</h1>
+    </a>
+  </div>
+  <div class="side-left w-1/2 flex items-center justify-center">
+    <div class="login-form">
+      <div class="header">تسجيل الدخول</div>
+      <form class="p-5">
+        <div class="input-field mb-8 ">
+          <label for="email">البريد الإلكتروني</label>
+          <input id="email" />
+        </div>
+        <div class="input-field mb-8">
+          <label for="password">كلمة المرور</label>
+          <input id="password" />
+        </div>
+        <div class="captcha-wrapper flex items-center gap-10">
+          <div class="input-field mb-8 w-1/2">
+            <label for="captcha">كود التحققق</label>
+            <input id="captcha" />
+          </div>
+          <div class="captcha w-1/2 flex items-center justify-center">{{captchaNumber}}</div>
+        </div>
+        <div class="login-actions flex items-center justify-between ">
+          <a href="">نسيت كلمة المرور</a>
+          <div class="remeber-input-field flex items-center gap-2 ">
+            <label for="remeber-me" class="remeber-me">تذكرني</label>
+            <input id="remeber-me" type="checkbox" />
+          </div>
+        </div>
+      </form>
+      <button class="enter-btn">دخول</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+.login-container {
+  background-color: #9acc23;
+
+  .side-right {
+    background-image: url("/assets/images/backlogin.png");
+    background-repeat: no-repeat;
+    background-position: 70px 110px;
+    position: relative;
+    .logo {
+      display: inline-block;
+      padding: 25px 25px 50px 25px;
+      background: #fff;
+      border-bottom-left-radius: 85px;
+      border-bottom-right-radius: 40px;
+      box-shadow: 0px 0px 8px 0px #c1c1c1;
+      margin-right: 60px;
+    }
+    .title {
+      font-size: 60px;
+      font-weight: bold;
+      text-align: left;
+      position: absolute;
+      top: 65%;
+      margin: 0;
+      left: 75px;
+      color: white;
+    }
+  }
+
+  .login-form {
+    width: 50%;
+    background-color: white;
+    border-radius: 8px;
+    .header {
+      margin: 0;
+      background: #efffca;
+      color: #9acc23;
+      text-align: center;
+      font-size: 25px;
+      padding: 20px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    .input-field {
+      label {
+        display: block;
+        color: #2e2e2e;
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      input {
+        display: block;
+        width: 100%;
+        height: 40px;
+        padding: 6px 12px;
+        font-size: 14px;
+        color: #555;
+        background-color: #fff;
+        border: 1px solid #c4c4c4;
+      }
+    }
+    .remeber-input-field {
+      .remeber-me {
+        color: #9acc23;
+      }
+    }
+    .captcha-wrapper {
+      .captcha {
+        background-color: #9acc23;
+        height: 40px;
+        font-size: 2rem;
+      }
+    }
+    .enter-btn {
+      margin: 0;
+      background: #efffca;
+      color: #9acc23;
+      text-align: center;
+      font-size: 25px;
+      padding: 15px;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      border: 0;
+      transition: 0.3s;
+      width: 100%;
+      height: 60px;
+    }
+  }
+}
+
+form input[type="checkbox"]:checked {
+  background: #9acc23 !important;
+  outline: 0;
+  border: 1px solid #2e2e2e !important;
+}
