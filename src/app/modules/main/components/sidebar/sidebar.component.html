@@ -1,0 +1,17 @@
+<ul>
+  <li *ngFor="let item of routes">
+      <ul>
+        <a > {{item.name}}</a>
+
+        <li *ngFor="let children of item.childrens">
+          <a [routerLink]="children.path">{{children.name}}</a>
+        </li>
+      </ul>
+  </li>
+
+  <li>
+    <a routerLink="/main/settings">
+      الاعدادات
+    </a>
+  </li>
+</ul>

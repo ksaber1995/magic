@@ -1,0 +1,15 @@
+
+<mat-sidenav-container >
+  <mat-sidenav [opened]="true" [disableClose]="true" [mode]="'push'">
+
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-header></app-header>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
