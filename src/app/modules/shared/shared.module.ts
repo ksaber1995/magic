@@ -2,9 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.component';
 import { CardComponent } from './components/card/card.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const declarationsImports = [
   CardComponent
+]
+const imports = [
+  ReactiveFormsModule,
+  FormsModule
 ]
 
 @NgModule({
@@ -13,10 +18,12 @@ const declarationsImports = [
     ...declarationsImports
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ...imports
   ],
   exports:[
-    CardComponent
+    ...declarationsImports,
+    ...imports
   ]
 })
 export class SharedModule { }

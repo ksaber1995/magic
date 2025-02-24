@@ -8,14 +8,25 @@
   <div class="side-left w-1/2 flex items-center justify-center">
     <div class="login-form">
       <div class="header">تسجيل الدخول</div>
-      <form class="p-5">
+      <form class="p-5" [formGroup]="loginForm">
         <div class="input-field mb-8 ">
           <label for="email">البريد الإلكتروني</label>
-          <input id="email" />
+          <input 
+          id="email" 
+          formControlName="email"
+          [class.error]="!loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+          />
+          <div *ngIf="!loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">حقل البريد الالكتروني مطلوب.</div>
         </div>
         <div class="input-field mb-8">
           <label for="password">كلمة المرور</label>
-          <input id="password" />
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            [class.error]="!loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+           />
+           <div *ngIf="!loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">حقل كلمة المرور مطلوب.</div>
         </div>
         <div class="captcha-wrapper flex items-center gap-10">
           <div class="input-field mb-8 w-1/2">
@@ -25,14 +36,14 @@
           <div class="captcha w-1/2 flex items-center justify-center">{{captchaNumber}}</div>
         </div>
         <div class="login-actions flex items-center justify-between ">
-          <a href="">نسيت كلمة المرور</a>
+          <a routerLink="/login/forget-password">نسيت كلمة المرور</a>
           <div class="remeber-input-field flex items-center gap-2 ">
             <label for="remeber-me" class="remeber-me">تذكرني</label>
             <input id="remeber-me" type="checkbox" />
           </div>
         </div>
       </form>
-      <button class="enter-btn">دخول</button>
+      <button class="enter-btn"  (click)="login()">دخول</button>
     </div>
   </div>
 </div>
