@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../../auth/services/auth.service';
+import { Router } from '@angular/router';
 
 
 interface Item {
@@ -51,4 +53,23 @@ const routes: Item [] = [
 })
 export class SidebarComponent {
   routes = routes;
+  userInfo = {
+    image : "assets/images/user-image.jpg", 
+    name : "Admin",
+    role : "اللجنة العليا"
+  }
+  notificationsCount : number = 2;
+
+  constructor(
+    private auth : AuthService, 
+    private router: Router
+  ) {
+    
+  }
+  
+
+  logout(){
+    this.auth.logout()
+    this.router.navigate(['/login'])
+  }
 }

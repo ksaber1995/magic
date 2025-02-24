@@ -1,17 +1,34 @@
-<ul>
-  <li *ngFor="let item of routes">
+<div class="sidebar-container">
+  <div class="sidebar-title">بوابة المشاريع</div>
+  <div class="profile-info w-100 px-3 py-9">
+    <div class="info flex gap-2 items-center">
+      <img src="{{ userInfo.image }}" class="user-image" alt="" />
+      <div class="about-user">
+        <div class="user-name">{{ userInfo.name }}</div>
+        <div class="user-role">{{ userInfo.role }}</div>
+      </div>
+    </div>
+    <div class="actions text-white flex gap-3 my-5">
+      <button class="notifications ">
+        <i class="bi bi-bell-fill "></i>
+        {{ notificationsCount }} الاشعارات</button>
+      <button (click)="logout()" class="logout">
+        <i class="bi bi-person-fill "></i>
+        تسحيل الخروج</button>
+    </div>
+  </div>
+  <ul>
+    <li *ngFor="let item of routes">
       <ul>
-        <a > {{item.name}}</a>
-
+        <a> {{ item.name }}</a>
         <li *ngFor="let children of item.childrens">
-          <a [routerLink]="children.path">{{children.name}}</a>
+          <a [routerLink]="children.path">{{ children.name }}</a>
         </li>
       </ul>
-  </li>
+    </li>
 
-  <li>
-    <a routerLink="/main/settings">
-      الاعدادات
-    </a>
-  </li>
-</ul>
+    <li>
+      <a routerLink="/main/settings"> الاعدادات </a>
+    </li>
+  </ul>
+</div>
