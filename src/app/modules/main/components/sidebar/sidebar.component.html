@@ -9,25 +9,38 @@
       </div>
     </div>
     <div class="actions text-white flex gap-3 my-5">
-      <button class="notifications ">
-        <i class="bi bi-bell-fill "></i>
-        {{ notificationsCount }} الاشعارات</button>
+      <button class="notifications">
+        <i class="bi bi-bell-fill"></i>
+        {{ notificationsCount }} الاشعارات
+      </button>
       <button (click)="logout()" class="logout">
-        <i class="bi bi-person-fill "></i>
-        تسحيل الخروج</button>
+        <i class="bi bi-person-fill"></i>
+        تسحيل الخروج
+      </button>
     </div>
   </div>
   <ul>
-    <li *ngFor="let item of routes">
-      <ul>
-        <a> {{ item.name }}</a>
-        <li *ngFor="let children of item.childrens">
-          <a [routerLink]="children.path">{{ children.name }}</a>
+    <li *ngFor="let item of routes" class="sidebar-item text-white " >
+      <div class="flex items-center justify-between p-3 " (click)="showChildrenItemsToggle(item)">
+        <div class="flex gap-2">
+          <img src="{{ item.icon }}" alt="" class="item-icon" />
+          <a> {{ item.name }}</a>
+        </div>
+        <i class="bi bi-chevron-double-up" *ngIf="item.showChildren"   style="font-size: 16px;"></i>
+        <i class="bi bi-chevron-double-down" *ngIf="!item.showChildren"  style="font-size: 16px;"></i>
+      </div>
+      
+      <ul class="item-childern" *ngIf="item.showChildren" >
+        <li *ngFor="let children of item.childrens" [routerLink]="children.path" class="child flex items-center gap-2">
+          <span class="v-line"></span>
+          <img src="{{children.icon}}" alt="" class="child-image">
+          <div class="child-name" >{{ children.name }}</div>
         </li>
       </ul>
     </li>
 
-    <li>
+    <li class="sidebar-item text-white flex p-3 gap-2 " >
+      <img src="assets/images/settings.svg" alt="" class="item-icon" />
       <a routerLink="/main/settings"> الاعدادات </a>
     </li>
   </ul>
