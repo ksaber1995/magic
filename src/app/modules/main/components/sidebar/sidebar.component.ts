@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 
 interface Item {
   name: string;
+  icon: string;
+  showChildren:boolean;
   childrens: {
     name: string;
     path: string;
@@ -38,7 +40,63 @@ interface Item {
 
 const routes: Item [] = [
   {
+    name: 'الاجتماعات',
+    icon: 'assets/images/meeting.svg',
+    showChildren: false,
+    childrens: [
+      { name: 'قائمة الاجتماعات', path: '/main/list-messages', icon: 'assets/images/list-mt.png' },
+      { name: 'انشاء اجتماع جديد', path: '/main/send-messages', icon: 'assets/images/new-meet.png' },
+    ],
+  },
+  {
+    name: 'ادارة المستخدمين',
+    icon: 'assets/images/users-p.svg',
+    showChildren: false,
+    childrens: [
+      { name: 'الرسائل القصيرة', path: '/main/list-messages', icon: '' },
+      { name: 'ارسال رسالة جديدة', path: '/main/send-messages', icon: '' },
+    ],
+  },
+  {
+    name: 'ادارة الصلاحيات',
+    icon: 'assets/images/reference-u.svg',
+    showChildren: false,
+    childrens: [
+      { name: 'الرسائل القصيرة', path: '/main/list-messages', icon: '' },
+      { name: 'ارسال رسالة جديدة', path: '/main/send-messages', icon: '' },
+    ],
+  },
+  {
+    name: 'ادارة الإذونات',
+    icon: 'assets/images/permissions.svg',
+    showChildren: false,
+    childrens: [
+      { name: 'الرسائل القصيرة', path: '/main/list-messages', icon: '' },
+      { name: 'ارسال رسالة جديدة', path: '/main/send-messages', icon: '' },
+    ],
+  },
+  {
+    name: 'ادارة أخر مستجدات اللجنة',
+    icon: 'assets/images/news-s.svg',
+    showChildren: false,
+    childrens: [
+      { name: 'الرسائل القصيرة', path: '/main/list-messages', icon: '' },
+      { name: 'ارسال رسالة جديدة', path: '/main/send-messages', icon: '' },
+    ],
+  },
+  {
+    name: 'قرارات اللجنة العليا',
+    icon: 'assets/images/news-s.svg',
+    showChildren: false,
+    childrens: [
+      { name: 'الرسائل القصيرة', path: '/main/list-messages', icon: '' },
+      { name: 'ارسال رسالة جديدة', path: '/main/send-messages', icon: '' },
+    ],
+  },
+  {
     name: 'الرسائل القصيرة',
+    icon: 'assets/images/news-s.svg',
+    showChildren: false,
     childrens: [
       { name: 'الرسائل القصيرة', path: '/main/list-messages', icon: '' },
       { name: 'ارسال رسالة جديدة', path: '/main/send-messages', icon: '' },
@@ -58,6 +116,7 @@ export class SidebarComponent {
     name : "Admin",
     role : "اللجنة العليا"
   }
+  showChildren : boolean = false;
   notificationsCount : number = 2;
 
   constructor(
@@ -71,5 +130,8 @@ export class SidebarComponent {
   logout(){
     this.auth.logout()
     this.router.navigate(['/login'])
+  }
+  showChildrenItemsToggle(item:Item ){
+    item.showChildren = !item.showChildren;
   }
 }

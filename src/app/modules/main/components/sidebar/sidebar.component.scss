@@ -1,5 +1,4 @@
 .sidebar-container {
-  position: fixed;
   width: 320px;
   height: 100%;
   z-index: 10;
@@ -33,14 +32,51 @@
         font-size: 15px;
       }
     }
-    .actions{
-      button{
+    .actions {
+      button {
         border: none;
-        &:hover{
+        &:hover {
           cursor: pointer;
           font-size: 14px;
         }
       }
     }
   }
+  .sidebar-item {
+    
+    background: #9d9d9d;
+    height: fit-content;
+    min-height: 60px;
+    font-size: 18px;
+    font-weight: 500;
+    &:hover {
+      cursor: pointer;
+    }
+    .item-childern {
+      display: block;
+      transition: all 1s ease-in-out;
+      .child {
+        height: 50px;
+        background: #eaeaea;
+        border-bottom: 1px solid #dedede;
+        .v-line{
+          display: block;
+          width: 40px;
+          height: 100%;
+          border-left: 1px solid #e0e0e0;
+        }
+        .child-name{
+          display: block;
+          color: #8a8a8a;
+          margin: 0;
+        }
+        .child-image{
+          width: 20px;
+        }
+      }
+    }
+  }
+}
+.item-icon {
+  width: 28px;
 }
