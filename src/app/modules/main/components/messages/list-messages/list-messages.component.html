@@ -1,1 +1,40 @@
-<p>list-messages works!</p>
+<div class="messages-container m-8 h-full w-100">
+  <div class="messages-header p-3">الرسائل القصيرة</div>
+  <div class="messages-content p-3">
+    <div class="message-item" *ngFor="let message of messagesList">
+      <div class="message-date">{{ message.date }}</div>
+      <div class="message-details flex">
+        <div class="message-card">
+          <div class="message-status">تم ارسال الرسالة</div>
+          <div class="message-body">
+            <div class="message-text-content w-100">
+              <div class="message-text">{{ message.message.content }}</div>
+              <div class="message-date-info">{{ message.message.date }}</div>
+              <div class="message-time">{{ message.message.hour }}</div>
+              <div class="message-location">
+                الموقع: {{ message.message.location }}
+              </div>
+            </div>
+            <div class="message-recipients">
+              <span class="recipients-title">مرسلة الي</span>
+              <div
+                class="recipient-item"
+                *ngFor="let receiver of message.receiversList"
+              >
+                <img
+                  src="{{ receiver.photoPath }}"
+                  alt=""
+                  class="recipient-photo"
+                />
+                <div class="recipient-name">{{ receiver.name }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="message-time">
+          {{ message.hour }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

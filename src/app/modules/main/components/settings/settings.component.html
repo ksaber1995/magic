@@ -1,5 +1,34 @@
-<div class="container">
-    <div class="settingForm">
-        <div class="input-form-field"></div>
+<div class="container w-100 h-full flex items-center justify-center">
+    <div class="setting-form p-10">
+        <form  [formGroup]="settingForm">
+            <div class="input-field">
+                <label for="name">اسم الموقع</label>
+                <input 
+                id="name" 
+                formControlName="name"
+                [class.error]="!settingForm.get('name')?.invalid && settingForm.get('name')?.touched"
+                placeholder="اسم الموقع"
+                />
+            </div>
+            <div class="input-field">
+                <label for="email">البريد الإلكتروني</label>
+                <input 
+                id="email" 
+                formControlName="email"
+                [class.error]="!settingForm.get('email')?.invalid && settingForm.get('email')?.touched"
+                placeholder="البريد الإلكتروني"
+                />
+                <div *ngIf="!settingForm.get('email')?.invalid && settingForm.get('email')?.touched" class="error-message">ادخل البريد غير صحيح.</div>
+            </div>
+            <div class="status-toggle-wraper">
+                <div class="toggle-wrapper">
+                    <p><mat-slide-toggle labelPosition="after" formControlName="emailMessgeStatus" class="mx-10">حالة ارسال رسائل email</mat-slide-toggle></p>
+                </div>
+                <div class="toggle-wrapper">
+                    <p><mat-slide-toggle formControlName="smsMessgeStatus" labelPosition="after" class="mx-10">حالة ارسال رسائل sms</mat-slide-toggle></p>
+                </div>
+            </div>
+            <button class="accept-btn" (click)="updataSite()" [disabled]="settingForm.value.invalid">موافق</button>
+        </form>
     </div>
 </div>
