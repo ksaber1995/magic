@@ -3,22 +3,22 @@
   <div class="messages-content p-3">
     <div class="message-item" *ngFor="let message of messagesList">
       <div class="message-date">{{ message.date }}</div>
-      <div class="message-details flex">
-        <div class="message-card">
+      <div class="message-details  p-2 flex" >
+        <div class="message-card" >
           <div class="message-status">تم ارسال الرسالة</div>
-          <div class="message-body">
+          <div class="message-body mb-3"  *ngFor="let message of message.messages">
             <div class="message-text-content w-100">
-              <div class="message-text">{{ message.message.content }}</div>
-              <div class="message-date-info">{{ message.message.date }}</div>
-              <div class="message-time">{{ message.message.hour }}</div>
+              <div class="message-text">{{ message.content }}</div>
+              <div class="message-date-info">{{ message.date }}</div>
+              <div class="message-hour">{{ message.hour }}</div>
               <div class="message-location">
-                الموقع: {{ message.message.location }}
+                الموقع: {{ message.location }}
               </div>
             </div>
-            <div class="message-recipients">
+            <div class="message-recipients flex flex-wrap items-center gap-2">
               <span class="recipients-title">مرسلة الي</span>
               <div
-                class="recipient-item"
+                class="recipient-item flex gap-2"
                 *ngFor="let receiver of message.receiversList"
               >
                 <img
@@ -28,6 +28,9 @@
                 />
                 <div class="recipient-name">{{ receiver.name }}</div>
               </div>
+            </div>
+            <div class="server-status">
+                حالة الرسالة : <span class="status-wrapper">  {{message.messageStatus}} </span>
             </div>
           </div>
         </div>
