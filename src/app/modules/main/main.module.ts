@@ -16,6 +16,9 @@ import { FilesComponent } from './components/programs/files/files.component';
 import { MembersComponent } from './components/programs/members/members.component';
 import { ReportsComponent } from './components/programs/reports/reports.component';
 import { SupremeCommitteeDecisionsComponent } from './components/programs/supreme-committee-decisions/supreme-committee-decisions.component';
+import { SidebarItemComponent } from './components/sidebar/sidebar-item/sidebar-item.component';
+import { ProgramsListComponent } from './components/programs/programs-list/programs-list.component';
+import { ProgramItemComponent } from './components/programs/programs-list/program-item/program-item.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { SupremeCommitteeDecisionsComponent } from './components/programs/suprem
     FilesComponent,
     MembersComponent,
     ReportsComponent,
-    SupremeCommitteeDecisionsComponent
+    SupremeCommitteeDecisionsComponent,
+    SidebarItemComponent,
+    ProgramsListComponent,
+    ProgramItemComponent
   ],
   imports: [
     CommonModule,

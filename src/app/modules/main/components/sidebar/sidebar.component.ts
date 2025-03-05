@@ -3,42 +3,58 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
 
 
-interface Item {
+interface SidebarChild {
+  name: string;
+  path: string;
+  icon: string;
+}
+export interface SideBarItem {
   name: string;
   icon: string;
-  showChildren:boolean;
-  childrens: {
-    name: string;
-    path: string;
-    icon: string;
-  }[]
+  showChildren: boolean;
+  childrens?: SidebarChild[]
 }
 
-// const programs = [ // from api
-//   { name: 'البرنامج الأول' },
-//   { name: 'البرنامج الثاني' },
-//   { name: 'البرنامج الثالث' },
-// ]
+interface ProgramsItem {
+  name: string;
+  icon: string;
+  showChildren: boolean;
 
-// const programsWithRoutes: item[] = programs.map((program => {
-//   const id = '10';// from api
-//   const item: item = {
-//     name: program.name,
-//     childrens: [
-//       { name: 'الاجراءات', path: `/main/programs/${id}/procedures`, icon: '' },
-//       { name: 'الملفات', path: `/main/programs/${id}/files`, icon: '' },
-//       { name: 'أعضاء', path: `/main/programs/${id}/members`, icon: '' },
-//       { name: 'التقارير', path: `/main/programs/${id}/reports`, icon: '' },
-//       { name: 'قرارات اللجنة العليا', path: `/main/programs/${id}/supreme-committee-decisions`, icon: '' },
+  programs: SideBarItem[];
+}
 
-//     ]
-//   }
+const programRouts: SidebarChild[] = [ // id will be dynamic
+  { name: ' الاجراءات', path: '/main/programs/id/procedures', icon: 'assets/images/list-mt.png' }, //TODO, add icon here
+  { name: 'الملفات', path: '/main/programs/id/files', icon: 'assets/images/new-meet.png' }, //TODO, add icon here
+  { name: 'أعضاء', path: '/main/programs/id/members', icon: 'assets/images/new-meet.png' }, //TODO, add icon here
+  { name: 'التقارير', path: '/main/programs/id/reports', icon: 'assets/images/new-meet.png' }, //TODO, add icon here
+  { name: 'قرارات اللجنة العليا', path: '/main/programs/id/supreme-committee-decisions', icon: 'assets/images/new-meet.png' }, //TODO, add icon here
+]
 
-//   return item
-// }))
+const programs: SideBarItem[] = [ // From endpoint
+  {
+    name: 'برنامج 1',
+    icon: 'assets/images/meeting.svg',
+    showChildren: false,
+    childrens: programRouts,
+  },
+  {
+    name: 'برنامج 2',
+    icon: 'assets/images/meeting.svg',
+    showChildren: false,
+    childrens: programRouts,
+  },
 
+]
 
-const routes: Item [] = [
+const programsParent: ProgramsItem = {
+  name: 'البرامج',
+  icon: 'assets/images/meeting.svg', //TODO, add icon here
+  showChildren: false,
+  programs: programs,
+}
+
+const routes: SideBarItem[] = [
   {
     name: 'الاجتماعات',
     icon: 'assets/images/meeting.svg',
@@ -112,26 +128,27 @@ const routes: Item [] = [
 export class SidebarComponent {
   routes = routes;
   userInfo = {
-    image : "assets/images/user-image.jpg", 
-    name : "Admin",
-    role : "اللجنة العليا"
+    image: "assets/images/user-image.jpg",
+    name: "Admin",
+    role: "اللجنة العليا"
   }
-  showChildren : boolean = false;
-  notificationsCount : number = 2;
+  showChildren = false;
+  notificationsCount = 2;
+  programsParent = programsParent;
 
   constructor(
-    private auth : AuthService, 
+    private auth: AuthService,
     private router: Router
   ) {
-    
-  }
-  
 
-  logout(){
+  }
+
+
+  logout() {
     this.auth.logout()
     this.router.navigate(['/login'])
   }
-  showChildrenItemsToggle(item:Item ){
+  showChildrenItemsToggle(item: SideBarItem) {
     item.showChildren = !item.showChildren;
   }
 }

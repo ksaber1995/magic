@@ -3,3 +3,9 @@ mat-sidenav-container{
   height: 100vh;
   background-color: #eeeeee !important;
 }
+
+
+mat-sidenav {
+  width: 400px !important; /* Set sidebar width */
+  max-width: 500px; /* Optional max width */
+}

@@ -1,0 +1,20 @@
+<div [ngStyle]="{'background': background}" class="sidebar-item" *ngIf="item">
+  <div class="flex items-center justify-between p-3 " (click)="showChildrenItemsToggle(item)">
+    <div class="flex gap-2">
+      <img src="{{ item.icon }}" alt="" class="item-icon" />
+      <a> {{ item.name }}</a>
+    </div>
+    <i class="bi bi-chevron-double-up" *ngIf="item.showChildren" style="font-size: 16px;"></i>
+    <i class="bi bi-chevron-double-down" *ngIf="!item.showChildren" style="font-size: 16px;"></i>
+  </div>
+
+  <ul class="item-childern" *ngIf="item.showChildren">
+    <ng-content></ng-content>
+
+    <li *ngFor="let children of item.childrens" [routerLink]="children.path" class="child flex items-center gap-2">
+      <span class="v-line"></span>
+      <img src="{{children.icon}}" alt="" class="child-image">
+      <div class="child-name">{{ children.name }}</div>
+    </li>
+  </ul>
+</div>
