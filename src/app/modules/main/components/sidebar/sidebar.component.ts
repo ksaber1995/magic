@@ -44,6 +44,12 @@ const programs: SideBarItem[] = [ // From endpoint
     showChildren: false,
     childrens: programRouts,
   },
+  {
+    name: 'برنامج 2',
+    icon: 'assets/images/meeting.svg',
+    showChildren: false,
+    childrens: programRouts,
+  },
 
 ]
 

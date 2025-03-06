@@ -16,6 +16,18 @@ const messages = [
             photoPath: 'assets/images/user-image.jpg',
             name: 'admin',
           },
+          {
+            photoPath: 'assets/images/user-image.jpg',
+            name: 'admin',
+          },
+          {
+            photoPath: 'assets/images/user-image.jpg',
+            name: 'admin',
+          },
+          {
+            photoPath: 'assets/images/user-image.jpg',
+            name: 'admin',
+          },
         ],
         messageStatus: 'لم يتم الاتصال بالخادم',
         

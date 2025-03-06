@@ -1,1 +1,40 @@
-<p>create-message works!</p>
+<div class="new-message-container ">
+    <div class="title p-3">
+        ارسال رسالة جديدة خاصة للأعضاء
+    </div>
+    <div class="memebers p-3 flex gap-4 w-full"> 
+        <span>الأعضاء</span>
+        <form class="w-full">
+            <mat-form-field class="example-chip-list">
+              <mat-chip-grid #chipGrid aria-label="member selection">
+                @for (member of members(); track $index) {
+                  <mat-chip-row (removed)="remove(member)">
+                    {{member}}
+                    <button matChipRemove [attr.aria-label]="'remove ' + member">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row>
+                }
+              </mat-chip-grid>
+              <input
+                name="currentmember"
+                #memberInput
+                [(ngModel)]="currentMember"
+                [matChipInputFor]="chipGrid"
+                [matAutocomplete]="auto"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)"
+              />
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event); memberInput.value = ''">
+                @for (member of filteredmembers(); track member) {
+                  <mat-option [value]="member">{{member}}</mat-option>
+                }
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+    </div>
+    <div class="p-3 ">
+        <textarea class="new-message-textarea mb-3" placeholder="نص الرسالة" rows="10" ></textarea>
+        <button class="send-message">ارسالة رسالة</button>
+    </div>
+</div>
