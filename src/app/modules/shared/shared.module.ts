@@ -8,7 +8,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
-
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
 const declarationsImports = [
   CardComponent
 ]
@@ -19,8 +20,9 @@ const imports = [
   MatAutocompleteModule,
   MatChipsModule,
   MatFormFieldModule,
-  MatIconModule
-
+  MatIconModule,
+  MatMenuModule,
+  MatDialogModule
 ]
 
 @NgModule({

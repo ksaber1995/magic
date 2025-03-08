@@ -1,0 +1,16 @@
+<div class="decision-details m-6 p-3">
+    <div class="title mb-2">{{decisionDetails.name}}</div>
+    <div class="description">
+        {{decisionDetails.description}}
+        <div class="uploadedFiles flex items-center gap-2 p-2">
+            <div class="file flex gap-2" *ngFor="let file of decisionDetails.uploadedFiles">
+                <img src="{{file.path}}" alt="" class="icon">
+                <div class="name">{{file.name}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="date text-end" *ngIf="decisionDetails.date">
+        التاريخ: {{decisionDetails.date}}
+    </div>
+
+</div>

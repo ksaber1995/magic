@@ -1,0 +1,38 @@
+.delete-dialog {
+  color: #858585;
+  font-weight: 500;
+  width: 300px;
+  height: fit-content;
+  .header {
+    border-bottom: 1px solid #eeeeee;
+    .close-i{
+        font-size: 24px;
+        cursor: pointer;
+    }
+}
+  .warning-message {
+    padding: 15px;
+    border-bottom: 1px solid #eeeeee;
+    .trash-i {
+      font-size: 35px;
+      color: #cc1919;
+    }
+  }
+  .actions {
+    button {
+      display: inline-block;
+      color: #fff;
+      font-size: 15px;
+      text-align: center;
+      padding: 7px 10px;
+      border: 0;
+      border-radius: 5px;
+    }
+    .delete-btn {
+      background: #cc1919;
+    }
+    .cancel-btn {
+      background: #8bb81f;
+    }
+  }
+}

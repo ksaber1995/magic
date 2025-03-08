@@ -10,6 +10,9 @@ import { MembersComponent } from './components/programs/members/members.componen
 import { ReportsComponent } from './components/programs/reports/reports.component';
 import { SupremeCommitteeDecisionsComponent } from './components/programs/supreme-committee-decisions/supreme-committee-decisions.component';
 import { ProgramsListComponent } from './components/programs/programs-list/programs-list.component';
+import { DesicionsListComponent } from './components/supreme-committee/desicions-list/desicions-list.component';
+import { CreateDecisionComponent } from './components/supreme-committee/create-decision/create-decision.component';
+import { DecisionDetailsComponent } from './components/supreme-committee/decision-details/decision-details.component';
 
 const routes: Routes = [
   {
@@ -29,6 +32,10 @@ const routes: Routes = [
       { path: 'programs/:id/members', component: MembersComponent },
       { path: 'programs/:id/reports', component: ReportsComponent },
       { path: 'programs/:id/supreme-committee-decisions', component: SupremeCommitteeDecisionsComponent },
+      // supereme-committee
+      { path: 'list-decisions', component: DesicionsListComponent },
+      { path: 'list-decisions/:id', component: DecisionDetailsComponent },
+      { path: 'new-decision', component: CreateDecisionComponent },
 
     ],
   },

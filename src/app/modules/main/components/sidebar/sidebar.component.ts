@@ -111,8 +111,8 @@ const routes: SideBarItem[] = [
     icon: 'assets/images/news-s.svg',
     showChildren: false,
     childrens: [
-      { name: 'الرسائل القصيرة', path: '/main/list-messages', icon: '' },
-      { name: 'ارسال رسالة جديدة', path: '/main/send-messages', icon: '' },
+      { name: 'قرارات اللجنة العليا', path: '/main/list-decisions', icon: '' },
+      { name: 'انشاء قرار جديد', path: '/main/new-decision', icon: '' },
     ],
   },
   {

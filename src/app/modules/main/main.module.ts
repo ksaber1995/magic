@@ -19,6 +19,11 @@ import { SupremeCommitteeDecisionsComponent } from './components/programs/suprem
 import { SidebarItemComponent } from './components/sidebar/sidebar-item/sidebar-item.component';
 import { ProgramsListComponent } from './components/programs/programs-list/programs-list.component';
 import { ProgramItemComponent } from './components/programs/programs-list/program-item/program-item.component';
+import { DesicionsListComponent } from './components/supreme-committee/desicions-list/desicions-list.component';
+import { CreateDecisionComponent } from './components/supreme-committee/create-decision/create-decision.component';
+import { DeleteDialogComponent } from './components/supreme-committee/delete-dialog/delete-dialog.component';
+import { DecisionDetailsComponent } from './components/supreme-committee/decision-details/decision-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,13 +41,18 @@ import { ProgramItemComponent } from './components/programs/programs-list/progra
     SupremeCommitteeDecisionsComponent,
     SidebarItemComponent,
     ProgramsListComponent,
-    ProgramItemComponent
+    ProgramItemComponent,
+    DesicionsListComponent,
+    CreateDecisionComponent,
+    DeleteDialogComponent,
+    DecisionDetailsComponent
   ],
   imports: [
     CommonModule,
     MainRoutingModule,
     MatSidenavModule,
     SharedModule,
+    FormsModule
   ]
 })
 

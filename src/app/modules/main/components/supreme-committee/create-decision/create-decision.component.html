@@ -1,0 +1,69 @@
+<div class="new-decision-container m-5 h-full">
+  <div class="header p-4">انشاء قرار</div>
+  <form action="" class="p-4" [formGroup]="decisionForm">
+    <div class="input-field flex justify-between mb-3">
+      <label> البرامج </label>
+      <select class="select-program" formControlName="program">
+        <option *ngFor="let program of programs" value="program.id">
+          {{ program.name }}
+        </option>
+      </select>
+    </div>
+    <div class="input-field flex justify-between mb-3">
+      <label> العنوان </label>
+      <input formControlName="address" type="text" class="address-input" />
+    </div>
+    <textarea
+      name=""
+      id=""
+      formControlName="descrpitioon"
+      class="details"
+      placeholder="التفاصيل"
+    ></textarea>
+    <div class="uploaded-files input-field">
+      <label class="title">ملفات مرفقة</label>
+      <input formArrayName="uploadedFiles" type="file" multiple id="fileInput" hidden />
+      <div
+        class="upload-files-button p-4"
+        onclick="document.getElementById('fileInput').click()"
+      >
+        <label>اسحب الملف هنا...</label>
+        <div class="choose-file">
+          أو قم باختيار الملف..
+          <i class="bi bi-upload"></i>
+        </div>
+      </div>
+      <div class="selected-files"></div>
+    </div>
+    <div class="input-field mt-1">
+      <label for="">نسبة الانجاز للمهمة</label>
+      <input
+        type="range"
+        min="0"
+        max="100"
+        formControlName="progressPercent"
+        class="progress-bar"
+        (input)="updateProgress($event)"
+      />
+    </div>
+    <div class="input-field flex justify-between my-4">
+      <label for="">الحالة</label>
+      <select class="select-status" formControlName="status">
+        <option value="1" selected>تحت الإجراء</option>
+        <option value="2">منجز</option>
+        <option value="3">متعثر</option>
+      </select>
+    </div>
+    <div class="input-field flex flex-col date-input-field my-4">
+      <label class="mb-1">تاريخ اصدار القرار</label>
+      <input
+        type="text"
+        class="date-input"
+        #dateInput
+        formControlName="date"
+        (click)="setTodayDate()"
+      />
+    </div>
+    <button class="add-btn" (click)="createDecision()">اضافة قرار</button>
+  </form>
+</div>
