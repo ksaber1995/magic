@@ -14,3 +14,20 @@ body {
 *{
   box-sizing: border-box;
 }
+
+.uploadedFiles{
+
+  .file{
+      background: #e1e1e1;
+      border-radius: 20px;
+      padding: 3px 7px;
+      cursor: pointer;
+      .icon{
+          width: 20px;
+          height: 20px;
+      }
+      .name{
+          color: #888888;
+      }
+  }
+}

@@ -1,0 +1,17 @@
+<div class="news-details-details m-10 p-5">
+    <div class="date mb-1">{{newsDetials.date}}</div>
+    <div class="name mb-3">{{newsDetials.name}}</div>
+    <div class="see-wrapper flex justify-between">
+        <div class="see-files">يمكنكم الاطلاع على {{newsDetials.name}} من خلال تحميل الملف المرفق.</div>
+        <img src="{{newsDetials.imagePath}}" class="news-image" alt="">
+    </div>
+    <div class="files-wrapper">
+        <div class="title">المرفقات</div>
+        <div class="uploadedFiles flex items-center gap-2 p-2">
+            <div class="file flex gap-2" *ngFor="let file of newsDetials.uploadedFiles">
+                <div class="file-name">{{file.name}}</div>
+                <img src="{{file.path}}" alt="" class="icon">
+            </div>
+        </div>
+    </div>
+</div>

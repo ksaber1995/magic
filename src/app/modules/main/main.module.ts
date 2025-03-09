@@ -24,6 +24,9 @@ import { CreateDecisionComponent } from './components/supreme-committee/create-d
 import { DeleteDialogComponent } from './components/supreme-committee/delete-dialog/delete-dialog.component';
 import { DecisionDetailsComponent } from './components/supreme-committee/decision-details/decision-details.component';
 import { FormsModule } from '@angular/forms';
+import { CommitteeUpdatesListComponent } from './components/latest-committee-updates/committee-updates-list/committee-updates-list.component';
+import { CreateNewNewsComponent } from './components/latest-committee-updates/create-new-news/create-new-news.component';
+import { NewsDetailsComponent } from './components/latest-committee-updates/news-details/news-details.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { FormsModule } from '@angular/forms';
     DesicionsListComponent,
     CreateDecisionComponent,
     DeleteDialogComponent,
-    DecisionDetailsComponent
+    DecisionDetailsComponent,
+    CommitteeUpdatesListComponent,
+    CreateNewNewsComponent,
+    NewsDetailsComponent
   ],
   imports: [
     CommonModule,

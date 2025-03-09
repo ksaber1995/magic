@@ -13,6 +13,9 @@ import { ProgramsListComponent } from './components/programs/programs-list/progr
 import { DesicionsListComponent } from './components/supreme-committee/desicions-list/desicions-list.component';
 import { CreateDecisionComponent } from './components/supreme-committee/create-decision/create-decision.component';
 import { DecisionDetailsComponent } from './components/supreme-committee/decision-details/decision-details.component';
+import { CommitteeUpdatesListComponent } from './components/latest-committee-updates/committee-updates-list/committee-updates-list.component';
+import { NewsDetailsComponent } from './components/latest-committee-updates/news-details/news-details.component';
+import { CreateNewNewsComponent } from './components/latest-committee-updates/create-new-news/create-new-news.component';
 
 const routes: Routes = [
   {
@@ -36,6 +39,11 @@ const routes: Routes = [
       { path: 'list-decisions', component: DesicionsListComponent },
       { path: 'list-decisions/:id', component: DecisionDetailsComponent },
       { path: 'new-decision', component: CreateDecisionComponent },
+      //latest-committee-updates
+      {path:'committee-updates-list' , component:CommitteeUpdatesListComponent},
+      {path:'committee-updates-list/:id' , component:NewsDetailsComponent},
+      {path:'create-new-news' , component:CreateNewNewsComponent},
+
 
     ],
   },

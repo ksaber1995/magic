@@ -1,0 +1,45 @@
+.updates-container{
+    background-color: white;
+    .updates-table{
+        padding: 5px;
+        width: 100%;
+        table-layout: fixed;
+        th{
+            text-align: justify;
+            padding: 5px;
+            border-bottom: 1px solid #f6f6f6;
+        }
+        td{
+            height: 50px;
+            padding: 5px;
+            border-bottom: 1px solid #f6f6f6;
+            button{
+                width: 85px;
+                padding: 2px 5px;
+                font-size: 12px;
+                border-radius: 3px;
+                color: white;
+                margin-left: 5px;
+                font-weight: 500;
+            }
+            .edit-news{
+                background-color: #337ab7;   
+            }
+            .delete-news{
+                background-color: #d9534f;
+            }
+            .news-image{
+                width: 70px;
+                cursor: pointer;
+            }
+        }
+        .news-name{
+            font-weight: 500;
+            color: #4183C4;
+            &:hover{
+                cursor: pointer;
+                color: #337ab7;
+            }
+        }
+    }
+}

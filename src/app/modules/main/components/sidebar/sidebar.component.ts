@@ -102,8 +102,8 @@ const routes: SideBarItem[] = [
     icon: 'assets/images/news-s.svg',
     showChildren: false,
     childrens: [
-      { name: 'الرسائل القصيرة', path: '/main/list-messages', icon: '' },
-      { name: 'ارسال رسالة جديدة', path: '/main/send-messages', icon: '' },
+      { name: 'ادارة اخر المستجدات', path: '/main/committee-updates-list', icon: '' },
+      { name: 'انشاء خبر جديد', path: '/main/create-new-news', icon: '' },
     ],
   },
   {
