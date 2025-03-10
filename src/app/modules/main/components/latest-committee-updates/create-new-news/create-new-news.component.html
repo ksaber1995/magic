@@ -1,3 +1,51 @@
-<div class="create-news-container">
-    
+<div class="create-news-container m-5 h-full p-4">
+  <form action="" class="p-4" [formGroup]="newsForm">
+    <div class="input-field flex mb-3">
+      <label> العنوان </label>
+      <input formControlName="address" placeholder="العنوان" type="text" class="address-input" />
+    </div>
+    <div class="input-field flex mb-3">
+        <label> البرامج </label>
+        <select class="select-program" formControlName="program">
+            <option value="">جميع البرامج</option>
+            <option *ngFor="let program of programs" value="program.id">
+                {{ program.name }}
+            </option>
+        </select>
+    </div>
+    <div class="input-field flex mb-3">
+      <label> الصورة</label>
+      <input type="file" accept="" class="image-input" />
+    </div>
+    <div class="input-field mb-3">
+      <label>التفاصيل</label>
+      <textarea
+        formControlName="description"
+        class="description"
+        placeholder="التفاصيل"
+      ></textarea>
+    </div>
+    <div class="uploaded-files input-field">
+      <label class="title">ملفات مرفقة</label>
+      <input
+        formArrayName="uploadedFiles"
+        type="file"
+        multiple
+        id="fileInput"
+        hidden
+      />
+      <div
+        class="upload-files-button p-4"
+        onclick="document.getElementById('fileInput').click()"
+      >
+        <label>اسحب الملف هنا...</label>
+        <div class="choose-file">
+          أو قم باختيار الملف..
+          <i class="bi bi-upload"></i>
+        </div>
+      </div>
+      <div class="selected-files"></div>
+    </div>
+    <button class="accept-btn" (click)="createNews()">موافق</button>
+  </form>
 </div>

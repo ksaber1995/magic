@@ -10,6 +10,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
+import { CreateSuccssDialogComponent } from './components/create-succss-dialog/create-succss-dialog.component';
 const declarationsImports = [
   CardComponent
 ]
@@ -28,7 +29,8 @@ const imports = [
 @NgModule({
   declarations: [
     BreadCrumbComponent,
-    ...declarationsImports
+    ...declarationsImports,
+    CreateSuccssDialogComponent
   ],
   imports: [
     CommonModule,
