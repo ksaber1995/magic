@@ -27,6 +27,11 @@ import { FormsModule } from '@angular/forms';
 import { CommitteeUpdatesListComponent } from './components/latest-committee-updates/committee-updates-list/committee-updates-list.component';
 import { CreateNewNewsComponent } from './components/latest-committee-updates/create-new-news/create-new-news.component';
 import { NewsDetailsComponent } from './components/latest-committee-updates/news-details/news-details.component';
+import { DeleteNewsPageComponent } from './components/latest-committee-updates/delete-news-page/delete-news-page.component';
+import { PermissionsListComponent } from './components/permissions-list/permissions-list.component';
+import { CreatePermissionComponent } from './components/permissions-list/create-permission/create-permission.component';
+import { RolesComponent } from './components/roles/roles.component';
+import { CreateRoleComponent } from './components/roles/create-role/create-role.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +56,12 @@ import { NewsDetailsComponent } from './components/latest-committee-updates/news
     DecisionDetailsComponent,
     CommitteeUpdatesListComponent,
     CreateNewNewsComponent,
-    NewsDetailsComponent
+    NewsDetailsComponent,
+    DeleteNewsPageComponent,
+    PermissionsListComponent,
+    CreatePermissionComponent,
+    RolesComponent,
+    CreateRoleComponent
   ],
   imports: [
     CommonModule,

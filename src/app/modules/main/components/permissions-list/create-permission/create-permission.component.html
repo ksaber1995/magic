@@ -1,0 +1,21 @@
+<div class="container w-100 h-full flex items-center justify-center">
+    <div class="permission-form p-10">
+        <form  [formGroup]="permissionForm">
+            <div class="input-field">
+                <label for="name">الاسم المختصر</label>
+                <input 
+                id="name" 
+                formControlName="name"
+                [class.error]="!permissionForm.get('name')?.invalid && permissionForm.get('name')?.touched"
+                placeholder="الاسم المختصر"
+                />
+            </div>
+            <div class="status-toggle-wraper">
+                <div class="toggle-wrapper">
+                    <p><mat-slide-toggle labelPosition="after" formControlName="emailMessgeStatus" class="mx-10">التحويل</mat-slide-toggle></p>
+                </div>
+            </div>
+            <button class="accept-btn" (click)="createPermission()" [disabled]="permissionForm.value.invalid">موافق</button>
+        </form>
+    </div>
+</div>

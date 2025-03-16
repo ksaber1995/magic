@@ -1,0 +1,40 @@
+.delete-messages-container {
+  width: 500px;
+  margin: 40px auto;
+  background: #ffffff;
+  box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
+  border-radius: 3px;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .title {
+    border: none;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .message {
+    color: #858585;
+    font-weight: 500;
+  }
+  .actions {
+    width: 100%;
+    display: flex;
+    padding: 3px 40px;
+    justify-content: space-between;
+    .back,
+    .continue {
+      cursor: pointer;
+      display: inline-block;
+      height: 36px;
+      width: 80px;
+      background: #e0e1e2 none;
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: bold;
+      border-radius: 3px;
+      box-shadow: 0px 0px 0px 1px transparent inset,
+        0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
+    }
+  }
+}

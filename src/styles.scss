@@ -31,3 +31,8 @@ body {
       }
   }
 }
+input{
+  &::placeholder{
+    height: 100%;
+  }
+}

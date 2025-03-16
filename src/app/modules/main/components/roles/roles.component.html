@@ -1,0 +1,52 @@
+<div class="roles-container m-10">
+  <table class="roles-table">
+    <thead>
+      <tr>
+        <th colspan="3">الاسم</th>
+        <th colspan="2">أعضاء</th>
+        <th colspan="2">أذونات</th>
+        <th colspan="5">خيارات</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of roles">
+        <td colspan="3" [routerLink]="[role.id]">
+          {{ role.name }}
+          <div class="tooltip-container">
+            <button [class]="role.roleId == 1 ? rolesClasses.upperPermission.className :  rolesClasses.projects.className">
+              {{role.roleId == 1 ? rolesClasses.upperPermission.name :  rolesClasses.projects.name}}
+            </button>
+            <div class="custom-tooltip">
+              <div class="tooltip-header">
+              {{role.roleId == 1 ? rolesClasses.upperPermission.name :  rolesClasses.projects.name}}
+              </div>
+              <div class="tooltip-content">one two three</div>
+            </div>
+          </div>
+        </td>
+        <td colspan="2">
+          عدد المستخدمين :
+          {{ role.members }}
+        </td>
+        <td colspan="2">
+          عدد الأذونات :
+          {{ role.roles }}
+        </td>
+        <td colspan="5">
+          <button class="edit-role">
+            <i class="bi bi-pencil-square"></i>
+            تعديل الإذن
+          </button>
+          <button class="create-role">
+            <i class="bi bi-lightning-fill"></i>
+            تحرير اذونات
+          </button>
+          <button class="delete-role" [routerLink]="[role.id + '/delete']">
+            <i class="bi bi-trash3-fill"></i>
+            حذف إذن
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

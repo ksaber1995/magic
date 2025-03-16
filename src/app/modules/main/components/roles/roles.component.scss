@@ -1,0 +1,101 @@
+.roles-container {
+  background-color: white;
+  color: #858585;
+  font-weight: 500;
+  .roles-table {
+    padding: 5px;
+    width: 100%;
+    table-layout: fixed;
+    th {
+      text-align: justify;
+      padding: 5px;
+      border-bottom: 1px solid #f6f6f6;
+    }
+    td {
+      height: 50px;
+      padding: 5px;
+      font-weight: 400;
+      border-bottom: 1px solid #f6f6f6;
+      line-height: 30px;
+      button {
+        width: 100px;
+        padding: 2px 5px;
+        font-size: 12px;
+        border-radius: 3px;
+        color: white;
+        margin-left: 1%;
+        font-weight: 500;
+      }
+      .edit-role {
+        background-color: #337ab7;
+      }
+      .delete-role {
+        background-color: #d9534f;
+      }
+      .create-role {
+        background-color: #5cb85c;
+      }
+    }
+  }
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 200px;
+  text-align: center;
+  display: none;
+  z-index: 1000;
+  margin-top: 8px;
+}
+
+.tooltip-header {
+  color: black;
+  font-weight: 500;
+  padding: 8px;
+  font-weight: bold;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.tooltip-content {
+  padding: 8px;
+  color: black;
+}
+
+.tooltip-container:hover .custom-tooltip {
+  display: block;
+}
+
+.red {
+  border: 1px solid red;
+  border-radius: 2px;
+  color: red !important;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.blue {
+  font-size: 10px !important;
+  border: 1px solid #2185d0;
+  border-radius: 2px;
+  color: #2185d0 !important;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}

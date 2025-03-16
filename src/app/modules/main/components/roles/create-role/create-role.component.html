@@ -1,0 +1,54 @@
+<div class="container w-100 h-full flex items-center justify-center">
+  <div class="role-form p-10">
+    <form [formGroup]="roleForm">
+      <div class="input-field">
+        <label for="name">الاسم المختصر</label>
+        <input
+          id="name"
+          formControlName="name"
+          [class.error]="
+            !roleForm.get('name')?.invalid && roleForm.get('name')?.touched
+          "
+          placeholder="الاسم المختصر"
+        />
+      </div>
+      <div class="input-field">
+        <label> اللون </label>
+        <select class="select-color"  pleceholder="اختر اللون">
+          <option *ngFor="let color of colors" value="{{color.id}}">
+            {{ color.color }}
+          </option>
+        </select>
+      </div>
+      <div class="status-toggle-wraper">
+        <div class="toggle-wrapper">
+          <p>
+            <mat-slide-toggle
+              labelPosition="after"
+              class="mx-10"
+              >التحويل</mat-slide-toggle
+            >
+          </p>
+          <p>
+            <mat-slide-toggle
+              labelPosition="after"
+              class="mx-10"
+              >السماح بالتعديل</mat-slide-toggle
+            >
+          </p>
+        </div>
+
+        <div class="toggle-list">
+
+        </div>
+      </div>
+      <button
+        class="accept-btn"
+        (click)="createRole()"
+        [disabled]="roleForm.value.invalid"
+      >
+        موافق
+      </button>
+    </form>
+  </div>
+</div>

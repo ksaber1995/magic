@@ -84,8 +84,8 @@ const routes: SideBarItem[] = [
     icon: 'assets/images/reference-u.svg',
     showChildren: false,
     childrens: [
-      { name: 'الرسائل القصيرة', path: '/main/list-messages', icon: '' },
-      { name: 'ارسال رسالة جديدة', path: '/main/send-messages', icon: '' },
+      { name: 'قائمة الصلاحيات', path: '/main/roles', icon: '' },
+      { name: 'انشاء صلاحية', path: '/main/create-role', icon: '' },
     ],
   },
   {
@@ -93,8 +93,8 @@ const routes: SideBarItem[] = [
     icon: 'assets/images/permissions.svg',
     showChildren: false,
     childrens: [
-      { name: 'الرسائل القصيرة', path: '/main/list-messages', icon: '' },
-      { name: 'ارسال رسالة جديدة', path: '/main/send-messages', icon: '' },
+      { name: 'قائمة الأذونات', path: '/main/permissions-list', icon: '' },
+      { name: 'إنشاء اذن', path: '/main/new-permission', icon: '' },
     ],
   },
   {
