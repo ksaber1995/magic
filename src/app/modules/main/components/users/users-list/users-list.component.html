@@ -1,0 +1,59 @@
+<div class="users-container m-10">
+  <table class="users-table">
+    <thead>
+      <tr>
+        <th colspan="2">الصوؤة الرمزية</th>
+        <th colspan="3">الاسم</th>
+        <th colspan="3">اللجان</th>
+        <th colspan="3">الايميل</th>
+        <th colspan="3">خيارات</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td colspan="2" [routerLink]="[user.id]">
+          <img src="{{ user.imagePath }}" alt="" />
+        </td>
+        <td colspan="2" [routerLink]="[user.id]">{{ user.name }}</td>
+        <td colspan="3">
+          <div class="tooltip-container">
+            <button
+              [class]="
+                role.roleId == 1
+                  ? rolesClasses.upperPermission.className
+                  : rolesClasses.projects.className
+              "
+            >
+              {{
+                role.roleId == 1
+                  ? rolesClasses.upperPermission.name
+                  : rolesClasses.projects.name
+              }}
+            </button>
+            <div class="custom-tooltip">
+              <div class="tooltip-header">
+                {{
+                  role.roleId == 1
+                    ? rolesClasses.upperPermission.name
+                    : rolesClasses.projects.name
+                }}
+              </div>
+              <div class="tooltip-content">one two three</div>
+            </div>
+          </div>
+        </td>
+        <td colspan="3">{{ user.email }}</td>
+        <td colspan="3">
+          <button class="edit-user">
+            <i class="bi bi-pencil-square"></i>
+            تحرير إذن
+          </button>
+          <button class="delete-user" [routerLink]="[user.id + '/delete']">
+            <i class="bi bi-trash3-fill"></i>
+            حذف إذن
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

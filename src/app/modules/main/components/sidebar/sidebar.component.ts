@@ -75,8 +75,9 @@ const routes: SideBarItem[] = [
     icon: 'assets/images/users-p.svg',
     showChildren: false,
     childrens: [
-      { name: 'الرسائل القصيرة', path: '/main/list-messages', icon: '' },
-      { name: 'ارسال رسالة جديدة', path: '/main/send-messages', icon: '' },
+      { name: 'قائمة المستخدمين', path: '/main/users', icon: '' },
+      { name: 'انشاء مستخدم', path: '/main/create-user', icon: '' },
+      { name: 'اعدادات المستخدمين', path: '/main/users-setting', icon: '' },
     ],
   },
   {
