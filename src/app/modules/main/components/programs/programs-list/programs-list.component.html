@@ -1,8 +1,6 @@
-
- <!-- ng for here  -->
-<div class="row ">
-    <div class="col-md-4">
-
-        <app-program-item> </app-program-item>
-    </div>
+<!-- ng for here  -->
+<div class="grid grid-cols-4 gap-10 p-6">
+  <div *ngFor="let program of programs">
+    <app-program-item> </app-program-item>
+  </div>
 </div>
