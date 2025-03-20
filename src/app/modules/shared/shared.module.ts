@@ -12,6 +12,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CreateSuccssDialogComponent } from './components/create-succss-dialog/create-succss-dialog.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatCardModule} from '@angular/material/card';
+
+
 const declarationsImports = [
   CardComponent
 ]
@@ -25,7 +28,8 @@ const imports = [
   MatIconModule,
   MatMenuModule,
   MatDialogModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatCardModule
 ]
 
 @NgModule({

@@ -1,1 +1,32 @@
-<p>program-item works!</p>
+
+<mat-card class="hover shadow-md hover:shadow-2xl transition-shadow duration-300">
+  <h2 class="main-title">
+    <mat-icon [class.star-color] ="true">star</mat-icon>
+    <!-- <mat-icon>star</mat-icon> -->
+    <!-- <mat-icon [class.star-bg] ="true">star_border</mat-icon> -->
+
+    مراقبة الانبعاثات من محطة توليد الكهرباء
+  </h2>
+
+  <div class="overflow-hidden">
+    <img class="transition-transform duration-500 ease-in-out hover:scale-125" src="https://pp.adv3.com/storage/thumbs/pehwHladfsjkapbD7rmgugPDWxfEC8JaATrSyFnU.jpeg"  alt="">
+  </div>
+
+  <mat-card-footer>
+    <div class="grid grid-cols-2">
+      <button class="flex" mat-button>
+        <mat-icon>
+          edit
+        </mat-icon>
+        تعديل
+      </button>
+
+      <button class="flex" mat-button>
+        <mat-icon>
+          delete
+        </mat-icon>
+        حذف
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>
