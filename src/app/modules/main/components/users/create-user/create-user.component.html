@@ -1,1 +1,119 @@
-<p>create-user works!</p>
+<div  class="create-user-wrapper flex gap-7 p-8" [formGroup]="userForm">
+  <div class="user-form w-[50%] p-9">
+    <div class="input-field">
+      <label>الاسم</label>
+      <input formControlName="name" placeholder="الاسم" type="text" />
+    </div>
+    <div class="input-field">
+      <label>البريد الالكتروني</label>
+      <input
+        formControlName="email"
+        placeholder="البريد الالكتروني"
+        type="text"
+      />
+    </div>
+    <div class="input-field">
+      <label>كلمة المرور </label>
+      <input
+        formControlName="password"
+        placeholder="كلمة المرور "
+        type="password"
+      />
+    </div>
+    <div class="input-field">
+      <label>تاكيد كلمة المرور </label>
+      <input
+        formControlName="confirmPassword"
+        placeholder="تاكيد كلمة المرور "
+        type="password"
+      />
+    </div>
+    <div class="input-field">
+      <label>المسمي الوظيفي</label>
+      <input
+        formControlName="jobTitle"
+        placeholder="المسمي الوظيفي"
+        type="text"
+      />
+    </div>
+    <div class="input-field">
+      <label>الهاتف</label>
+      <input formControlName="phoneNumber" placeholder="الهاتف" type="text" />
+    </div>
+    <div class="input-field">
+      <label>الجوال</label>
+      <input formControlName="mobileNumber" placeholder="الجوال" type="text" />
+    </div>
+    <div class="input-field">
+      <label>الفاكس</label>
+      <input formControlName="fax" placeholder="الفاكس" type="text" />
+    </div>
+  </div>
+  <div class="w-[50%]">
+    <div class="committees-form w-full p-9">
+      <p>
+        <mat-slide-toggle
+          formControlName="admin"
+          disabled
+          labelPosition="before"
+        >
+          admin
+          <i class="bi bi-asterisk" style="color: #db2828"></i>
+        </mat-slide-toggle>
+      </p>
+      <p>
+        <mat-slide-toggle
+          formControlName="technicalCommittee"
+          labelPosition="before"
+          >اللجنة الفنية</mat-slide-toggle
+        >
+      </p>
+      <p>
+        <mat-slide-toggle
+          formControlName="supremeCommittee"
+          labelPosition="before"
+          >اللجنة العليا</mat-slide-toggle
+        >
+      </p>
+      <p>
+        <mat-slide-toggle
+          formControlName="reportsFollowUpCommittee"
+          labelPosition="before"
+          >لحنة متابعة التقارير</mat-slide-toggle
+        >
+      </p>
+      <p>
+        <mat-slide-toggle
+          formControlName="programSupervisors"
+          labelPosition="before"
+          >مشرفين البرامج</mat-slide-toggle
+        >
+      </p>
+    </div>
+
+    <div class="options-form w-full p-9">
+      <p>
+        <mat-slide-toggle
+          formControlName="activateMembership"
+          labelPosition="before"
+          >تفعيل العضوية
+        </mat-slide-toggle>
+      </p>
+      <p>
+        <mat-slide-toggle
+          formControlName="sendActivationEmail"
+          labelPosition="before"
+          >إرسال بريد التفعيل
+        </mat-slide-toggle>
+      </p>
+      <p>
+        <mat-slide-toggle
+          formControlName="sendWelcomeEmail"
+          labelPosition="before"
+          >إرسال ترحيب البريد الإلكتروني
+        </mat-slide-toggle>
+      </p>
+      <button class="accept-btn" (click)="createUser()">موافق</button>
+    </div>
+  </div>
+</div>

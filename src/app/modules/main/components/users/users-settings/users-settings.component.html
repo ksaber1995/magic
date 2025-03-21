@@ -1,1 +1,36 @@
-<p>users-settings works!</p>
+<div class="users-setting-wrapper w-[60%] p-10">
+  <form action="" [formGroup]="settingForm">
+    <div class="input-field">
+      <label for="">نوع العضويات الافتراضي</label>
+      <select class="select-committee" formControlName="committeeType">
+        <option *ngFor="let committee of committees" value="{{ committee.id }}">
+          {{ committee.name }}
+        </option>
+      </select>
+    </div>
+    <p>
+      <mat-slide-toggle formControlName="country">
+        الدولة الافتراضية
+      </mat-slide-toggle>
+    </p>
+    <p>
+      <mat-slide-toggle formControlName="register">
+        تفعيل التسجيل
+      </mat-slide-toggle>
+    </p>
+    <div class="input-field">
+      <label for="">الية التنشيط</label>
+      <select class="select-committee" formControlName="activate">
+        <option value="1">تنشيط يدوي</option>
+        <option value="2">ارسال رسالة التنشيط</option>
+        <option value="3">تنشيط افتراضيا</option>
+      </select>
+    </div>
+    <p>
+      <mat-slide-toggle formControlName="sendWelcomeEmail">
+        ارسال بريد ترحيبي
+      </mat-slide-toggle>
+    </p>
+    <button class="accept-btn" (click)="updateSetting()">موافق</button>
+  </form>
+</div>

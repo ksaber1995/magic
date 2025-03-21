@@ -1,0 +1,75 @@
+<div class="edit-user p-8">
+  <form action="" [formGroup]="userForm">
+    <div class="input-field">
+      <label>الصورة</label>
+      <input formControlName="name" placeholder="الاسم" type="file" />
+    </div>
+    <div class="input-field">
+      <label>الاسم</label>
+      <input formControlName="name" placeholder="الاسم" type="text" />
+    </div>
+    <div class="input-field">
+      <label>البريد الالكتروني</label>
+      <input
+        formControlName="email"
+        placeholder="البريد الالكتروني"
+        type="text"
+      />
+    </div>
+    <div class="input-field">
+      <label>كلمة المرور </label>
+      <input
+        formControlName="password"
+        placeholder="كلمة المرور "
+        type="password"
+      />
+    </div>
+    <div class="input-field">
+      <label>تاكيد كلمة المرور </label>
+      <input
+        formControlName="confirmPassword"
+        placeholder="تاكيد كلمة المرور "
+        type="password"
+      />
+    </div>
+    <div class="input-field">
+      <label>المسمي الوظيفي</label>
+      <input
+        formControlName="jobTitle"
+        placeholder="المسمي الوظيفي"
+        type="text"
+      />
+    </div>
+    <div class="input-field">
+        <label>القسم</label>
+        <input
+          formControlName="department"
+          placeholder="القسم"
+          type="text"
+        />
+      </div>
+    <div class="input-field">
+      <label>الهاتف</label>
+      <input formControlName="phoneNumber" placeholder="الهاتف" type="text" />
+    </div>
+    <div class="input-field">
+      <label>الجوال</label>
+      <input formControlName="mobileNumber" placeholder="الجوال" type="text" />
+    </div>
+    <div class="input-field">
+      <label>الفاكس</label>
+      <input formControlName="fax" placeholder="الفاكس" type="text" />
+    </div>
+    <p class="mb-2">
+      <mat-slide-toggle formControlName="activate"  labelPosition="before">
+        تنشيط
+      </mat-slide-toggle>
+    </p>
+    <p class="mb-2">
+      <mat-slide-toggle formControlName="block"  labelPosition="before">
+        حظر
+      </mat-slide-toggle>
+    </p>
+    <button class="accept-btn" (click)="editUser()">موافق</button>
+  </form>
+</div>

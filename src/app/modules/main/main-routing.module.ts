@@ -25,6 +25,9 @@ import { UsersListComponent } from './components/users/users-list/users-list.com
 import { CreateUserComponent } from './components/users/create-user/create-user.component';
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
 import { UserInformationComponent } from './components/users/user-information/user-information.component';
+import { UserFilesComponent } from './components/users/user-files/user-files.component';
+import { EditUserComponent } from './components/users/edit-user/edit-user.component';
+import { EditRolesComponent } from './components/users/edit-roles/edit-roles.component';
 
 const routes: Routes = [
   {
@@ -66,8 +69,13 @@ const routes: Routes = [
       //users 
       {path:'users', component:UsersListComponent}, 
       {path:'users/:id', component:UserInformationComponent}, 
+      {path:'users/:id/edit', component:EditUserComponent}, 
+      {path:'users/:id/edit-roles', component:EditRolesComponent}, 
+      {path:'users/:id/files', component:UserFilesComponent}, 
       {path:'create-user', component:CreateUserComponent}, 
       {path:'users-setting', component:UsersSettingsComponent}, 
+      {path:'users/:id/delete' , component:DeleteNewsPageComponent},
+
 
     ],
   },

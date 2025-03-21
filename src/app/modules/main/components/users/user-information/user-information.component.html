@@ -1,38 +1,38 @@
-<div class="user-information-container flex w-full">
-  <div class="user-information flex w-[65%]">
+<div class="user-information-container flex w-full gap-8">
+  <div class="user-information flex w-[70%]">
     <div class="info w-[75%]">
       <div class="header">
         Admin <span class="role">admin</span> <span class="commite"></span>
       </div>
-      <div class="info-row">
+      <div class="info-row flex justify-between pl-3 mb-6">
         <div class="title">الاسم</div>
         <div class="value">admin</div>
       </div>
-      <div class="info-row">
+      <div class="info-row flex justify-between pl-3 mb-6">
         <div class="title">المنصب</div>
         <div class="value">اللجنة العليا</div>
       </div>
-      <div class="info-row">
+      <div class="info-row flex justify-between pl-3 mb-6">
         <div class="title">الادارة</div>
         <div class="value">programmer</div>
       </div>
-      <div class="info-row">
+      <div class="info-row flex justify-between pl-3 mb-6">
         <div class="title">رقم الهاتف</div>
         <div class="value">لا يوجد</div>
       </div>
-      <div class="info-row">
+      <div class="info-row flex justify-between pl-3 mb-6">
         <div class="title">جوال</div>
         <div class="value">966456546546</div>
       </div>
-      <div class="info-row">
+      <div class="info-row flex justify-between pl-3 mb-6">
         <div class="title">فاكس</div>
         <div class="value">لا يوجد</div>
       </div>
-      <div class="info-row">
+      <div class="info-row flex justify-between pl-3 mb-6">
         <div class="title">البريدالإلكتروني</div>
         <div class="value">ahmed&#64;etree.com.sa</div>
       </div>
-      <div class="info-row">
+      <div class="info-row flex justify-between pl-3 mb-6">
         <div class="title">تاريخ الإنضمام</div>
         <div class="value">25-1-2017</div>
       </div>
@@ -42,5 +42,85 @@
       <div class="last-time">اخر تواجد كان بتاريخ 17-2-2025</div>
     </div>
   </div>
-  <div class="statics w-[35%]"></div>
+  <div class="statics w-[30%]">
+    <div class="statics-title p-3">احصائيات</div>
+    <div class="p-5">
+      <div class="procedures mb-5">
+        <div class="title flex gap-2">
+          <img src="assets/images/to-do.png" alt="" />
+          الاجراءات
+        </div>
+        <div class="count">
+          <span> 0 </span>
+          اجراءات منتهية
+        </div>
+        <div class="count">
+          <span> 0 </span>
+          اجراءات قيد التنفيذ
+        </div>
+      </div>
+      <div class="files">
+        <div class="title flex gap-2">
+          <img src="assets/images/fil.png" alt="" />
+          الملفات
+        </div>
+        <div class="count" routerLink="files">
+          <span>
+            {{ 153 }}
+          </span>
+          ملفات
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="procedures-wrapper p-2">
+  <div class="procedures-header">
+    <div class="procedures-title">الاجراءات</div>
+    <div class="user-name flex justify-between">
+      <div class="name">
+        {{ "admin" }}
+      </div>
+      <div class="tasks flex gap-1">
+        الجميع
+        <p><mat-slide-toggle></mat-slide-toggle></p>
+        مهامي
+      </div>
+    </div>
+  </div>
+  <div class="procedures-container">
+    <div class="title p-3">الاجراءات</div>
+    <div class="procedures w-full flex justify-end">
+      <div class="status w-[30%]">
+        <div class="status-row flex justify-between mb-5">
+          <div class="status-name flex items-center gap-2">
+            <span class="status-color done"></span>
+            منجز
+          </div>
+          <div class="status-precent">
+            {{ "0%" }}
+          </div>
+        </div>
+        <div class="status-row flex justify-between mb-5">
+          <div class="status-name flex items-center gap-2">
+            <span class="status-color late"></span>
+            متعثر
+          </div>
+          <div class="status-precent">
+            {{ "0%" }}
+          </div>
+        </div>
+        <div class="status-row flex justify-between">
+          <div class="status-name flex items-center gap-2">
+            <span class="status-color in-progress"></span>
+            قيد التنفيذ
+          </div>
+          <div class="status-precent">
+            {{ "0%" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -14,41 +14,54 @@
         <td colspan="2" [routerLink]="[user.id]">
           <img src="{{ user.imagePath }}" class="user-image" />
         </td>
-        <td colspan="3"  (click)="userDetails(user.id)" >
-          <span style="cursor: pointer; color: #1e70bf;">
+        <td colspan="3" (click)="userDetails(user.id)">
+          <span style="cursor: pointer; color: #1e70bf">
             {{ user.name }}
           </span>
         </td>
-        <td colspan="3" >
-          <div class="committees">
-            اللجان المنتسب لها
-          </div>
+        <td colspan="3">
+          <div class="committees">اللجان المنتسب لها</div>
         </td>
-        <td colspan="3" >
-          <div class="flex items-center ">
-            <i class="bi bi-check-lg" *ngIf="user.activated" style="color: green; font-size: 20px; font-weight: 700;"></i>  
-            <i class="bi bi-exclamation-lg" *ngIf="!user.activated" style="color: #F2711C; font-size: 20px; font-weight: 700;"></i>        
+        <td colspan="3">
+          <div class="flex items-center">
+            <i
+              class="bi bi-check-lg"
+              *ngIf="user.activated"
+              style="color: green; font-size: 20px; font-weight: 700"
+            ></i>
+            <i
+              class="bi bi-exclamation-lg"
+              *ngIf="!user.activated"
+              style="color: #f2711c; font-size: 20px; font-weight: 700"
+            ></i>
             {{ user.email }}
           </div>
-          </td>
+        </td>
         <td colspan="3">
           <div class="flex justify-center">
-            <button mat-button [matMenuTriggerFor]="menu" xPosition="afterMenu" class="options">خيارات</button>
+            <button
+              mat-button
+              [matMenuTriggerFor]="menu"
+              xPosition="afterMenu"
+              class="options"
+            >
+              خيارات
+            </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item >
-                <i class="bi bi-pencil-square"></i>                
-                تحرير العضو 
+              <button mat-menu-item [routerLink]="user.id + '/edit'">
+                <i class="bi bi-pencil-square"></i>
+                تحرير العضو
               </button>
-              <button mat-menu-item >
+              <button mat-menu-item [routerLink]="user.id + '/edit-roles'">
                 <i class="bi bi-star-fill"></i>
                 تعديل الاذونات
               </button>
-              <button mat-menu-item *ngIf="user.roleType != 0">
+              <button mat-menu-item *ngIf="user.roleType != 0" [routerLink]="user.id + '/delete'">
                 <i class="bi bi-trash"></i>
                 حذف المستخدم
               </button>
-              <button mat-menu-item >
-                <i class="bi bi-pencil-square"></i>                
+              <button mat-menu-item>
+                <i class="bi bi-pencil-square"></i>
                 ارسال بيانات
               </button>
             </mat-menu>

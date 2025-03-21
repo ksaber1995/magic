@@ -36,6 +36,10 @@ import { UsersListComponent } from './components/users/users-list/users-list.com
 import { CreateUserComponent } from './components/users/create-user/create-user.component';
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
 import { UserInformationComponent } from './components/users/user-information/user-information.component';
+import { UserFilesComponent } from './components/users/user-files/user-files.component';
+import { FileDetailsComponent } from './components/users/file-details/file-details.component';
+import { EditUserComponent } from './components/users/edit-user/edit-user.component';
+import { EditRolesComponent } from './components/users/edit-roles/edit-roles.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +73,11 @@ import { UserInformationComponent } from './components/users/user-information/us
     UsersListComponent,
     CreateUserComponent,
     UsersSettingsComponent,
-    UserInformationComponent
+    UserInformationComponent,
+    UserFilesComponent,
+    FileDetailsComponent,
+    EditUserComponent,
+    EditRolesComponent
   ],
   imports: [
     CommonModule,
