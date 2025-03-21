@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ENDPOINT_URI } from './utlity';
 import { User } from '../../model/user';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Procedure } from '../../model/procedure';
 import { Decision } from '../../model/decission';
 import { Meeting } from '../../model/metting';
@@ -13,7 +13,12 @@ import { Role } from '../../model/role';
 import { Setting } from '../../model/setting';
 import { Sms } from '../../model/sms';
 import { Group, ProceduresGroup } from '../../model/group';
+import { Project } from '../../model/project';
 
+
+interface ResponseData<T = any> {
+  data: T[]
+}
 
 function createFormData(item) {
   const formData = new FormData();
@@ -71,8 +76,8 @@ export class SwaggerService {
 
   // projects
 
-  getAllProjects() {
-    return this.http.get(ENDPOINT_URI + 'projects');
+  getAllProjects(): Observable<Project[]> {
+    return this.http.get<ResponseData<Project>>(ENDPOINT_URI + 'projects').pipe(map(res=> res.data));
   }
 
   getOneProject(id: string) {
@@ -283,7 +288,7 @@ export class SwaggerService {
 
   // Settings
   getAllSettings() {
-    return this.http.get(ENDPOINT_URI + 'settings');
+    return this.http.get<ResponseData<Setting>>(ENDPOINT_URI + 'settings').pipe(map(res=> res.data));
   }
 
   getOneSetting(id: string) {

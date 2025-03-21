@@ -24,41 +24,23 @@ interface ProgramsItem {
   programs: SideBarItem[];
 }
 
-const programRouts: SidebarChild[] = [ // id will be dynamic
-  { name: ' الاجراءات', path: '/main/programs/id/procedures', icon: 'assets/images/list-mt.png' }, //TODO, add icon here
-  { name: 'الملفات', path: '/main/programs/id/files', icon: 'assets/images/new-meet.png' }, //TODO, add icon here
-  { name: 'أعضاء', path: '/main/programs/id/members', icon: 'assets/images/new-meet.png' }, //TODO, add icon here
-  { name: 'التقارير', path: '/main/programs/id/reports', icon: 'assets/images/new-meet.png' }, //TODO, add icon here
-  { name: 'قرارات اللجنة العليا', path: '/main/programs/id/supreme-committee-decisions', icon: 'assets/images/new-meet.png' }, //TODO, add icon here
-]
 
-const programs: SideBarItem[] = [ // From endpoint
-  {
-    name: 'برنامج 1',
-    icon: 'assets/images/meeting.svg',
-    showChildren: false,
-    childrens: programRouts,
-  },
-  {
-    name: 'برنامج 2',
-    icon: 'assets/images/meeting.svg',
-    showChildren: false,
-    childrens: programRouts,
-  },
-  {
-    name: 'برنامج 2',
-    icon: 'assets/images/meeting.svg',
-    showChildren: false,
-    childrens: programRouts,
-  },
+function getProgramRoutes(id):SidebarChild[] {
+  return [ // id will be dynamic
+    { name: ' الاجراءات', path: `/main/programs/${id}/procedures`, icon: 'assets/images/list-mt.png' }, //TODO, add icon here
+    { name: 'الملفات', path: `/main/programs/${id}/files`, icon: 'assets/images/new-meet.png' }, //TODO, add icon here
+    { name: 'أعضاء', path: `/main/programs/${id}/members`, icon: 'assets/images/new-meet.png' }, //TODO, add icon here
+    { name: 'التقارير', path: `/main/programs/${id}/reports`, icon: 'assets/images/new-meet.png' }, //TODO, add icon here
+    { name: 'قرارات اللجنة العليا', path: `/main/programs/${id}/supreme-committee-decisions`, icon: 'assets/images/new-meet.png' }, //TODO, add icon here
+  ]
+}
 
-]
 
 const programsParent: ProgramsItem = {
   name: 'البرامج',
   icon: 'assets/images/meeting.svg', //TODO, add icon here
   showChildren: false,
-  programs: programs,
+  programs: [],
 }
 
 const routes: SideBarItem[] = [
@@ -159,7 +141,17 @@ export class SidebarComponent implements OnInit{
   getPrograms(){
     this.swagger.getAllProjects()
       .subscribe(res=>{
-        console.log(res)
+        const programs: SideBarItem[] = res.map(res=>{
+            return{
+              name: res.title,
+              icon: res.image,
+              showChildren: false,
+
+              childrens: getProgramRoutes(res.id),
+            }
+        })
+
+        programsParent.programs = programs;
       })
   }
 

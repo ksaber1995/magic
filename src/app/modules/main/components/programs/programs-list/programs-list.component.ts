@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
 
-
-const program = [{
-  title: 'ادارة النفايات الصلبة',
-
-}]
 
 @Component({
   selector: 'app-programs-list',
@@ -13,5 +9,6 @@ const program = [{
 })
 
 export class ProgramsListComponent {
-  programs = new Array(30).fill(program)
+  projects$ = this.swagger.getAllProjects();
+  constructor(private swagger: SwaggerService){}
 }
