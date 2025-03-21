@@ -29,7 +29,7 @@ const imports = [
   MatMenuModule,
   MatDialogModule,
   MatTooltipModule,
-  MatCardModule
+  MatCardModule,
 ]
 
 @NgModule({

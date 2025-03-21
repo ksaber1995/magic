@@ -1,0 +1,22 @@
+.user-information-container {
+  padding: 10px;
+  .user-information {
+    min-height: 300px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0px 0px 2px 1px rgba(204, 204, 204, 0.49);
+    .info{
+
+        .header{
+            color: #535353;
+            font-size: 18px;
+            margin-bottom: 20px ;
+            line-height: 25px;
+        }
+    }
+    .image-wrapper{
+
+    }
+}
+}
