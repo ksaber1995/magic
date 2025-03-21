@@ -10,6 +10,9 @@ import { IReport } from '../../model/report';
 import { Post } from '../../model/post';
 import { Permission } from '../../model/permission';
 import { Role } from '../../model/role';
+import { Setting } from '../../model/setting';
+import { Sms } from '../../model/sms';
+import { Group, ProceduresGroup } from '../../model/group';
 
 
 function createFormData(item) {
@@ -27,7 +30,7 @@ function createFormData(item) {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class SwaggerService {
 
   constructor(private http: HttpClient) { }
 
@@ -278,7 +281,79 @@ export class AuthService {
     return this.http.put(ENDPOINT_URI + `users/${id}`, formData);
   }
 
+  // Settings
+  getAllSettings() {
+    return this.http.get(ENDPOINT_URI + 'settings');
+  }
 
+  getOneSetting(id: string) {
+    return this.http.get(ENDPOINT_URI + `settings/${id}`);
+  }
+
+  createSetting(setting: Setting) {
+    const formData = createFormData(setting);
+    return this.http.post(ENDPOINT_URI + `settings`, formData);
+  }
+
+  updateSetting(id: string, setting: Setting) {
+    const formData = createFormData(setting);
+    return this.http.put(ENDPOINT_URI + `settings/${id}`, formData);
+  }
+
+  // sms
+  getAllSms() {
+    return this.http.get(ENDPOINT_URI + 'sms');
+  }
+
+
+  getOneSms(id: string) {
+    return this.http.get(ENDPOINT_URI + `sms/${id}`);
+  }
+
+  createSms(sms: Sms) {
+    const formData = createFormData(sms);
+    return this.http.post(ENDPOINT_URI + `settings`, formData);
+  }
+
+
+  // groups
+  // Groups
+  getAllGroups() {
+    return this.http.get(ENDPOINT_URI + 'groups');
+  }
+
+  getOneGroup(id: string) {
+    return this.http.get(ENDPOINT_URI + `groups/${id}`);
+  }
+
+  createGroup(group: Group) {
+    const formData = createFormData(group);
+    return this.http.post(ENDPOINT_URI + `groups`, formData);
+  }
+
+  updateGroup(id: string, group: Group) {
+    const formData = createFormData(group);
+    return this.http.put(ENDPOINT_URI + `groups/${id}`, formData);
+  }
+
+  // Procedures Groups
+  getAllProceduresGroups() {
+    return this.http.get(ENDPOINT_URI + 'procedures-groups');
+  }
+
+  getOneProceduresGroup(id: string) {
+    return this.http.get(ENDPOINT_URI + `procedures-groups/${id}`);
+  }
+
+  createProceduresGroup(proceduresGroup: ProceduresGroup) {
+    const formData = createFormData(proceduresGroup);
+    return this.http.post(ENDPOINT_URI + `procedures-groups`, formData);
+  }
+
+  updateProceduresGroup(id: string, proceduresGroup: ProceduresGroup) {
+    const formData = createFormData(proceduresGroup);
+    return this.http.put(ENDPOINT_URI + `procedures-groups/${id}`, formData);
+  }
 
 
 

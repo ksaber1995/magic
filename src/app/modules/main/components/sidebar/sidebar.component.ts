@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
+import { SwaggerService } from '../../../../swagger/swagger.service';
 
 
 interface SidebarChild {
@@ -132,7 +133,7 @@ const routes: SideBarItem[] = [
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
   routes = routes;
   userInfo = {
     image: "assets/images/user-image.jpg",
@@ -145,11 +146,22 @@ export class SidebarComponent {
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private swagger: SwaggerService,
   ) {
-
   }
 
+
+  ngOnInit(): void {
+     this.getPrograms();
+  }
+
+  getPrograms(){
+    this.swagger.getAllProjects()
+      .subscribe(res=>{
+        console.log(res)
+      })
+  }
 
   logout() {
     this.auth.logout()

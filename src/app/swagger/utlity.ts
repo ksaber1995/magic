@@ -1,1 +1,1 @@
-export const ENDPOINT_URI = '';
+export const ENDPOINT_URI = 'https://pp.lv.adv5.com/api/';
