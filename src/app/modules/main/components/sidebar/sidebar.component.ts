@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
+import { SwaggerService } from '../../../../swagger/swagger.service';
 
 
 interface SidebarChild {
@@ -23,41 +24,23 @@ interface ProgramsItem {
   programs: SideBarItem[];
 }
 
-const programRouts: SidebarChild[] = [ // id will be dynamic
-  { name: ' الاجراءات', path: '/main/programs/id/procedures', icon: 'assets/images/list-mt.png' }, //TODO, add icon here
-  { name: 'الملفات', path: '/main/programs/id/files', icon: 'assets/images/new-meet.png' }, //TODO, add icon here
-  { name: 'أعضاء', path: '/main/programs/id/members', icon: 'assets/images/new-meet.png' }, //TODO, add icon here
-  { name: 'التقارير', path: '/main/programs/id/reports', icon: 'assets/images/new-meet.png' }, //TODO, add icon here
-  { name: 'قرارات اللجنة العليا', path: '/main/programs/id/supreme-committee-decisions', icon: 'assets/images/new-meet.png' }, //TODO, add icon here
-]
 
-const programs: SideBarItem[] = [ // From endpoint
-  {
-    name: 'برنامج 1',
-    icon: 'assets/images/meeting.svg',
-    showChildren: false,
-    childrens: programRouts,
-  },
-  {
-    name: 'برنامج 2',
-    icon: 'assets/images/meeting.svg',
-    showChildren: false,
-    childrens: programRouts,
-  },
-  {
-    name: 'برنامج 2',
-    icon: 'assets/images/meeting.svg',
-    showChildren: false,
-    childrens: programRouts,
-  },
+function getProgramRoutes(id):SidebarChild[] {
+  return [ // id will be dynamic
+    { name: ' الاجراءات', path: `/main/programs/${id}/procedures`, icon: 'assets/images/list-mt.png' }, //TODO, add icon here
+    { name: 'الملفات', path: `/main/programs/${id}/files`, icon: 'assets/images/new-meet.png' }, //TODO, add icon here
+    { name: 'أعضاء', path: `/main/programs/${id}/members`, icon: 'assets/images/new-meet.png' }, //TODO, add icon here
+    { name: 'التقارير', path: `/main/programs/${id}/reports`, icon: 'assets/images/new-meet.png' }, //TODO, add icon here
+    { name: 'قرارات اللجنة العليا', path: `/main/programs/${id}/supreme-committee-decisions`, icon: 'assets/images/new-meet.png' }, //TODO, add icon here
+  ]
+}
 
-]
 
 const programsParent: ProgramsItem = {
   name: 'البرامج',
   icon: 'assets/images/meeting.svg', //TODO, add icon here
   showChildren: false,
-  programs: programs,
+  programs: [],
 }
 
 const routes: SideBarItem[] = [
@@ -132,7 +115,7 @@ const routes: SideBarItem[] = [
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
   routes = routes;
   userInfo = {
     image: "assets/images/user-image.jpg",
@@ -145,11 +128,32 @@ export class SidebarComponent {
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private swagger: SwaggerService,
   ) {
-
   }
 
+
+  ngOnInit(): void {
+     this.getPrograms();
+  }
+
+  getPrograms(){
+    this.swagger.getAllProjects()
+      .subscribe(res=>{
+        const programs: SideBarItem[] = res.map(res=>{
+            return{
+              name: res.title,
+              icon: res.image,
+              showChildren: false,
+
+              childrens: getProgramRoutes(res.id),
+            }
+        })
+
+        programsParent.programs = programs;
+      })
+  }
 
   logout() {
     this.auth.logout()

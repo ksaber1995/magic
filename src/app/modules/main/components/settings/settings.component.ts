@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SwaggerService } from '../../../../swagger/swagger.service';
 
 @Component({
   selector: 'app-settings',
@@ -9,14 +10,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SettingsComponent implements OnInit{
   settingForm : FormGroup
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private swagger: SwaggerService
   ){
 
   }
   ngOnInit() {
+    this.swagger.getAllSettings()
+    .subscribe(res=>{
+      console.log(res)
+    })
     this.settingForm = this.fb.group({
       name: ['',[Validators.required]],
-      email: ['' , [Validators.email]], 
+      email: ['' , [Validators.email]],
       emailMessgeStatus: [''],
       smsMessgeStatus: [''],
     })

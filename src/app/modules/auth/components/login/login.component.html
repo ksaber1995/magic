@@ -9,10 +9,13 @@
     <div class="login-form">
       <div class="header">تسجيل الدخول</div>
       <form class="p-5" [formGroup]="loginForm">
+        <div *ngIf="errors" class="text-red-500 m-2 center">
+          <mat-error>{{errors}}</mat-error>
+        </div>
         <div class="input-field mb-8 ">
           <label for="email">البريد الإلكتروني</label>
-          <input 
-          id="email" 
+          <input
+          id="email"
           formControlName="email"
           [class.error]="!loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
           />

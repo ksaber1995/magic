@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Project } from '../../../../../../../model/project';
 
 @Component({
   selector: 'app-program-item',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './program-item.component.scss'
 })
 export class ProgramItemComponent {
-
+  @Input() project: Project;
 }

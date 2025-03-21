@@ -1,6 +1,6 @@
 <!-- ng for here  -->
-<div class="grid grid-cols-4 gap-10 p-6">
-  <div *ngFor="let program of programs">
-    <app-program-item> </app-program-item>
+<div *ngIf="projects$ | async as projects" class="grid grid-cols-4 gap-10 p-6">
+  <div *ngFor="let project of projects">
+    <app-program-item [project]="project"> </app-program-item>
   </div>
 </div>
