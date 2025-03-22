@@ -40,6 +40,8 @@ import { UserFilesComponent } from './components/users/user-files/user-files.com
 import { FileDetailsComponent } from './components/users/file-details/file-details.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { EditRolesComponent } from './components/users/edit-roles/edit-roles.component';
+import { MeetingsListComponent } from './components/meetings/meetings-list/meetings-list.component';
+import { CreateMeetingComponent } from './components/meetings/create-meeting/create-meeting.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,9 @@ import { EditRolesComponent } from './components/users/edit-roles/edit-roles.com
     UserFilesComponent,
     FileDetailsComponent,
     EditUserComponent,
-    EditRolesComponent
+    EditRolesComponent,
+    MeetingsListComponent,
+    CreateMeetingComponent,
   ],
   imports: [
     CommonModule,

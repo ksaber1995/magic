@@ -1,0 +1,67 @@
+<div class="meetings-container m-10">
+  <div class="title p-3">الاجتماعات القادمة</div>
+  <div class="px-6">
+    <table class="meetings-table w-full">
+      <thead>
+        <tr>
+          <th colspan="4">موضوع الاجتماع</th>
+          <th colspan="3">التاريخ والوقت</th>
+          <th colspan="1">تم دعوتهم</th>
+          <th colspan="1">الحالة</th>
+          <th colspan="2">المنسق</th>
+          <th colspan="2">التحكم</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let meeting of meetings">
+          <td colspan="4" [routerLink]="[meeting.id]">
+            <div class="meeting-topic">
+              <div class="name">{{ meeting.meetingTopic.name }}</div>
+              <div class="location">{{ meeting.meetingTopic.location }}</div>
+            </div>
+          </td>
+          <td colspan="3" (click)="meetingDetails(meeting.id)">
+            <div class="date">
+              <div class="day">{{ meeting.date.day }}</div>
+              <div class="day">
+                من الساعة
+                <span>
+                  {{ meeting.date.hourFrom }}
+                </span>
+                الي الساعة
+                <span>
+                  {{ meeting.date.hourTo }}
+                </span>
+              </div>
+            </div>
+          </td>
+          <td colspan="1">
+            <div class="committees">{{ meeting.invited }}</div>
+          </td>
+          <td colspan="1">
+            <div class="status">{{ meeting.status }}</div>
+          </td>
+          <td colspan="2">
+            <div class="coordinator flex gap-1 items-center">
+              <img src="{{ meeting.coordinator.imagePath }}" alt="" />
+              <div class="name">{{ meeting.coordinator.name }}</div>
+            </div>
+          </td>
+          <td colspan="2">
+            <button class="edit-meeting">
+              <i class="bi bi-pencil-square"></i>
+              تعديل
+            </button>
+            <button
+              class="delete-meeting"
+              [routerLink]="[meeting.id + '/delete']"
+            >
+              <i class="bi bi-trash3-fill"></i>
+              حذف
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

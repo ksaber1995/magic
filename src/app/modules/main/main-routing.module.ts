@@ -28,6 +28,8 @@ import { UserInformationComponent } from './components/users/user-information/us
 import { UserFilesComponent } from './components/users/user-files/user-files.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { EditRolesComponent } from './components/users/edit-roles/edit-roles.component';
+import { CreateMeetingComponent } from './components/meetings/create-meeting/create-meeting.component';
+import { MeetingsListComponent } from './components/meetings/meetings-list/meetings-list.component';
 
 const routes: Routes = [
   {
@@ -76,7 +78,10 @@ const routes: Routes = [
       {path:'users-setting', component:UsersSettingsComponent}, 
       {path:'users/:id/delete' , component:DeleteNewsPageComponent},
 
-
+      //meetings 
+      {path:'meetings', component:MeetingsListComponent}, 
+      {path:'create-meeting', component:CreateMeetingComponent},
+  
     ],
   },
 

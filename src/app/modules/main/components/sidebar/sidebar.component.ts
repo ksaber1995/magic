@@ -49,8 +49,8 @@ const routes: SideBarItem[] = [
     icon: 'assets/images/meeting.svg',
     showChildren: false,
     childrens: [
-      { name: 'قائمة الاجتماعات', path: '/main/list-messages', icon: 'assets/images/list-mt.png' },
-      { name: 'انشاء اجتماع جديد', path: '/main/send-messages', icon: 'assets/images/new-meet.png' },
+      { name: 'قائمة الاجتماعات', path: '/main/meetings', icon: 'assets/images/list-mt.png' },
+      { name: 'انشاء اجتماع جديد', path: '/main/create-meeting', icon: 'assets/images/new-meet.png' },
     ],
   },
   {

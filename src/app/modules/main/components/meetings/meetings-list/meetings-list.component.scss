@@ -1,0 +1,68 @@
+.meetings-container {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 2px 1px rgba(204, 204, 204, 0.49);
+  .title {
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 20px;
+    color: #858585;
+    font-weight: 500;
+  }
+  .meetings-table {
+    padding: 10px;
+    width: 100%;
+    table-layout: fixed;
+    color: #858585;
+    th {
+      text-align: justify;
+      padding: 5px;
+      border-bottom: 1px solid #f6f6f6;
+    }
+    td {
+      height: 50px;
+      padding: 5px;
+      border-bottom: 1px solid #f6f6f6;
+      line-height: 30px;
+      .meeting-topic {
+        .name {
+          font-weight: 500;
+          height: 20px;
+          cursor: pointer;
+        }
+        .location {
+          color: #434874;
+          font-weight: bold;
+          height: 20px;
+        }
+      }
+      .status,
+      .committees {
+        color: #434874;
+        font-weight: bold;
+      }
+      .coordinator {
+        width: fit-content;
+        background: #eeeeee;
+        color: #666;
+        padding: 0 6px;
+        border-radius: 20px;
+        font-size: 13px;
+        img {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+        }
+      }
+      .date {
+        .day {
+          height: 20px;
+        }
+      }
+      button {
+        font-size: 16px;
+        font-weight: 500;
+        margin-left: 5px;
+      }
+    }
+  }
+}
