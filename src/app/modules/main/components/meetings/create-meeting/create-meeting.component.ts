@@ -24,16 +24,20 @@ export class CreateMeetingComponent {
 
   progressValue: number = 0;
   meetingForm: FormGroup;
+  times = [5,10,15,20,25,30,35,40,45,50,55,60]
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {
     this.meetingForm = this.fb.group({
-      program: [null],
-      address: [null],
+      meetingTopic: [null],
+      meetingLocation: [null],
+      committee: this.fb.array([]),
+      member: this.fb.array([]),
+      program: this.fb.array([]),
       descrpitioon: [null],
       uploadedFiles: this.fb.array([]),
-      progressPercent: [null],
-      status: [null],
       date: [null],
+      time: [null], 
+      reminder: [null]
     });
   }
 
@@ -41,6 +45,12 @@ export class CreateMeetingComponent {
     this.meetingForm
       .get('date')
       .setValue(new Date().toISOString().split('T')[0]);
+  }
+  setTime(){
+    // this.meetingForm
+    // .get('time')
+    // .setValue('12:00 am');
+  
   }
   createmeeting() {
     console.log(this.meetingForm.value);
@@ -101,8 +111,9 @@ export class CreateMeetingComponent {
 
     if (!selectedList.includes(option)) {
       selectedList.push(option);
+      this.meetingForm.get(type).value.push(option)
     }
-
+    
     this.closeAllDropdowns();
   }
 
@@ -124,6 +135,10 @@ export class CreateMeetingComponent {
       this.selectedProgram = this.selectedProgram.filter(
         (item) => item !== option
       );
+    }
+    const formControl = this.meetingForm.get(type);
+    if (formControl) {
+      formControl.setValue(formControl.value.filter((item: string) => item !== option));
     }
   }
 

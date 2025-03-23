@@ -3,11 +3,11 @@
   <form action="" class="p-4" [formGroup]="meetingForm">
     <div class="input-field flex justify-between mb-3">
       <label> عنوان الاجتماع </label>
-      <input type="text" class="address-input" />
+      <input type="text" class="address-input" formControlName="meetingTopic"  />
     </div>
     <div class="input-field flex justify-between mb-3">
       <label>مكان الاجتماع </label>
-      <input type="text" class="address-input" />
+      <input formControlName="meetingLocation" type="text" class="address-input" />
     </div>
     <!-- Committees Dropdown -->
     <div class="input-field flex justify-between mb-3">
@@ -96,12 +96,39 @@
       </div>
     </div>
 
-    <div class="start-date">
-      
+    <div class="start-date-wrapper flex gap-4 mb-3">
+      <div class="start-date-input flex items-center gap-2 w-1/2">
+        <label for="">تاريخ بداية الاجتماع</label>
+        <input
+          class="flex-grow"
+          matInput
+          formControlName="date"
+          (click)="setTodayDate()"
+          [matDatepicker]="picker"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+          (click)="setTodayDate()"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+      <div class="meeting-time-input flex items-center gap-2 w-1/2">
+        <label for="">وقت بداية الاجتماع</label>
+        <p-datepicker
+          (click)="setTime()"
+          inputId="calendar-timeonly"
+          formControlName="time"
+          [timeOnly]="true"
+          [hourFormat]="12"
+          class="flex-grow"
+        />
+        <i class="bi bi-clock" style="font-size: 20px ;margin: 0 15px;"></i>
+      </div>
     </div>
 
-    <textarea name="" id="" class="details" placeholder="التفاصيل"></textarea>
-    <div class="uploaded-files input-field">
+    <textarea name="" id="" class="details" placeholder="التفاصيل" formControlName="descrpitioon"></textarea>
+    <div class="uploaded-files input-field mb-3">
       <label class="title">ملفات مرفقة</label>
       <input
         formArrayName="uploadedFiles"
@@ -122,16 +149,15 @@
       </div>
       <div class="selected-files"></div>
     </div>
-
-    <div class="input-field flex flex-col date-input-field my-4">
-      <label class="mb-1">تاريخ اصدار القرار</label>
-      <input
-        type="text"
-        class="date-input"
-        #dateInput
-        (click)="setTodayDate()"
-      />
+    <div class="input-field mb-9">
+      تذكير قبل ب 
+      <select class="reminder" formControlName="reminder" >
+        <option value="1" selected>بدون تذكير</option>
+        <option *ngFor="let time of times" value="{{time}}">{{time}}</option>
+      </select>
+      دقيقة
     </div>
-    <button class="add-btn" (click)="createmeeting()">اضافة قرار</button>
+
+    <button class="add-btn" (click)="createmeeting()">اضافة اجتماع</button>
   </form>
 </div>

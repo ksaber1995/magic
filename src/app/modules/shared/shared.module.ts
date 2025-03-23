@@ -13,8 +13,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { CreateSuccssDialogComponent } from './components/create-succss-dialog/create-succss-dialog.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
-
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import { DatePickerModule } from 'primeng/datepicker';
 const declarationsImports = [
   CardComponent
 ]
@@ -30,6 +31,9 @@ const imports = [
   MatDialogModule,
   MatTooltipModule,
   MatCardModule,
+  MatInputModule, 
+  MatDatepickerModule, 
+  DatePickerModule
 ]
 
 @NgModule({
