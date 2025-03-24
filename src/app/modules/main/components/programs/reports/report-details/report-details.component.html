@@ -1,0 +1,76 @@
+<div class="report-details-container p-4 mb-4">
+  <div class="report-image-wrapper w-full p-1 mb-1">
+    <img src="{{ report.imagePath }}" class="report-image" />
+  </div>
+  <div class="reportTitle w-full flex items-center justify-between mb-5">
+    <div class="report-name">{{ report.name }}</div>
+    <div class="report-date">{{ report.date }}</div>
+  </div>
+  <div class="description mb-3">
+    {{ report.description }}
+  </div>
+  <div class="report-details p-3 mb-6">
+    <div class="flex justify-between mb-5">
+      <div class="last-update">اخر تحديث كان قبل {{ report.lastUpdate }}</div>
+      <div class="report-status flex items-center gap-2">
+        <label for=""> حالة التقرير </label>
+        <div class="input-wrapper flex items-center gap-2">
+          <input
+            type="checkbox"
+            class="status-input"
+            [(ngModel)]="isReportPosted"
+          />
+          <span>{{ isReportPosted ? "منشور" : "مسودة" }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="files-wrapper">
+      <div class="title mb-2">المرفقات</div>
+      <div class="uploadedFiles flex items-center gap-2 p-2">
+        <div class="file flex gap-2" *ngFor="let file of report.uploadedFiles">
+          <img src="{{ file.path }}" alt="" class="icon" />
+          <div class="file-name">{{ file.name }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="admin-comment p-3" *ngIf="isUserHasAdminRole">
+    <form [formGroup]="adminCommentForm" class="w-full">
+    <div class="title my-3">Admin</div>
+    <div class="input-field">
+      <label for="" class="description-title mb-2">تعليق</label>
+      <textarea
+      name=""
+      id=""
+      class="details"
+      formControlName="description"
+      ></textarea>
+    </div>
+    <div class="uploaded-files input-field mb-3">
+      <input
+      formArrayName="uploadedFiles"
+      type="file"
+      multiple
+      id="fileInput"
+      hidden
+      />
+      <div
+      class="upload-files-button p-4"
+      onclick="document.getElementById('fileInput').click()"
+      >
+      <label>اسحب الملف هنا...</label>
+      <div class="choose-file">
+        أو قم باختيار الملف..
+        <i class="bi bi-upload"></i>
+      </div>
+    </div>
+      <div class="selected-files"></div>
+    </div>
+    <div class="flex justify-end">
+      <button class="accept-btn">موافق</button>
+    </div>
+    
+    </form>
+  </div>
+</div>

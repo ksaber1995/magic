@@ -1,1 +1,31 @@
-<p>reports works!</p>
+<div class="reports-container w-full p-4" *ngIf="reports.length >0 ">
+  <div class="report-wrapper p-4" *ngFor="let report of reports">
+    <div class="reportTitle w-full flex items-center justify-between mb-5">
+      <div class="report-name">{{ report.name }}</div>
+      <div class="report-date">{{ report.date }}</div>
+    </div>
+    <div class="w-full flex items-center justify-between">
+      <div class="report-info flex items-center gap-4">
+        <div class="report-creator">
+          معد التقرير
+          <span class="creator-name">{{ report.reportCreator }}</span>
+        </div>
+        <div class="report-status">
+          حالة التقرير
+          <span class="status-name">{{ report.reportStatus }}</span>
+        </div>
+      </div>
+      <div class="report-action">
+        <button class="see-report-btn mx-2" [routerLink]="[report.id]"> مشاهدة التقرير</button>
+        <button class="edit" [routerLink]="[report.id] + '/edit'">تعديل</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="p-5">
+    <div class="empty-state w-full" *ngIf="reports.length == 0"> 
+        لا يوجد تقارير حاليا لهذا المشروع
+    </div>
+</div>

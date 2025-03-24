@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
@@ -14,7 +14,8 @@ interface decision {
   templateUrl: './desicions-list.component.html',
   styleUrl: './desicions-list.component.scss',
 })
-export class DesicionsListComponent {
+export class DesicionsListComponent implements OnInit{
+  @Input() decisionsListInput :decision[]
   decisionsList : decision[] = [
     {
       name: 'توجيه سمو أمير منطقة الرياض بما يخص المحضر',
@@ -91,6 +92,12 @@ export class DesicionsListComponent {
   tooltipVisible : string | null = null;
   hideTimeout: any;
   
+  ngOnInit(): void {
+    if(this.decisionsListInput){
+      this.decisionsList = this.decisionsListInput
+    }
+  }
+
   showToolTip(decisionId) {
     this.tooltipVisible = decisionId;
     clearTimeout(this.hideTimeout); // Stop any pending hide action

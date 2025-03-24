@@ -1,0 +1,138 @@
+.report-details-container {
+  .report-image-wrapper {
+    background-color: #fff;
+    border: 10px solid #fff;
+    border-radius: 7px;
+    height: 300px;
+    margin-bottom: 15px;
+    .report-image {
+      display: block;
+      margin: auto;
+      height: 100%;
+      border-radius: 7px;
+    }
+  }
+  .reportTitle {
+    .report-name {
+      color: #464646;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}
+
+.status-input {
+  appearance: none;
+  width: 17px;
+  height: 17px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  background: none;
+}
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: red;
+}
+
+.status-input:checked {
+  background-color: white;
+  border-color: white;
+}
+.input-wrapper {
+  background: #7ea71d;
+  border-radius: 5px;
+  color: #fff;
+  padding: 3px 10px;
+  font-size: 16px;
+  line-height: 26px;
+  margin-right: 5px;
+  font-weight: 500;
+}
+
+.report-details {
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0px 0px 2px 1px rgba(204, 204, 204, 0.49);
+  .last-update {
+    color: #565656;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .report-status {
+    color: #858585;
+    font-weight: 500;
+  }
+}
+
+.files-wrapper {
+  .title {
+    color: #adadad;
+    font-weight: 500;
+    font-size: 18px;
+  }
+}
+.admin-comment {
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0px 0px 2px 1px rgba(204, 204, 204, 0.49);
+  .title {
+    color: #636363;
+    font-size: 22px;
+    font-weight: 500;
+  }
+}
+.uploaded-files {
+  .upload-files-button {
+    width: 100%;
+    min-height: 150px;
+    height: fit-content;
+    border: 1px dashed #ccc;
+    border-radius: 3px;
+    text-align: center;
+    position: relative;
+    font-size: 20px;
+    color: #7e7e7e;
+    cursor: pointer;
+    &:hover .choose-file {
+      background-color: hwb(0 49% 51% / 0.753);
+    }
+    label {
+      display: block;
+      font-size: 20px;
+      color: #7e7e7e;
+      margin-bottom: 16px;
+    }
+    .choose-file {
+      color: white;
+      font-size: 17px;
+      width: 200px;
+      border-radius: 5px;
+      background-color: #7ea71d;
+      padding: 7px;
+      margin: auto;
+    }
+  }
+}
+.details {
+  width: 100%;
+  height: 110px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.description-title {
+  display: block;
+  color: #000000de;
+}
+.accept-btn {
+  color: #fff;
+  background: #8bb81f;
+  text-align: center;
+  padding: 5px 20px;
+  border-radius: 5px;
+  
+}

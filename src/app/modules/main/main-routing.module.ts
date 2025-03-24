@@ -30,6 +30,8 @@ import { EditUserComponent } from './components/users/edit-user/edit-user.compon
 import { EditRolesComponent } from './components/users/edit-roles/edit-roles.component';
 import { CreateMeetingComponent } from './components/meetings/create-meeting/create-meeting.component';
 import { MeetingsListComponent } from './components/meetings/meetings-list/meetings-list.component';
+import { ReportDetailsComponent } from './components/programs/reports/report-details/report-details.component';
+import { EditReportComponent } from './components/programs/reports/edit-report/edit-report.component';
 
 const routes: Routes = [
   {
@@ -48,6 +50,9 @@ const routes: Routes = [
       { path: 'programs/:id/files', component: FilesComponent },
       { path: 'programs/:id/members', component: MembersComponent },
       { path: 'programs/:id/reports', component: ReportsComponent },
+      { path: 'programs/:id/reports/:reportId', component: ReportDetailsComponent },
+      { path: 'programs/:id/reports/:reportId/edit', component: EditReportComponent },
+
       { path: 'programs/:id/supreme-committee-decisions', component: SupremeCommitteeDecisionsComponent },
       // supereme-committee
       { path: 'list-decisions', component: DesicionsListComponent },

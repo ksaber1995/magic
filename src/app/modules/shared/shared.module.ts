@@ -33,7 +33,7 @@ const imports = [
   MatCardModule,
   MatInputModule, 
   MatDatepickerModule, 
-  DatePickerModule
+  DatePickerModule,
 ]
 
 @NgModule({
