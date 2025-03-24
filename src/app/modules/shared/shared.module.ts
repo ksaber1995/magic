@@ -16,6 +16,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import { DatePickerModule } from 'primeng/datepicker';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 const declarationsImports = [
   CardComponent
 ]
@@ -31,9 +32,10 @@ const imports = [
   MatDialogModule,
   MatTooltipModule,
   MatCardModule,
-  MatInputModule, 
-  MatDatepickerModule, 
+  MatInputModule,
+  MatDatepickerModule,
   DatePickerModule,
+  MatSnackBarModule
 ]
 
 @NgModule({

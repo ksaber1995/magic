@@ -12,6 +12,7 @@
         <div *ngIf="errors" class="text-red-500 m-2 center">
           <mat-error>{{errors}}</mat-error>
         </div>
+
         <div class="input-field mb-8 ">
           <label for="email">البريد الإلكتروني</label>
           <input
@@ -31,13 +32,19 @@
            />
            <div *ngIf="!loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">حقل كلمة المرور مطلوب.</div>
         </div>
-        <div class="captcha-wrapper flex items-center gap-10">
+
+        <!-- <div class="captcha-wrapper flex items-center gap-10">
           <div class="input-field mb-8 w-1/2">
             <label for="captcha">كود التحققق</label>
             <input id="captcha" />
           </div>
           <div class="captcha w-1/2 flex items-center justify-center">{{captchaNumber}}</div>
-        </div>
+        </div> -->
+
+
+        <re-captcha (resolved)="resolved($event)" siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></re-captcha>
+
+
         <div class="login-actions flex items-center justify-between ">
           <a routerLink="/login/forget-password">نسيت كلمة المرور</a>
           <div class="remeber-input-field flex items-center gap-2 ">
@@ -45,7 +52,9 @@
             <input id="remeber-me" type="checkbox" />
           </div>
         </div>
+
       </form>
+
       <button class="enter-btn"  (click)="login()">دخول</button>
     </div>
   </div>

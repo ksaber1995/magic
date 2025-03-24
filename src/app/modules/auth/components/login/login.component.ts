@@ -10,7 +10,7 @@ import { SwaggerService } from '../../../../swagger/swagger.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  captchaNumber : number = Math.floor(100000 + Math.random() * 900000)
+  // captchaNumber : number = Math.floor(100000 + Math.random() * 900000)
   loginForm : FormGroup
   errors: any;
   constructor(
@@ -21,20 +21,37 @@ export class LoginComponent {
     this.loginForm = this.fb.group({
       email : ['karim@gmail.com' , [Validators.required , Validators.email]],
       password: ['123456' , [Validators.required]],
-      captecha : [null , [Validators.required]]
     })
   }
+  captcha;
+  resolved(captchaResponse: string) {
+    this.captcha = captchaResponse
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
+
+  // validateCaptcha() {
+  //   if (window['grecaptcha']) {
+  //     grecaptcha.ready(() => {
+  //       grecaptcha.execute('YOUR_SITE_KEY', { action: 'login' }).then((token: string) => {
+  //         console.log('reCAPTCHA Token:', token);
+  //         this.login(token);
+  //       });
+  //     });
+  //   } else {
+  //     console.error('reCAPTCHA is not defined.');
+  //   }
+  // }
 
   login(){
     this.errors = null;
-    this.swagger.login({email: this.loginForm.value.email, password: this.loginForm.value.password })
+    this.swagger.login({email: this.loginForm.value.email, password: this.loginForm.value.password, recaptcha_token: this.captcha })
     .subscribe((res:any)=>{
 
       localStorage.setItem('token', res.token)
       this.router.navigate(['/'])
     },error=>{
       // handle errors
-      this.errors  = error.message
+      this.errors  = error.message || error.error
     })
   }
 }

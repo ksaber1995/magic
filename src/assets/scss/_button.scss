@@ -1,0 +1,75 @@
+// spinner in the button
+@keyframes spinner {
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+.mat-button-toggle-checked {
+  background-color: #b3e1fd;
+
+}
+
+.loading-btn {
+  font-size: 0px;
+  pointer-events: none;
+
+  * {
+      opacity: .2;
+  }
+}
+
+.loading-btn:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}
+
+button.flat {
+  padding: 0;
+}
+
+.close-dialog-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+mat-button {
+  .loading {
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin-top: -10px;
+      margin-left: -10px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      border-top-color: #000000;
+      animation: spinner .8s linear infinite;
+  }
+}
+
+
+.fixed-buttons-wrapper{
+  position: sticky;
+  margin-top: 1rem;
+  width: 100%;
+  background-color: #fff;
+  z-index: 99;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+}

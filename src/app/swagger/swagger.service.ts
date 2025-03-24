@@ -20,6 +20,11 @@ interface ResponseData<T = any> {
   data: T[]
 }
 
+
+interface ResponseItem<T = any> {
+  data: T
+}
+
 function createFormData(item) {
   const formData = new FormData();
 
@@ -39,7 +44,7 @@ export class SwaggerService {
 
   constructor(private http: HttpClient) { }
 
-  login(body: { email: string, password: string }) {
+  login(body: { email: string, password: string, recaptcha_token: string }) {
     const url = ENDPOINT_URI + 'login'
     return this.http.post(url, body);
   }
@@ -227,7 +232,7 @@ export class SwaggerService {
 
   // Permissions
   getAllPermissions() {
-    return this.http.get(ENDPOINT_URI + 'permissions');
+    return this.http.get<ResponseData<Permission>>(ENDPOINT_URI + 'permissions').pipe(map(res=> res.data));
   }
 
   getOnePermission(id: string) {
@@ -269,7 +274,7 @@ export class SwaggerService {
 
   // Users
   getAllUsers() {
-    return this.http.get(ENDPOINT_URI + 'users');
+    return this.http.get<ResponseData<User>>(ENDPOINT_URI + 'users').pipe(map(res=>res.data));
   }
 
   getOneUser(id: string) {
@@ -287,22 +292,12 @@ export class SwaggerService {
   }
 
   // Settings
-  getAllSettings() {
-    return this.http.get<ResponseData<Setting>>(ENDPOINT_URI + 'settings').pipe(map(res=> res.data));
+  getSetting() {
+    return this.http.get<ResponseItem<Setting>>(ENDPOINT_URI + `settings/1`).pipe(map(res=> res.data));
   }
 
-  getOneSetting(id: string) {
-    return this.http.get(ENDPOINT_URI + `settings/${id}`);
-  }
-
-  createSetting(setting: Setting) {
-    const formData = createFormData(setting);
-    return this.http.post(ENDPOINT_URI + `settings`, formData);
-  }
-
-  updateSetting(id: string, setting: Setting) {
-    const formData = createFormData(setting);
-    return this.http.put(ENDPOINT_URI + `settings/${id}`, formData);
+  updateSetting(setting: Setting) {
+    return this.http.put(ENDPOINT_URI + `settings/1`, setting);
   }
 
   // sms

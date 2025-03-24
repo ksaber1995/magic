@@ -1,153 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-interface user {
-  name: string;
-  committees:string[];
-  email: string;
-  id: string;
-  roleType:number; 
-  imagePath:string,
-  activated:boolean
-}
+import { SwaggerService } from '../../../../../swagger/swagger.service';
+import { User } from '../../../../../../model/user';
+
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.scss',
 })
-export class UsersListComponent {
-  users: user[] = [
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:0,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: false,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-    {
-      name: 'admin',
-      committees: ['اعطاء صلاحيات admin'],
-      email: 'ahmed@etree.com.sa',
-      id: '02',
-      roleType:1,
-      activated: true,
-      imagePath:'assets/images/user-image.jpg'
-    },
-  ];
+export class UsersListComponent implements OnInit {
+  users: User[] = [];
+  // TODO, Ahmed اللجان المنتسب لها
   constructor(
-    private router : Router
+    private router : Router,
+    private swagger: SwaggerService,
   ){
 
   }
+
+  ngOnInit(): void {
+    this.swagger.getAllUsers().subscribe(users=>{
+      this.users = users;
+    })
+  }
+
   userDetails(id : string){
     this.router.navigate(['main/users/', id ])
   }

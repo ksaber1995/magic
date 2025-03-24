@@ -1,3 +1,22 @@
 .hover:hover{
   cursor: pointer;
 }
+
+mat-error{
+ color: rgb(239 68 68 / var(--tw-text-opacity, 1)) !important;
+}
+
+.mat-mdc-snack-bar-container {
+  background-color: #4caf50 !important; /* Green Background */
+  color: white !important;
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+}
+
+.mat-mdc-snack-bar-container::before {
+  background-color: #4caf50 !important; /* Green Background */
+  content: '✔'; /* Green Title */
+  font-weight: bold;
+  padding: 0 1rem;
+}

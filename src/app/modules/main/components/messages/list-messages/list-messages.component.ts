@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
 
 const messages = [
   {
@@ -30,7 +31,7 @@ const messages = [
           },
         ],
         messageStatus: 'لم يتم الاتصال بالخادم',
-        
+
       },
       {
         content:
@@ -75,6 +76,18 @@ const messages = [
   templateUrl: './list-messages.component.html',
   styleUrl: './list-messages.component.scss',
 })
-export class ListMessagesComponent {
+export class ListMessagesComponent  implements OnInit{
   messagesList = messages;
+  messages;
+
+  constructor(private swagger: SwaggerService){}
+
+  ngOnInit(): void {
+    this.swagger.getAllSms().subscribe(res=>{
+      this.messages = res;
+
+      // TODO, Ahmed, create this
+    })
+  }
+
 }

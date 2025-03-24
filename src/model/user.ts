@@ -8,6 +8,6 @@ export interface User{
   fax: string,
   role: string,
   status: string,
-  image: File,
+  image: File | string,
   password_confirmation: string,
 }

@@ -12,7 +12,7 @@
     <tbody>
       <tr *ngFor="let user of users">
         <td colspan="2" [routerLink]="[user.id]">
-          <img src="{{ user.imagePath }}" class="user-image" />
+          <img [src]="user.image" alt="" class="user-image" />
         </td>
         <td colspan="3" (click)="userDetails(user.id)">
           <span style="cursor: pointer; color: #1e70bf">
