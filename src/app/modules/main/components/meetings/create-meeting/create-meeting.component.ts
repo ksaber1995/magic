@@ -1,60 +1,81 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import {
   Component,
-  computed,
   ElementRef,
   HostListener,
-  inject,
-  model,
-  signal,
-  ViewChild,
+  OnInit,
+  ViewChild
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
+import { Meeting } from '../../../../../../model/metting';
 
 @Component({
   selector: 'app-create-meeting',
   templateUrl: './create-meeting.component.html',
   styleUrl: './create-meeting.component.scss',
 })
-export class CreateMeetingComponent {
+export class CreateMeetingComponent implements OnInit{
   @ViewChild('dateInput') dateInput!: ElementRef;
 
-  progressValue: number = 0;
-  meetingForm: FormGroup;
+  users$ = this.swagger.getAllUsers();
+  projects$ = this.swagger.getAllProjects();
+
+  progressValue = 0;
+  form: FormGroup;
   times = [5,10,15,20,25,30,35,40,45,50,55,60]
-  constructor(private fb: FormBuilder) {}
+
+  constructor(
+    private fb: FormBuilder,
+    private swagger: SwaggerService
+  ) {}
+
   ngOnInit(): void {
-    this.meetingForm = this.fb.group({
-      meetingTopic: [null],
-      meetingLocation: [null],
-      committee: this.fb.array([]),
-      member: this.fb.array([]),
-      program: this.fb.array([]),
-      descrpitioon: [null],
-      uploadedFiles: this.fb.array([]),
-      date: [null],
-      time: [null], 
-      reminder: [null]
+    this.form = this.fb.group({
+      title: [],
+      content: [],
+      meeting_address: [],
+      members_ids: [[]],
+      projects_ids: [[]],
+      files: [[]],
+      meeting_date: [],
+      meeting_time: [],
+      reminder_time: []
     });
   }
 
   setTodayDate() {
-    this.meetingForm
+    this.form
       .get('date')
       .setValue(new Date().toISOString().split('T')[0]);
   }
+
   setTime(){
     // this.meetingForm
     // .get('time')
     // .setValue('12:00 am');
-  
+
   }
-  createmeeting() {
-    console.log(this.meetingForm.value);
+
+  createMeeting() {
+    const meeting: Meeting = {
+      title: this.formValue.title,
+      content: this.formValue.content,
+      meeting_address:this.formValue.meeting_address,
+      meeting_date: this.formValue.meeting_date,
+      meeting_time: this.formValue.meeting_time,
+      reminder_time: this.formValue.reminder_time,
+      members_ids: this.formValue.members_ids,
+      projects_ids: this.formValue.projects_ids,
+      files: this.formValue.files
+    };
+
+    this.swagger.createMeeting(meeting).subscribe(res=>{
+      console.log(res)
+    })
+
+    console.log(this.form.value);
   }
+
   members: string[] = [
     'جميع الاعضاء...',
     'دزأحمد بن بدر بأبدر',
@@ -86,61 +107,6 @@ export class CreateMeetingComponent {
   isMemberDropdownOpen = false;
   isProgramDropdownOpen = false;
 
-  toggleDropdown(type: 'committee' | 'member' | 'program', event: Event) {
-    event.stopPropagation();
-    this.isCommitteeDropdownOpen =
-      type === 'committee' ? !this.isCommitteeDropdownOpen : false;
-    this.isMemberDropdownOpen =
-      type === 'member' ? !this.isMemberDropdownOpen : false;
-    this.isProgramDropdownOpen =
-      type === 'program' ? !this.isProgramDropdownOpen : false;
-  }
-
-  selectItem(
-    type: 'committee' | 'member' | 'program',
-    option: string,
-    event: Event
-  ) {
-    event.stopPropagation();
-    const selectedList =
-      type === 'committee'
-        ? this.selectedCommittee
-        : type === 'member'
-        ? this.selectedMember
-        : this.selectedProgram;
-
-    if (!selectedList.includes(option)) {
-      selectedList.push(option);
-      this.meetingForm.get(type).value.push(option)
-    }
-    
-    this.closeAllDropdowns();
-  }
-
-  removeItem(
-    type: 'committee' | 'member' | 'program',
-    option: string,
-    event: Event
-  ) {
-    event.stopPropagation();
-    if (type === 'committee') {
-      this.selectedCommittee = this.selectedCommittee.filter(
-        (item) => item !== option
-      );
-    } else if (type === 'member') {
-      this.selectedMember = this.selectedMember.filter(
-        (item) => item !== option
-      );
-    } else {
-      this.selectedProgram = this.selectedProgram.filter(
-        (item) => item !== option
-      );
-    }
-    const formControl = this.meetingForm.get(type);
-    if (formControl) {
-      formControl.setValue(formControl.value.filter((item: string) => item !== option));
-    }
-  }
 
   closeAllDropdowns() {
     this.isCommitteeDropdownOpen = false;
@@ -153,5 +119,9 @@ export class CreateMeetingComponent {
     if (!(event.target as HTMLElement).closest('.dropdown-container')) {
       this.closeAllDropdowns();
     }
+  }
+
+  get formValue(){
+    return this.form.value;
   }
 }

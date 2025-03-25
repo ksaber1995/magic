@@ -42,8 +42,6 @@
         </div> -->
 
 
-        <re-captcha (resolved)="resolved($event)" siteKey="6Ld4SPYpAAAAACPpyAJa46r7hpekRR9nOIjV7B5u"></re-captcha>
-
 
         <div class="login-actions flex items-center justify-between ">
           <a routerLink="/login/forget-password">نسيت كلمة المرور</a>
@@ -53,11 +51,10 @@
           </div>
         </div>
 
-        <!-- RECAPTCHA_SITE_KEY=6Ld4SPYpAAAAACPpyAJa46r7hpekRR9nOIjV7B5u -->
-
-        <!-- RECAPTCHA_SECRET_KEY=6Ldiy_0qAAAAAPbkg7TViMyV3iNF84dDXsl5MI-I -->
+        <!-- RECAPTCHA_SITE_KEY=6Ldiy_0qAAAAAHaLWSfUDA0imzFPTeMaE9rIchic -->
+        <!-- secret key: 6Ldiy_0qAAAAAPbkg7TViMyV3iNF84dDXsl5MI-I -->
       </form>
-      <button class="enter-btn"  (click)="login()">دخول</button>
+      <button class="enter-btn"  (click)="validateCaptcha()">دخول</button>
     </div>
   </div>
 </div>

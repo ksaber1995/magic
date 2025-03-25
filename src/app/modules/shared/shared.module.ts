@@ -10,6 +10,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { CreateSuccssDialogComponent } from './components/create-succss-dialog/create-succss-dialog.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
@@ -23,6 +24,7 @@ const declarationsImports = [
 const imports = [
   ReactiveFormsModule,
   FormsModule,
+  MatSelectModule,
   MatSlideToggleModule,
   MatAutocompleteModule,
   MatChipsModule,

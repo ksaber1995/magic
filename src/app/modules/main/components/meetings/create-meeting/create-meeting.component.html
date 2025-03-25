@@ -1,146 +1,72 @@
 <div class="new-meeting-container m-5 h-full">
   <div class="header p-4">اجتماع جديد</div>
-  <form action="" class="p-4" [formGroup]="meetingForm">
+  <form (submit)="createMeeting()" action="" class="p-4" [formGroup]="form">
     <div class="input-field flex justify-between mb-3">
       <label> عنوان الاجتماع </label>
-      <input type="text" class="address-input" formControlName="meetingTopic"  />
+      <input type="text" class="address-input" formControlName="title" />
     </div>
     <div class="input-field flex justify-between mb-3">
       <label>مكان الاجتماع </label>
-      <input formControlName="meetingLocation" type="text" class="address-input" />
+      <input formControlName="meeting_address" type="text" class="address-input" />
     </div>
     <!-- Committees Dropdown -->
-    <div class="input-field flex justify-between mb-3">
-      <label> اللجان </label>
-      <div
-        class="custom-dropdown dropdown-container"
-        (click)="toggleDropdown('committee', $event)"
-      >
-        <div class="selected-options">
-          <span *ngFor="let option of selectedCommittee" class="tag">
-            <span
-              class="remove ml-2"
-              (click)="removeItem('committee', option, $event)"
-              >✖</span
-            >
-            {{ option }}
-          </span>
-        </div>
-        <ul class="dropdown-menu" *ngIf="isCommitteeDropdownOpen">
-          <li
-            *ngFor="let option of committees"
-            [class.selected]="selectedCommittee.includes(option)"
-            (click)="selectItem('committee', option, $event)"
-          >
-            {{ option }}
-          </li>
-        </ul>
-      </div>
-    </div>
+
+    <!-- ignore it for now  -->
+    <!-- <div class="input-field flex justify-between mb-3">
+      <span> اللجان </span>
+
+      <mat-form-field class="custom-dropdown dropdown-container">
+        <mat-select formControlName="members_ids" multiple> </mat-select>
+      </mat-form-field>
+
+    </div> -->
+
 
     <!-- Members Dropdown -->
     <div class="input-field flex justify-between mb-3">
-      <label> الاعضاء </label>
-      <div
-        class="custom-dropdown dropdown-container"
-        (click)="toggleDropdown('member', $event)"
-      >
-        <div class="selected-options">
-          <span *ngFor="let option of selectedMember" class="tag">
-            <span
-              class="remove ml-2"
-              (click)="removeItem('member', option, $event)"
-              >✖</span
-            >
-            {{ option }}
-          </span>
-        </div>
-        <ul class="dropdown-menu" *ngIf="isMemberDropdownOpen">
-          <li
-            *ngFor="let option of members"
-            [class.selected]="selectedMember.includes(option)"
-            (click)="selectItem('member', option, $event)"
-          >
-            {{ option }}
-          </li>
-        </ul>
-      </div>
+      <span> الأعضاء </span>
+
+      <mat-form-field class="custom-dropdown dropdown-container">
+        <mat-select formControlName="members_ids" multiple>
+          <mat-option *ngFor="let user of users$ | async" [value]="user.id"> {{user.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
     </div>
 
     <!-- Programs Dropdown -->
     <div class="input-field flex justify-between mb-3">
-      <label> البرامج </label>
-      <div
-        class="custom-dropdown dropdown-container"
-        (click)="toggleDropdown('program', $event)"
-      >
-        <div class="selected-options">
-          <span *ngFor="let option of selectedProgram" class="tag">
-            <span
-              class="remove ml-2"
-              (click)="removeItem('program', option, $event)"
-              >✖</span
-            >
-            {{ option }}
-          </span>
-        </div>
-        <ul class="dropdown-menu" *ngIf="isProgramDropdownOpen">
-          <li
-            *ngFor="let option of programs"
-            [class.selected]="selectedProgram.includes(option)"
-            (click)="selectItem('program', option, $event)"
-          >
-            {{ option }}
-          </li>
-        </ul>
-      </div>
+      <span> البرامج </span>
+
+      <mat-form-field class="custom-dropdown dropdown-container">
+        <mat-select multiple formControlName="projects_ids">
+          <mat-option *ngFor="let project of projects$ | async" [value]="project.id"> {{project.title}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
 
     <div class="start-date-wrapper flex gap-4 mb-3">
       <div class="start-date-input flex items-center gap-2 w-1/2">
         <label for="">تاريخ بداية الاجتماع</label>
-        <input
-          class="flex-grow"
-          matInput
-          formControlName="date"
-          (click)="setTodayDate()"
-          [matDatepicker]="picker"
-        />
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-          (click)="setTodayDate()"
-        ></mat-datepicker-toggle>
+        <input class="flex-grow" matInput formControlName="meeting_date" (click)="setTodayDate()"
+          [matDatepicker]="picker" />
+        <mat-datepicker-toggle matIconSuffix [for]="picker" (click)="setTodayDate()"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </div>
       <div class="meeting-time-input flex items-center gap-2 w-1/2">
         <label for="">وقت بداية الاجتماع</label>
-        <p-datepicker
-          (click)="setTime()"
-          inputId="calendar-timeonly"
-          formControlName="time"
-          [timeOnly]="true"
-          [hourFormat]="12"
-          class="flex-grow"
-        />
+        <p-datepicker (click)="setTime()" inputId="calendar-timeonly" formControlName="meeting_time" [timeOnly]="true"
+          [hourFormat]="12" class="flex-grow" />
         <i class="bi bi-clock" style="font-size: 20px ;margin: 0 15px;"></i>
       </div>
     </div>
 
-    <textarea name="" id="" class="details" placeholder="التفاصيل" formControlName="descrpitioon"></textarea>
+    <textarea name="" id="" class="details" placeholder="التفاصيل" formControlName="content"></textarea>
     <div class="uploaded-files input-field mb-3">
       <label class="title">ملفات مرفقة</label>
-      <input
-        formArrayName="uploadedFiles"
-        type="file"
-        multiple
-        id="fileInput"
-        hidden
-      />
-      <div
-        class="upload-files-button p-4"
-        onclick="document.getElementById('fileInput').click()"
-      >
+      <input formArrayName="files" type="file" multiple id="fileInput" hidden />
+      <div class="upload-files-button p-4" onclick="document.getElementById('fileInput').click()">
         <label>اسحب الملف هنا...</label>
         <div class="choose-file">
           أو قم باختيار الملف..
@@ -150,14 +76,14 @@
       <div class="selected-files"></div>
     </div>
     <div class="input-field mb-9">
-      تذكير قبل ب 
-      <select class="reminder" formControlName="reminder" >
+      تذكير قبل ب
+      <select class="reminder" formControlName="reminder_time">
         <option value="1" selected>بدون تذكير</option>
         <option *ngFor="let time of times" value="{{time}}">{{time}}</option>
       </select>
       دقيقة
     </div>
 
-    <button class="add-btn" (click)="createmeeting()">اضافة اجتماع</button>
+    <button class="add-btn" [disabled]>اضافة اجتماع</button>
   </form>
 </div>

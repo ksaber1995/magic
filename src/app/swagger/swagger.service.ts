@@ -35,6 +35,8 @@ function createFormData(item) {
       formData.append(key, value as string); // Convert values to strings
     }
   });
+
+  return formData;
 }
 
 @Injectable({
@@ -183,6 +185,7 @@ export class SwaggerService {
   }
 
   createMeeting(meeting: Meeting) {
+    debugger
     const formData = createFormData(meeting);
     return this.http.post(ENDPOINT_URI + `meetings`, formData);
   }

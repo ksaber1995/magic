@@ -22,28 +22,23 @@ export class LoginComponent {
       password: ['123456' , [Validators.required]],
     })
   }
-  captcha;
-  resolved(captchaResponse: string) {
-    this.captcha = captchaResponse
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
+
+  validateCaptcha() {
+    if (window['grecaptcha']) {
+      grecaptcha.ready(() => {
+        grecaptcha.execute('6Ldiy_0qAAAAAHaLWSfUDA0imzFPTeMaE9rIchic', { action: 'login' }).then((token: string) => {
+          console.log('reCAPTCHA Token:', token);
+          this.login(token);
+        });
+      });
+    } else {
+      console.error('reCAPTCHA is not defined.');
+    }
   }
 
-  // validateCaptcha() {
-  //   if (window['grecaptcha']) {
-  //     grecaptcha.ready(() => {
-  //       grecaptcha.execute('YOUR_SITE_KEY', { action: 'login' }).then((token: string) => {
-  //         console.log('reCAPTCHA Token:', token);
-  //         this.login(token);
-  //       });
-  //     });
-  //   } else {
-  //     console.error('reCAPTCHA is not defined.');
-  //   }
-  // }
-
-  login(){
+  login(recaptcha_token: string){
     this.errors = null;
-    this.swagger.login({email: this.loginForm.value.email, password: this.loginForm.value.password, recaptcha_token: this.captcha })
+    this.swagger.login({email: this.loginForm.value.email, password: this.loginForm.value.password, recaptcha_token })
     .subscribe((res:any)=>{
 
       localStorage.setItem('token', res.token)
