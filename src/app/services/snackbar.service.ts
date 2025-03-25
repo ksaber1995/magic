@@ -8,10 +8,20 @@ export class SnackbarService {
   constructor(private snackBar: MatSnackBar) {}
   showSuccess(title: string) {
     this.snackBar.open(`${title}`, 'Close', {
-      duration: 300000,
+      duration: 3000,
       horizontalPosition: 'end',
       verticalPosition: 'top',
       panelClass: ['success-snackbar']
+    });
+  }
+
+  showError(title: string) {
+    // TODO, Ahmed
+    this.snackBar.open(`${title}`, 'Close', {
+      duration: 3000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+      panelClass: ['error-snackbar']
     });
   }
 }

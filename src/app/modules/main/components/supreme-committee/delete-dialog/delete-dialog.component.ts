@@ -9,9 +9,5 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class DeleteDialogComponent {
   readonly dialogRef = inject(MatDialogRef<DeleteDialogComponent>);
   readonly data = inject<boolean>(MAT_DIALOG_DATA);
-  deleteDecision() {}
-  
-  closeDiolog() {
-    this.dialogRef.close();
-  }
+
 }

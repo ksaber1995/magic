@@ -13,24 +13,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let meeting of meetings">
+        <tr *ngFor="let meeting of meetings ">
           <td colspan="4" [routerLink]="[meeting.id]">
             <div class="meeting-topic">
-              <div class="name">{{ meeting.meetingTopic.name }}</div>
-              <div class="location">{{ meeting.meetingTopic.location }}</div>
+              <div class="name">{{ meeting.title }}</div>
+              <div class="location">{{ meeting.meeting_address }}</div>
             </div>
           </td>
           <td colspan="3" (click)="meetingDetails(meeting.id)">
             <div class="date">
-              <div class="day">{{ meeting.date.day }}</div>
+              <div class="day">{{ meeting.meeting_date }}</div>
               <div class="day">
-                من الساعة
+                 الساعة
                 <span>
-                  {{ meeting.date.hourFrom }}
-                </span>
-                الي الساعة
-                <span>
-                  {{ meeting.date.hourTo }}
+                  {{ meeting.meeting_time }}
                 </span>
               </div>
             </div>
@@ -43,8 +39,8 @@
           </td>
           <td colspan="2">
             <div class="coordinator flex gap-1 items-center">
-              <img src="{{ meeting.coordinator.imagePath }}" alt="" />
-              <div class="name">{{ meeting.coordinator.name }}</div>
+              <img src="{{ meeting.coordinator_user.image }}" alt="" />
+              <div class="name">{{ meeting.coordinator_user.name }}</div>
             </div>
           </td>
           <td colspan="2">
@@ -54,7 +50,7 @@
             </button>
             <button
               class="delete-meeting"
-              [routerLink]="[meeting.id + '/delete']"
+              (click)="delete(meeting.id)"
             >
               <i class="bi bi-trash3-fill"></i>
               حذف

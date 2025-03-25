@@ -28,7 +28,7 @@
 
       <mat-form-field class="custom-dropdown dropdown-container">
         <mat-select formControlName="members_ids" multiple>
-          <mat-option *ngFor="let user of users$ | async" [value]="user.id"> {{user.name}}</mat-option>
+          <mat-option *ngFor="let member of members$ | async" [value]="member.id"> {{member.user?.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -56,8 +56,8 @@
       </div>
       <div class="meeting-time-input flex items-center gap-2 w-1/2">
         <label for="">وقت بداية الاجتماع</label>
-        <p-datepicker (click)="setTime()" inputId="calendar-timeonly" formControlName="meeting_time" [timeOnly]="true"
-          [hourFormat]="12" class="flex-grow" />
+        <p-datepicker inputId="calendar-timeonly" formControlName="meeting_time" [timeOnly]="true"
+           class="flex-grow" />
         <i class="bi bi-clock" style="font-size: 20px ;margin: 0 15px;"></i>
       </div>
     </div>

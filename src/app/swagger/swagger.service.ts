@@ -25,14 +25,23 @@ interface ResponseItem<T = any> {
   data: T
 }
 
-function createFormData(item) {
+function createFormData(item: any): FormData {
   const formData = new FormData();
 
   Object.entries(item).forEach(([key, value]) => {
-    if (key === 'image' && value instanceof File) {
-      formData.append(key, value); // Append file correctly
-    } else {
-      formData.append(key, value as string); // Convert values to strings
+    if (Array.isArray(value)) {
+      // Handle multiple files or multiple values
+      value.forEach((val, index) => {
+        if (val instanceof File) {
+          formData.append(`${key}[${index}]`, val); // Append each file with indexed key
+        } else {
+          formData.append(`${key}[]`, val.toString()); // Append normal array values
+        }
+      });
+    } else if (value instanceof File) {
+      formData.append(key, value); // Append a single file
+    } else if (value !== null && value !== undefined) {
+      formData.append(key, value.toString()); // Convert other values to string
     }
   });
 
@@ -159,7 +168,10 @@ export class SwaggerService {
 
   // Decisions
   getAllMembers() {
-    return this.http.get(ENDPOINT_URI + 'members');
+    return this.http.get<ResponseData<any>>(ENDPOINT_URI + 'members')
+    .pipe(
+      map(res=>res.data),
+    );
   }
 
   getOneMember(id: string) {
@@ -177,7 +189,7 @@ export class SwaggerService {
 
   // Meetings
   getAllMeetings() {
-    return this.http.get(ENDPOINT_URI + 'meetings');
+    return this.http.get<ResponseData<Meeting>>(ENDPOINT_URI + 'meetings').pipe(map(res=> res.data));
   }
 
   getOneMeeting(id: string) {
@@ -185,7 +197,6 @@ export class SwaggerService {
   }
 
   createMeeting(meeting: Meeting) {
-    debugger
     const formData = createFormData(meeting);
     return this.http.post(ENDPOINT_URI + `meetings`, formData);
   }
@@ -193,6 +204,9 @@ export class SwaggerService {
   updateMeeting(id: string, meeting: Meeting) {
     const formData = createFormData(meeting);
     return this.http.put(ENDPOINT_URI + `meetings/${id}`, formData);
+  }
+  deleteMeeting(id: string) {
+    return this.http.delete(ENDPOINT_URI + `meetings/${id}`);
   }
 
   // Reports

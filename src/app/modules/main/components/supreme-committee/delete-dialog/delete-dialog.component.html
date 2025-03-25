@@ -1,14 +1,14 @@
 <div class="delete-dialog">
     <div class="header flex justify-between items-center p-2">
         <div class="title">تأكيد الحذف</div>
-        <i class="bi bi-x close-i" (click)="closeDiolog()"></i>
+        <i class="bi bi-x close-i" mat-dialog-close=""></i>
     </div>
     <div class="warning-message flex flex-col gap-3 items-center">
         <i class="bi bi-trash3-fill trash-i" ></i>
         <div class="message">هل أنت متاكد من الحذف؟!</div>
     </div>
     <div class="actions p-3 flex justify-end gap-2">
-        <button class="delete-btn" (click)="deleteDecision()">حذف</button>
-        <button class="cancel-btn" (click)="closeDiolog()">إلغاء</button>
+        <button class="delete-btn" mat-dialog-close="true" >حذف</button>
+        <button class="cancel-btn" mat-dialog-close>إلغاء</button>
     </div>
 </div>

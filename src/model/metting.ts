@@ -8,4 +8,9 @@ export interface Meeting{
   members_ids: number[];
   projects_ids: number[];
   files: File[]
+  coordinator_user?: {
+    name: string
+  };
+
+  id?:string;
 }
