@@ -32,6 +32,7 @@ import { CreateMeetingComponent } from './components/meetings/create-meeting/cre
 import { MeetingsListComponent } from './components/meetings/meetings-list/meetings-list.component';
 import { ReportDetailsComponent } from './components/programs/reports/report-details/report-details.component';
 import { EditReportComponent } from './components/programs/reports/edit-report/edit-report.component';
+import { EditMemberComponent } from './components/programs/members/edit-member/edit-member.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,7 @@ const routes: Routes = [
       { path: 'programs/:id/procedures', component: ProceduresComponent },
       { path: 'programs/:id/files', component: FilesComponent },
       { path: 'programs/:id/members', component: MembersComponent },
+      { path: 'programs/:id/members/:memberId/edit', component: EditMemberComponent },
       { path: 'programs/:id/reports', component: ReportsComponent },
       { path: 'programs/:id/reports/:reportId', component: ReportDetailsComponent },
       { path: 'programs/:id/reports/:reportId/edit', component: EditReportComponent },

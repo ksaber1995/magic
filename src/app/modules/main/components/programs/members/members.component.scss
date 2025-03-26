@@ -1,0 +1,60 @@
+.members-container {
+  .title {
+    color: #5b5b5b;
+    font-size: 18px;
+    margin-bottom: 25px;
+    font-weight: 500;
+  }
+  .member {
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    height: fit-content;
+    .name {
+      font-size: 20px;
+      color: #646464;
+      padding: 12px 0;
+      display: block;
+      text-align: center;
+    }
+    .job-title {
+      width: 100%;
+      background: #f7f7f7;
+      padding: 5px;
+      color: #646464;
+      font-size: 14px;
+      text-align: center;
+    }
+    .member-details {
+        width: 100%;
+      div {
+        color: #646464;
+        font-size: 14px;
+        text-align: center;
+        padding: 7px 0;
+      }
+      .actions {
+        button {
+          color: #646464;
+          text-align: center;
+          width: 49.5%;
+          background: #f7f7f7;
+          padding: 5px 0; 
+          &:hover{
+            background-color: #a9a9a9;
+            color: white;
+            transition: all .4s ease-in-out;
+          }
+        }
+      }
+    }
+    .details-btn{
+        display: block;
+        color: #646464;
+        font-size: 14px;
+        text-align: center;
+        padding: 7px 0;
+    }
+  }
+}

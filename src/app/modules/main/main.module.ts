@@ -44,6 +44,7 @@ import { MeetingsListComponent } from './components/meetings/meetings-list/meeti
 import { CreateMeetingComponent } from './components/meetings/create-meeting/create-meeting.component';
 import { ReportDetailsComponent } from './components/programs/reports/report-details/report-details.component';
 import { EditReportComponent } from './components/programs/reports/edit-report/edit-report.component';
+import { EditMemberComponent } from './components/programs/members/edit-member/edit-member.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { EditReportComponent } from './components/programs/reports/edit-report/e
     CreateMeetingComponent,
     ReportDetailsComponent,
     EditReportComponent,
+    EditMemberComponent,
   ],
   imports: [
     CommonModule,
