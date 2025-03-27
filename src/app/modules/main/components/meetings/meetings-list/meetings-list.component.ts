@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Meeting } from '../../../../../../model/metting';
+import { Meeting } from '../../../../../../model/meeting';
 import { SnackbarService } from '../../../../../services/snackbar.service';
 import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { DeleteDialogComponent } from '../../supreme-committee/delete-dialog/delete-dialog.component';
 
 
-// TODO, Ahmed, check  all data
+// TODO, Ahmed, check  all data, files
 @Component({
   selector: 'app-meetings-list',
   templateUrl: './meetings-list.component.html',

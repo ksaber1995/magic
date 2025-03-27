@@ -2,49 +2,48 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 import { ContainerComponent } from './components/container/container.component';
 import { ContentComponent } from './components/content/content.component';
 import { HeaderComponent } from './components/header/header.component';
-import { SettingsComponent } from './components/settings/settings.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { MainRoutingModule } from './main-routing.module';
-import { CreateMessageComponent } from './components/messages/create-message/create-message.component';
-import { ListMessagesComponent } from './components/messages/list-messages/list-messages.component';
-import { SharedModule } from '../shared/shared.module';
-import { ProceduresComponent } from './components/programs/procedures/procedures.component';
-import { FilesComponent } from './components/programs/files/files.component';
-import { MembersComponent } from './components/programs/members/members.component';
-import { ReportsComponent } from './components/programs/reports/reports.component';
-import { SupremeCommitteeDecisionsComponent } from './components/programs/supreme-committee-decisions/supreme-committee-decisions.component';
-import { SidebarItemComponent } from './components/sidebar/sidebar-item/sidebar-item.component';
-import { ProgramsListComponent } from './components/programs/programs-list/programs-list.component';
-import { ProgramItemComponent } from './components/programs/programs-list/program-item/program-item.component';
-import { DesicionsListComponent } from './components/supreme-committee/desicions-list/desicions-list.component';
-import { CreateDecisionComponent } from './components/supreme-committee/create-decision/create-decision.component';
-import { DeleteDialogComponent } from './components/supreme-committee/delete-dialog/delete-dialog.component';
-import { DecisionDetailsComponent } from './components/supreme-committee/decision-details/decision-details.component';
-import { FormsModule } from '@angular/forms';
 import { CommitteeUpdatesListComponent } from './components/latest-committee-updates/committee-updates-list/committee-updates-list.component';
 import { CreateNewNewsComponent } from './components/latest-committee-updates/create-new-news/create-new-news.component';
-import { NewsDetailsComponent } from './components/latest-committee-updates/news-details/news-details.component';
 import { DeleteNewsPageComponent } from './components/latest-committee-updates/delete-news-page/delete-news-page.component';
-import { PermissionsListComponent } from './components/permissions-list/permissions-list.component';
-import { CreatePermissionComponent } from './components/permissions-list/create-permission/create-permission.component';
-import { RolesComponent } from './components/roles/roles.component';
-import { CreateRoleComponent } from './components/roles/create-role/create-role.component';
-import { UsersListComponent } from './components/users/users-list/users-list.component';
-import { CreateUserComponent } from './components/users/create-user/create-user.component';
-import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
-import { UserInformationComponent } from './components/users/user-information/user-information.component';
-import { UserFilesComponent } from './components/users/user-files/user-files.component';
-import { FileDetailsComponent } from './components/users/file-details/file-details.component';
-import { EditUserComponent } from './components/users/edit-user/edit-user.component';
-import { EditRolesComponent } from './components/users/edit-roles/edit-roles.component';
-import { MeetingsListComponent } from './components/meetings/meetings-list/meetings-list.component';
+import { NewsDetailsComponent } from './components/latest-committee-updates/news-details/news-details.component';
 import { CreateMeetingComponent } from './components/meetings/create-meeting/create-meeting.component';
-import { ReportDetailsComponent } from './components/programs/reports/report-details/report-details.component';
-import { EditReportComponent } from './components/programs/reports/edit-report/edit-report.component';
+import { MeetingsListComponent } from './components/meetings/meetings-list/meetings-list.component';
+import { CreateMessageComponent } from './components/messages/create-message/create-message.component';
+import { ListMessagesComponent } from './components/messages/list-messages/list-messages.component';
+import { CreatePermissionComponent } from './components/permissions-list/create-permission/create-permission.component';
+import { PermissionsListComponent } from './components/permissions-list/permissions-list.component';
+import { FilesComponent } from './components/programs/files/files.component';
 import { EditMemberComponent } from './components/programs/members/edit-member/edit-member.component';
+import { MembersComponent } from './components/programs/members/members.component';
+import { ProceduresComponent } from './components/programs/procedures/procedures.component';
+import { ProgramItemComponent } from './components/programs/programs-list/program-item/program-item.component';
+import { ProgramsListComponent } from './components/programs/programs-list/programs-list.component';
+import { EditReportComponent } from './components/programs/reports/edit-report/edit-report.component';
+import { ReportDetailsComponent } from './components/programs/reports/report-details/report-details.component';
+import { ReportsComponent } from './components/programs/reports/reports.component';
+import { CreateRoleComponent } from './components/roles/create-role/create-role.component';
+import { RolesComponent } from './components/roles/roles.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { SidebarItemComponent } from './components/sidebar/sidebar-item/sidebar-item.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { CreateDecisionComponent } from './components/supreme-committee/create-decision/create-decision.component';
+import { DecisionDetailsComponent } from './components/supreme-committee/decision-details/decision-details.component';
+import { DeleteDialogComponent } from './components/supreme-committee/delete-dialog/delete-dialog.component';
+import { DecisionsListComponent } from './components/supreme-committee/desicions-list/decisions-list.component';
+import { CreateUserComponent } from './components/users/create-user/create-user.component';
+import { EditRolesComponent } from './components/users/edit-roles/edit-roles.component';
+import { EditUserComponent } from './components/users/edit-user/edit-user.component';
+import { FileDetailsComponent } from './components/users/file-details/file-details.component';
+import { UserFilesComponent } from './components/users/user-files/user-files.component';
+import { UserInformationComponent } from './components/users/user-information/user-information.component';
+import { UsersListComponent } from './components/users/users-list/users-list.component';
+import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
+import { MainRoutingModule } from './main-routing.module';
 
 @NgModule({
   declarations: [
@@ -59,11 +58,10 @@ import { EditMemberComponent } from './components/programs/members/edit-member/e
     FilesComponent,
     MembersComponent,
     ReportsComponent,
-    SupremeCommitteeDecisionsComponent,
     SidebarItemComponent,
     ProgramsListComponent,
     ProgramItemComponent,
-    DesicionsListComponent,
+    DecisionsListComponent,
     CreateDecisionComponent,
     DeleteDialogComponent,
     DecisionDetailsComponent,

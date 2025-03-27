@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let role of roles">
+      <tr *ngFor="let role of roles$ | async">
         <td colspan="3" [routerLink]="[role.id]">
           {{ role.name }}
           <div class="tooltip-container">

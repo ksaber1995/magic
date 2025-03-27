@@ -1,55 +1,47 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, computed, inject, model, signal } from '@angular/core';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { SnackbarService } from './../../../../../services/snackbar.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
 @Component({
   selector: 'app-create-message',
   templateUrl: './create-message.component.html',
   styleUrl: './create-message.component.scss'
 })
-export class CreateMessageComponent {
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  readonly currentMember = model('جميع الأعضاء');
-  readonly members = signal(['جميع الأعضاء']);
-  readonly allmembers: string[] = ['دزأحمد بن بدر بأبدر', 'عبداللطيف الروقي', 'سعود عبدالله الشمري', 'علي غرم الله الغامدي', 'احمد الهليل'];
-  readonly filteredmembers = computed(() => {
-    const currentMember = this.currentMember().toLowerCase();
-    return currentMember
-      ? this.allmembers.filter(Member => Member.toLowerCase().includes(currentMember))
-      : this.allmembers.slice();
+
+// TODO, validators
+export class CreateMessageComponent implements OnInit{
+  allMembers$ = this.swagger.getAllMembers();
+  form = this.fb.group({
+    members_ids :[[], [Validators.required]],
+    message: [null, [Validators.required]]
   });
 
-  readonly announcer = inject(LiveAnnouncer);
+  constructor(
+    private swagger: SwaggerService,
+    private fb: FormBuilder,
+    private snackbarService: SnackbarService
+  ){}
 
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+  ngOnInit(): void {
+  }
 
-    // Add our Member
-    if (value) {
-      this.members.update(members => [...members, value]);
+  sendMessage(){
+    const sms = {
+      members_ids : this.formValue.members_ids,
+      message: this.formValue.message,
+      status_id: 0
     }
 
-    // Clear the input value
-    this.currentMember.set('');
+    this.swagger.createSms(sms)
+      .subscribe(res=>{
+        this.snackbarService.showSuccess('تم ار سال الرسالة بنجاح');
+        this.form.reset();
+      },error=>{
+        this.snackbarService.showError(error.message)
+      })
   }
 
-  remove(Member: string): void {
-    this.members.update(members => {
-      const index = members.indexOf(Member);
-      if (index < 0) {
-        return members;
-      }
-
-      members.splice(index, 1);
-      this.announcer.announce(`Removed ${Member}`);
-      return [...members];
-    });
-  }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.members.update(members => [...members, event.option.viewValue]);
-    this.currentMember.set('');
-    event.option.deselect();
+  get formValue(){
+    return this.form.value
   }
 }

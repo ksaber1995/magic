@@ -77,7 +77,7 @@ const routes: SideBarItem[] = [
     icon: 'assets/images/permissions.svg',
     showChildren: false,
     childrens: [
-      { name: 'قائمة الأذونات', path: '/main/permissions-list', icon: '' },
+      { name: 'قائمة الأذونات', path: '/main/permissions', icon: '' },
       { name: 'إنشاء اذن', path: '/main/new-permission', icon: '' },
     ],
   },
@@ -95,7 +95,7 @@ const routes: SideBarItem[] = [
     icon: 'assets/images/news-s.svg',
     showChildren: false,
     childrens: [
-      { name: 'قرارات اللجنة العليا', path: '/main/list-decisions', icon: '' },
+      { name: 'قرارات اللجنة العليا', path: '/main/decisions', icon: '' },
       { name: 'انشاء قرار جديد', path: '/main/new-decision', icon: '' },
     ],
   },

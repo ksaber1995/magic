@@ -1,5 +1,5 @@
 export interface Sms{
   message: string;
-  status_id: string;
+  status_id: number;
   members_ids: number[]
 }

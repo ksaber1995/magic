@@ -5,7 +5,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Meeting } from '../../../../../../model/metting';
+import { Meeting } from '../../../../../../model/meeting';
 import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { SnackbarService } from './../../../../../services/snackbar.service';
 function formatDate(date: Date): string {
@@ -25,12 +25,13 @@ function formatDate(date: Date): string {
 export class CreateMeetingComponent implements OnInit{
   @ViewChild('dateInput') dateInput!: ElementRef;
 
-  members$ = this.swagger.getAllMembers();
+  users$ = this.swagger.getAllUsers();
   projects$ = this.swagger.getAllProjects();
 
   progressValue = 0;
   form: FormGroup;
   times = [5,10,15,20,25,30,35,40,45,50,55,60]
+  selectedFiles: File[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -45,11 +46,9 @@ export class CreateMeetingComponent implements OnInit{
       meeting_address: [],
       members_ids: [[]],
       projects_ids: [[]],
-      files: [[]],
       meeting_date: [],
       meeting_time: [],
-      reminder_time: []
-
+      reminder_time: [0] // no reminder
     });
 
   }
@@ -73,11 +72,12 @@ export class CreateMeetingComponent implements OnInit{
       reminder_time: this.formValue.reminder_time,
       members_ids: this.formValue.members_ids,
       projects_ids: this.formValue.projects_ids,
-      files: this.formValue.files
+      files: this.selectedFiles
     };
 
     this.swagger.createMeeting(meeting).subscribe(res=>{
-      this.snackbar.showSuccess('تم اضافة الاجتماع بنجاح')
+      this.snackbar.showSuccess('تم اضافة الاجتماع بنجاح');
+      this.form.reset();
     },error=>{
       this.snackbar.showError(error.message)
     })
@@ -86,6 +86,12 @@ export class CreateMeetingComponent implements OnInit{
   }
 
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.selectedFiles = Array.from(input.files); // Store selected files
+    }
+  }
 
   get formValue(){
     return this.form.value;

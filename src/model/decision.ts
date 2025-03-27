@@ -5,5 +5,6 @@ export interface Decision {
   progress_percentage: string,
   status_id: number,
   decision_date: string,
-  // files[0]: File
+  id: number,
+  files: File[]
 }

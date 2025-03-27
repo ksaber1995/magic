@@ -4,8 +4,8 @@ import { ENDPOINT_URI } from './utlity';
 import { User } from '../../model/user';
 import { map, Observable } from 'rxjs';
 import { Procedure } from '../../model/procedure';
-import { Decision } from '../../model/decission';
-import { Meeting } from '../../model/metting';
+import { Decision } from '../../model/decision';
+import { Meeting } from '../../model/meeting';
 import { IReport } from '../../model/report';
 import { Post } from '../../model/post';
 import { Permission } from '../../model/permission';
@@ -60,7 +60,7 @@ export class SwaggerService {
     return this.http.post(url, body);
   }
 
-  register(user: User): Observable<User> {
+  register(user: Partial<User>): Observable<User> {
     const url = ENDPOINT_URI + 'register';
     const formData = createFormData(user);
 
@@ -93,7 +93,7 @@ export class SwaggerService {
   // projects
 
   getAllProjects(): Observable<Project[]> {
-    return this.http.get<ResponseData<Project>>(ENDPOINT_URI + 'projects').pipe(map(res=> res.data));
+    return this.http.get<ResponseData<Project>>(ENDPOINT_URI + 'projects').pipe(map(res => res.data));
   }
 
   getOneProject(id: string) {
@@ -143,11 +143,11 @@ export class SwaggerService {
 
   // Decisions
   getAllDecisions() {
-    return this.http.get(ENDPOINT_URI + 'decisions');
+    return this.http.get<ResponseData<Decision>>(ENDPOINT_URI + 'decisions').pipe(map(res=> res.data));
   }
 
   getOneDecision(id: string) {
-    return this.http.get(ENDPOINT_URI + `decisions/${id}`);
+    return this.http.get<ResponseItem<Decision>>(ENDPOINT_URI + `decisions/${id}`).pipe(map(res=> res.data));
   }
 
   createDecision(decision: Decision) {
@@ -161,7 +161,7 @@ export class SwaggerService {
   }
 
 
-  deleteDecision(id: string) {
+  deleteDecision(id: number) {
     return this.http.delete(ENDPOINT_URI + `decisions/${id}`);
   }
 
@@ -169,9 +169,9 @@ export class SwaggerService {
   // Decisions
   getAllMembers() {
     return this.http.get<ResponseData<any>>(ENDPOINT_URI + 'members')
-    .pipe(
-      map(res=>res.data),
-    );
+      .pipe(
+        map(res => res.data),
+      );
   }
 
   getOneMember(id: string) {
@@ -189,7 +189,7 @@ export class SwaggerService {
 
   // Meetings
   getAllMeetings() {
-    return this.http.get<ResponseData<Meeting>>(ENDPOINT_URI + 'meetings').pipe(map(res=> res.data));
+    return this.http.get<ResponseData<Meeting>>(ENDPOINT_URI + 'meetings').pipe(map(res => res.data));
   }
 
   getOneMeeting(id: string) {
@@ -249,7 +249,7 @@ export class SwaggerService {
 
   // Permissions
   getAllPermissions() {
-    return this.http.get<ResponseData<Permission>>(ENDPOINT_URI + 'permissions').pipe(map(res=> res.data));
+    return this.http.get<ResponseData<Permission>>(ENDPOINT_URI + 'permissions').pipe(map(res => res.data));
   }
 
   getOnePermission(id: string) {
@@ -268,7 +268,7 @@ export class SwaggerService {
 
   // Roles
   getAllRoles() {
-    return this.http.get(ENDPOINT_URI + 'roles');
+    return this.http.get<Role[]>(ENDPOINT_URI + 'roles');
   }
 
   getOneRole(id: string) {
@@ -291,16 +291,11 @@ export class SwaggerService {
 
   // Users
   getAllUsers() {
-    return this.http.get<ResponseData<User>>(ENDPOINT_URI + 'users').pipe(map(res=>res.data));
+    return this.http.get<ResponseData<User>>(ENDPOINT_URI + 'users').pipe(map(res => res.data));
   }
 
   getOneUser(id: string) {
     return this.http.get(ENDPOINT_URI + `users/${id}`);
-  }
-
-  createUser(user: User) {
-    const formData = createFormData(user);
-    return this.http.post(ENDPOINT_URI + `users`, formData);
   }
 
   updateUser(id: string, user: User) {
@@ -310,7 +305,7 @@ export class SwaggerService {
 
   // Settings
   getSetting() {
-    return this.http.get<ResponseItem<Setting>>(ENDPOINT_URI + `settings/1`).pipe(map(res=> res.data));
+    return this.http.get<ResponseItem<Setting>>(ENDPOINT_URI + `settings/1`).pipe(map(res => res.data));
   }
 
   updateSetting(setting: Setting) {
@@ -327,9 +322,8 @@ export class SwaggerService {
     return this.http.get(ENDPOINT_URI + `sms/${id}`);
   }
 
-  createSms(sms: Sms) {
-    const formData = createFormData(sms);
-    return this.http.post(ENDPOINT_URI + `settings`, formData);
+  createSms(sms: Partial<Sms>) {
+    return this.http.post(ENDPOINT_URI + `sms`, sms);
   }
 
 

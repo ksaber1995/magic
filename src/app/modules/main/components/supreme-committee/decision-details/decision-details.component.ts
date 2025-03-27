@@ -1,31 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
+import { Decision } from '../../../../../../model/decision';
+import { ActivatedRoute } from '@angular/router';
 
-interface Decision{
-  name:string,
-  date:string,
-  uploadedFiles:UploadedFiles[],
-  description:string,
-  id:string,
-}
-interface UploadedFiles{
-  name:string,
-  path:string
+interface UploadedFiles {
+  name: string,
+  path: string
 }
 @Component({
   selector: 'app-decision-details',
   templateUrl: './decision-details.component.html',
   styleUrl: './decision-details.component.scss'
 })
-export class DecisionDetailsComponent {
-  decisionDetails : Decision =
-    {
-      name: 'توجيه سمو أمير منطقة الرياض بما يخص المحضر',
-      date: '27-01-2021',
-      description:'loreamloreamloreamloreamloream loreamloreamloreamloreamloream sdfaloreamloreamloreamloreamloream loreamloreamloreamloreamloream loreamloreamloreamloreamloream loreamloreamloreamloreamloream loreamloreamloreamloreamloream loreamloreamloreamloreamloream loreamloreamloreamloreamloream ',
-      uploadedFiles:[{
-        name:'pdf12',
-        path:'assets/images/pdf.svg'
-      }],
-      id:'10000',
-    }
+export class DecisionDetailsComponent implements OnInit {
+  decisionDetails: Decision;
+  id = this.route.snapshot.paramMap.get('id');
+
+  constructor(
+    private swagger: SwaggerService,
+    private route: ActivatedRoute
+  ) {
+
+  }
+
+  ngOnInit(): void {
+    this.swagger.getOneDecision(this.id)
+    .subscribe(res=>{
+      this.decisionDetails = res;
+    })
+  }
 }

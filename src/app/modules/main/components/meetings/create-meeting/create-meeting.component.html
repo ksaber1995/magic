@@ -24,11 +24,11 @@
 
     <!-- Members Dropdown -->
     <div class="input-field flex justify-between mb-3">
-      <span> الأعضاء </span>
+      <label> الأعضاء </label>
 
       <mat-form-field class="custom-dropdown dropdown-container">
         <mat-select formControlName="members_ids" multiple>
-          <mat-option *ngFor="let member of members$ | async" [value]="member.id"> {{member.user?.name}}</mat-option>
+          <mat-option *ngFor="let user of users$ | async" [value]="user.id"> {{user?.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -36,7 +36,7 @@
 
     <!-- Programs Dropdown -->
     <div class="input-field flex justify-between mb-3">
-      <span> البرامج </span>
+      <label> البرامج </label>
 
       <mat-form-field class="custom-dropdown dropdown-container">
         <mat-select multiple formControlName="projects_ids">
@@ -65,7 +65,8 @@
     <textarea name="" id="" class="details" placeholder="التفاصيل" formControlName="content"></textarea>
     <div class="uploaded-files input-field mb-3">
       <label class="title">ملفات مرفقة</label>
-      <input formArrayName="files" type="file" multiple id="fileInput" hidden />
+      <input (change)="onFileSelected($event)"
+       formControlName="files" type="file" multiple id="fileInput" hidden />
       <div class="upload-files-button p-4" onclick="document.getElementById('fileInput').click()">
         <label>اسحب الملف هنا...</label>
         <div class="choose-file">
@@ -78,7 +79,7 @@
     <div class="input-field mb-9">
       تذكير قبل ب
       <select class="reminder" formControlName="reminder_time">
-        <option value="1" selected>بدون تذكير</option>
+        <option value="0">بدون تذكير</option>
         <option *ngFor="let time of times" value="{{time}}">{{time}}</option>
       </select>
       دقيقة

@@ -9,5 +9,4 @@ export interface User{
   role: string,
   status: string,
   image: File | string,
-  password_confirmation: string,
 }

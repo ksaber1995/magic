@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SwaggerService } from '../../../../swagger/swagger.service';
 
 interface role {
   name: string;
@@ -12,66 +13,13 @@ interface role {
   templateUrl: './roles.component.html',
   styleUrl: './roles.component.scss',
 })
-export class RolesComponent {
-  roles: role[] = [
-    {
-      name: 'admin',
-      roleId: 1,
-      members: 4,
-      roles: 5,
-      id: '1222',
-    },
-    {
-      name: 'admin',
-      members: 4,
-      roleId: 1,
-      roles: 5,
-      id: '1222',
-    },
-    {
-      name: 'admin',
-      members: 4,
-      roleId: 2,
-      roles: 5,
-      id: '1222',
-    },
-    {
-      name: 'admin',
-      members: 4,
-      roleId: 1,
+export class RolesComponent implements OnInit {
+  roles$ = this.swagger.getAllRoles();
 
-      roles: 5,
-      id: '1222',
-    },
-    {
-      name: 'admin',
-      members: 4,
-      roleId: 1,
-      roles: 5,
-      id: '1222',
-    },
-    {
-      roleId: 1,
-      name: 'admin',
-      members: 4,
-      roles: 5,
-      id: '1222',
-    },
-    {
-      name: 'admin',
-      members: 4,
-      roles: 5,
-      id: '1222',
-      roleId: 1,
-    },
-    {
-      name: '',
-      roleId: 1,
-      members: 4,
-      roles: 5,
-      id: '1222',
-    },
-  ];
+  constructor(private swagger: SwaggerService){}
+
+  ngOnInit(): void {
+  }
 
   rolesClasses = {
     upperPermission: {

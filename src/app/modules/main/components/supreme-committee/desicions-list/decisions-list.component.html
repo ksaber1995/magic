@@ -8,7 +8,7 @@
   <div class="decisions-list p-2">
     <div
       class="decision-wrapper flex gap-2 items-center relative"
-      *ngFor="let decision of decisionsList"
+      *ngFor="let decision of decisions"
     >
       <a
         [routerLink]="[ decision.id]"
@@ -16,7 +16,7 @@
         (mouseenter)="showToolTip(decision.id)"
         (mouseleave)="startHideTimeout()"
       >
-        {{ decision.name }}
+        {{ decision.title }}
       </a>
 
       <!-- Tooltip -->
@@ -26,7 +26,7 @@
         (mouseenter)="cancelHideTimeout()"
         (mouseleave)="startHideTimeout()"
       >
-        <i class="bi bi-trash3 trash-i" (click)="openDialog()"></i>
+        <i class="bi bi-trash3 trash-i" (click)="delete(decision.id)"></i>
         <i class="bi bi-pencil-square edit-i"></i>
       </div>
 
