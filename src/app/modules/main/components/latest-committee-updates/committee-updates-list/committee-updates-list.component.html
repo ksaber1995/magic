@@ -8,15 +8,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let news of newsList">
-            <td colspan="7" class="news-name" [routerLink]='[news.id]'>{{news.name}}</td>
-            <td colspan="2"><img class="news-image" [routerLink]='[news.id]' src="{{news.imagePath}}"></td>
+          <tr *ngFor="let post of posts">
+            <td colspan="7" class="news-name" [routerLink]='[post.id]'>{{post.title}}</td>
+            <td colspan="2"><img class="news-image" [routerLink]='[post.id]' src="{{post.image}}"></td>
             <td colspan="3">
                 <button class="edit-news">
                     <i class="bi bi-pencil-square"></i>
-                    تعديل الخبر 
+                    تعديل الخبر
                 </button>
-                <button class="delete-news" [routerLink]="[news.id + '/delete']">
+                <button class="delete-news" (click)="delete(post.id)">
                     <i class="bi bi-trash3-fill"></i>
                     حذف الخبر
                 </button>

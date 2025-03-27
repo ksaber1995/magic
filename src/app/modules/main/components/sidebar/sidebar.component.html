@@ -26,7 +26,6 @@
     <li class="sidebar-item text-white ">
 
       <app-sidebar-item [item]="programsParent">
-        <!-- TODO customize this   -->
 
         <div class="search-wrapper">
           <input class="" type="search" >
@@ -34,7 +33,8 @@
 
 
         <li *ngFor="let item of programsParent.programs" class="text-white ">
-          <app-sidebar-item [item]="item" [background]="'#e0e0e0'"></app-sidebar-item>
+          <app-sidebar-item  [item]="item" [background]="'#e0e0e0'">
+          </app-sidebar-item>
         </li>
 
 
@@ -44,11 +44,11 @@
     </li>
 
 
-    <li *ngFor="let item of routes" class="text-white ">
-      <app-sidebar-item [item]="item"></app-sidebar-item>
+    <li *ngFor="let item of routes" class="text-white" >
+      <app-sidebar-item [showImage]="true" [item]="item"></app-sidebar-item>
     </li>
 
-    <li class="sidebar-item text-white flex p-3 gap-2 ">
+    <li class="sidebar-item text-white flex p-3 gap-2 setting-item ">
       <img src="assets/images/settings.svg" alt="" class="item-icon" />
       <a routerLink="/main/settings"> الاعدادات </a>
     </li>

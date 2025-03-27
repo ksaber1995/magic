@@ -230,7 +230,7 @@ export class SwaggerService {
 
   // Posts
   getAllPosts() {
-    return this.http.get(ENDPOINT_URI + 'posts');
+    return this.http.get<ResponseData<Post>>(ENDPOINT_URI + 'posts').pipe(map(res=> res.data));
   }
 
   getOnePost(id: string) {

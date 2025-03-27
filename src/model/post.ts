@@ -3,4 +3,5 @@ export interface Post{
   image: File;
   content: string;
   title: string;
+  id: number
 }

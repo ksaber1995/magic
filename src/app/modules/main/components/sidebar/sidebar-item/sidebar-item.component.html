@@ -1,7 +1,7 @@
 <div [ngStyle]="{'background': background}" class="sidebar-item" *ngIf="item">
   <div class="flex items-center justify-between p-3 " (click)="showChildrenItemsToggle(item)">
     <div class="flex gap-2">
-      <img src="{{ item.icon }}" alt="" class="item-icon" />
+      <img *ngIf="showImage" src="{{ item.icon }}" alt="" class="item-icon" />
       <a> {{ item.name }}</a>
     </div>
     <i class="bi bi-chevron-double-up" *ngIf="item.showChildren" style="font-size: 16px;"></i>

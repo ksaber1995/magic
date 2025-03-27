@@ -9,6 +9,7 @@ import { SideBarItem } from '../sidebar.component';
 export class SidebarItemComponent {
   @Input() item : SideBarItem;
   @Input() background = '#9d9d9d';
+  @Input() showImage = false;
   showChildrenItemsToggle(item: SideBarItem) {
     item.showChildren = !item.showChildren;
   }

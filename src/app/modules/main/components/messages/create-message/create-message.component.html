@@ -6,7 +6,7 @@
     </div>
     <div class="memebers p-3 flex gap-4 w-full">
       <span>الأعضاء</span>
-      <ng-select formControlName="members_ids" [multiple]="true">
+      <ng-select class="flex-grow" formControlName="members_ids" [multiple]="true">
         @for (member of allMembers$ | async; track member.id) {
         <ng-option [value]="member.id">{{member.user?.name}}</ng-option>
         }
