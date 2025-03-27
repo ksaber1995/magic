@@ -28,14 +28,14 @@ export class CommitteeUpdatesListComponent implements OnInit{
   }
 
 
-  delete(id: string){
+  delete(id: number){
       // this.sw
       const ref = this.dialog.open(DeleteDialogComponent)
       ref.afterClosed().subscribe(res=>{
         if(res){
-          this.swagger.deleteMeeting(id)
+          this.swagger.deletePost(id)
           .subscribe(()=>{
-            const index = this.posts.findIndex(res=> res.id)
+            const index = this.posts.findIndex(res=> res.id === id)
             this.posts.splice(index, 1);
             this.snackbar.showSuccess('تم حذف الخبر')
           },error=>{

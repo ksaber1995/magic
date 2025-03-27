@@ -205,7 +205,7 @@ export class SwaggerService {
     const formData = createFormData(meeting);
     return this.http.put(ENDPOINT_URI + `meetings/${id}`, formData);
   }
-  deleteMeeting(id: string) {
+  deleteMeeting(id: number) {
     return this.http.delete(ENDPOINT_URI + `meetings/${id}`);
   }
 
@@ -247,23 +247,30 @@ export class SwaggerService {
     return this.http.put(ENDPOINT_URI + `posts/${id}`, formData);
   }
 
+  deletePost(id: number) {
+    return this.http.delete(ENDPOINT_URI + `posts/${id}`);
+  }
+
   // Permissions
   getAllPermissions() {
-    return this.http.get<ResponseData<Permission>>(ENDPOINT_URI + 'permissions').pipe(map(res => res.data));
+    return this.http.get<Permission[]>(ENDPOINT_URI + 'permissions');
   }
 
   getOnePermission(id: string) {
-    return this.http.get(ENDPOINT_URI + `permissions/${id}`);
+    return this.http.get<Permission>(ENDPOINT_URI + `permissions/${id}`);
   }
 
   createPermission(permission: Permission) {
-    const formData = createFormData(permission);
-    return this.http.post(ENDPOINT_URI + `permissions`, formData);
+    return this.http.post(ENDPOINT_URI + `permissions`, permission);
   }
 
-  updatePermission(id: string, permission: Permission) {
-    const formData = createFormData(permission);
-    return this.http.put(ENDPOINT_URI + `permissions/${id}`, formData);
+  updatePermission(permission: Permission) {
+    return this.http.put(ENDPOINT_URI + `permissions/${permission.id}`, permission);
+  }
+
+
+  deletePermission(id: number) {
+    return this.http.delete(ENDPOINT_URI + `permissions/${id}`);
   }
 
   // Roles
@@ -314,7 +321,7 @@ export class SwaggerService {
 
   // sms
   getAllSms() {
-    return this.http.get(ENDPOINT_URI + 'sms');
+    return this.http.get<ResponseData<Sms>>(ENDPOINT_URI + 'sms').pipe(map(res=> res.data));
   }
 
 

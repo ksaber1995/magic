@@ -6,11 +6,7 @@
         padding: 5px;
         width: 100%;
         table-layout: fixed;
-        th{
-            text-align: justify;
-            padding: 5px;
-            border-bottom: 1px solid #f6f6f6;
-        }
+
         td{
             height: 50px;
             padding: 5px;
@@ -26,12 +22,12 @@
                 font-weight: 500;
             }
             .edit-permission{
-                background-color: #337ab7;   
+                background-color: #337ab7;
             }
             .delete-permission{
                 background-color: #d9534f;
             }
-            
+
         }
     }
 }

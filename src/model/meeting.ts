@@ -12,5 +12,5 @@ export interface Meeting{
     name: string
   };
 
-  id?:string;
+  id?:number;
 }

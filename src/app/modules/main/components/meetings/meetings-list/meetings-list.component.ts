@@ -29,17 +29,17 @@ export class MeetingsListComponent implements OnInit  {
   }
   meetings: Meeting[] =[] ;
   meetingDetails(){
-    // TODO, Ahmed
+    // TODO,
   }
 
-  delete(id: string){
+  delete(id: number){
     // this.sw
     const ref = this.dialog.open(DeleteDialogComponent)
     ref.afterClosed().subscribe(res=>{
       if(res){
         this.swagger.deleteMeeting(id)
         .subscribe(()=>{
-          const index = this.meetings.findIndex(res=> res.id)
+          const index = this.meetings.findIndex(res=> res.id === id)
           this.meetings.splice(index, 1);
           this.snackBar.showSuccess('تم حذف الاجتماع')
         },error=>{

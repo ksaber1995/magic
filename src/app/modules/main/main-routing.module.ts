@@ -68,7 +68,7 @@ const routes: Routes = [
       // permissions
       {path:'permissions' , component: PermissionsListComponent},
       {path:'new-permission' , component: CreatePermissionComponent},
-      {path:'permissions/:id/delete' , component:DeleteNewsPageComponent},
+      {path:'permissions/:id' , component:CreatePermissionComponent},
 
       //roles
       {path:'roles', component:RolesComponent},
