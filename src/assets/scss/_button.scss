@@ -1,7 +1,7 @@
 // spinner in the button
 @keyframes spinner {
   to {
-      transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -15,7 +15,7 @@
   pointer-events: none;
 
   * {
-      opacity: .2;
+    opacity: .2;
   }
 }
 
@@ -47,23 +47,23 @@ button.flat {
 
 mat-button {
   .loading {
-      box-sizing: border-box;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 20px;
-      height: 20px;
-      margin-top: -10px;
-      margin-left: -10px;
-      border-radius: 50%;
-      border: 2px solid #ffffff;
-      border-top-color: #000000;
-      animation: spinner .8s linear infinite;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: #000000;
+    animation: spinner .8s linear infinite;
   }
 }
 
 
-.fixed-buttons-wrapper{
+.fixed-buttons-wrapper {
   position: sticky;
   margin-top: 1rem;
   width: 100%;
@@ -72,4 +72,16 @@ mat-button {
   bottom: 0;
   left: 0;
   padding: 1rem;
+}
+
+
+
+.accept-btn {
+  padding: 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: #e0e1e2 none;
+  color: rgba(0, 0, 0, 0.6);
 }

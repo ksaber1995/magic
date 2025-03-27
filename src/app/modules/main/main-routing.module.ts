@@ -73,6 +73,7 @@ const routes: Routes = [
       //roles
       {path:'roles', component:RolesComponent},
       {path:'create-role', component:CreateRoleComponent},
+      {path:'update-role/:id', component:CreateRoleComponent},
 
       //users
       {path:'users', component:UsersListComponent},
