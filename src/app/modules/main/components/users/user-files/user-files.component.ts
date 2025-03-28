@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FileDetailsComponent } from '../file-details/file-details.component';
 
@@ -7,7 +7,8 @@ import { FileDetailsComponent } from '../file-details/file-details.component';
   templateUrl: './user-files.component.html',
   styleUrl: './user-files.component.scss',
 })
-export class UserFilesComponent {
+export class UserFilesComponent implements OnInit {
+  @Input() inputFiles
   files = [
     {
       title: 'M 0',
@@ -46,6 +47,13 @@ export class UserFilesComponent {
       name: 'pdf1',
     },
   ];
+  ngOnInit() {
+    if(this.inputFiles?.length > 0){
+      this.files = this.inputFiles
+    }
+  }
+
+
   readonly dialog = inject(MatDialog);
   openDialog(file): void {
     this.dialog.open(FileDetailsComponent, {

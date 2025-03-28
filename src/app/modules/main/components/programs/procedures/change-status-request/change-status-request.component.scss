@@ -1,0 +1,31 @@
+.message-wrapper {
+  color: #858585;
+  font-weight: 500;
+  width: 550px;
+  height: fit-content;
+  .header {
+    border-bottom: 1px solid #eeeeee;
+    .title {
+      color: #adadad;
+    }
+    .close-i {
+      font-size: 24px;
+      cursor: pointer;
+    }
+  }
+  .message {
+    text-align: center;
+    border-bottom: 1px solid #eeeeee;
+  }
+  .close {
+    .close-btn {
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+  }
+}

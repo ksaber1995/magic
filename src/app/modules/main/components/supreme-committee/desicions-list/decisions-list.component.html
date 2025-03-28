@@ -1,4 +1,4 @@
-<div class="decisions-list-container font-medium">
+<div class="decisions-list-container font-medium m-4">
   <div class="header w-full p2 flex items-center justify-between p-2">
     <div class="title">قرارت اللجنة العليا لحماية البيئة</div>
     <button class="new-decision" routerLink="/main/new-decision">
@@ -11,7 +11,7 @@
       *ngFor="let decision of decisions"
     >
       <a
-        [routerLink]="[ decision.id]"
+        [routerLink]="[decision.id]"
         class="decision-name block my-2"
         (mouseenter)="showToolTip(decision.id)"
         (mouseleave)="startHideTimeout()"
@@ -30,9 +30,13 @@
         <i class="bi bi-pencil-square edit-i"></i>
       </div>
 
+      <span class="decision-date" *ngIf="decision.progress_percentage">
+        % {{ decision.progress_percentage }}  
+      </span>
       <span class="decision-date" *ngIf="decision.date">
         {{ decision.date }}
       </span>
     </div>
+    <button class="more-btn mx-3" *ngIf="showMorebutton">المزيد</button>
   </div>
 </div>

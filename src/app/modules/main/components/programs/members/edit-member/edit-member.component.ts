@@ -7,10 +7,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './edit-member.component.scss'
 })
 export class EditMemberComponent {
-memberFrom: FormGroup;
+memberForm: FormGroup;
   constructor(private fb: FormBuilder) {}
   ngOnInit() {
-    this.memberFrom = this.fb.group({
+    this.memberForm = this.fb.group({
       name: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required]],
@@ -28,6 +28,6 @@ memberFrom: FormGroup;
     // we will patch value here and call the method in the onint
   }
   editMember() {
-    console.log(this.memberFrom.value);
+    console.log(this.memberForm.value);
   }
 }

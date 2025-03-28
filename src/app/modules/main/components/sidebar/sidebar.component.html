@@ -21,37 +21,25 @@
   </div>
 
   <ul>
-
-
-    <li class="sidebar-item text-white ">
-
+    <li class="sidebar-item text-white">
       <app-sidebar-item [item]="programsParent">
-
-        <div class="search-wrapper">
-          <input class="" type="search" >
-        </div>
-
-
-        <li *ngFor="let item of programsParent.programs" class="text-white ">
-          <app-sidebar-item  [item]="item" [background]="'#e0e0e0'">
+        <li *ngFor="let item of programsParent.programs" class="text-white">
+          <app-sidebar-item [item]="item" [background]="'#e0e0e0'">
           </app-sidebar-item>
         </li>
-
-
-
+        <div class="search-wrapper ">
+          <input class="w-full" type="search"  />
+        </div>
       </app-sidebar-item>
-
     </li>
 
-
-    <li *ngFor="let item of routes" class="text-white" >
+    <li *ngFor="let item of routes" class="text-white">
       <app-sidebar-item [showImage]="true" [item]="item"></app-sidebar-item>
     </li>
 
-    <li class="sidebar-item text-white flex p-3 gap-2 setting-item ">
+    <li class="sidebar-item text-white flex p-3 gap-2 setting-item">
       <img src="assets/images/settings.svg" alt="" class="item-icon" />
       <a routerLink="/main/settings"> الاعدادات </a>
     </li>
   </ul>
 </div>
-

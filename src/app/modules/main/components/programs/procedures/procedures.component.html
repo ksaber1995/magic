@@ -1,0 +1,314 @@
+<div class="procedures-container p-3">
+  <div class="header mb-2">
+    <div class="title mr-3">مراقبة الانبعاثات من محطات توليد الكهرباء</div>
+    <div class="description mr-3">
+      متابعة ومراقبة الانبعاثات الصادرة من محطات توليد الكهرباء بمدينة الرياض
+      وتطبيق إجراءات الحد من آثارها السلبية
+    </div>
+  </div>
+  <div class="flex gap-5">
+    <div class="procedure-details w-[67%]">
+      <div class="status-wrapper flex gap-6 mb-4">
+        <!-- مؤشرات الاداء للقرارات -->
+        <div class="status w-[50%] flex gap-2">
+          <div class="w-[70%]">
+            <div class="title">مؤشرات الاداء للقرارات</div>
+            <div class="status-row flex justify-between mb-5">
+              <div class="status-name flex items-center gap-2">
+                <span class="status-color done"></span>
+                منجز
+              </div>
+              <div class="status-precent">
+                {{ "0%" }}
+              </div>
+            </div>
+            <div class="status-row flex justify-between mb-5">
+              <div class="status-name flex items-center gap-2">
+                <span class="status-color late"></span>
+                متعثر
+              </div>
+              <div class="status-precent">
+                {{ "0%" }}
+              </div>
+            </div>
+            <div class="status-row flex justify-between">
+              <div class="status-name flex items-center gap-2">
+                <span class="status-color in-progress"></span>
+                قيد التنفيذ
+              </div>
+              <div class="status-precent">
+                {{ "0%" }}
+              </div>
+            </div>
+          </div>
+          <div id="chart">
+            <apx-chart
+              [series]="desicionChartOptions.series"
+              [chart]="desicionChartOptions.chart"
+              [labels]="desicionChartOptions.labels"
+              [fill]="desicionChartOptions.fill"
+              [dataLabels]="desicionChartOptions.dataLabels"
+              [responsive]="desicionChartOptions.responsive"
+            ></apx-chart>
+          </div>
+        </div>
+        <!-- مؤشرات الاداء للاجراءات -->
+        <div class="status w-[50%] flex gap-2">
+          <div class="w-[70%]">
+            <div class="title">مؤشرات الاداء للاجراءات</div>
+            <div class="status-row flex justify-between mb-5">
+              <div class="status-name flex items-center gap-2">
+                <span class="status-color done"></span>
+                منجز
+              </div>
+              <div class="status-precent">
+                {{ "0%" }}
+              </div>
+            </div>
+            <div class="status-row flex justify-between mb-5">
+              <div class="status-name flex items-center gap-2">
+                <span class="status-color late"></span>
+                متعثر
+              </div>
+              <div class="status-precent">
+                {{ "0%" }}
+              </div>
+            </div>
+            <div class="status-row flex justify-between">
+              <div class="status-name flex items-center gap-2">
+                <span class="status-color in-progress"></span>
+                قيد التنفيذ
+              </div>
+              <div class="status-precent">
+                {{ "0%" }}
+              </div>
+            </div>
+          </div>
+          <div id="chart">
+            <apx-chart
+              [series]="proceduresChartOptions.series"
+              [chart]="proceduresChartOptions.chart"
+              [labels]="proceduresChartOptions.labels"
+              [fill]="proceduresChartOptions.fill"
+              [dataLabels]="proceduresChartOptions.dataLabels"
+              [responsive]="proceduresChartOptions.responsive"
+            ></apx-chart>
+          </div>
+        </div>
+      </div>
+
+      <!-- آخر التحديثات -->
+
+      <div class="last-updates mb-3 pb-2">
+        <div class="title p-3">آخر التحديثات</div>
+        <div class="update-details p-3" *ngFor="let update of lastUpdates">
+          <div class="date mb-1">{{ update.date }}</div>
+          <div class="details flex items-center">
+            تم تغيير حالة التقرير
+            <span class="report-name mx-1">
+              {{ update.reportName }}
+            </span>
+            بواسطة
+            <div class="user-info flex gap-2 mr-1">
+              <img src="{{ update.userImage }}" class="user-image" alt="" />
+              {{ update.userName }}
+            </div>
+          </div>
+        </div>
+        <button class="more-btn m-3">المزيد</button>
+      </div>
+
+      <!-- قرارات اللجنة العليا لحماية البيئة -->
+
+      <app-decisions-list
+        [inputDecisionsList]="decisionsList"
+        [showMorebutton]="true"
+      ></app-decisions-list>
+
+      <!-- إجراءات تنفيذ البرنامج -->
+
+      <div class="procedures my-6">
+        <div class="header flex p-3 justify-between items-center">
+          <div class="title">إجراءات تنفيذ البرنامج</div>
+          <div class="flex gap-2 items-center">
+            <div class="tasks flex gap-1 pt-2">
+              الجميع
+              <p><mat-slide-toggle></mat-slide-toggle></p>
+              مهامي
+            </div>
+            <button class="add-list-btn">اضافة قائمة</button>
+          </div>
+        </div>
+        <div class="procedures-list pt-8 p-3 mb-5">
+          <div class="title mb-5">إجراءات تنفيذ البرنامج</div>
+          <div class="procedures-inprogress">
+            <div class="procedure-type-title">الاجراءات قيد التنفيذ</div>
+            <div
+              class="procedures-wrapper flex gap-2 items-center relative"
+              *ngFor="let procedures of proceduresList"
+            >
+              <input
+                type="checkbox"
+                class="status-input"
+                #checkbox
+                (click)="changeProceduresStatus(checkbox)"
+              />
+              <a
+                [routerLink]="[procedures.id]"
+                class="procedures-name block my-2"
+                (mouseenter)="showToolTip(procedures.id)"
+                (mouseleave)="startHideTimeout()"
+              >
+                {{ procedures.name }}
+              </a>
+
+              <!-- Tooltip -->
+              <div
+                *ngIf="tooltipVisible == procedures.id"
+                class="custom-tooltip absolute bg-white shadow-md flex items-center justify-center gap-1 p-2"
+                (mouseenter)="cancelHideTimeout()"
+                (mouseleave)="startHideTimeout()"
+              >
+                <i
+                  class="bi bi-trash3 trash-i"
+                  (click)="delete(procedures.id)"
+                ></i>
+                <i class="bi bi-pencil-square edit-i"></i>
+              </div>
+
+              <span class="procedures-date" *ngIf="procedures.percent">
+                % {{ procedures.percent }}
+              </span>
+              <span class="procedures-date" *ngIf="procedures.comments">
+                <i class="bi bi-chat"></i>
+                {{ procedures.comments }}
+              </span>
+              <span class="procedures-date" *ngIf="procedures.userImage">
+                <img src="{{ procedures.userImage }}" alt="" />
+              </span>
+            </div>
+            <button class="add-procedures-btn my-2">اضافة اجراء</button>
+          </div>
+          <hr />
+          <div class="procedures-done">
+            <div class="procedure-type-title">الاجراءات قيد التنفيذ</div>
+            <div
+              class="procedures-wrapper flex gap-2 items-center relative"
+              *ngFor="let procedures of proceduresList"
+            >
+              <input
+                type="checkbox"
+                class="status-input"
+                #checkbox
+                checked
+                (click)="changeProceduresStatus(checkbox)"
+              />
+              <a
+                [routerLink]="[procedures.id]"
+                class="procedures-name done block my-2"
+                (mouseenter)="showToolTip(procedures.id)"
+                (mouseleave)="startHideTimeout()"
+              >
+                {{ procedures.name }}
+              </a>
+
+              <span class="procedures-date" *ngIf="procedures.percent">
+                % {{ procedures.percent }}
+              </span>
+              <span class="procedures-date" *ngIf="procedures.comments">
+                <i class="bi bi-chat"></i>
+                {{ procedures.comments }}
+              </span>
+              <span class="procedures-date" *ngIf="procedures.userImage">
+                <img src="{{ procedures.userImage }}" alt="" />
+              </span>
+            </div>
+          </div>
+          <hr />
+
+          <div class="procedures-lated">
+            <div class="procedure-type-title">الاجراءات قيد التنفيذ</div>
+            <div
+              class="procedures-wrapper flex gap-2 items-center relative"
+              *ngFor="let procedures of proceduresList"
+            >
+              <input
+                type="checkbox"
+                class="status-input"
+                #checkbox
+                checked
+                (click)="changeProceduresStatus(checkbox)"
+              />
+              <a
+                [routerLink]="[procedures.id]"
+                class="procedures-name done block my-2"
+                (mouseenter)="showToolTip(procedures.id)"
+                (mouseleave)="startHideTimeout()"
+              >
+                {{ procedures.name }}
+              </a>
+
+              <span class="procedures-date" *ngIf="procedures.percent">
+                % {{ procedures.percent }}
+              </span>
+              <span class="procedures-date" *ngIf="procedures.comments">
+                <i class="bi bi-chat"></i>
+                {{ procedures.comments }}
+              </span>
+              <span class="procedures-date" *ngIf="procedures.userImage">
+                <img src="{{ procedures.userImage }}" alt="" />
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="latest-reports w-[33%]">
+      <button class="send-report-btn mb-3">
+        إرسال تقرير عن البرامج الي اللجنة العليا
+      </button>
+      <div class="latest-committee-list mb-3">
+        <div class="header flex justify-between p-3">
+          <div class="latest-committee-title">أخر مستجدات اللجنة</div>
+          <button class="more-btn">المزيد</button>
+        </div>
+        <div class="committee-list p-3 flex flex-col gap-2">
+          <div
+            class="committee flex gap-4"
+            *ngFor="let committee of committeeList"
+          >
+            <img
+              class="committee-image"
+              src="{{ committee.imagePath }}"
+              alt=""
+            />
+            <div class="committee-details">
+              <div class="mb-3">{{ committee.name }}</div>
+              <div>{{ committee.date }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="members-list mb-3">
+        <div class="header flex justify-between p-3 mb-3">
+          <div class="members-title">الأعضاء</div>
+          <button class="more-btn">المزيد</button>
+        </div>
+        <div class="member-list p-3 flex flex-wrap gap-2">
+          <div class="user-info flex gap-2 mr-1" *ngFor="let member of members">
+            <img src="{{ member.memberImage }}" class="user-image" alt="" />
+            {{ member.memberName }}
+          </div>
+        </div>
+        <div class="flex justify-center p-4">
+          <button class="add-member-btn">
+            <i class="bi bi-plus" style="color: #8bb81f; font-size: 20px; font-weight: 700;"></i>
+            اضافة
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ملفات تم رفعها مؤخرا -->
+  <app-user-files [inputFiles]="files"></app-user-files>
+</div>
