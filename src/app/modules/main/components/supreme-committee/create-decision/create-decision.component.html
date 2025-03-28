@@ -26,7 +26,7 @@
     <div class="uploaded-files input-field">
       <label class="title">ملفات مرفقة</label>
 
-      <app-files-upload [control]="filesControl"> </app-files-upload>
+      <app-files-upload [control]="filesControl"></app-files-upload>
     </div>
 
     <div class="flex my-6 gap-3 input-field ">
@@ -59,6 +59,6 @@
     </div>
 
 
-    <button class="add-btn" [disabled]="decisionForm.invalid" (click)="createDecision()">اضافة قرار</button>
+    <button  [class.loading-btn]="isUpdating" class="add-btn" [disabled]="decisionForm.invalid || isUpdating" (click)="createDecision()">اضافة قرار</button>
   </form>
 </div>

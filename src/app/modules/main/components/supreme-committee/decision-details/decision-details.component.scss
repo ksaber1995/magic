@@ -17,11 +17,14 @@
   .description {
     color: #858585;
 
-    .uploadedFiles {
+    .uploaded-files {
       .file {
         background: #e1e1e1;
         border-radius: 20px;
-        padding: 3px 7px;
+        padding: 7px;
+        margin: 15px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
         cursor: pointer;
 
         .icon {

@@ -142,7 +142,7 @@ export class SwaggerService {
 
 
   // Decisions
-  getAllDecisions() {
+  getAllDecisions(): Observable<Decision[] > {
     return this.http.get<ResponseData<Decision>>(ENDPOINT_URI + 'decisions').pipe(map(res => res.data));
   }
 

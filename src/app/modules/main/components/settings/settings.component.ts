@@ -22,8 +22,8 @@ export class SettingsComponent implements OnInit {
   ) {
 
   }
-  //TODO, Ahmed Add Validator Here
-  //TODO, Ahmed make disable button obvious when it is disabled
+  //TODO, Add Validator Here
+  //TODO, make disable button obvious when it is disabled
   //TODO, invalid buttons colors
 
   ngOnInit() {
@@ -47,12 +47,14 @@ export class SettingsComponent implements OnInit {
   }
 
   updataSite() {
+    this.updating = true;
     this.swagger.updateSetting(this.settingForm.value).subscribe(() => {
       this.canUpdate = true;
       this.updating = false;
       this.snackbar.showSuccess('تم تغيير الاعدادات بنجاح');
 
     }, error => {
+      this.updating = false;
       this.error = error.message
     });
   }
