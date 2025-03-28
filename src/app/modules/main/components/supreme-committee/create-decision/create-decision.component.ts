@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { SnackbarService } from '../../../../../services/snackbar.service';
 import { Decision } from '../../../../../../model/decision';
+import { FormControl } from '@angular/forms';
 function formatDate(date: Date): string {
   const year = date.getFullYear();
   const month = date.getMonth() + 1; // Months are 0-based, so add 1
@@ -35,7 +36,7 @@ export class CreateDecisionComponent implements OnInit {
       project_id: ['all'],
       title: [null],
       content: [null],
-      uploadedFiles: this.fb.array([]),
+      files: this.fb.array([]),
       progress_percentage: [null],
       status_id: [null],
       decision_date: [null]
@@ -69,5 +70,9 @@ export class CreateDecisionComponent implements OnInit {
 
   get formValue(){
     return this.decisionForm.value
+  }
+
+  get filesControl(){
+    return this.decisionForm.get('files') as FormControl;
   }
 }

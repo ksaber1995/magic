@@ -22,9 +22,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { MagicSelectComponent } from './components/magic-select/magic-select.component';
 import { MatSliderModule } from '@angular/material/slider';
+import { FilesUploadComponent } from './components/files-upload/files-upload.component';
 
 const declarationsImports = [
-  CardComponent
+  CardComponent,
+  MagicSelectComponent,
+  FilesUploadComponent
 ]
 const imports = [
   ReactiveFormsModule,
@@ -43,7 +46,7 @@ const imports = [
   MatDatepickerModule,
   DatePickerModule,
   MatSnackBarModule,
-  NgSelectModule, 
+  NgSelectModule,
   NgApexchartsModule,
   MatSliderModule
 ]
@@ -53,7 +56,7 @@ const imports = [
     BreadCrumbComponent,
     ...declarationsImports,
     CreateSuccssDialogComponent,
-    MagicSelectComponent
+
   ],
   imports: [
     CommonModule,

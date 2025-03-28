@@ -54,7 +54,8 @@
         <!-- RECAPTCHA_SITE_KEY=6Ldiy_0qAAAAAHaLWSfUDA0imzFPTeMaE9rIchic -->
         <!-- secret key: 6Ldiy_0qAAAAAPbkg7TViMyV3iNF84dDXsl5MI-I -->
       </form>
-      <button class="enter-btn"  (click)="validateCaptcha()">دخول</button>
+
+      <button [class.loading-btn]="isUpdating" class="enter-btn"  (click)="validateCaptcha()">دخول</button>
     </div>
   </div>
 </div>

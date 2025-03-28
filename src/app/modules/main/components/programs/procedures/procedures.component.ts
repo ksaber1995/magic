@@ -207,20 +207,20 @@ export class ProceduresComponent implements OnInit {
   ];
   committeeList = [
     {
-      imagePath: 'assets/images/user-image.jpg', 
-      name:'سعادة الأستاذ', 
+      imagePath: 'assets/images/user-image.jpg',
+      name:'سعادة الأستاذ',
       date:'2021-01-29 14:45:53',
       id:'151'
-    }, 
+    },
     {
-      imagePath: 'assets/images/user-image.jpg', 
-      name:'سعادة الأستاذ', 
+      imagePath: 'assets/images/user-image.jpg',
+      name:'سعادة الأستاذ',
       date:'2021-01-29 14:45:53',
       id:'151'
-    }, 
+    },
     {
-      imagePath: 'assets/images/user-image.jpg', 
-      name:'سعادة الأستاذ', 
+      imagePath: 'assets/images/user-image.jpg',
+      name:'سعادة الأستاذ',
       date:'2021-01-29 14:45:53',
       id:'151'
     }
@@ -252,7 +252,7 @@ export class ProceduresComponent implements OnInit {
       memberImage: 'assets/images/user-image.jpg',
       memberId: '545',
     },
-    
+
   ]
   ngOnInit() {}
 
