@@ -34,7 +34,7 @@
                     <p><mat-slide-toggle formControlName="sms_status" labelPosition="after" class="mx-10">حالة ارسال رسائل sms</mat-slide-toggle></p>
                 </div>
             </div>
-            <button class="accept-btn"  [class.loading-btn]="updating" [disabled]="settingForm.value.invalid || !canUpdate">موافق</button>
+            <button class="accept-btn flex "  [class.loading-btn]="updating" [disabled]="settingForm.value.invalid || !canUpdate">موافق</button>
         </form>
     </div>
 </div>

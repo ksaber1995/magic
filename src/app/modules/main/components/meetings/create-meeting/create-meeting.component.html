@@ -1,6 +1,6 @@
-<div class="new-meeting-container m-5 h-full">
+<div *ngIf="form" class="new-meeting-container m-5 h-full">
   <div class="header p-4">اجتماع جديد</div>
-  <form (submit)="createMeeting()" action="" class="p-4" [formGroup]="form">
+  <form (submit)="submit()" action="" class="p-4" [formGroup]="form">
     <div class="input-field flex justify-between mb-3">
       <label> عنوان الاجتماع </label>
       <input type="text" class="address-input" formControlName="title" />
@@ -15,7 +15,7 @@
     <!-- <div class="input-field flex justify-between mb-3">
       <span> اللجان </span>
 
-      <mat-form-field class="custom-dropdown dropdown-container">
+      <mat-form-field class="custom-dropdown ">
         <mat-select formControlName="members_ids" multiple> </mat-select>
       </mat-form-field>
 
@@ -26,11 +26,11 @@
     <div class="input-field flex justify-between mb-3">
       <label> الأعضاء </label>
 
-      <mat-form-field class="custom-dropdown dropdown-container">
-        <mat-select formControlName="members_ids" multiple>
-          <mat-option *ngFor="let user of users$ | async" [value]="user.id"> {{user?.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="ng-select ">
+        <ng-select formControlName="members_ids" [multiple] ="true">
+          <ng-option *ngFor="let user of users$ | async" [value]="user.id"> {{user?.name}}</ng-option>
+        </ng-select>
+      </div>
 
     </div>
 
@@ -38,11 +38,11 @@
     <div class="input-field flex justify-between mb-3">
       <label> البرامج </label>
 
-      <mat-form-field class="custom-dropdown dropdown-container">
-        <mat-select multiple formControlName="projects_ids">
-          <mat-option *ngFor="let project of projects$ | async" [value]="project.id"> {{project.title}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="ng-select ">
+        <ng-select [multiple]="true" formControlName="projects_ids">
+          <ng-option *ngFor="let project of projects$ | async" [value]="project.id"> {{project.title}}</ng-option>
+        </ng-select>
+      </div>
     </div>
 
 
@@ -63,19 +63,12 @@
     </div>
 
     <textarea name="" id="" class="details" placeholder="التفاصيل" formControlName="content"></textarea>
-    <div class="uploaded-files input-field mb-3">
+    <div  class="uploaded-files input-field mb-3">
       <label class="title">ملفات مرفقة</label>
-      <input (change)="onFileSelected($event)"
-       formControlName="files" type="file" multiple id="fileInput" hidden />
-      <div class="upload-files-button p-4" onclick="document.getElementById('fileInput').click()">
-        <label>اسحب الملف هنا...</label>
-        <div class="choose-file">
-          أو قم باختيار الملف..
-          <i class="bi bi-upload"></i>
-        </div>
-      </div>
-      <div class="selected-files"></div>
+
+      <app-files-upload  [control]="filesControl"></app-files-upload>
     </div>
+
     <div class="input-field mb-9">
       تذكير قبل ب
       <select class="reminder" formControlName="reminder_time">
@@ -85,6 +78,10 @@
       دقيقة
     </div>
 
-    <button class="add-btn" [disabled]>اضافة اجتماع</button>
+    <button class="add-btn" [disabled]="form.invalid || isUpdating" [class.loading-btn]="isUpdating">
+      <span *ngIf="id">تعديل اجتماع</span>
+      <span *ngIf="!id"> اضافة اجتماع</span>
+
+    </button>
   </form>
 </div>

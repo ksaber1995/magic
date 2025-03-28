@@ -1,3 +1,5 @@
+import { Project } from "./project";
+
 export interface Decision {
   project_id: string,
   title: string,
@@ -6,5 +8,6 @@ export interface Decision {
   status_id: number,
   decision_date: string,
   id: number,
-  files: File[]
+  files: File[],
+  project: Project
 }

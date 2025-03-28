@@ -46,6 +46,8 @@ import { UsersSettingsComponent } from './components/users/users-settings/users-
 import { MainRoutingModule } from './main-routing.module';
 import { ChangeStatusRequestComponent } from './components/programs/procedures/change-status-request/change-status-request.component';
 import { CreateReportComponent } from './components/programs/reports/create-report/create-report.component';
+import { DecisionsComponent } from './components/decisions/decisions.component';
+import { ProjectDecisionsComponent } from './components/project-decisions/project-decisions.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { CreateReportComponent } from './components/programs/reports/create-repo
     EditMemberComponent,
     ChangeStatusRequestComponent,
     CreateReportComponent,
+    DecisionsComponent,
+    ProjectDecisionsComponent,
   ],
   imports: [
     CommonModule,

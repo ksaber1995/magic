@@ -1,16 +1,18 @@
 <div *ngIf="decisionDetails" class="decision-details m-6 p-3">
-    <div class="title mb-2">{{decisionDetails.title}}</div>
-    <div class="description">
-        {{decisionDetails.content}}
-        <div class="uploadedFiles flex items-center gap-2 p-2">
-            <div class="file flex gap-2" *ngFor="let file of decisionDetails.files">
-                <img src="{{file.path}}" alt="" class="icon">
-                <div class="name">{{file.name}}</div>
-            </div>
-        </div>
+  <div class="title mb-2">{{decisionDetails.title}}</div>
+  <div class="description">
+    {{decisionDetails.content}}
+    <div class="uploaded-files p-2">
+      <div class="file flex gap-2" *ngFor="let file of decisionDetails.files">
+        <img width="20" [src]="getFileIcon(file)" alt="" />
+
+
+        <a target="_blank" [href]="file" class="name">{{getFileName(file)}}</a>
+      </div>
     </div>
-    <div class="date text-end" *ngIf="decisionDetails.decision_date">
-        التاريخ: {{decisionDetails.decision_date | date}}
-    </div>
+  </div>
+  <div class="date text-end" *ngIf="decisionDetails.decision_date">
+    التاريخ: {{decisionDetails.decision_date | date}}
+  </div>
 
 </div>

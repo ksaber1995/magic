@@ -1,0 +1,25 @@
+<div class="uploaded-files">
+  <input type="file" multiple (change)="onFileSelected($event)" id="fileInput" hidden />
+  <div class="upload-files-button p-4" onclick="document.getElementById('fileInput').click()">
+    <label>اسحب الملف هنا...</label>
+    <div class="choose-file">
+      أو قم باختيار الملف..
+      <i class="bi bi-upload"></i>
+    </div>
+  </div>
+
+  <!-- Selected Files List -->
+  <div class="selected-files mt-3" *ngIf="selectedFiles.length > 0">
+
+    <p>📂 الملفات المختارة:</p>
+
+    <ul>
+      <li class="file-item my-3 font-bold text-base" *ngFor="let file of selectedFiles">
+        <span class="file-icon">{{ getFileIcon(file.name) }}</span>
+        {{ file.name }}
+
+        <button (click)="removeFile(i)" class="delete-button">❌</button>
+      </li>
+    </ul>
+  </div>
+</div>

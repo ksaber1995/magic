@@ -12,6 +12,7 @@ export class LoginComponent {
   // captchaNumber : number = Math.floor(100000 + Math.random() * 900000)
   loginForm : FormGroup
   errors: any;
+  isUpdating;
   constructor(
     private fb: FormBuilder,
     private swagger: SwaggerService,
@@ -37,13 +38,18 @@ export class LoginComponent {
   }
 
   login(recaptcha_token: string){
+    this.isUpdating = true;
+
     this.errors = null;
     this.swagger.login({email: this.loginForm.value.email, password: this.loginForm.value.password, recaptcha_token })
     .subscribe((res:any)=>{
+      this.isUpdating = false;
 
-      localStorage.setItem('token', res.token)
+      localStorage.setItem('token', res.token);
+      localStorage.setItem('user', JSON.stringify( res.user));
       this.router.navigate(['/'])
     },error=>{
+      this.isUpdating = false;
       // handle errors
       this.errors  = error.message || error.error
     })

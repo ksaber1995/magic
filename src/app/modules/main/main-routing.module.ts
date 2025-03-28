@@ -33,6 +33,8 @@ import { UserInformationComponent } from './components/users/user-information/us
 import { UsersListComponent } from './components/users/users-list/users-list.component';
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
 import { CreateReportComponent } from './components/programs/reports/create-report/create-report.component';
+import { DecisionsComponent } from './components/decisions/decisions.component';
+import { ProjectDecisionsComponent } from './components/project-decisions/project-decisions.component';
 
 const routes: Routes = [
   {
@@ -56,9 +58,9 @@ const routes: Routes = [
       { path: 'programs/:id/reports/:reportId', component: ReportDetailsComponent },
       { path: 'programs/:id/reports/:reportId/edit', component: EditReportComponent },
 
-      { path: 'programs/:id/supreme-committee-decisions', component: DecisionsListComponent },
+      { path: 'programs/:id/supreme-committee-decisions', component: ProjectDecisionsComponent },
       // supereme-committee
-      { path: 'decisions', component: DecisionsListComponent },
+      { path: 'decisions', component: DecisionsComponent },
       { path: 'decisions/:id', component: DecisionDetailsComponent },
       { path: 'new-decision', component: CreateDecisionComponent },
       //latest-committee-updates
@@ -90,6 +92,7 @@ const routes: Routes = [
       //meetings
       {path:'meetings', component:MeetingsListComponent},
       {path:'create-meeting', component:CreateMeetingComponent},
+      {path:'update-meeting/:id', component:CreateMeetingComponent},
 
     ],
   },

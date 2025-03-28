@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
 import { SwaggerService } from '../../../../swagger/swagger.service';
+import { User } from '../../../../../model/user';
 
 
 interface SidebarChild {
@@ -117,12 +118,8 @@ const routes: SideBarItem[] = [
 })
 export class SidebarComponent implements OnInit{
   routes = routes;
-  userInfo = {
-    image: "assets/images/user-image.jpg",
-    name: "Admin",
-    role: "اللجنة العليا"
-  }
-  showChildren = false;
+  userInfo = JSON.parse(localStorage.getItem('user') || '{}') as User;
+   showChildren = false;
   notificationsCount = 2;
   programsParent = programsParent;
 
@@ -136,6 +133,7 @@ export class SidebarComponent implements OnInit{
 
   ngOnInit(): void {
      this.getPrograms();
+     console.log(this.userInfo)
   }
 
   getPrograms(){

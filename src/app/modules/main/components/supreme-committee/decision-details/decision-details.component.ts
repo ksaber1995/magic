@@ -29,4 +29,20 @@ export class DecisionDetailsComponent implements OnInit {
       this.decisionDetails = res;
     })
   }
+
+  getFileIcon(name: string){
+      if(name.endsWith('.pdf')){
+        return 'assets/images/pdf.svg'
+      }
+
+      if(name.endsWith('')){
+        return 'assets/images/docx-icon.svg'
+      }
+
+      return 'assets/images/file.png';
+  }
+
+  getFileName(url: string): string {
+    return url.split('/').pop() || '';
+  }
 }

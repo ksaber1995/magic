@@ -86,37 +86,43 @@
   }
 }
 
-.custom-dropdown {
-  position: relative;
+.ng-select{
   width: 90%;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background: #f8f8f8;
-  padding: 5px;
-  min-height: 35px;
-  cursor: pointer;
 
-  .selected-options {
+  ng-select{
+    position: relative;
+    width: 100%;
+    background: #f8f8f8;
+    min-height: 35px;
+
+  }
+}
+
+:host ::ng-deep .ng-option {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  height: 30px;
+  .tag {
+    background-color: #8ab825;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    height: 30px;
-    .tag {
-      background-color: #8ab825;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      font-size: 14px;
+    align-items: center;
+    font-size: 14px;
 
-      .remove {
-        margin-left: 5px;
-        cursor: pointer;
-        font-weight: bold;
-      }
+    .remove {
+      margin-left: 5px;
+      cursor: pointer;
+      font-weight: bold;
     }
   }
+}
+
+
+.custom-dropdown {
+
 
   .dropdown {
     display: flex;

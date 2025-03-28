@@ -10,28 +10,19 @@ import { SnackbarService } from '../../../../../services/snackbar.service';
   templateUrl: './decisions-list.component.html',
   styleUrl: './decisions-list.component.scss',
 })
-export class DecisionsListComponent implements OnInit {
-  @Input() inputDecisionsList : Decision[];
+export class DecisionsListComponent  {
+  @Input() decisions : Decision[];
   @Input() showMorebutton: boolean = false ;
-  decisions: Decision[];
+
   readonly dialog = inject(MatDialog);
   tooltipVisible: string | null = null;
   hideTimeout: any;
 
   constructor(
     private swagger: SwaggerService,
-    private snackbar: SnackbarService
+    private snackbar: SnackbarService,
   ) {}
 
-  ngOnInit(): void {
-    if (this.inputDecisionsList?.length > 0) {
-      this.decisions = this.inputDecisionsList;
-    } else {
-      this.swagger.getAllDecisions().subscribe((res) => {
-        this.decisions = res;
-      });
-    }
-  }
 
   showToolTip(decisionId) {
     this.tooltipVisible = decisionId;
