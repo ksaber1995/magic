@@ -5,7 +5,7 @@
       <img src="{{ userInfo.image }}" class="user-image" alt="" />
       <div class="about-user">
         <div class="user-name">{{ userInfo.name }}</div>
-        <div class="user-role">{{ userInfo.role }}</div>
+        <div class="user-role">{{ userInfo.role || 'Admin' }}</div>
       </div>
     </div>
     <div class="actions text-white flex gap-3 my-5">

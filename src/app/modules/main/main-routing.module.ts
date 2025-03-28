@@ -90,6 +90,7 @@ const routes: Routes = [
       //meetings
       {path:'meetings', component:MeetingsListComponent},
       {path:'create-meeting', component:CreateMeetingComponent},
+      {path:'update-meeting/:id', component:CreateMeetingComponent},
 
     ],
   },

@@ -1,3 +1,5 @@
+import { Project } from "./project";
+
 export interface Meeting{
   title: string;
   content: string;
@@ -11,6 +13,9 @@ export interface Meeting{
   coordinator_user?: {
     name: string
   };
+
+  members?: any[],
+  projects?: Project[],
 
   id?:number;
 }

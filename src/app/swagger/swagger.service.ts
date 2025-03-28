@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ENDPOINT_URI } from './utlity';
 import { User } from '../../model/user';
-import { map, Observable } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 import { Procedure } from '../../model/procedure';
 import { Decision } from '../../model/decision';
 import { Meeting } from '../../model/meeting';
@@ -93,7 +93,8 @@ export class SwaggerService {
   // projects
 
   getAllProjects(): Observable<Project[]> {
-    return this.http.get<ResponseData<Project>>(ENDPOINT_URI + 'projects').pipe(map(res => res.data));
+    return this.http.get<ResponseData<Project>>(ENDPOINT_URI + 'projects')
+    .pipe(map(res => res.data), shareReplay(1));
   }
 
   getOneProject(id: string) {
@@ -192,8 +193,8 @@ export class SwaggerService {
     return this.http.get<ResponseData<Meeting>>(ENDPOINT_URI + 'meetings').pipe(map(res => res.data));
   }
 
-  getOneMeeting(id: string) {
-    return this.http.get(ENDPOINT_URI + `meetings/${id}`);
+  getOneMeeting(id: number) {
+    return this.http.get<ResponseItem<Meeting >>(ENDPOINT_URI + `meetings/${id}`).pipe(map(res=> res.data));
   }
 
   createMeeting(meeting: Meeting) {
@@ -201,9 +202,9 @@ export class SwaggerService {
     return this.http.post(ENDPOINT_URI + `meetings`, formData);
   }
 
-  updateMeeting(id: string, meeting: Meeting) {
+  updateMeeting(meeting: Partial < Meeting >) {
     const formData = createFormData(meeting);
-    return this.http.put(ENDPOINT_URI + `meetings/${id}`, formData);
+    return this.http.put(ENDPOINT_URI + `meetings/${meeting.id}`, formData);
   }
   deleteMeeting(id: number) {
     return this.http.delete(ENDPOINT_URI + `meetings/${id}`);

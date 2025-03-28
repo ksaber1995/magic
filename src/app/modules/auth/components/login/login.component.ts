@@ -45,7 +45,8 @@ export class LoginComponent {
     .subscribe((res:any)=>{
       this.isUpdating = false;
 
-      localStorage.setItem('token', res.token)
+      localStorage.setItem('token', res.token);
+      localStorage.setItem('user', JSON.stringify( res.user));
       this.router.navigate(['/'])
     },error=>{
       this.isUpdating = false;

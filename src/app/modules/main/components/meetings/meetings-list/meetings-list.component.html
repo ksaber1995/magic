@@ -31,9 +31,12 @@
               </div>
             </div>
           </td>
+
+
           <td colspan="1">
-            <div class="committees">{{ meeting.invited }}</div>
+            <div  class="committees">{{meeting?.members?.length || 0}}</div>
           </td>
+
           <td colspan="1">
             <div class="status">{{ meeting.status }}</div>
           </td>
@@ -44,7 +47,7 @@
             </div>
           </td>
           <td colspan="2">
-            <button class="edit-meeting">
+            <button [routerLink]="'/main/update-meeting/' + meeting.id" class="edit-meeting">
               <i class="bi bi-pencil-square"></i>
               تعديل
             </button>
