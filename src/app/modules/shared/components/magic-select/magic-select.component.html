@@ -1,0 +1,5 @@
+<ng-select class="flex-grow" [formControl]="control" [multiple]="true">
+  @for (item of items; track item.id) {
+  <ng-option [value]="item.id">{{item?.name}}</ng-option>
+  }
+</ng-select>

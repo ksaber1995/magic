@@ -19,7 +19,13 @@ import {MatInputModule} from '@angular/material/input';
 import { DatePickerModule } from 'primeng/datepicker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgSelectModule } from '@ng-select/ng-select';
+<<<<<<< HEAD
 import { NgApexchartsModule } from "ng-apexcharts";
+=======
+import { MagicSelectComponent } from './components/magic-select/magic-select.component';
+import { MatSliderModule } from '@angular/material/slider';
+
+>>>>>>> 4ac1fc2a9c6c232e36f501674d1f4088eae63ab7
 const declarationsImports = [
   CardComponent
 ]
@@ -40,15 +46,21 @@ const imports = [
   MatDatepickerModule,
   DatePickerModule,
   MatSnackBarModule,
+<<<<<<< HEAD
   NgSelectModule, 
   NgApexchartsModule
+=======
+  NgSelectModule,
+  MatSliderModule
+>>>>>>> 4ac1fc2a9c6c232e36f501674d1f4088eae63ab7
 ]
 
 @NgModule({
   declarations: [
     BreadCrumbComponent,
     ...declarationsImports,
-    CreateSuccssDialogComponent
+    CreateSuccssDialogComponent,
+    MagicSelectComponent
   ],
   imports: [
     CommonModule,

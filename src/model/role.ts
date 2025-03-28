@@ -1,5 +1,8 @@
 export interface Role{
   name: string;
-  transformation: string;
-  id: number | string
+  color: string;
+  transformation: boolean;
+  id: number | string;
+  edit_permission: boolean;
+  permission_ids: number[]
 }

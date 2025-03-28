@@ -9,19 +9,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let role of roles$ | async">
+      <tr *ngFor="let role of roles">
         <td colspan="3" [routerLink]="[role.id]">
           {{ role.name }}
           <div class="tooltip-container">
             <button [class]="role.roleId == 1 ? rolesClasses.upperPermission.className :  rolesClasses.projects.className">
               {{role.roleId == 1 ? rolesClasses.upperPermission.name :  rolesClasses.projects.name}}
             </button>
-            <div class="custom-tooltip">
+
+            <!-- <div class="custom-tooltip">
               <div class="tooltip-header">
               {{role.roleId == 1 ? rolesClasses.upperPermission.name :  rolesClasses.projects.name}}
               </div>
               <div class="tooltip-content">one two three</div>
-            </div>
+            </div> -->
           </div>
         </td>
         <td colspan="2">
@@ -33,15 +34,12 @@
           {{ role.roles }}
         </td>
         <td colspan="5">
-          <button class="edit-role">
+          <button [routerLink]="['/main/update-role/' + role.id]" class="edit-role">
             <i class="bi bi-pencil-square"></i>
             تعديل الإذن
           </button>
-          <button class="create-role">
-            <i class="bi bi-lightning-fill"></i>
-            تحرير اذونات
-          </button>
-          <button class="delete-role" [routerLink]="[role.id + '/delete']">
+
+          <button (click)="delete(role.id)" class="delete-role">
             <i class="bi bi-trash3-fill"></i>
             حذف إذن
           </button>

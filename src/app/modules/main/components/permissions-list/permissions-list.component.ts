@@ -31,11 +31,7 @@ export class PermissionsListComponent implements OnInit {
 
 
   delete(id: number) {
-
     const ref = this.dialog.open(DeleteDialogComponent)
-
-
-
     ref.afterClosed().subscribe(res => {
       if (res) {
         this.swagger.deletePermission(id)

@@ -18,6 +18,7 @@
           height: 40px;
           padding: 6px 12px;
           font-size: 14px;
+          font-weight: bold;
           color: #555;
           background-color: #fff;
           border: 1px solid rgba(34, 36, 38, 0.15);
@@ -37,16 +38,5 @@
           }
         }
       }
-      .accept-btn {
-        width: 80px;
-        height: 40px;
-        border-radius:4px;
-        font-size: 1rem;
-        font-weight: 700;
-        cursor: pointer;
-        background: #e0e1e2 none;
-        color: rgba(0, 0, 0, 0.6);
-      }
     }
   }
-  

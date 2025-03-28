@@ -143,14 +143,14 @@ export class SwaggerService {
 
   // Decisions
   getAllDecisions() {
-    return this.http.get<ResponseData<Decision>>(ENDPOINT_URI + 'decisions').pipe(map(res=> res.data));
+    return this.http.get<ResponseData<Decision>>(ENDPOINT_URI + 'decisions').pipe(map(res => res.data));
   }
 
   getOneDecision(id: string) {
-    return this.http.get<ResponseItem<Decision>>(ENDPOINT_URI + `decisions/${id}`).pipe(map(res=> res.data));
+    return this.http.get<ResponseItem<Decision>>(ENDPOINT_URI + `decisions/${id}`).pipe(map(res => res.data));
   }
 
-  createDecision(decision: Decision) {
+  createDecision(decision: Partial< Decision >) {
     const formData = createFormData(decision)
     return this.http.post(ENDPOINT_URI + `decisions`, formData);
   }
@@ -230,7 +230,7 @@ export class SwaggerService {
 
   // Posts
   getAllPosts() {
-    return this.http.get<ResponseData<Post>>(ENDPOINT_URI + 'posts').pipe(map(res=> res.data));
+    return this.http.get<ResponseData<Post>>(ENDPOINT_URI + 'posts').pipe(map(res => res.data));
   }
 
   getOnePost(id: string) {
@@ -279,18 +279,22 @@ export class SwaggerService {
   }
 
   getOneRole(id: string) {
-    return this.http.get(ENDPOINT_URI + `roles/${id}`);
+    return this.http.get<Role>(ENDPOINT_URI + `roles/${id}`);
   }
 
-  createRole(role: Role) {
-    const formData = createFormData(role);
-    return this.http.post(ENDPOINT_URI + `roles`, formData);
+  createRole(role: Partial<Role>) {
+    return this.http.post(ENDPOINT_URI + `roles`, role);
   }
 
-  updateRole(id: string, role: Role) {
+  updateRole( role:Partial< Role >) {
     const formData = createFormData(role);
-    return this.http.put(ENDPOINT_URI + `roles/${id}`, formData);
+    return this.http.put(ENDPOINT_URI + `roles/${role.id}`, formData);
   }
+
+  deleteRole(id: number) {
+    return this.http.delete(ENDPOINT_URI + `roles/${id}`);
+  }
+
 
   // assignPermissions(){
 
@@ -321,7 +325,7 @@ export class SwaggerService {
 
   // sms
   getAllSms() {
-    return this.http.get<ResponseData<Sms>>(ENDPOINT_URI + 'sms').pipe(map(res=> res.data));
+    return this.http.get<ResponseData<Sms>>(ENDPOINT_URI + 'sms').pipe(map(res => res.data));
   }
 
 

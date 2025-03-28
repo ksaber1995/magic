@@ -3,30 +3,30 @@
   <form action="" class="p-4" [formGroup]="decisionForm">
     <div class="input-field flex justify-between mb-3">
       <label> البرامج </label>
-      <select class="select-program" formControlName="program">
-        <option *ngFor="let program of programs" value="program.id">
-          {{ program.name }}
+
+      <select class="select-program" formControlName="project_id">
+        <option value="all">
+          جميع البرامج...
+        </option>
+
+        <option *ngFor="let project of projects$ | async" [value]="project.id">
+          {{ project.title }}
         </option>
       </select>
+
     </div>
+
     <div class="input-field flex justify-between mb-3">
       <label> العنوان </label>
-      <input formControlName="address" type="text" class="address-input" />
+      <input formControlName="title" type="text" class="title-input" />
     </div>
-    <textarea
-      name=""
-      id=""
-      formControlName="descrpitioon"
-      class="details"
-      placeholder="التفاصيل"
-    ></textarea>
+
+    <textarea name="" id="" formControlName="content" class="details" placeholder="التفاصيل"></textarea>
+
     <div class="uploaded-files input-field">
       <label class="title">ملفات مرفقة</label>
       <input formArrayName="uploadedFiles" type="file" multiple id="fileInput" hidden />
-      <div
-        class="upload-files-button p-4"
-        onclick="document.getElementById('fileInput').click()"
-      >
+      <div class="upload-files-button p-4" onclick="document.getElementById('fileInput').click()">
         <label>اسحب الملف هنا...</label>
         <div class="choose-file">
           أو قم باختيار الملف..
@@ -35,35 +35,37 @@
       </div>
       <div class="selected-files"></div>
     </div>
-    <div class="input-field mt-1">
+
+    <div class="flex my-6 gap-3 input-field ">
       <label for="">نسبة الانجاز للمهمة</label>
-      <input
-        type="range"
-        min="0"
-        max="100"
-        formControlName="progressPercent"
-        class="progress-bar"
-        (input)="updateProgress($event)"
-      />
+
+
+      <mat-slider class="flex-grow" [displayWith]="formatLabel" min="1" max="100" discrete step="1">
+        <input matSliderThumb formControlName="progress_percentage">
+      </mat-slider>
     </div>
+
     <div class="input-field flex justify-between my-4">
       <label for="">الحالة</label>
-      <select class="select-status" formControlName="status">
-        <option value="1" selected>تحت الإجراء</option>
-        <option value="2">منجز</option>
-        <option value="3">متعثر</option>
-      </select>
+      <mat-select class="select-status" formControlName="status_id">
+        <mat-option value="1" selected>تحت الإجراء</mat-option>
+        <mat-option value="2">منجز</mat-option>
+        <mat-option value="3">متعثر</mat-option>
+      </mat-select>
     </div>
+
+
     <div class="input-field flex flex-col date-input-field my-4">
       <label class="mb-1">تاريخ اصدار القرار</label>
-      <input
-        type="text"
-        class="date-input"
-        #dateInput
-        formControlName="date"
-        (click)="setTodayDate()"
-      />
+
+      <mat-form-field  class="w-100 grow picker">
+        <input formControlName="decision_date" (click)="picker.open()" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
     </div>
-    <button class="add-btn" (click)="createDecision()">اضافة قرار</button>
+
+
+    <button class="add-btn" [disabled]="decisionForm.invalid" (click)="createDecision()">اضافة قرار</button>
   </form>
 </div>

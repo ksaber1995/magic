@@ -70,7 +70,6 @@ export class CreatePermissionComponent {
     this.swagger.updatePermission(body)
     .subscribe(res => {
       this.snackbarService.showSuccess('تم تعديل الإذن');
-      this.form.reset();
     }, error => {
       this.snackbarService.showError(error.message)
     })

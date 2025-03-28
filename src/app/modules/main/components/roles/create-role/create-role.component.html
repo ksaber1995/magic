@@ -1,21 +1,17 @@
 <div class="container w-100 h-full flex items-center justify-center">
   <div class="role-form p-10">
-    <form [formGroup]="roleForm">
+    <form (submit)="submit()" [formGroup]="roleForm">
       <div class="input-field">
         <label for="name">الاسم المختصر</label>
-        <input
-          id="name"
-          formControlName="name"
-          [class.error]="
+        <input id="name" formControlName="name" [class.error]="
             !roleForm.get('name')?.invalid && roleForm.get('name')?.touched
-          "
-          placeholder="الاسم المختصر"
-        />
+          " placeholder="الاسم المختصر" />
       </div>
       <div class="input-field">
         <label> اللون </label>
-        <select class="select-color"  pleceholder="اختر اللون">
-          <option *ngFor="let color of colors" value="{{color.id}}">
+        <select formControlName="color" [ngStyle]="{ color: formValue?.color}" class="select-color"
+          pleceholder="اختر اللون">
+          <option [style.color]="color.value" class="font-bold" *ngFor="let color of colors" value="{{color.value}}">
             {{ color.color }}
           </option>
         </select>
@@ -23,18 +19,10 @@
       <div class="status-toggle-wraper">
         <div class="toggle-wrapper">
           <p>
-            <mat-slide-toggle
-              labelPosition="after"
-              class="mx-10"
-              >التحويل</mat-slide-toggle
-            >
+            <mat-slide-toggle formControlName="transformation" labelPosition="after" class="mx-10">التحويل</mat-slide-toggle>
           </p>
           <p>
-            <mat-slide-toggle
-              labelPosition="after"
-              class="mx-10"
-              >السماح بالتعديل</mat-slide-toggle
-            >
+            <mat-slide-toggle formControlName="edit_permission" labelPosition="after" class="mx-10">السماح بالتعديل</mat-slide-toggle>
           </p>
         </div>
 
@@ -42,11 +30,23 @@
 
         </div>
       </div>
-      <button
-        class="accept-btn"
-        (click)="createRole()"
-        [disabled]="roleForm.value.invalid"
-      >
+
+
+      <!-- -- permissoin  -->
+      <div *ngIf="isPermissionsLoaded" class="permissions">
+        <div class="actions flex gap-5">
+          <button type="button" class="accept-btn" (click)="selectAll()">تحديد الكل</button>
+          <button type="button" class="accept-btn" (click)="deselectAll()">الغاء التحديد</button>
+        </div>
+
+        <div formGroupName="permissions" class="permissions-list grid grid-cols-3 gap-4 py-4">
+          <div *ngFor="let permission of permissions"  class=" mb-4">
+            <mat-slide-toggle [formControlName]="permission.id" labelPosition="after" class="mx-10">{{permission.name}}</mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+
+      <button class="accept-btn" [disabled]="roleForm.invalid">
         موافق
       </button>
     </form>
