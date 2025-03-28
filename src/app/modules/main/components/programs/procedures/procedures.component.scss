@@ -212,6 +212,10 @@
       padding: 5px;
       border-radius: 5px;
       width: 100%;
+      &:hover{
+        background-color: #8bb81f;
+        color: white;
+      }
     }
     .latest-committee-list,
     .members-list {

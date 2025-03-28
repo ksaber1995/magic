@@ -1,0 +1,47 @@
+<div class="create-report-container p-7 flex gap-3">
+  <form class="report-form w-[70%]">
+    <div class="header p-3">تقرير جديد</div>
+    <div class="p-3">
+      <div class="input-field flex justify-between items-center mb-3">
+        <label> العنوان </label>
+        <input type="text" class="title-input" />
+      </div>
+      <textarea class="description mb-3" placeholder="التفاصيل"></textarea>
+      <div class="uploaded-files mb-3 input-field">
+        <label class="title">ملفات مرفقة</label>
+        <input type="file" multiple id="fileInput" hidden />
+        <div
+          class="upload-files-button p-4"
+          onclick="document.getElementById('fileInput').click()"
+        >
+          <label>اسحب الملف هنا...</label>
+          <div class="choose-file">
+            أو قم باختيار الملف..
+            <i class="bi bi-upload"></i>
+          </div>
+        </div>
+        <div class="selected-files"></div>
+      </div>
+      <button class="add-report-button mb-3">اضافة التقرير</button>
+      <div class="note-wrapper">
+        ملاحظة: سيتم اضافة التقرير بشكل مسودة وسيتم مراجعته من اللجنة المختصة
+        قبل الارسال الى اللجنة العليا ويمكنك متابعة التقرير من خلال التعليقات
+      </div>
+    </div>
+  </form>
+  <div class="report-image w-[30%]">
+    <div class="header p-3">صورة التقرير</div>
+    <div class="p-4">
+        <img src="assets/images/user-image.jpg" class="image-preview" alt="">
+    </div>
+    <input type="file" id="imgaeInput" hidden />
+    <div class="flex justify-center mb-3">
+      <button
+        class="set-image-btn"
+        onclick="document.getElementById('imgaeInput').click()"
+      >
+        تعيين صورة للتقرير
+      </button>
+    </div>
+  </div>
+</div>

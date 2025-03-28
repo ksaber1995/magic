@@ -276,7 +276,7 @@ export class ProceduresComponent implements OnInit {
       .open(ChangeStatusRequestComponent)
       .afterClosed()
       .subscribe(() => {
-        checkbox.checked = false; // Reset checkbox when dialog closes
+        checkbox.checked = false; 
       });
   }
 }

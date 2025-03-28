@@ -32,6 +32,7 @@ import { UserFilesComponent } from './components/users/user-files/user-files.com
 import { UserInformationComponent } from './components/users/user-information/user-information.component';
 import { UsersListComponent } from './components/users/users-list/users-list.component';
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
+import { CreateReportComponent } from './components/programs/reports/create-report/create-report.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
       //programs
       { path: 'programs', component: ProgramsListComponent },
       { path: 'programs/:id/procedures', component: ProceduresComponent },
+      { path: 'programs/:id/procedures/create', component: CreateReportComponent },
       { path: 'programs/:id/files', component: FilesComponent },
       { path: 'programs/:id/members', component: MembersComponent },
       { path: 'programs/:id/members/:memberId/edit', component: EditMemberComponent },

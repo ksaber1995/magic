@@ -45,6 +45,7 @@ import { UsersListComponent } from './components/users/users-list/users-list.com
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
 import { MainRoutingModule } from './main-routing.module';
 import { ChangeStatusRequestComponent } from './components/programs/procedures/change-status-request/change-status-request.component';
+import { CreateReportComponent } from './components/programs/reports/create-report/create-report.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { ChangeStatusRequestComponent } from './components/programs/procedures/c
     EditReportComponent,
     EditMemberComponent,
     ChangeStatusRequestComponent,
+    CreateReportComponent,
   ],
   imports: [
     CommonModule,
