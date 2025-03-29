@@ -16,7 +16,7 @@ export class SnackbarService {
   }
 
   showError(title: string) {
-    // TODO, Ahmed
+    // TODO,
     this.snackBar.open(`${title}`, 'Close', {
       duration: 3000,
       horizontalPosition: 'end',

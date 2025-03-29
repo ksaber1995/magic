@@ -10,7 +10,7 @@ import { User } from '../../../../../../model/user';
 })
 export class UsersListComponent implements OnInit {
   users: User[] = [];
-  // TODO, Ahmed اللجان المنتسب لها
+  // TODO,  اللجان المنتسب لها
   breadcrumbs = [
     {
       label: ' قائمة المستخدمين',
