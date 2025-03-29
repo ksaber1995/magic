@@ -4,21 +4,28 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-edit-roles',
   templateUrl: './edit-roles.component.html',
-  styleUrl: './edit-roles.component.scss'
+  styleUrl: './edit-roles.component.scss',
 })
 export class EditRolesComponent {
   rolesForm: FormGroup;
-    constructor(private fb: FormBuilder) {}
-    ngOnInit() {
-      this.rolesForm = this.fb.group({
-        admin: [null],
-        technicalCommittee: [null],
-        supremeCommittee: [null],
-        reportsFollowUpCommittee: [null],
-        programSupervisors: [null],
-      });
-    }
-    editRoles(){
-      
-    }
+  breadcrumbs = [
+    {
+      label: ' قائمة المستخدمين',
+      url: '/main/users',
+    },
+    {
+      label: ' تعديل الاذونات',
+    },
+  ];
+  constructor(private fb: FormBuilder) {}
+  ngOnInit() {
+    this.rolesForm = this.fb.group({
+      admin: [null],
+      technicalCommittee: [null],
+      supremeCommittee: [null],
+      reportsFollowUpCommittee: [null],
+      programSupervisors: [null],
+    });
+  }
+  editRoles() {}
 }

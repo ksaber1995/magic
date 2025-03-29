@@ -20,6 +20,11 @@ interface role {
 export class RolesComponent implements OnInit {
   roles: Role[] = [];
 
+  breadcrumbs = [ 
+    {
+      label:' الأذونات'
+    }
+  ]
   constructor(
     private swagger: SwaggerService,
     private dialog: MatDialog,

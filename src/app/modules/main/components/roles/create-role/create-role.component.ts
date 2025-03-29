@@ -33,6 +33,16 @@ export class CreateRoleComponent {
 
   permissions: (Permission)[];
   isPermissionsLoaded = false
+  breadcrumbs = [ 
+    {
+      label:' الأذونات' , 
+      url:'/main/roles'
+    }, 
+    {
+      label:'اضافة اذن جديد'
+    }
+  ]
+  
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -40,6 +50,7 @@ export class CreateRoleComponent {
     private snackbar: SnackbarService
 
   ) { }
+
   ngOnInit() {
     this.roleForm = this.fb.group({
       name: ['', [Validators.required]],

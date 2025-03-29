@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-bread-crumb',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './bread-crumb.component.scss'
 })
 export class BreadCrumbComponent {
-
+  @Input() breadcrumbs: { label: string; url?: string }[] = [];
+  @Input() breadCrumbButton:{label: string , url:string}
 }

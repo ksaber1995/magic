@@ -1,9 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Meeting } from '../../../../../../model/meeting';
 import { SwaggerService } from '../../../../../swagger/swagger.service';
@@ -11,15 +6,14 @@ import { SnackbarService } from './../../../../../services/snackbar.service';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 function formatDate(date: Date): string {
-  if(date instanceof Date){
-
+  if (date instanceof Date) {
     const year = date.getFullYear();
     const month = date.getMonth() + 1; // Months are 0-based, so add 1
     const day = date.getDate();
 
     return `${year}-${month}-${day}`;
-  }else{
-    return date
+  } else {
+    return date;
   }
 }
 
@@ -34,42 +28,58 @@ export class CreateMeetingComponent implements OnInit {
 
   users$ = this.swagger.getAllUsers();
   projects$ = this.swagger.getAllProjects();
-
+  breadcrumbs;
   form: FormGroup;
-  times = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60]
+  times = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
   isUpdating = false;
-  id = +this.route.snapshot.paramMap.get('id')
+  id = +this.route.snapshot.paramMap.get('id');
   constructor(
     private fb: FormBuilder,
     private swagger: SwaggerService,
     private snackbar: SnackbarService,
     private router: Router,
-    private route: ActivatedRoute,
-  ) { }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     if (this.id) {
-      this.swagger.getOneMeeting(this.id)
-        .subscribe(res => {
-          const meeting_time = new Date();
-          const times = res.meeting_time.split(':')
-          meeting_time.setHours(+times[0], +times[1], +times[2]); // Set to 10:30 AM
+      this.breadcrumbs = [
+        {
+          label: 'الاجتماعات',
+          url: '/main/meetings',
+        },
+        {
+          label: 'تعديل اجتماع ',
+        },
+      ];
 
-          this.form = this.fb.group({
-            title: [res.title],
-            content: [res.content],
-            meeting_address: [res.meeting_address],
-            members_ids: [res.members.map(res=> res.id)],
-            projects_ids: [res.projects.map(res=> res.id)],
-            meeting_date: [new Date( res.meeting_date)],
-            meeting_time: [meeting_time],
-            files: [[]],
-            reminder_time: [res.reminder_time],
-          });
+      this.swagger.getOneMeeting(this.id).subscribe((res) => {
+        const meeting_time = new Date();
+        const times = res.meeting_time.split(':');
+        meeting_time.setHours(+times[0], +times[1], +times[2]); // Set to 10:30 AM
 
-        })
+        this.form = this.fb.group({
+          title: [res.title],
+          content: [res.content],
+          meeting_address: [res.meeting_address],
+          members_ids: [res.members.map((res) => res.id)],
+          projects_ids: [res.projects.map((res) => res.id)],
+          meeting_date: [new Date(res.meeting_date)],
+          meeting_time: [meeting_time],
+          files: [[]],
+          reminder_time: [res.reminder_time],
+        });
+      });
     } else {
-
+      this.breadcrumbs = [
+        {
+          label: 'الاجتماعات',
+          url: '/main/meetings',
+        },
+        {
+          label: 'اضافة اجتماع جديد',
+        },
+      ];
       this.form = this.fb.group({
         title: [],
         content: [],
@@ -82,48 +92,49 @@ export class CreateMeetingComponent implements OnInit {
         reminder_time: [0], // no reminder
       });
     }
-
   }
 
   setTodayDate() {
-    this.form
-      .get('date')
-      .setValue(new Date().toISOString().split('T')[0]);
+    this.form.get('date').setValue(new Date().toISOString().split('T')[0]);
   }
 
   updateMeeting(meeting: Partial<Meeting>) {
     meeting.id = this.id;
-    this.swagger.updateMeeting(meeting).subscribe(res => {
-      this.snackbar.showSuccess('تم تعديل الاجتماع بنجاح');
-      this.form.reset();
-      this.isUpdating = false;
-      this.router.navigate(['/main/meetings'])
-    }, error => {
-      this.snackbar.showError(error.message);
-      this.isUpdating = false;
-    })
-
-
+    this.swagger.updateMeeting(meeting).subscribe(
+      (res) => {
+        this.snackbar.showSuccess('تم تعديل الاجتماع بنجاح');
+        this.form.reset();
+        this.isUpdating = false;
+        this.router.navigate(['/main/meetings']);
+      },
+      (error) => {
+        this.snackbar.showError(error.message);
+        this.isUpdating = false;
+      }
+    );
   }
 
   createMeeting(meeting: Meeting) {
-
-    this.swagger.createMeeting(meeting).subscribe(res => {
-      this.snackbar.showSuccess('تم اضافة الاجتماع بنجاح');
-      this.form.reset();
-      this.isUpdating = false;
-      this.router.navigate(['/main/meetings'])
-    }, error => {
-      this.snackbar.showError(error.message);
-      this.isUpdating = false;
-    })
-
+    this.swagger.createMeeting(meeting).subscribe(
+      (res) => {
+        this.snackbar.showSuccess('تم اضافة الاجتماع بنجاح');
+        this.form.reset();
+        this.isUpdating = false;
+        this.router.navigate(['/main/meetings']);
+      },
+      (error) => {
+        this.snackbar.showError(error.message);
+        this.isUpdating = false;
+      }
+    );
   }
-
 
   submit() {
     this.isUpdating = true;
-    const meeting_time = `${this.formValue.meeting_time.getHours()}:${this.formValue.meeting_time.getMinutes().toString().padStart(2, '0')}`;
+    const meeting_time = `${this.formValue.meeting_time.getHours()}:${this.formValue.meeting_time
+      .getMinutes()
+      .toString()
+      .padStart(2, '0')}`;
 
     const meeting: Meeting = {
       title: this.formValue.title,
@@ -134,12 +145,11 @@ export class CreateMeetingComponent implements OnInit {
       reminder_time: this.formValue.reminder_time,
       members_ids: this.formValue.members_ids,
       projects_ids: this.formValue.projects_ids,
-      files: this.formValue.files
+      files: this.formValue.files,
     };
 
     if (this.id) {
       this.updateMeeting(meeting);
-
     } else {
       this.createMeeting(meeting);
     }
@@ -149,9 +159,7 @@ export class CreateMeetingComponent implements OnInit {
     return this.form?.value;
   }
 
-
   get filesControl() {
     return this.form?.get('files') as FormControl;
   }
-
 }

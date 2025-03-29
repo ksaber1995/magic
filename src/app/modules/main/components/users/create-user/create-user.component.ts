@@ -14,7 +14,15 @@ export class CreateUserComponent implements OnInit {
   userForm: FormGroup;
   roles: Role[] ;
   isLoaded = false;
-
+  breadcrumbs = [
+    {
+      label: ' قائمة المستخدمين',
+      url: '/main/users',
+    },
+    {
+      label: ' انشاء مستخدم',
+    },
+  ];
   constructor(
     private fb: FormBuilder,
     private swagger: SwaggerService,

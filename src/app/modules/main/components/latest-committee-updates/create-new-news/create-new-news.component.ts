@@ -53,6 +53,19 @@ export class CreateNewNewsComponent implements OnInit {
       name: 'مراقبة الانبعاثات من محطات توليد الكهرباء',
     },
   ];
+  breadcrumbs = [
+    {
+      label:'البرامج', 
+      url:'/'
+    }, 
+    {
+      label:' قائمة أخر مستجدات اللجنة ', 
+      url:'/main/committee-updates-list',
+    }, 
+    {
+      label:'انشاء خبر'
+    }
+  ]
   constructor(
     private fb : FormBuilder
   ){

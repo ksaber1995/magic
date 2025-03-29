@@ -1,3 +1,5 @@
+<app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
+
 <div class="container w-100 h-full flex items-center justify-center">
     <div *ngIf="loaded" class="setting-form p-10">
         <form (submit)="updataSite()"  [formGroup]="settingForm">

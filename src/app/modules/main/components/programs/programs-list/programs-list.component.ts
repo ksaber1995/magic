@@ -9,6 +9,15 @@ import { SwaggerService } from '../../../../../swagger/swagger.service';
 })
 
 export class ProgramsListComponent {
+  breadcrumbs = [
+    {
+      label:'بوابة البرامج', 
+      url:'/'
+    }, 
+    {
+      label:'البرامج'
+    }
+  ]
   projects$ = this.swagger.getAllProjects();
   constructor(private swagger: SwaggerService){}
 }

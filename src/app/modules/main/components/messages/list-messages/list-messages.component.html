@@ -1,4 +1,6 @@
-<div class="messages-container m-8 h-full w-100">
+
+<app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
+<div class="messages-container  h-full w-100">
   <div class="messages-header p-3">الرسائل القصيرة</div>
   <div class="messages-content p-3">
     <div class="message-item" *ngFor="let message of messages">

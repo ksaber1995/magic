@@ -11,6 +11,15 @@ export class UsersSettingsComponent implements OnInit {
   constructor(
     private fb : FormBuilder
   ){}
+  breadcrumbs = [
+    {
+      label: ' قائمة المستخدمين',
+      url: '/main/users',
+    },
+    {
+      label: ' إعدادات المستخدمين',
+    },
+  ];
   ngOnInit() {
     this.settingForm = this.fb.group({
       committeeType:[null], 

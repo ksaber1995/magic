@@ -25,6 +25,21 @@ export class CreateDecisionComponent implements OnInit {
   projects$ = this.swagger.getAllProjects();
 
   decisionForm: FormGroup
+
+  breadcrumbs = [
+    {
+      label:'بوابة البرامج', 
+      url:'/'
+    }, 
+    {
+      label:'قرارات اللجنة العليا', 
+      url:'/main/decisions'
+    }, 
+    {
+      label:'انشاء قرار'
+    }
+
+  ]
   constructor(
     private fb: FormBuilder,
     private swagger: SwaggerService,

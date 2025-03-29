@@ -79,7 +79,11 @@ const messages = [
 export class ListMessagesComponent  implements OnInit{
   messagesList = messages;
   messages;
-
+  breadcrumbs = [
+    {
+      label:' الرسائل القصيرة', 
+    }, 
+  ]
   constructor(private swagger: SwaggerService){}
 
   ngOnInit(): void {

@@ -18,6 +18,16 @@ export class DecisionsListComponent  {
   tooltipVisible: string | null = null;
   hideTimeout: any;
 
+  breadcrumbs = [
+    {
+      label:'بوابة البرامج', 
+      url:'/'
+    }, 
+    {
+      label:'قرارات اللجنة العليا'
+    }
+  ]
+
   constructor(
     private swagger: SwaggerService,
     private snackbar: SnackbarService,

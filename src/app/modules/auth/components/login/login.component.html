@@ -1,7 +1,7 @@
 <div class="login-container flex items-center justify-center h-screen">
   <div class="side-right w-1/2 h-screen">
     <a href="" class="logo">
-      <img src="assets/images/logo.png" alt="بيئة الرياض">
+      <img src="assets/images/logo.png" alt="بيئة الرياض" />
       <h1 class="title">بوابة البرنامج</h1>
     </a>
   </div>
@@ -9,28 +9,17 @@
     <div class="login-form">
       <div class="header">تسجيل الدخول</div>
       <form class="p-5" [formGroup]="loginForm">
-        <div *ngIf="errors" class="text-red-500 m-2 center">
-          <mat-error>{{errors}}</mat-error>
+        <div class="text-red-500 m-2 center">
+          <div *ngIf="errors" class="error-message">{{ errorMessage }}</div>
         </div>
 
-        <div class="input-field mb-8 ">
+        <div class="input-field mb-8">
           <label for="email">البريد الإلكتروني</label>
-          <input
-          id="email"
-          formControlName="email"
-          [class.error]="!loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
-          />
-          <div *ngIf="!loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">حقل البريد الالكتروني مطلوب.</div>
+          <input id="email" formControlName="email" />
         </div>
         <div class="input-field mb-8">
           <label for="password">كلمة المرور</label>
-          <input
-            type="password"
-            id="password"
-            formControlName="password"
-            [class.error]="!loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
-           />
-           <div *ngIf="!loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">حقل كلمة المرور مطلوب.</div>
+          <input type="password" id="password" formControlName="password" />
         </div>
 
         <!-- <div class="captcha-wrapper flex items-center gap-10">
@@ -41,11 +30,9 @@
           <div class="captcha w-1/2 flex items-center justify-center">{{captchaNumber}}</div>
         </div> -->
 
-
-
-        <div class="login-actions flex items-center justify-between ">
+        <div class="login-actions flex items-center justify-between">
           <a routerLink="/login/forget-password">نسيت كلمة المرور</a>
-          <div class="remeber-input-field flex items-center gap-2 ">
+          <div class="remeber-input-field flex items-center gap-2">
             <label for="remeber-me" class="remeber-me">تذكرني</label>
             <input id="remeber-me" type="checkbox" />
           </div>
@@ -55,7 +42,13 @@
         <!-- secret key: 6Ldiy_0qAAAAAPbkg7TViMyV3iNF84dDXsl5MI-I -->
       </form>
 
-      <button [class.loading-btn]="isUpdating" class="enter-btn"  (click)="validateCaptcha()">دخول</button>
+      <button
+        [class.loading-btn]="isUpdating"
+        class="enter-btn"
+        (click)="validateCaptcha()"
+      >
+        دخول
+      </button>
     </div>
   </div>
 </div>

@@ -93,3 +93,23 @@ form input[type="checkbox"]:checked {
   outline: 0;
   border: 1px solid #2e2e2e !important;
 }
+.error-message{
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  padding: 15px 30px 15px 15px;
+  border-radius: 4px;
+  list-style-type: disc;
+  position: relative;
+  &::before{
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #a94442;
+    right: 13px;
+    top: 50%;
+    transform: translate(-50% , -50%);
+  }
+}

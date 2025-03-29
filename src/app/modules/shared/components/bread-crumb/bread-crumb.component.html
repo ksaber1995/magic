@@ -1,1 +1,11 @@
-<p>bread-crumb works!</p>
+<nav *ngIf="breadcrumbs.length" class="breadcrumb-container mb-7 flex justify-between">
+    <ul class="breadcrumb">
+      <li *ngFor="let breadcrumb of breadcrumbs; let last = last">
+        <a *ngIf="!last" [routerLink]="breadcrumb.url">{{ breadcrumb.label}} ></a>
+        <span class="last-item" *ngIf="last">{{ breadcrumb.label }}</span>
+      </li>
+    </ul>
+    <button *ngIf="breadCrumbButton" class="bread-crumb-button" [routerLink]="breadCrumbButton.url">{{breadCrumbButton.label}}</button>
+</nav>
+
+

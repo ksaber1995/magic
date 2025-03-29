@@ -14,6 +14,16 @@ import { DeleteDialogComponent } from '../../supreme-committee/delete-dialog/del
 })
 export class MeetingsListComponent implements OnInit  {
 
+  breadcrumbs = [
+    {
+      label: ' بوابة البرامج',
+      url: '/',
+    },
+    {
+      label: 'الاجتماع',
+    },
+  ];
+  breadCrumbButton = {label:'اضافة اجتماع جديد' , url:'/main/create-meeting'}
   constructor(
     private swagger: SwaggerService,
     private dialog: MatDialog,

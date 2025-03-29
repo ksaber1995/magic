@@ -1,0 +1,27 @@
+.breadcrumb {
+  list-style: none;
+  display: flex;
+  font-weight: 400;
+  color: #858585;
+}
+
+.breadcrumb li {
+  margin-right: 5px;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.last-item {
+  font-weight: 500;
+}
+
+.bread-crumb-button {
+  color: #fff;
+  background: #8bb81f;
+  text-align: center;
+  padding: 7px 10px;
+  border-radius: 5px;
+}

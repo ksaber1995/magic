@@ -12,7 +12,15 @@ import { ActivatedRoute } from '@angular/router';
 export class CreatePermissionComponent {
   form: FormGroup;
   id = this.route.snapshot.paramMap.get('id');
-
+  breadcrumbs = [ 
+    {
+      label:'قائمة الأذونات', 
+      url:'/main/permissions'
+    }, 
+    {
+      label:' انشاء إذن'
+    }
+  ]
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,

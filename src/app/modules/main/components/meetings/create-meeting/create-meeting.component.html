@@ -1,4 +1,7 @@
-<div *ngIf="form" class="new-meeting-container m-5 h-full">
+
+<app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
+
+<div *ngIf="form" class="new-meeting-container  h-full">
   <div class="header p-4">اجتماع جديد</div>
   <form (submit)="submit()" action="" class="p-4" [formGroup]="form">
     <div class="input-field flex justify-between mb-3">

@@ -21,6 +21,11 @@ export class PermissionsListComponent implements OnInit {
   }
   permissions: Permission[];
 
+  breadcrumbs = [ 
+    {
+      label:'قائمة الأذونات'
+    }
+  ]
   ngOnInit(): void {
     this.swagger.getAllPermissions().subscribe(res => {
       this.permissions = res;

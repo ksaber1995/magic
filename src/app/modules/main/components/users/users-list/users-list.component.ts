@@ -11,20 +11,20 @@ import { User } from '../../../../../../model/user';
 export class UsersListComponent implements OnInit {
   users: User[] = [];
   // TODO, Ahmed اللجان المنتسب لها
-  constructor(
-    private router : Router,
-    private swagger: SwaggerService,
-  ){
-
-  }
+  breadcrumbs = [
+    {
+      label: ' قائمة المستخدمين',
+    },
+  ];
+  constructor(private router: Router, private swagger: SwaggerService) {}
 
   ngOnInit(): void {
-    this.swagger.getAllUsers().subscribe(users=>{
+    this.swagger.getAllUsers().subscribe((users) => {
       this.users = users;
-    })
+    });
   }
 
-  userDetails(id : string){
-    this.router.navigate(['main/users/', id ])
+  userDetails(id: string) {
+    this.router.navigate(['main/users/', id]);
   }
 }

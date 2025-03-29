@@ -10,6 +10,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EditUserComponent implements OnInit {
   userForm: FormGroup;
   constructor(private fb: FormBuilder) {}
+  breadcrumbs = [
+    {
+      label: ' قائمة المستخدمين',
+      url: '/main/users',
+    },
+    {
+      label: 'تحرير العضو',
+    },
+  ];
   ngOnInit() {
     this.userForm = this.fb.group({
       name: [null],

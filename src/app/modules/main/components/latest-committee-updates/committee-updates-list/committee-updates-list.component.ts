@@ -19,6 +19,11 @@ export class CommitteeUpdatesListComponent implements OnInit{
     private snackbar: SnackbarService
   ){}
 
+  breadcrumbs = [
+    {
+      label:'قائمة أخر مستجدات اللجنة '
+    }
+  ]
   posts : Post[] = []
 
   ngOnInit(): void {

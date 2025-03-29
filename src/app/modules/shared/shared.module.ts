@@ -23,11 +23,14 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import { MagicSelectComponent } from './components/magic-select/magic-select.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { FilesUploadComponent } from './components/files-upload/files-upload.component';
+import { RouterModule } from '@angular/router';
 
 const declarationsImports = [
   CardComponent,
   MagicSelectComponent,
-  FilesUploadComponent
+  FilesUploadComponent, 
+  CreateSuccssDialogComponent,
+  BreadCrumbComponent
 ]
 const imports = [
   ReactiveFormsModule,
@@ -48,14 +51,13 @@ const imports = [
   MatSnackBarModule,
   NgSelectModule,
   NgApexchartsModule,
-  MatSliderModule
+  MatSliderModule, 
+  RouterModule
 ]
 
 @NgModule({
   declarations: [
-    BreadCrumbComponent,
     ...declarationsImports,
-    CreateSuccssDialogComponent,
 
   ],
   imports: [
