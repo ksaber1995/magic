@@ -3,25 +3,25 @@
   <form action="" class="p-4" [formGroup]="newsForm">
     <div class="input-field flex mb-3">
       <label> العنوان </label>
-      <input formControlName="address" placeholder="العنوان" type="text" class="address-input" />
+      <input formControlName="title" placeholder="العنوان" type="text" class="address-input" />
     </div>
     <div class="input-field flex mb-3">
         <label> البرامج </label>
-        <select class="select-program" formControlName="program">
+        <select class="select-program" formControlName="project_id">
             <option value="">جميع البرامج</option>
-            <option *ngFor="let program of programs" value="program.id">
-                {{ program.name }}
+            <option *ngFor="let program of programs$ | async" [value]="program.id">
+                {{ program.title }}
             </option>
         </select>
     </div>
     <div class="input-field flex mb-3">
       <label> الصورة</label>
-      <input type="file" accept="" class="image-input" />
+      <input type="file"  accept="" formControlName="image" class="image-input" />
     </div>
     <div class="input-field mb-3">
       <label>التفاصيل</label>
       <textarea
-        formControlName="description"
+        formControlName="content"
         class="description"
         placeholder="التفاصيل"
       ></textarea>

@@ -1,6 +1,8 @@
 import { M } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-user',
@@ -9,7 +11,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class EditUserComponent implements OnInit {
   userForm: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  userId = this.route.snapshot.paramMap.get('id');
+  
+  constructor(
+    private fb: FormBuilder , 
+    private swagger : SwaggerService, 
+    private route : ActivatedRoute
+  ) {}
   breadcrumbs = [
     {
       label: ' قائمة المستخدمين',
@@ -19,20 +27,37 @@ export class EditUserComponent implements OnInit {
       label: 'تحرير العضو',
     },
   ];
+  
   ngOnInit() {
     this.userForm = this.fb.group({
       name: [null],
       email: [null, [Validators.email]],
       password: [null],
       confirmPassword: [null],
-      jobTitle: [null],
-      phoneNumber: [null],
-      mobileNumber: [null],
+      position: [null],
+      phone: [null],
+      mobile: [null],
       fax: [null],
       department:[null], 
       activate:[null], 
       block:[null]
     });
+    this.getUserData()
+  }
+  getUserData(){
+    this.swagger.getOneUser(this.userId).subscribe((res:any)=>{
+      const userData = res.data
+      console.log(userData)
+      this.userForm.patchValue({
+        name: userData.name,
+        email: userData.email,
+        fax: userData.fax,
+        position: userData.position,
+        mobile:userData.mobile,
+        phone:userData.phone,
+
+      })
+    }) 
   }
   editUser(){
     

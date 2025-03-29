@@ -6,7 +6,6 @@ import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { DeleteDialogComponent } from '../../supreme-committee/delete-dialog/delete-dialog.component';
 
 
-// TODO, Ahmed, check  all data, files
 @Component({
   selector: 'app-meetings-list',
   templateUrl: './meetings-list.component.html',

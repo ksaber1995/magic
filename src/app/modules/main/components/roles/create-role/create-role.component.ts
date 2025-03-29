@@ -28,88 +28,96 @@ export class CreateRoleComponent {
     { color: 'اللون البني', value: '#8B4513' }, // Brown
     { color: ' اللون الأزرق', value: '#0000FF' }, // Blue
     { color: 'اللون الرمادي ', value: '#808080' }, // Gray
-    { color: 'اللون الأسود', value: '#000000' } // Black
+    { color: 'اللون الأسود', value: '#000000' }, // Black
   ];
 
-  permissions: (Permission)[];
-  isPermissionsLoaded = false
-  breadcrumbs = [ 
-    {
-      label:' الأذونات' , 
-      url:'/main/roles'
-    }, 
-    {
-      label:'اضافة اذن جديد'
-    }
-  ]
-  
+  permissions: Permission[];
+  isPermissionsLoaded = false;
+  breadcrumbs;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private swagger: SwaggerService,
     private snackbar: SnackbarService
-
-  ) { }
+  ) {}
 
   ngOnInit() {
+    if (this.id) {
+      this.breadcrumbs = [
+        {
+          label: ' الأذونات',
+          url: '/main/roles',
+        },
+        {
+          label: 'تعديل اذن',
+        },
+      ];
+    } else {
+      this.breadcrumbs = [
+        {
+          label: ' الأذونات',
+          url: '/main/roles',
+        },
+        {
+          label: 'اضافة اذن جديد',
+        },
+      ];
+    }
     this.roleForm = this.fb.group({
       name: ['', [Validators.required]],
       color: ['', [Validators.required]],
       transformation: [false],
       edit_permission: [false],
-      permissions: this.fb.group({})
+      permissions: this.fb.group({}),
     });
 
     if (this.id) {
       const permissions$ = this.swagger.getAllPermissions();
-      const role$ = this.swagger.getOneRole(this.id)
-      combineLatest([role$, permissions$])
-      .subscribe(([role, permissions]) => {
+      const role$ = this.swagger.getOneRole(this.id);
+      combineLatest([role$, permissions$]).subscribe(([role, permissions]) => {
         this.roleForm = this.fb.group({
           name: [role.name, [Validators.required]],
           color: [role.color, [Validators.required]],
           transformation: [role.transformation],
           edit_permission: [role.edit_permission],
-          permissions: this.fb.group({})
+          permissions: this.fb.group({}),
         });
-        this.permissions = permissions.map(res => ({ ...res, id: res.id + '' }));
+        this.permissions = permissions.map((res) => ({
+          ...res,
+          id: res.id + '',
+        }));
 
         this.setPermissionsControl();
         // set old values for permissions
       });
-
     } else {
-
-      this.swagger.getAllPermissions()
-        .subscribe(res => {
-          this.permissions = res.map(res => ({ ...res, id: res.id + '' }));
-          this.setPermissionsControl();
-        })
+      this.swagger.getAllPermissions().subscribe((res) => {
+        this.permissions = res.map((res) => ({ ...res, id: res.id + '' }));
+        this.setPermissionsControl();
+      });
     }
   }
 
   setPermissionsControl() {
-    const permissionsForm = this.roleForm.get('permissions') as FormGroup
+    const permissionsForm = this.roleForm.get('permissions') as FormGroup;
 
-    this.permissions.forEach(res => {
-      permissionsForm.addControl(res.id as string, this.fb.control(false))
-    })
+    this.permissions.forEach((res) => {
+      permissionsForm.addControl(res.id as string, this.fb.control(false));
+    });
 
     this.isPermissionsLoaded = true;
   }
 
-  createRole() {
-    console.log(this.roleForm.value, 'ahmed');
-  }
+  createRole() {}
 
   selectAll() {
-    Object.keys(this.permissionsForm.controls).forEach(key => {
+    Object.keys(this.permissionsForm.controls).forEach((key) => {
       this.permissionsForm.get(key)?.setValue(true);
     });
   }
 
   deselectAll() {
-    Object.keys(this.permissionsForm.controls).forEach(key => {
+    Object.keys(this.permissionsForm.controls).forEach((key) => {
       this.permissionsForm.get(key)?.setValue(false);
     });
   }
@@ -119,23 +127,27 @@ export class CreateRoleComponent {
   }
 
   create(role: Partial<Role>) {
-    this.swagger.createRole(role)
-      .subscribe(res => {
+    this.swagger.createRole(role).subscribe(
+      (res) => {
         this.snackbar.showSuccess('تم اضافة الصلاحية');
-        this.roleForm.reset()
-      }, error => {
+        this.roleForm.reset();
+      },
+      (error) => {
         this.snackbar.showError(error.message);
-      });
+      }
+    );
   }
 
   update(role: Partial<Role>) {
     role.id = this.id;
-    this.swagger.updateRole(role)
-      .subscribe(res => {
+    this.swagger.updateRole(role).subscribe(
+      (res) => {
         this.snackbar.showSuccess('تم تعديل الصلاحية');
-      }, error => {
+      },
+      (error) => {
         this.snackbar.showError(error.message);
-      });
+      }
+    );
   }
 
   submit() {
@@ -144,8 +156,8 @@ export class CreateRoleComponent {
       color: this.formValue.color,
       transformation: this.formValue.transformation || false,
       edit_permission: this.formValue.edit_permission || false,
-      permission_ids: this.selectedPermissions
-    }
+      permission_ids: this.selectedPermissions,
+    };
 
     if (this.id) {
       this.update(role);
@@ -159,13 +171,13 @@ export class CreateRoleComponent {
 
   get selectedPermissions(): number[] {
     const permissionsFormValue = this.permissionsForm.value;
-    const result = []
-    Object.keys(permissionsFormValue).forEach(id => {
+    const result = [];
+    Object.keys(permissionsFormValue).forEach((id) => {
       if (permissionsFormValue[id]) {
-        result.push(id)
+        result.push(id);
       }
-    })
+    });
 
-    return result
+    return result;
   }
 }

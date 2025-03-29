@@ -19,7 +19,6 @@ export class ProjectDecisionsComponent {
   ngOnInit(): void {
     this.swagger.getAllDecisions().subscribe(res => {
       this.decisions = res.filter(res=>  res.project?.id === this.id);
-
     });
   }
 }

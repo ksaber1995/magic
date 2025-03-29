@@ -24,13 +24,15 @@ import { MagicSelectComponent } from './components/magic-select/magic-select.com
 import { MatSliderModule } from '@angular/material/slider';
 import { FilesUploadComponent } from './components/files-upload/files-upload.component';
 import { RouterModule } from '@angular/router';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 const declarationsImports = [
   CardComponent,
   MagicSelectComponent,
   FilesUploadComponent, 
   CreateSuccssDialogComponent,
-  BreadCrumbComponent
+  BreadCrumbComponent, 
+  SpinnerComponent
 ]
 const imports = [
   ReactiveFormsModule,

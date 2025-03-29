@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ENDPOINT_URI } from './utlity';
 import { User } from '../../model/user';
-import { map, Observable, shareReplay } from 'rxjs';
+import { finalize, map, Observable, shareReplay } from 'rxjs';
 import { Procedure } from '../../model/procedure';
 import { Decision } from '../../model/decision';
 import { Meeting } from '../../model/meeting';
@@ -14,6 +14,7 @@ import { Setting } from '../../model/setting';
 import { Sms } from '../../model/sms';
 import { Group, ProceduresGroup } from '../../model/group';
 import { Project } from '../../model/project';
+import { SpinnerService } from '../services/spinner.service';
 
 
 interface ResponseData<T = any> {
@@ -53,7 +54,7 @@ function createFormData(item: any): FormData {
 })
 export class SwaggerService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient , private spinner : SpinnerService) { }
 
   login(body: { email: string, password: string, recaptcha_token: string }) {
     const url = ENDPOINT_URI + 'login'
@@ -93,12 +94,14 @@ export class SwaggerService {
   // projects
 
   getAllProjects(): Observable<Project[]> {
+    this.spinner.showSpinner()
     return this.http.get<ResponseData<Project>>(ENDPOINT_URI + 'projects')
-    .pipe(map(res => res.data), shareReplay(1));
+    .pipe(finalize(()=>this.spinner.hideSpinner()),map(res => res.data), shareReplay(1));
   }
 
   getOneProject(id: string) {
-    return this.http.get(ENDPOINT_URI + `projects/${id}`);
+    this.spinner.showSpinner()
+    return this.http.get(ENDPOINT_URI + `projects/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   createProject(project: { title: string, content: string, image: File, status_id: string }) {
@@ -118,11 +121,13 @@ export class SwaggerService {
 
   // Procedures
   getAllProcedures() {
-    return this.http.get(ENDPOINT_URI + 'procedures');
+    this.spinner.showSpinner()
+    return this.http.get(ENDPOINT_URI + 'procedures').pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   getOneProcedure(id: string) {
-    return this.http.get(ENDPOINT_URI + `procedures/${id}`);
+    this.spinner.showSpinner()
+    return this.http.get(ENDPOINT_URI + `procedures/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   createProcedure(procedure: Procedure) {
@@ -144,11 +149,13 @@ export class SwaggerService {
 
   // Decisions
   getAllDecisions(): Observable<Decision[] > {
-    return this.http.get<ResponseData<Decision>>(ENDPOINT_URI + 'decisions').pipe(map(res => res.data));
+    this.spinner.showSpinner();
+    return this.http.get<ResponseData<Decision>>(ENDPOINT_URI + 'decisions').pipe(finalize(()=>this.spinner.hideSpinner()) ,map(res => res.data));
   }
 
   getOneDecision(id: string) {
-    return this.http.get<ResponseItem<Decision>>(ENDPOINT_URI + `decisions/${id}`).pipe(map(res => res.data));
+    this.spinner.showSpinner();
+    return this.http.get<ResponseItem<Decision>>(ENDPOINT_URI + `decisions/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()) ,map(res => res.data));
   }
 
   createDecision(decision: Partial< Decision >) {
@@ -169,14 +176,18 @@ export class SwaggerService {
 
   // Decisions
   getAllMembers() {
+    this.spinner.showSpinner()
+
     return this.http.get<ResponseData<any>>(ENDPOINT_URI + 'members')
       .pipe(
+        finalize(()=>this.spinner.hideSpinner()),
         map(res => res.data),
       );
   }
 
   getOneMember(id: string) {
-    return this.http.get(ENDPOINT_URI + `members/${id}`);
+    this.spinner.showSpinner()
+    return this.http.get(ENDPOINT_URI + `members/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   createMember(member: User) {
@@ -190,11 +201,13 @@ export class SwaggerService {
 
   // Meetings
   getAllMeetings() {
-    return this.http.get<ResponseData<Meeting>>(ENDPOINT_URI + 'meetings').pipe(map(res => res.data));
+    this.spinner.showSpinner()
+    return this.http.get<ResponseData<Meeting>>(ENDPOINT_URI + 'meetings').pipe(finalize(()=>this.spinner.hideSpinner()), map(res => res.data));
   }
 
   getOneMeeting(id: number) {
-    return this.http.get<ResponseItem<Meeting >>(ENDPOINT_URI + `meetings/${id}`).pipe(map(res=> res.data));
+    this.spinner.showSpinner()
+    return this.http.get<ResponseItem<Meeting >>(ENDPOINT_URI + `meetings/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()), map(res=> res.data));
   }
 
   createMeeting(meeting: Meeting) {
@@ -231,11 +244,13 @@ export class SwaggerService {
 
   // Posts
   getAllPosts() {
-    return this.http.get<ResponseData<Post>>(ENDPOINT_URI + 'posts').pipe(map(res => res.data));
+    this.spinner.showSpinner()
+    return this.http.get<ResponseData<Post>>(ENDPOINT_URI + 'posts').pipe(finalize(()=>this.spinner.hideSpinner()), map(res => res.data));
   }
 
   getOnePost(id: string) {
-    return this.http.get(ENDPOINT_URI + `posts/${id}`);
+    this.spinner.showSpinner()
+    return this.http.get(ENDPOINT_URI + `posts/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   createPost(post: Post) {
@@ -276,11 +291,13 @@ export class SwaggerService {
 
   // Roles
   getAllRoles() {
-    return this.http.get<Role[]>(ENDPOINT_URI + 'roles');
+    this.spinner.showSpinner()
+    return this.http.get<Role[]>(ENDPOINT_URI + 'roles').pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   getOneRole(id: string) {
-    return this.http.get<Role>(ENDPOINT_URI + `roles/${id}`);
+    this.spinner.showSpinner()
+    return this.http.get<Role>(ENDPOINT_URI + `roles/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   createRole(role: Partial<Role>) {
@@ -303,11 +320,13 @@ export class SwaggerService {
 
   // Users
   getAllUsers() {
-    return this.http.get<ResponseData<User>>(ENDPOINT_URI + 'users').pipe(map(res => res.data));
+    this.spinner.showSpinner()
+    return this.http.get<ResponseData<User>>(ENDPOINT_URI + 'users').pipe(finalize(() => this.spinner.hideSpinner()),map(res => res.data));
   }
 
-  getOneUser(id: string) {
-    return this.http.get(ENDPOINT_URI + `users/${id}`);
+  getOneUser(id: string)  {
+    this.spinner.showSpinner()
+    return this.http.get(ENDPOINT_URI + `users/${id}`).pipe(finalize(() => this.spinner.hideSpinner()));
   }
 
   updateUser(id: string, user: User) {
@@ -326,7 +345,8 @@ export class SwaggerService {
 
   // sms
   getAllSms() {
-    return this.http.get<ResponseData<Sms>>(ENDPOINT_URI + 'sms').pipe(map(res => res.data));
+    this.spinner.showSpinner()
+    return this.http.get<ResponseData<Sms>>(ENDPOINT_URI + 'sms').pipe(finalize(()=>this.spinner.hideSpinner()), map(res => res.data));
   }
 
 
@@ -342,11 +362,13 @@ export class SwaggerService {
   // groups
   // Groups
   getAllGroups() {
-    return this.http.get(ENDPOINT_URI + 'groups');
+    this.spinner.showSpinner()
+    return this.http.get(ENDPOINT_URI + 'groups').pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   getOneGroup(id: string) {
-    return this.http.get(ENDPOINT_URI + `groups/${id}`);
+    this.spinner.showSpinner()
+    return this.http.get(ENDPOINT_URI + `groups/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   createGroup(group: Group) {
@@ -361,11 +383,13 @@ export class SwaggerService {
 
   // Procedures Groups
   getAllProceduresGroups() {
-    return this.http.get(ENDPOINT_URI + 'procedures-groups');
+    this.spinner.showSpinner()
+    return this.http.get(ENDPOINT_URI + 'procedures-groups').pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   getOneProceduresGroup(id: string) {
-    return this.http.get(ENDPOINT_URI + `procedures-groups/${id}`);
+    this.spinner.showSpinner()
+    return this.http.get(ENDPOINT_URI + `procedures-groups/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   createProceduresGroup(proceduresGroup: ProceduresGroup) {

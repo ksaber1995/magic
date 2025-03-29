@@ -9,4 +9,7 @@ export interface User{
   role: string,
   status: string,
   image: File | string,
+  group:string,
+  updated_at:string, 
+  created_at:string
 }
