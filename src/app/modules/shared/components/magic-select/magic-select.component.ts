@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,8 +6,26 @@ import { FormControl } from '@angular/forms';
   templateUrl: './magic-select.component.html',
   styleUrl: './magic-select.component.scss'
 })
-export class MagicSelectComponent {
+export class MagicSelectComponent implements OnInit{
+
+
   @Input() items : {id: number | string, name: string}[]
 
   @Input() control: FormControl;
+  @Input() magicLabel: string;
+  @Input() magicValue: string = 'all';
+
+  ngOnInit(): void {
+    this.control.valueChanges.subscribe(selectedValues => {
+      if (selectedValues.includes(this.magicValue)) {
+        // Only keep 'all_members'
+        this.control.setValue([this.magicValue], { emitEvent: false });
+      }
+    });
+  }
+
+  isDisabledOption(value: string): boolean {
+    const selected = this.control.value || [];
+    return selected.includes(this.magicValue) && value !== this.magicValue;
+  }
 }

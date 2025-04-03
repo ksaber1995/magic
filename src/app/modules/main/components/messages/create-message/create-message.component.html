@@ -7,16 +7,13 @@
     </div>
     <div class="memebers p-3 flex gap-4 w-full">
       <span>الأعضاء</span>
-      <ng-select class="flex-grow" formControlName="members_ids" [multiple]="true">
-        @for (member of allMembers$ | async; track member.id) {
-        <ng-option [value]="member.id">{{member.user?.name}}</ng-option>
-        }
-      </ng-select>
+
+      <magic-select  class="flex-grow" [magicValue]="'all_members'" [magicLabel]="'جميع الأعضاء' "  [items]="allMembers$ | async" [control]="form.get('members_ids')"></magic-select>
     </div>
     <div class="p-3 ">
       <textarea formControlName="message" class="new-message-textarea mb-3" placeholder="نص الرسالة"
         rows="10"></textarea>
-      <button [disabled]="form.invalid" class="send-message">ارسالة رسالة</button>
+      <button [class.loading-btn]="isUpdating" [disabled]="form.invalid" class="send-message">ارسال رسالة</button>
     </div>
   </div>
 </form>
