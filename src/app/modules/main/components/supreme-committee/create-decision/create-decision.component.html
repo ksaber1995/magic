@@ -6,15 +6,8 @@
     <div class="input-field flex justify-between mb-3">
       <label> البرامج </label>
 
-      <select class="select-program" formControlName="project_id">
-        <option value="all">
-          جميع البرامج...
-        </option>
 
-        <option *ngFor="let project of projects$ | async" [value]="project.id">
-          {{ project.title }}
-        </option>
-      </select>
+      <magic-select   class="flex-grow select-program" [magicValue]="'all_projects'" [magicLabel]="'جميع البرامج' "  [items]="projects$ | async" [control]="decisionForm.get('project_id')"></magic-select>
 
     </div>
 

@@ -4,6 +4,7 @@ import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { SnackbarService } from '../../../../../services/snackbar.service';
 import { Decision } from '../../../../../../model/decision';
 import { FormControl } from '@angular/forms';
+import { map } from 'rxjs';
 function formatDate(date: Date): string {
   const year = date.getFullYear();
   const month = date.getMonth() + 1; // Months are 0-based, so add 1
@@ -22,19 +23,19 @@ export class CreateDecisionComponent implements OnInit {
     return `${value} %`;
   }
   isUpdating: boolean;
-  projects$ = this.swagger.getAllProjects();
+  projects$ = this.swagger.getAllProjects().pipe(map(allProjects=> allProjects.map(res=> ({name: res.title, id: res.id}))));
 
   decisionForm: FormGroup
 
   breadcrumbs = [
     {
-      label:'بوابة البرامج', 
+      label:'بوابة البرامج',
       url:'/'
-    }, 
+    },
     {
-      label:'قرارات اللجنة العليا', 
+      label:'قرارات اللجنة العليا',
       url:'/main/decisions'
-    }, 
+    },
     {
       label:'انشاء قرار'
     }
@@ -64,8 +65,11 @@ export class CreateDecisionComponent implements OnInit {
   }
 
   createDecision() {
+    const project_idValue: any[] = this.formValue.project_id;
+    const projects_ids = project_idValue.includes('all_projects') ? 'all_projects' : project_idValue;
+
     const decision: Partial<Decision> = {
-      project_id: this.formValue.project_id,
+      projects_ids,
       title: this.formValue.title,
       content: this.formValue.content,
       progress_percentage: this.formValue.progress_percentage,

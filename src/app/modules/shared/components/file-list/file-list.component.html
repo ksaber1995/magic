@@ -1,0 +1,8 @@
+<div class="uploaded-files p-2">
+  <div class="file flex gap-2" *ngFor="let file of files">
+    <img width="20" [src]="getFileIcon(file)" alt="" />
+
+
+    <a target="_blank" [href]="file" class="name">{{getFileName(file)}}</a>
+  </div>
+</div>

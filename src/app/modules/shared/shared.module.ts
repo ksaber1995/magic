@@ -25,14 +25,16 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FilesUploadComponent } from './components/files-upload/files-upload.component';
 import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { FileListComponent } from './components/file-list/file-list.component';
 
 const declarationsImports = [
   CardComponent,
   MagicSelectComponent,
-  FilesUploadComponent, 
+  FilesUploadComponent,
   CreateSuccssDialogComponent,
-  BreadCrumbComponent, 
-  SpinnerComponent
+  BreadCrumbComponent,
+  SpinnerComponent,
+  FileListComponent
 ]
 const imports = [
   ReactiveFormsModule,
@@ -53,13 +55,14 @@ const imports = [
   MatSnackBarModule,
   NgSelectModule,
   NgApexchartsModule,
-  MatSliderModule, 
+  MatSliderModule,
   RouterModule
 ]
 
 @NgModule({
   declarations: [
     ...declarationsImports,
+
 
   ],
   imports: [

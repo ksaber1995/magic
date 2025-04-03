@@ -264,7 +264,7 @@ export class SwaggerService {
 
   getOnePost(id: string) {
     this.spinner.showSpinner()
-    return this.http.get(ENDPOINT_URI + `posts/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
+    return this.http.get<ResponseItem<Post>>(ENDPOINT_URI + `posts/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()), map(res => res.data));
   }
 
   createPost(post: Post) {

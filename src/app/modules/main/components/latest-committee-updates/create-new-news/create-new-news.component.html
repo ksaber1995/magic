@@ -5,18 +5,24 @@
       <label> العنوان </label>
       <input formControlName="title" placeholder="العنوان" type="text" class="address-input" />
     </div>
+
     <div class="input-field flex mb-3">
         <label> البرامج </label>
-        <select class="select-program" formControlName="project_id">
-            <option value="">جميع البرامج</option>
-            <option *ngFor="let program of programs$ | async" [value]="program.id">
-                {{ program.title }}
-            </option>
-        </select>
+
+
+
+      <ng-select  formControlName="project_id" class="flex-grow"  >
+        <ng-option  [value]="'all_projects'">جميع البرامج</ng-option>
+
+        @for (item of (projects$ | async); track item.id) {
+        <ng-option  [value]="item.id">{{item?.name}}</ng-option>
+        }
+      </ng-select>
+
     </div>
     <div class="input-field flex mb-3">
       <label> الصورة</label>
-      <input type="file"  accept="" formControlName="image" class="image-input" />
+      <input (change)="onFileSelected($event)" type="file"  accept="webp,png,jpg" formControlName="image" class="image-input" />
     </div>
     <div class="input-field mb-3">
       <label>التفاصيل</label>
@@ -28,25 +34,9 @@
     </div>
     <div class="uploaded-files input-field">
       <label class="title">ملفات مرفقة</label>
-      <input
-        formArrayName="uploadedFiles"
-        type="file"
-        multiple
-        id="fileInput"
-        hidden
-      />
-      <div
-        class="upload-files-button p-4"
-        onclick="document.getElementById('fileInput').click()"
-      >
-        <label>اسحب الملف هنا...</label>
-        <div class="choose-file">
-          أو قم باختيار الملف..
-          <i class="bi bi-upload"></i>
-        </div>
-      </div>
-      <div class="selected-files"></div>
+      <app-files-upload  [control]="filesControl"></app-files-upload>
+
     </div>
-    <button class="accept-btn" (click)="createNews()">موافق</button>
+    <button [disabled]="newsForm.invalid || isUpdating" [class.loading-btn]="isUpdating"  class="accept-btn" (click)="createNews()">موافق</button>
   </form>
 </div>
