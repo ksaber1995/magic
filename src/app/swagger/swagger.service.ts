@@ -61,6 +61,20 @@ export class SwaggerService {
     return this.http.post(url, body);
   }
 
+  verifyMfa(body: {one_time_password: number}){
+    const url = ENDPOINT_URI + 'verify-2fa'
+    return this.http.post(url, body);
+  }
+
+
+  generateMfaSecret(){
+    const url = ENDPOINT_URI + 'generate-2fa-secret'
+    return this.http.post(url, {});
+  }
+
+
+
+
   register(user: Partial<User>): Observable<User> {
     const url = ENDPOINT_URI + 'register';
     const formData = createFormData(user);

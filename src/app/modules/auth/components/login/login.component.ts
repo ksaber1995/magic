@@ -64,7 +64,19 @@ export class LoginComponent {
           this.isUpdating = false;
           console.log(error.error);
           // handle errors
-          debugger;
+
+
+          if(error.error == '2FA code is required'){
+            // debugger
+            this.router.navigate(['/login/register-mfa'], {
+              queryParams: {
+                email: this.loginForm.value.email,
+              },
+            })
+          }
+
+
+
           this.errors = error.message || error.error;
           if (error.errors?.email) {
             this.errorMessage = 'حقل البريد الالكتروني مطلوب.';

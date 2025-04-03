@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
+import { SwaggerService } from '../../../../swagger/swagger.service';
 
 @Component({
   selector: 'app-forget-password',
   templateUrl: './forget-password.component.html',
-  styleUrl: './forget-password.component.scss'
+  styleUrl: './forget-password.component.scss',
 })
 export class ForgetPasswordComponent {
-  
-  sendLink(){
-    
+  email: string;
+  constructor(private swagger: SwaggerService) {}
+  sendLink() {
+    debugger
+    this.swagger.forgetPassword( this.email ).subscribe((res) => {});
   }
 }
