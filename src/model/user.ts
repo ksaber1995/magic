@@ -1,4 +1,5 @@
 export interface User{
+  id: number,
   name:  string,
   email: string,
   password: string,
@@ -10,6 +11,7 @@ export interface User{
   status: string,
   image: File | string,
   group:string,
-  updated_at:string, 
+  updated_at:string,
   created_at:string
+  email_verified: boolean;
 }

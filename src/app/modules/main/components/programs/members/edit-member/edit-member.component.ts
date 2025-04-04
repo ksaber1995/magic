@@ -12,8 +12,8 @@ export class EditMemberComponent {
 memberForm: FormGroup;
 id: string
   constructor(
-    private fb: FormBuilder, 
-    private swagger: SwaggerService, 
+    private fb: FormBuilder,
+    private swagger: SwaggerService,
     private route : ActivatedRoute
   ) {}
   ngOnInit() {
@@ -27,7 +27,7 @@ id: string
       mobile: [null],
       fax: [null],
       email_verified: [null],
-      block:[null], 
+      block:[null],
       group:[null]
     });
     this.getMemberById()
@@ -48,7 +48,7 @@ id: string
     })
   }
   editMember() {
-    this.swagger.updateUser(this.id , this.memberForm.value).subscribe(res=>{
+    this.swagger.updateUser(this.memberForm.value).subscribe(res=>{
     })
   }
 }

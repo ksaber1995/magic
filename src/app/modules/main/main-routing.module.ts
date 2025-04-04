@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContainerComponent } from './components/container/container.component';
+import { DecisionsComponent } from './components/decisions/decisions.component';
 import { CommitteeUpdatesListComponent } from './components/latest-committee-updates/committee-updates-list/committee-updates-list.component';
 import { CreateNewNewsComponent } from './components/latest-committee-updates/create-new-news/create-new-news.component';
 import { DeleteNewsPageComponent } from './components/latest-committee-updates/delete-news-page/delete-news-page.component';
@@ -19,22 +20,20 @@ import { ProgramsListComponent } from './components/programs/programs-list/progr
 import { EditReportComponent } from './components/programs/reports/edit-report/edit-report.component';
 import { ReportDetailsComponent } from './components/programs/reports/report-details/report-details.component';
 import { ReportsComponent } from './components/programs/reports/reports.component';
+import { ProjectDecisionsComponent } from './components/project-decisions/project-decisions.component';
 import { CreateRoleComponent } from './components/roles/create-role/create-role.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CreateDecisionComponent } from './components/supreme-committee/create-decision/create-decision.component';
 import { DecisionDetailsComponent } from './components/supreme-committee/decision-details/decision-details.component';
-import { DecisionsListComponent } from './components/supreme-committee/desicions-list/decisions-list.component';
 import { CreateUserComponent } from './components/users/create-user/create-user.component';
-import { EditRolesComponent } from './components/users/edit-roles/edit-roles.component';
+import { EditUserRolesComponent } from './components/users/edit-user-roles/edit-user-roles.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { UserFilesComponent } from './components/users/user-files/user-files.component';
 import { UserInformationComponent } from './components/users/user-information/user-information.component';
 import { UsersListComponent } from './components/users/users-list/users-list.component';
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
 import { CreateReportComponent } from './components/programs/reports/create-report/create-report.component';
-import { DecisionsComponent } from './components/decisions/decisions.component';
-import { ProjectDecisionsComponent } from './components/project-decisions/project-decisions.component';
 import { CreateProceduresComponent } from './components/programs/procedures/create-procedures/create-procedures.component';
 
 const routes: Routes = [
@@ -85,7 +84,7 @@ const routes: Routes = [
       {path:'users', component:UsersListComponent},
       {path:'users/:id', component:UserInformationComponent},
       {path:'users/:id/edit', component:EditUserComponent},
-      {path:'users/:id/edit-roles', component:EditRolesComponent},
+      {path:'users/:id/edit-roles', component:EditUserRolesComponent},
       {path:'users/:id/files', component:UserFilesComponent},
       {path:'create-user', component:CreateUserComponent},
       {path:'users-setting', component:UsersSettingsComponent},

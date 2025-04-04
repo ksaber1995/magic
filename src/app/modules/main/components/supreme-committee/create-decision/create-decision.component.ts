@@ -129,10 +129,10 @@ export class CreateDecisionComponent implements OnInit {
 
     this.swagger.updateDecision(decision)
     .subscribe(res => {
-      this.snackbar.showSuccess('تم تعديل القرار', '/main/decisions');
       this.decisionForm.reset();
       this.filesControl.reset();
       this.isUpdating = false;
+      this.snackbar.showSuccess('تم تعديل القرار', '/main/decisions');
 
     }, error => {
       this.snackbar.showError(error.message);

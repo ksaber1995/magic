@@ -1,8 +1,18 @@
-import { M } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SwaggerService } from '../../../../../swagger/swagger.service';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { User } from '../../../../../../model/user';
+import {
+  getBlobFromUrl,
+
+} from '../../../../../../utlities/file-helper';
+import { SnackbarService } from '../../../../../services/snackbar.service';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -11,12 +21,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditUserComponent implements OnInit {
   userForm: FormGroup;
-  userId = this.route.snapshot.paramMap.get('id');
+  id = +this.route.snapshot.paramMap.get('id');
+  isUpdating = false;
+  imageUrl: string | null = null;
+  showUpdateButton = false; // Control visibility of the button
 
   constructor(
     private fb: FormBuilder,
     private swagger: SwaggerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackbar: SnackbarService
   ) {}
   breadcrumbs = [
     {
@@ -29,39 +43,71 @@ export class EditUserComponent implements OnInit {
   ];
 
   ngOnInit() {
-    this.userForm = this.fb.group({
-      name: [null, [Validators.required]],
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required]],
-      confirmPassword: [null, [Validators.required]],
-      position: [null],
-      phone: [null],
-      mobile: [null],
-      fax: [null],
-      email_verified: [null],
-      block: [null],
-      group: [null],
-    });
     this.getUserData();
   }
   getUserData() {
-    this.swagger.getOneUser(this.userId).subscribe((res: any) => {
-      const userData = res.data;
-      console.log(userData);
-      this.userForm.patchValue({
-        name: userData.name,
-        email: userData.email,
-        position: userData.position,
-        phone: userData.phone,
-        mobile: userData.mobile,
-        fax: userData.fax,
-        email_verified: userData.email_verified,
-        group: userData.group,
+    this.swagger.getOneUser(this.id).subscribe((user) => {
+      this.userForm = this.fb.group({
+        name: [user.name, [Validators.required]],
+        email: [user.email, [Validators.required, Validators.email]],
+        position: [user.position],
+        phone: [user.phone],
+        mobile: [user.mobile],
+        fax: [user.fax],
+        email_verified: [user.email_verified],
+        group: [user.group],
+        image: [],
       });
+
+      this.imageUrl = user.image as string;
     });
   }
-  editUser() {
-    this.swagger.updateUser(this.userId , this.userForm.value).subscribe(res=>{
-    })
-  } 
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length) {
+      const file = input.files[0];
+
+
+      // Update preview
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageUrl = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  async editUser() {
+    this.isUpdating = true;
+    const image = await getBlobFromUrl(this.imageUrl);
+
+    const user: Partial<User> = {
+      name: this.formValue.name,
+      email: this.formValue.email,
+      position: this.formValue.position,
+      phone: this.formValue.phone,
+      mobile: this.formValue.mobile,
+      fax: this.formValue.fax,
+      email_verified: this.formValue.email_verified,
+      group: this.formValue.group,
+      id: this.id,
+      image,
+    };
+
+    this.swagger.updateUser(user).subscribe(
+      (user) => {
+        this.isUpdating = false;
+        this.snackbar.showSuccess('تم تعديل المستخدم بنجاح', '/main/users');
+      },
+      (error) => {
+        this.snackbar.showError(error.message);
+        this.isUpdating = false;
+      }
+    );
+  }
+
+  get formValue() {
+    return this.userForm.value;
+  }
 }

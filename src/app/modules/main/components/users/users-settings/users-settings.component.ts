@@ -22,32 +22,32 @@ export class UsersSettingsComponent implements OnInit {
   ];
   ngOnInit() {
     this.settingForm = this.fb.group({
-      committeeType:[null], 
-      country:[null], 
-      register:[null], 
-      activate:[null], 
+      committeeType:[null],
+      country:[null],
+      register:[null],
+      activate:[null],
       sendWelcomeEmail:[null]
     })
   }
   committees=[
     {
-      name:'اللجنة الفنية', 
+      name:'اللجنة الفنية',
       value:1
     },
     {
-      name:'مشرفين اللجنة', 
+      name:'مشرفين اللجنة',
       value:2
-    }, 
+    },
     {
-      name:'لجنة متابعة التقارير', 
+      name:'لجنة متابعة التقارير',
       value:3
-    }, 
+    },
     {
-      name:'اللجنة العليا', 
+      name:'اللجنة العليا',
       value:4
-    }, 
+    },
     {
-      name:'admin', 
+      name:'admin',
       value:5
     }
   ]

@@ -203,7 +203,7 @@ export class SwaggerService {
     this.spinner.showSpinner()
     return this.http.get(ENDPOINT_URI + `members/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
- 
+
   createMember(member: User) {
     const formData = createFormData(member)
     return this.http.post(ENDPOINT_URI + `members`, formData);
@@ -338,14 +338,14 @@ export class SwaggerService {
     return this.http.get<ResponseData<User>>(ENDPOINT_URI + 'users').pipe(finalize(() => this.spinner.hideSpinner()),map(res => res.data));
   }
 
-  getOneUser(id: string)  {
+  getOneUser(id)  {
     this.spinner.showSpinner()
-    return this.http.get(ENDPOINT_URI + `users/${id}`).pipe(finalize(() => this.spinner.hideSpinner()));
+    return this.http.get<ResponseItem<User>>(ENDPOINT_URI + `users/${id}`).pipe(finalize(() => this.spinner.hideSpinner()),map(res => res.data));
   }
 
-  updateUser(id: string, user: User) {
+  updateUser( user: Partial< User >) {
     const formData = createFormData(user);
-    return this.http.put(ENDPOINT_URI + `users/${id}`, formData);
+    return this.http.put(ENDPOINT_URI + `users/${user.id}`, formData);
   }
 
   // Settings

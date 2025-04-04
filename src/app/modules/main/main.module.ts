@@ -36,7 +36,6 @@ import { DecisionDetailsComponent } from './components/supreme-committee/decisio
 import { DeleteDialogComponent } from './components/supreme-committee/delete-dialog/delete-dialog.component';
 import { DecisionsListComponent } from './components/supreme-committee/desicions-list/decisions-list.component';
 import { CreateUserComponent } from './components/users/create-user/create-user.component';
-import { EditRolesComponent } from './components/users/edit-roles/edit-roles.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { FileDetailsComponent } from './components/users/file-details/file-details.component';
 import { UserFilesComponent } from './components/users/user-files/user-files.component';
@@ -49,6 +48,7 @@ import { CreateReportComponent } from './components/programs/reports/create-repo
 import { DecisionsComponent } from './components/decisions/decisions.component';
 import { ProjectDecisionsComponent } from './components/project-decisions/project-decisions.component';
 import { CreateProceduresComponent } from './components/programs/procedures/create-procedures/create-procedures.component';
+import { EditUserRolesComponent } from './components/users/edit-user-roles/edit-user-roles.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +85,6 @@ import { CreateProceduresComponent } from './components/programs/procedures/crea
     UserFilesComponent,
     FileDetailsComponent,
     EditUserComponent,
-    EditRolesComponent,
     MeetingsListComponent,
     CreateMeetingComponent,
     ReportDetailsComponent,
@@ -95,7 +94,11 @@ import { CreateProceduresComponent } from './components/programs/procedures/crea
     CreateReportComponent,
     DecisionsComponent,
     ProjectDecisionsComponent,
+<<<<<<< HEAD
     CreateProceduresComponent,
+=======
+    EditUserRolesComponent,
+>>>>>>> db5653cd522c6b6b3ebe89a16b7b04990b34edf5
   ],
   imports: [
     CommonModule,
