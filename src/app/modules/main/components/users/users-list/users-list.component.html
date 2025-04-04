@@ -27,12 +27,12 @@
           <div class="flex items-center">
             <i
               class="bi bi-check-lg"
-              *ngIf="user.activated"
+              *ngIf="user.email_verified"
               style="color: green; font-size: 20px; font-weight: 700"
             ></i>
             <i
               class="bi bi-exclamation-lg"
-              *ngIf="!user.activated"
+              *ngIf="!user.email_verified"
               style="color: #f2711c; font-size: 20px; font-weight: 700"
             ></i>
             {{ user.email }}

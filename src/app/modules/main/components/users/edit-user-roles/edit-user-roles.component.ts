@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
 
 @Component({
-  selector: 'app-edit-roles',
-  templateUrl: './edit-roles.component.html',
-  styleUrl: './edit-roles.component.scss',
+  selector: 'app-edit-user-roles',
+  templateUrl: './edit-user-roles.component.html',
+  styleUrl: './edit-user-roles.component.scss'
 })
-export class EditRolesComponent {
-  rolesForm: FormGroup;
+export class EditUserRolesComponent {
+ rolesForm: FormGroup;
+ roles$ = this.swagger.getAllRoles();
+
   breadcrumbs = [
     {
       label: ' قائمة المستخدمين',
@@ -17,7 +20,10 @@ export class EditRolesComponent {
       label: ' تعديل الاذونات',
     },
   ];
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private swagger: SwaggerService
+  ) {}
   ngOnInit() {
     this.rolesForm = this.fb.group({
       admin: [null],
