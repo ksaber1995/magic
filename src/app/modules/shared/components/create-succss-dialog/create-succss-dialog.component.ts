@@ -16,13 +16,13 @@ interface DialogData {
 })
 export class CreateSuccessDialogComponent {
   readonly dialogRef = inject(MatDialogRef<CreateSuccessDialogComponent>);
-
+  title: string
   constructor(
     private router : Router,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
 
   ){
-
+    this.title = data.title;
   }
 
   closeDialog(){
