@@ -12,11 +12,11 @@ import { ActivatedRoute } from '@angular/router';
 export class CreatePermissionComponent {
   form: FormGroup;
   id = this.route.snapshot.paramMap.get('id');
-  breadcrumbs = [ 
+  breadcrumbs = [
     {
-      label:'قائمة الأذونات', 
+      label:'قائمة الأذونات',
       url:'/main/permissions'
-    }, 
+    },
     {
       label:' انشاء إذن'
     }
@@ -61,7 +61,7 @@ export class CreatePermissionComponent {
     const body = { ...this.form.value, transformation: this.form.value.transformation || false }
     this.swagger.createPermission(body)
     .subscribe(res => {
-      this.snackbarService.showSuccess('تم اضافة الإذن');
+      this.snackbarService.showSuccess('تم اضافة الإذن', '/main/permissions');
       this.form.reset();
     }, error => {
       this.snackbarService.showError(error.message)
@@ -77,7 +77,7 @@ export class CreatePermissionComponent {
 
     this.swagger.updatePermission(body)
     .subscribe(res => {
-      this.snackbarService.showSuccess('تم تعديل الإذن');
+      this.snackbarService.showSuccess('تم تعديل الإذن', '/main/permissions');
     }, error => {
       this.snackbarService.showError(error.message)
     })

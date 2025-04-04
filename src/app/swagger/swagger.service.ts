@@ -167,7 +167,7 @@ export class SwaggerService {
     return this.http.get<ResponseData<Decision>>(ENDPOINT_URI + 'decisions').pipe(finalize(()=>this.spinner.hideSpinner()) ,map(res => res.data));
   }
 
-  getOneDecision(id: string) {
+  getOneDecision(id) {
     this.spinner.showSpinner();
     return this.http.get<ResponseItem<Decision>>(ENDPOINT_URI + `decisions/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()) ,map(res => res.data));
   }
@@ -177,9 +177,9 @@ export class SwaggerService {
     return this.http.post(ENDPOINT_URI + `decisions`, formData);
   }
 
-  updateDecision(id: string, decision: Decision) {
+  updateDecision( decision: Partial< Decision>) {
     const formData = createFormData(decision)
-    return this.http.put(ENDPOINT_URI + `decisions/${id}`, formData);
+    return this.http.put(ENDPOINT_URI + `decisions/${decision.id}`, formData);
   }
 
 

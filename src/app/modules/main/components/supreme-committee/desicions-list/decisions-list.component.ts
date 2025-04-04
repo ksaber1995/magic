@@ -20,9 +20,9 @@ export class DecisionsListComponent  {
 
   breadcrumbs = [
     {
-      label:'بوابة البرامج', 
+      label:'بوابة البرامج',
       url:'/'
-    }, 
+    },
     {
       label:'قرارات اللجنة العليا'
     }
@@ -56,7 +56,7 @@ export class DecisionsListComponent  {
       if (res) {
         this.swagger.deleteDecision(id).subscribe(
           (res) => {
-            this.snackbar.showSuccess('تم حذف القرار');
+            this.snackbar.showSuccessSnackbar('تم حذف القرار');
             const index = this.decisions.findIndex((res) => res.id === id);
             this.decisions.splice(index, 1);
           },

@@ -48,7 +48,7 @@ export class CreateMessageComponent implements OnInit{
 
     this.swagger.createSms(sms)
       .subscribe(res=>{
-        this.snackbarService.showSuccess('تم ار سال الرسالة بنجاح');
+        this.snackbarService.showSuccess('تم ار سال الرسالة بنجاح', '/main/messages');
         this.form.reset();
         this.isUpdating = false;
       },error=>{

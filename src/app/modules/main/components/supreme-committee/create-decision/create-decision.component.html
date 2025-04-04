@@ -1,17 +1,18 @@
 <app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
 
-<div class="new-decision-container  h-full">
+<div *ngIf="decisionForm" class="new-decision-container  h-full">
   <div class="header p-4">انشاء قرار</div>
   <form action="" class="p-4" [formGroup]="decisionForm">
-    <div class="input-field flex justify-between mb-3">
+    <div class="input-field flex justify-between  items-center">
       <label> البرامج </label>
 
 
-      <magic-select   class="flex-grow select-program" [magicValue]="'all_projects'" [magicLabel]="'جميع البرامج' "  [items]="projects$ | async" [control]="decisionForm.get('project_id')"></magic-select>
+      <magic-select class="select-input" [magicValue]="'all_projects'" [magicLabel]="'جميع البرامج' "
+        [items]="projects$ | async" [control]="decisionForm.get('project_id')"></magic-select>
 
     </div>
 
-    <div class="input-field flex justify-between mb-3">
+    <div class="input-field flex justify-between items-center">
       <label> العنوان </label>
       <input formControlName="title" type="text" class="title-input" />
     </div>
@@ -33,9 +34,9 @@
       </mat-slider>
     </div>
 
-    <div class="input-field flex justify-between my-4">
-      <label for="">الحالة</label>
-      <mat-select class="select-status" formControlName="status_id">
+    <div class="input-field flex flex-col date-input-field my-4">
+      <label class="mb-1">الحالة</label>
+      <mat-select class="select-status w-100" formControlName="status_id">
         <mat-option value="1" selected>تحت الإجراء</mat-option>
         <mat-option value="2">منجز</mat-option>
         <mat-option value="3">متعثر</mat-option>
@@ -46,7 +47,7 @@
     <div class="input-field flex flex-col date-input-field my-4">
       <label class="mb-1">تاريخ اصدار القرار</label>
 
-      <mat-form-field  class="w-100 grow picker">
+      <mat-form-field class="w-100 grow picker">
         <input formControlName="decision_date" (click)="picker.open()" matInput [matDatepicker]="picker">
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
@@ -54,6 +55,12 @@
     </div>
 
 
-    <button  [class.loading-btn]="isUpdating" class="add-btn" [disabled]="decisionForm.invalid || isUpdating" (click)="createDecision()">اضافة قرار</button>
+    <button [class.loading-btn]="isUpdating" class="add-btn" [disabled]="decisionForm.invalid || isUpdating"
+      (click)="takeAction()">
+      <span *ngIf="id">تعديل قرار</span>
+      <span *ngIf="!id">
+        اضافة قرار
+      </span>
+    </button>
   </form>
 </div>

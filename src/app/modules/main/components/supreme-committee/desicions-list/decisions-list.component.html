@@ -29,11 +29,11 @@
         (mouseleave)="startHideTimeout()"
       >
         <i class="bi bi-trash3 trash-i" (click)="delete(decision.id)"></i>
-        <i class="bi bi-pencil-square edit-i"></i>
+        <i [routerLink]="'/main/new-decision/' + decision.id" class="bi bi-pencil-square edit-i"></i>
       </div>
 
       <span class="decision-date" *ngIf="decision.progress_percentage">
-        % {{ decision.progress_percentage }}  
+        % {{ decision.progress_percentage }}
       </span>
       <span class="decision-date" *ngIf="decision.date">
         {{ decision.date }}

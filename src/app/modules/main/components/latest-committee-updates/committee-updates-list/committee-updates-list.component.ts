@@ -42,7 +42,8 @@ export class CommitteeUpdatesListComponent implements OnInit{
           .subscribe(()=>{
             const index = this.posts.findIndex(res=> res.id === id)
             this.posts.splice(index, 1);
-            this.snackbar.showSuccess('تم حذف الخبر')
+            this.snackbar.showSuccessSnackbar
+            ('تم حذف الخبر')
           },error=>{
             this.snackbar.showError(error.message)
 

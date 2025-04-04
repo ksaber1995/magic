@@ -11,7 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import { CreateSuccssDialogComponent } from './components/create-succss-dialog/create-succss-dialog.component';
+import { CreateSuccessDialogComponent } from './components/create-succss-dialog/create-succss-dialog.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -31,7 +31,7 @@ const declarationsImports = [
   CardComponent,
   MagicSelectComponent,
   FilesUploadComponent,
-  CreateSuccssDialogComponent,
+  CreateSuccessDialogComponent,
   BreadCrumbComponent,
   SpinnerComponent,
   FileListComponent

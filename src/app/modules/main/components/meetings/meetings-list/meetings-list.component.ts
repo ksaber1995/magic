@@ -50,7 +50,7 @@ export class MeetingsListComponent implements OnInit  {
         .subscribe(()=>{
           const index = this.meetings.findIndex(res=> res.id === id)
           this.meetings.splice(index, 1);
-          this.snackBar.showSuccess('تم حذف الاجتماع')
+          this.snackBar.showSuccessSnackbar('تم حذف الاجتماع')
         },error=>{
           this.snackBar.showError(error.message)
 
