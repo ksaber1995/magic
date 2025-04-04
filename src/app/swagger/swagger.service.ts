@@ -203,7 +203,7 @@ export class SwaggerService {
     this.spinner.showSpinner()
     return this.http.get(ENDPOINT_URI + `members/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
-
+ 
   createMember(member: User) {
     const formData = createFormData(member)
     return this.http.post(ENDPOINT_URI + `members`, formData);
@@ -212,7 +212,7 @@ export class SwaggerService {
   deleteMember(id: string) {
     return this.http.delete(ENDPOINT_URI + `members/${id}`);
   }
-
+.0
   // Meetings
   getAllMeetings() {
     this.spinner.showSpinner()

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SwaggerService } from '../../../../../../swagger/swagger.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-member',
@@ -8,26 +10,45 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class EditMemberComponent {
 memberForm: FormGroup;
-  constructor(private fb: FormBuilder) {}
+id: string
+  constructor(
+    private fb: FormBuilder, 
+    private swagger: SwaggerService, 
+    private route : ActivatedRoute
+  ) {}
   ngOnInit() {
     this.memberForm = this.fb.group({
       name: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]],
-      jobTitle: [null],
-      phoneNumber: [null],
-      mobileNumber: [null],
+      position: [null],
+      phone: [null],
+      mobile: [null],
       fax: [null],
-      active: [null],
+      email_verified: [null],
       block:[null], 
-      department:[null]
+      group:[null]
     });
+    this.getMemberById()
   }
   getMemberById(){
-    // we will patch value here and call the method in the onint
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.swagger.getOneMember(this.id).subscribe((res:any)=>{
+      this.memberForm.patchValue({
+        name: res.data.user.name,
+        email: res.data.user.email,
+        position:res.data.user.position ,
+        phone:res.data.user.phone ,
+        mobile: res.data.user.mobile,
+        fax: res.data.user.fax,
+        email_verified: res.data.user.email_verified ,
+        group:res.data.user.group
+      })
+    })
   }
   editMember() {
-    console.log(this.memberForm.value);
+    this.swagger.updateUser(this.id , this.memberForm.value).subscribe(res=>{
+    })
   }
 }

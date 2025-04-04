@@ -1,8 +1,7 @@
-<div class="edit-member-container flex gap-7 p-8" [formGroup]="memberForm">
+<div class="edit-member-container flex gap-7 p-10" [formGroup]="memberForm">
   <div class="user-form w-[70%] p-9">
     <div class="input-field">
       <label>الصورة</label>
-      <img src="assets/images/user-image.jpg " class="mt-1" alt="" />
       <input type="file" />
     </div>
     <div class="input-field">
@@ -36,32 +35,32 @@
     <div class="input-field">
       <label>المسمي الوظيفي</label>
       <input
-        formControlName="jobTitle"
+        formControlName="position"
         placeholder="المسمي الوظيفي"
         type="text"
       />
     </div>
     <div class="input-field">
       <label>القسم</label>
-      <input formControlName="department" placeholder="القسم" type="text" />
+      <input formControlName="group" placeholder="القسم" type="text" />
     </div>
     <div class="input-field">
       <label>الهاتف</label>
-      <input formControlName="phoneNumber" placeholder="الهاتف" type="text" />
+      <input formControlName="phone" placeholder="الهاتف" type="text" />
     </div>
     <div class="input-field">
       <label>الجوال</label>
-      <input formControlName="mobileNumber" placeholder="الجوال" type="text" />
+      <input formControlName="mobile" placeholder="الجوال" type="text" />
     </div>
     <div class="input-field">
       <label>الفاكس</label>
       <input formControlName="fax" placeholder="الفاكس" type="text" />
     </div>
     <div class="input-field my-5">
-      <mat-slide-toggle formControlName="active"> تنشيط </mat-slide-toggle>
+      <mat-slide-toggle formControlName="email_verified" [checked]="memberForm.get('email_verified').value"> تنشيط </mat-slide-toggle>
     </div>
     <div class="input-field my-7">
-      <mat-slide-toggle formControlName="block"> حظر </mat-slide-toggle>
+      <mat-slide-toggle formControlName="block" > حظر </mat-slide-toggle>
     </div>
     <button class="edit-btn" (click)="editMember()">
         موافق
