@@ -12,11 +12,11 @@ import { ActivatedRoute } from '@angular/router';
 export class EditUserComponent implements OnInit {
   userForm: FormGroup;
   userId = this.route.snapshot.paramMap.get('id');
-  
+
   constructor(
-    private fb: FormBuilder , 
-    private swagger : SwaggerService, 
-    private route : ActivatedRoute
+    private fb: FormBuilder,
+    private swagger: SwaggerService,
+    private route: ActivatedRoute
   ) {}
   breadcrumbs = [
     {
@@ -27,39 +27,38 @@ export class EditUserComponent implements OnInit {
       label: 'تحرير العضو',
     },
   ];
-  
+
   ngOnInit() {
     this.userForm = this.fb.group({
-      name: [null],
-      email: [null, [Validators.email]],
-      password: [null],
-      confirmPassword: [null],
+      name: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]],
+      confirmPassword: [null, [Validators.required]],
       position: [null],
       phone: [null],
       mobile: [null],
       fax: [null],
-      department:[null], 
-      activate:[null], 
-      block:[null]
+      email_verified: [null],
+      block: [null],
+      group: [null],
     });
-    this.getUserData()
+    this.getUserData();
   }
-  getUserData(){
-    this.swagger.getOneUser(this.userId).subscribe((res:any)=>{
-      const userData = res.data
-      console.log(userData)
+  getUserData() {
+    this.swagger.getOneUser(this.userId).subscribe((res: any) => {
+      const userData = res.data;
+      console.log(userData);
       this.userForm.patchValue({
         name: userData.name,
         email: userData.email,
-        fax: userData.fax,
         position: userData.position,
-        mobile:userData.mobile,
-        phone:userData.phone,
-
-      })
-    }) 
+        phone: userData.phone,
+        mobile: userData.mobile,
+        fax: userData.fax,
+        email_verified: userData.email_verified,
+        group: userData.group,
+      });
+    });
   }
-  editUser(){
-    
-  }
+  editUser() {}
 }

@@ -1,3 +1,4 @@
+<app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
 <div class="members-container p-8">
     <div class="title">اعضاء البرنامج</div>
     <div class="members-wrapper flex gap-3 flex-wrap">
@@ -6,25 +7,25 @@
         *ngFor="let member of members"
       >
         <div class="name">
-          {{ member.name }}
+          {{ member.user.name }}
         </div>
         <div class="job-title">
-          {{ member.job ? member.job : " غير محدد" }}
+          {{ member.user.job ? member.user.job : " غير محدد" }}
         </div>
         <div
          class="member-details" 
          *ngIf="selectedMemberIds.has(member.id)">
-          <div class="email">{{ member.email }}</div>
+          <div class="email">{{ member.user.email }}</div>
           <div class="phone-number">
-            {{ member.phoneNumber ? member.phoneNumber : "غير محدد" }}
+            {{ member.user.phone ? member.user.phone : "غير محدد" }}
           </div>
-          <div class="code">{{ member.code }}</div>
+          <div class="code">{{ member.user.id }}</div>
           <div class="actions flex justify-between" >
-            <button routerLink="{{member.id}}/edit">
+            <button routerLink="{{member.user.id}}/edit">
               <i class="bi bi-pencil-square"></i>
               تعديل
             </button>
-            <button (click)="deleteMember(member.id)">
+            <button (click)="deleteMember(member.user.id)">
               <i class="bi bi-trash3-fill"></i>
               حذف
             </button>

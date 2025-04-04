@@ -1,55 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
+import { ActivatedRoute } from '@angular/router';
+import { Member } from '../../../../../../model/member';
 
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
   styleUrl: './members.component.scss'
 })
-export class MembersComponent {
-  members= [
+export class MembersComponent implements OnInit {
+  members : Member[] = []
+
+  breadcrumbs = [
     {
-      name:'سعود عبدالله الشمري', 
-      job:'مهندس مدني', 
-      email:'saoud94@gmail.com', 
-      phoneNumber:'0540036368',
-      code:'77', 
-      id:'1111'
+      label:'البرامج',
+      url:''
+    },
+
+    {
+      label:'البرامج',
+      url:''
     },
     {
-      name:'سعود عبدالله الشمري', 
-      job:null, 
-      email:'saoud94@gmail.com', 
-      phoneNumber:'0540036368',
-      code:'77', 
-      id:'1211'
-    },
-    {
-      name:'سعود عبدالله الشمري', 
-      job:'مهندس مدني', 
-      email:'saoud94@gmail.com', 
-      phoneNumber:'0540036368',
-      code:'77', 
-      id:'1131'
-    },
-    {
-      name:'سعود عبدالله الشمري', 
-      job:'مهندس مدني', 
-      email:'saoud94@gmail.com', 
-      phoneNumber:'0540036368',
-      code:'77', 
-      id:'1141'
-    },
-    {
-      name:'سعود عبدالله الشمري', 
-      job:'مهندس مدني', 
-      email:'saoud94@gmail.com', 
-      phoneNumber:'0540036368',
-      code:'77', 
-      id:'1151'
+      label:'اعضاء اللحنة ',
     },
   ]
-
+  id: string;
   selectedMemberIds: Set<string> = new Set();
+
+  constructor(
+    private swagger : SwaggerService, 
+    private route : ActivatedRoute
+  ){
+
+  }
+
+  ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id')
+    this.swagger.getOneProject(this.id).subscribe((res:any)=>{
+      this.members = res.data.members
+      console.log(this.members)
+    })
+  }
 
   showDetails(memberId: string): void {
     if (this.selectedMemberIds.has(memberId)) {
