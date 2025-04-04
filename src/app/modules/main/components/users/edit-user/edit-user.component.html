@@ -1,54 +1,37 @@
 <app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
-<div class="edit-user p-8">
+<div *ngIf="userForm" class="edit-user p-8">
   <form action="" [formGroup]="userForm">
     <div class="input-field">
       <label>الصورة</label>
-      <input formControlName="name" placeholder="الاسم" type="file" />
+
+      <div class="image-container" (mouseenter)="showUpdateButton = true" (mouseleave)="showUpdateButton = false">
+        <img [src]="imageUrl" alt="Preview" class="preview-image" />
+
+        <!-- Update button (shown only on hover) -->
+        <label *ngIf="showUpdateButton" class="update-button">
+          Update
+          <input type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+        </label>
+      </div>
     </div>
+
     <div class="input-field">
       <label>الاسم</label>
       <input formControlName="name" placeholder="الاسم" type="text" />
     </div>
     <div class="input-field">
       <label>البريد الالكتروني</label>
-      <input
-        formControlName="email"
-        placeholder="البريد الالكتروني"
-        type="text"
-      />
+      <input formControlName="email" placeholder="البريد الالكتروني" type="text" />
     </div>
-    <div class="input-field">
-      <label>كلمة المرور </label>
-      <input
-        formControlName="password"
-        placeholder="كلمة المرور "
-        type="password"
-      />
-    </div>
-    <div class="input-field">
-      <label>تاكيد كلمة المرور </label>
-      <input
-        formControlName="confirmPassword"
-        placeholder="تاكيد كلمة المرور "
-        type="password"
-      />
-    </div>
+
     <div class="input-field">
       <label>المسمي الوظيفي</label>
-      <input
-        formControlName="position"
-        placeholder="المسمي الوظيفي"
-        type="text"
-      />
+      <input formControlName="position" placeholder="المسمي الوظيفي" type="text" />
     </div>
     <div class="input-field">
-        <label>القسم</label>
-        <input
-          formControlName="group"
-          placeholder="القسم"
-          type="text"
-        />
-      </div>
+      <label>القسم</label>
+      <input formControlName="group" placeholder="القسم" type="text" />
+    </div>
     <div class="input-field">
       <label>الهاتف</label>
       <input formControlName="phone" placeholder="الهاتف" type="text" />
@@ -62,15 +45,16 @@
       <input formControlName="fax" placeholder="الفاكس" type="text" />
     </div>
     <p class="mb-2">
-      <mat-slide-toggle formControlName="email_verified"  labelPosition="before">
+      <mat-slide-toggle formControlName="email_verified" labelPosition="before">
         تنشيط
       </mat-slide-toggle>
     </p>
-    <p class="mb-2">
-      <mat-slide-toggle formControlName="block"  labelPosition="before">
+    <!-- <p class="mb-2">
+      <mat-slide-toggle formControlName="block" labelPosition="before">
         حظر
       </mat-slide-toggle>
-    </p>
-    <button class="accept-btn" (click)="editUser()">موافق</button>
+    </p> -->
+    <button [disabled]="userForm.invalid || isUpdating" [class.loading-btn]="isUpdating" class="accept-btn"
+      (click)="editUser()">موافق</button>
   </form>
 </div>
