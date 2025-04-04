@@ -9,6 +9,6 @@ export interface Decision {
   status_id: number,
   decision_date: string,
   id: number,
-  files: File[],
+  files: File[] | string[],
   project: Project
 }

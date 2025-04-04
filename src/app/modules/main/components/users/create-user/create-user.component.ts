@@ -75,7 +75,7 @@ export class CreateUserComponent implements OnInit {
 
     this.swagger.register(user)
       .subscribe(user => {
-        this.snackbarService.showSuccess('تم اضافة المستخدم بنجاح')
+        this.snackbarService.showSuccess('تم اضافة المستخدم بنجاح' , '/main/users');
       }, error => {
         this.snackbarService.showError(error.message)
       })

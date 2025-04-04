@@ -129,7 +129,7 @@ export class CreateRoleComponent {
   create(role: Partial<Role>) {
     this.swagger.createRole(role).subscribe(
       (res) => {
-        this.snackbar.showSuccess('تم اضافة الصلاحية');
+        this.snackbar.showSuccess('تم اضافة الصلاحية', '/main/roles');
         this.roleForm.reset();
       },
       (error) => {
@@ -142,7 +142,7 @@ export class CreateRoleComponent {
     role.id = this.id;
     this.swagger.updateRole(role).subscribe(
       (res) => {
-        this.snackbar.showSuccess('تم تعديل الصلاحية');
+        this.snackbar.showSuccess('تم تعديل الصلاحية', '/main/roles');
       },
       (error) => {
         this.snackbar.showError(error.message);

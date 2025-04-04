@@ -16,9 +16,9 @@ export class SettingsComponent implements OnInit {
   error: string;
   breadcrumbs = [
     {
-      label:'بوابة البرامج', 
+      label:'بوابة البرامج',
       url:'/'
-    }, 
+    },
     {
       label:'إعدادات'
     }
@@ -55,7 +55,7 @@ export class SettingsComponent implements OnInit {
       () => {
         this.canUpdate = true;
         this.updating = false;
-        this.snackbar.showSuccess('تم تغيير الاعدادات بنجاح');
+        this.snackbar.showSuccessSnackbar('تم تغيير الاعدادات بنجاح');
       },
       (error) => {
         this.updating = false;

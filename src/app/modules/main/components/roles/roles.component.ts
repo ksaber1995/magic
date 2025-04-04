@@ -20,7 +20,7 @@ interface role {
 export class RolesComponent implements OnInit {
   roles: Role[] = [];
 
-  breadcrumbs = [ 
+  breadcrumbs = [
     {
       label:' الأذونات'
     }
@@ -59,7 +59,7 @@ export class RolesComponent implements OnInit {
             .subscribe(() => {
               const index = this.roles.findIndex(res => res.id === id)
               this.roles.splice(index, 1);
-              this.snackbar.showSuccess('تم حذف الاذن')
+              this.snackbar.showSuccessSnackbar('تم حذف الاذن')
             }, error => {
               this.snackbar.showError(error.message)
 

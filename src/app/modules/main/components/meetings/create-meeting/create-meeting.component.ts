@@ -102,10 +102,9 @@ export class CreateMeetingComponent implements OnInit {
     meeting.id = this.id;
     this.swagger.updateMeeting(meeting).subscribe(
       (res) => {
-        this.snackbar.showSuccess('تم تعديل الاجتماع بنجاح');
+        this.snackbar.showSuccess('تم تعديل الاجتماع بنجاح', '/main/meetings');
         this.form.reset();
         this.isUpdating = false;
-        this.router.navigate(['/main/meetings']);
       },
       (error) => {
         this.snackbar.showError(error.message);
@@ -117,10 +116,9 @@ export class CreateMeetingComponent implements OnInit {
   createMeeting(meeting: Meeting) {
     this.swagger.createMeeting(meeting).subscribe(
       (res) => {
-        this.snackbar.showSuccess('تم اضافة الاجتماع بنجاح');
+        this.snackbar.showSuccess('تم اضافة الاجتماع بنجاح', '/main/meetings');
         this.form.reset();
         this.isUpdating = false;
-        this.router.navigate(['/main/meetings']);
       },
       (error) => {
         this.snackbar.showError(error.message);

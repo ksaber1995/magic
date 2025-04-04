@@ -21,7 +21,7 @@ export class PermissionsListComponent implements OnInit {
   }
   permissions: Permission[];
 
-  breadcrumbs = [ 
+  breadcrumbs = [
     {
       label:'قائمة الأذونات'
     }
@@ -43,7 +43,7 @@ export class PermissionsListComponent implements OnInit {
           .subscribe(() => {
             const index = this.permissions.findIndex(res => res.id === id)
             this.permissions.splice(index, 1);
-            this.snackbar.showSuccess('تم حذف الاذن')
+            this.snackbar.showSuccessSnackbar('تم حذف الاذن')
           }, error => {
             this.snackbar.showError(error.message)
 

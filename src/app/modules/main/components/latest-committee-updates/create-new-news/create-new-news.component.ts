@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateSuccssDialogComponent } from '../../../../shared/components/create-succss-dialog/create-succss-dialog.component';
+import { CreateSuccessDialogComponent } from '../../../../shared/components/create-succss-dialog/create-succss-dialog.component';
 import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { map } from 'rxjs';
 import { SnackbarService } from '../../../../../services/snackbar.service';
@@ -62,7 +62,7 @@ export class CreateNewNewsComponent implements OnInit {
     }
 
     this.swagger.createPost(news).subscribe(res=>{
-      this.dialog.open(CreateSuccssDialogComponent);
+      this.dialog.open(CreateSuccessDialogComponent);
       this.isUpdating = false;
       this.newsForm.reset()
     }, error=>{

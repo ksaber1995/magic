@@ -63,6 +63,7 @@ const routes: Routes = [
       { path: 'decisions', component: DecisionsComponent },
       { path: 'decisions/:id', component: DecisionDetailsComponent },
       { path: 'new-decision', component: CreateDecisionComponent },
+      { path: 'new-decision/:id', component: CreateDecisionComponent },
       //latest-committee-updates
       {path:'committee-updates-list' , component:CommitteeUpdatesListComponent},
       {path:'committee-updates-list/:id' , component:NewsDetailsComponent},
