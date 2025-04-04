@@ -94,11 +94,8 @@ import { EditUserRolesComponent } from './components/users/edit-user-roles/edit-
     CreateReportComponent,
     DecisionsComponent,
     ProjectDecisionsComponent,
-<<<<<<< HEAD
     CreateProceduresComponent,
-=======
     EditUserRolesComponent,
->>>>>>> db5653cd522c6b6b3ebe89a16b7b04990b34edf5
   ],
   imports: [
     CommonModule,
