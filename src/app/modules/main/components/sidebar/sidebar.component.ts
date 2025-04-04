@@ -61,7 +61,7 @@ const routes: SideBarItem[] = [
     childrens: [
       { name: 'قائمة المستخدمين', path: '/main/users', icon: '' },
       { name: 'انشاء مستخدم', path: '/main/create-user', icon: '' },
-      { name: 'اعدادات المستخدمين', path: '/main/users-setting', icon: '' },
+      // { name: 'اعدادات المستخدمين', path: '/main/users-setting', icon: '' },
     ],
   },
   {

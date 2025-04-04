@@ -12,6 +12,7 @@ import {
 } from 'ng-apexcharts';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangeStatusRequestComponent } from './change-status-request/change-status-request.component';
+import { ActivatedRoute } from '@angular/router';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -33,6 +34,7 @@ export class ProceduresComponent implements OnInit {
   public desicionChartOptions: Partial<ChartOptions>;
   public proceduresChartOptions: Partial<ChartOptions>;
   tooltipVisible: string | null = null;
+  id: string;
   hideTimeout: any;
   dialog = inject(MatDialog);
   lastUpdates = [
@@ -122,7 +124,11 @@ export class ProceduresComponent implements OnInit {
     },
   ];
 
-  constructor() {
+  constructor(
+    private swagger : SwaggerService,
+    private route : ActivatedRoute
+  ) {
+
     this.desicionChartOptions = {
       series: [44, 55, 41],
       labels: ['منجز', 'متعثر', 'قيد التنفيذ'],
@@ -254,7 +260,14 @@ export class ProceduresComponent implements OnInit {
     },
 
   ]
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.id = this.route.snapshot.paramMap.get('id')
+    console.log(this.id)
+    this.swagger.getOneProcedure(this.id).subscribe(res=>{
+      console.log(this.id)
+    })
+  }
 
   showToolTip(decisionId) {
     this.tooltipVisible = decisionId;
