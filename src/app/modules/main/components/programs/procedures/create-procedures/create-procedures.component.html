@@ -1,0 +1,85 @@
+<app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
+
+<div class="new-procedure-container h-full">
+  <div class="header p-4">اضافة اجراء جديد</div>
+  <form action="" class="p-4" [formGroup]="procedureForm">
+    <div class="input-field flex justify-between items-center">
+      <label> المسؤول </label>
+      <magic-select
+        class="select-input"
+        [magicValue]="'all_projects'"
+        [magicLabel]="'جميع البرامج'"
+        [control]="procedureForm.get('project_id')"
+      ></magic-select>
+    </div>
+
+    <div class="input-field flex justify-between items-center">
+      <label> العنوان </label>
+      <input formControlName="title" type="text" class="title-input" />
+    </div>
+
+    <textarea
+      name=""
+      id=""
+      formControlName="content"
+      class="details"
+      placeholder="التفاصيل"
+    ></textarea>
+
+    <div class="uploaded-files input-field">
+      <label class="title">ملفات مرفقة</label>
+
+      <app-files-upload [control]="filesControl"></app-files-upload>
+    </div>
+
+    <div class="flex my-6 gap-3 input-field">
+      <label for="">نسبة الانجاز للمهمة</label>
+
+      <mat-slider
+        class="flex-grow"
+        [displayWith]="formatLabel"
+        min="1"
+        max="100"
+        discrete
+        step="1"
+      >
+        <input matSliderThumb formControlName="progress_percentage" />
+      </mat-slider>
+    </div>
+
+    <div class="input-field flex flex-col date-input-field my-4">
+      <label class="mb-1">الحالة</label>
+      <mat-select class="select-status w-100" formControlName="status_id">
+        <mat-option value="1" selected>تحت الإجراء</mat-option>
+        <mat-option value="2">منجز</mat-option>
+        <mat-option value="3">متعثر</mat-option>
+      </mat-select>
+    </div>
+
+    <div class="input-field flex flex-col date-input-field my-4">
+      <label class="mb-1">تاريخ اصدار القرار</label>
+
+      <mat-form-field class="w-100 grow picker">
+        <input
+          formControlName="procedure_date"
+          (click)="picker.open()"
+          matInput
+          [matDatepicker]="picker"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <button
+      [class.loading-btn]="isUpdating"
+      class="add-btn"
+      [disabled]="procedureForm.invalid || isUpdating"
+    >
+      اضافة اجراء
+    </button>
+  </form>
+</div>

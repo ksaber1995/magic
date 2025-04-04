@@ -60,5 +60,8 @@ export class EditUserComponent implements OnInit {
       });
     });
   }
-  editUser() {}
+  editUser() {
+    this.swagger.updateUser(this.userId , this.userForm.value).subscribe(res=>{
+    })
+  } 
 }

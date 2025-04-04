@@ -48,6 +48,7 @@ import { ChangeStatusRequestComponent } from './components/programs/procedures/c
 import { CreateReportComponent } from './components/programs/reports/create-report/create-report.component';
 import { DecisionsComponent } from './components/decisions/decisions.component';
 import { ProjectDecisionsComponent } from './components/project-decisions/project-decisions.component';
+import { CreateProceduresComponent } from './components/programs/procedures/create-procedures/create-procedures.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { ProjectDecisionsComponent } from './components/project-decisions/projec
     CreateReportComponent,
     DecisionsComponent,
     ProjectDecisionsComponent,
+    CreateProceduresComponent,
   ],
   imports: [
     CommonModule,
