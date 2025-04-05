@@ -15,12 +15,14 @@ import { PermissionsListComponent } from './components/permissions-list/permissi
 import { FilesComponent } from './components/programs/files/files.component';
 import { EditMemberComponent } from './components/programs/members/edit-member/edit-member.component';
 import { MembersComponent } from './components/programs/members/members.component';
+import { CreateProceduresComponent } from './components/programs/procedures/create-procedures/create-procedures.component';
 import { ProceduresComponent } from './components/programs/procedures/procedures.component';
 import { ProgramsListComponent } from './components/programs/programs-list/programs-list.component';
 import { EditReportComponent } from './components/programs/reports/edit-report/edit-report.component';
 import { ReportDetailsComponent } from './components/programs/reports/report-details/report-details.component';
 import { ReportsComponent } from './components/programs/reports/reports.component';
 import { ProjectDecisionsComponent } from './components/project-decisions/project-decisions.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CreateRoleComponent } from './components/roles/create-role/create-role.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -33,8 +35,6 @@ import { UserFilesComponent } from './components/users/user-files/user-files.com
 import { UserInformationComponent } from './components/users/user-information/user-information.component';
 import { UsersListComponent } from './components/users/users-list/users-list.component';
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
-import { CreateReportComponent } from './components/programs/reports/create-report/create-report.component';
-import { CreateProceduresComponent } from './components/programs/procedures/create-procedures/create-procedures.component';
 
 const routes: Routes = [
   {
@@ -68,6 +68,8 @@ const routes: Routes = [
       {path:'committee-updates-list' , component:CommitteeUpdatesListComponent},
       {path:'committee-updates-list/:id' , component:NewsDetailsComponent},
       {path:'create-new-news' , component:CreateNewNewsComponent},
+      {path:'update-post/:id' , component:CreateNewNewsComponent},
+
       {path:'committee-updates-list/:id/delete' , component:DeleteNewsPageComponent},
 
       // permissions
@@ -83,6 +85,7 @@ const routes: Routes = [
       //users
       {path:'users', component:UsersListComponent},
       {path:'users/:id', component:UserInformationComponent},
+      {path:'users/:email/reset-password', component:ResetPasswordComponent},
       {path:'users/:id/edit', component:EditUserComponent},
       {path:'users/:id/edit-roles', component:EditUserRolesComponent},
       {path:'users/:id/files', component:UserFilesComponent},

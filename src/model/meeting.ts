@@ -9,7 +9,7 @@ export interface Meeting{
   reminder_time: string;
   members_ids: number[];
   projects_ids: number[];
-  files: File[]
+  files: File[] | string[];
   coordinator_user?: {
     name: string
   };

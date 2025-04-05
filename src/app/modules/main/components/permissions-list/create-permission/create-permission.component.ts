@@ -7,79 +7,91 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-create-permission',
   templateUrl: './create-permission.component.html',
-  styleUrl: './create-permission.component.scss'
+  styleUrl: './create-permission.component.scss',
 })
 export class CreatePermissionComponent {
   form: FormGroup;
+  isUpdating: boolean = false;
   id = this.route.snapshot.paramMap.get('id');
   breadcrumbs = [
     {
-      label:'قائمة الأذونات',
-      url:'/main/permissions'
+      label: 'قائمة الأذونات',
+      url: '/main/permissions',
     },
     {
-      label:' انشاء إذن'
-    }
-  ]
+      label: ' انشاء إذن',
+    },
+  ];
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private swagger: SwaggerService,
     private snackbarService: SnackbarService
-  ) {
-
-  }
+  ) {}
   ngOnInit() {
     if (this.id) {
-      this.swagger.getOnePermission(this.id)
-        .subscribe(res => {
-          this.form = this.fb.group({
-            name: [res.name, [Validators.required]],
-            description: [res.description, [Validators.required]],
-            transformation: [res.transformation || false],
-          })
-        })
+      this.swagger.getOnePermission(this.id).subscribe((res) => {
+        this.form = this.fb.group({
+          name: [res.name, [Validators.required]],
+          description: [res.description, [Validators.required]],
+          transformation: [res.transformation || false],
+        });
+      });
     } else {
       this.form = this.fb.group({
         name: ['', [Validators.required]],
         description: ['', [Validators.required]],
         transformation: [false],
-      })
+      });
     }
-
   }
   submit() {
-    if(this.id){
+    if (this.id) {
       this.update();
-    }else{
+    } else {
       this.create();
     }
   }
 
-
-  create(){
-    const body = { ...this.form.value, transformation: this.form.value.transformation || false }
-    this.swagger.createPermission(body)
-    .subscribe(res => {
-      this.snackbarService.showSuccess('تم اضافة الإذن', '/main/permissions');
-      this.form.reset();
-    }, error => {
-      this.snackbarService.showError(error.message)
-    })
-  }
-
-  update(){
+  create() {
+    this.isUpdating = true;
     const body = {
       ...this.form.value,
       transformation: this.form.value.transformation || false,
-      id: this.id
-    }
+    };
+    this.swagger.createPermission(body).subscribe(
+      (res) => {
+        this.isUpdating = false;
+        this.snackbarService.showSuccess('تم اضافة الإذن', '/main/permissions');
+        this.form.reset();
+      },
+      (error) => {
+        this.isUpdating = false;
 
-    this.swagger.updatePermission(body)
-    .subscribe(res => {
-      this.snackbarService.showSuccess('تم تعديل الإذن', '/main/permissions');
-    }, error => {
-      this.snackbarService.showError(error.message)
-    })
+        this.snackbarService.showError(error.message);
+      }
+    );
+  }
+
+  update() {
+    this.isUpdating = true;
+
+    const body = {
+      ...this.form.value,
+      transformation: this.form.value.transformation || false,
+      id: this.id,
+    };
+
+    this.swagger.updatePermission(body).subscribe(
+      (res) => {
+        this.isUpdating = false;
+
+        this.snackbarService.showSuccess('تم تعديل الإذن', '/main/permissions');
+      },
+      (error) => {
+        this.isUpdating = false;
+        this.snackbarService.showError(error.message);
+      }
+    );
   }
 }

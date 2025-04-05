@@ -1,14 +1,24 @@
 <app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
 <div class="roles-form p-9">
   <form>
-    <p *ngFor="let role of roles$ | async">
-      <mat-slide-toggle name="{{role.id}}" [(ngModel)]="role.checked" labelPosition="before">
-        {{role.name}}
-        <i class="bi bi-asterisk" [ngStyle]="{'color': role.name === 'admin' ? (role.color || '#db2828') : 'inherit'}"></i>
-      </mat-slide-toggle>
-    </p>
+    <div *ngFor="let role of roles" class="flex items-center gap-2 mb-2">
+      <mat-slide-toggle
+        name="{{ role.id }}"
+        [(ngModel)]="role.checked"
+        labelPosition="before"
+        class="flex items-center">
 
-    <button class="accept-btn" (click)="editRoles()">موافق</button>
+        <span class="flex items-center gap-1">
+          {{ role.name }}
+          <i class="bi bi-asterisk"
+             [ngStyle]="{'color': role.name === 'admin' ? (role.color || '#db2828') : 'inherit'}">
+          </i>
+        </span>
+
+      </mat-slide-toggle>
+    </div>
+
+    <button [class.loading-btn]="isUpdating" class="accept-btn" (click)="editRoles()">موافق</button>
 
   </form>
 </div>

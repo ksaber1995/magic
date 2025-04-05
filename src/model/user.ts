@@ -1,3 +1,5 @@
+import { Role } from "./role";
+
 export interface User{
   id: number,
   name:  string,
@@ -14,4 +16,6 @@ export interface User{
   updated_at:string,
   created_at:string
   email_verified: boolean;
+
+  roles: Role[],
 }

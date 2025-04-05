@@ -262,19 +262,19 @@ export class SwaggerService {
     return this.http.get<ResponseData<Post>>(ENDPOINT_URI + 'posts').pipe(finalize(()=>this.spinner.hideSpinner()), map(res => res.data));
   }
 
-  getOnePost(id: string) {
+  getOnePost(id) {
     this.spinner.showSpinner()
     return this.http.get<ResponseItem<Post>>(ENDPOINT_URI + `posts/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()), map(res => res.data));
   }
 
-  createPost(post: Post) {
+  createPost(post: Partial< Post>) {
     const formData = createFormData(post);
     return this.http.post(ENDPOINT_URI + `posts`, formData);
   }
 
-  updatePost(id: string, post: Post) {
+  updatePost(post: Partial< Post >) {
     const formData = createFormData(post);
-    return this.http.put(ENDPOINT_URI + `posts/${id}`, formData);
+    return this.http.put(ENDPOINT_URI + `posts/${post.id}`, formData);
   }
 
   deletePost(id: number) {
@@ -307,6 +307,11 @@ export class SwaggerService {
   getAllRoles() {
     this.spinner.showSpinner()
     return this.http.get<Role[]>(ENDPOINT_URI + 'roles').pipe(finalize(()=>this.spinner.hideSpinner()));
+  }
+
+  assignRolesToUser(body: {user_id: any, roles: any[]}) {
+    return this.http.post(ENDPOINT_URI + 'users/assign-role', body)
+
   }
 
   getOneRole(id: string) {

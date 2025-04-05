@@ -49,6 +49,7 @@ import { DecisionsComponent } from './components/decisions/decisions.component';
 import { ProjectDecisionsComponent } from './components/project-decisions/project-decisions.component';
 import { CreateProceduresComponent } from './components/programs/procedures/create-procedures/create-procedures.component';
 import { EditUserRolesComponent } from './components/users/edit-user-roles/edit-user-roles.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { EditUserRolesComponent } from './components/users/edit-user-roles/edit-
     ProjectDecisionsComponent,
     CreateProceduresComponent,
     EditUserRolesComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     CommonModule,

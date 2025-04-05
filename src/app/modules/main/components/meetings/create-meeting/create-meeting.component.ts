@@ -5,6 +5,7 @@ import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { SnackbarService } from './../../../../../services/snackbar.service';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { updateFilesFromUrls } from '../../../../../../utlities/file-helper';
 function formatDate(date: Date): string {
   if (date instanceof Date) {
     const year = date.getFullYear();
@@ -69,6 +70,7 @@ export class CreateMeetingComponent implements OnInit {
           files: [[]],
           reminder_time: [res.reminder_time],
         });
+        updateFilesFromUrls(res.files as string[], this.filesControl);
       });
     } else {
       this.breadcrumbs = [

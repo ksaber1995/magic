@@ -14,13 +14,13 @@
         </textarea>
       </div>
 
-      <div class="status-toggle-wraper">
+      <!-- <div class="status-toggle-wraper">
         <div class="toggle-wrapper">
           <p><mat-slide-toggle labelPosition="after" formControlName="transformation"
               class="mx-10">التحويل</mat-slide-toggle></p>
         </div>
-      </div>
-      <button class="accept-btn" [disabled]="form.invalid">موافق</button>
+      </div> -->
+      <button [disabled]="isUpdating" [class.loading-btn]="isUpdating" class="accept-btn" [disabled]="form.invalid">موافق</button>
     </form>
   </div>
 </div>

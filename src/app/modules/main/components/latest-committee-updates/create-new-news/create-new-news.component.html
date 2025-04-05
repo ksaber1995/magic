@@ -1,5 +1,5 @@
 <app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
-<div class="create-news-container  h-full p-4">
+<div *ngIf="newsForm" class="create-news-container  h-full p-4">
   <form action="" class="p-4" [formGroup]="newsForm">
     <div class="input-field flex mb-3">
       <label> العنوان </label>
@@ -37,6 +37,6 @@
       <app-files-upload  [control]="filesControl"></app-files-upload>
 
     </div>
-    <button [disabled]="newsForm.invalid || isUpdating" [class.loading-btn]="isUpdating"  class="accept-btn" (click)="createNews()">موافق</button>
+    <button [disabled]="newsForm.invalid || isUpdating" [class.loading-btn]="isUpdating"   class="accept-btn" (click)="takeAction()">موافق</button>
   </form>
 </div>

@@ -13,7 +13,7 @@
             <td colspan="7" class="news-name" [routerLink]='[post.id]'>{{post.title}}</td>
             <td colspan="2"><img class="news-image" [routerLink]='[post.id]' src="{{post.image}}"></td>
             <td colspan="3">
-                <button class="edit-news">
+                <button [routerLink]="['/main/update-post/' + post.id]" class="edit-news">
                     <i class="bi bi-pencil-square"></i>
                     تعديل الخبر
                 </button>
