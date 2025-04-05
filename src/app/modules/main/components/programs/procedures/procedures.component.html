@@ -1,9 +1,8 @@
-<div class="procedures-container p-3">
+<div class="procedures-container p-3" *ngIf="project">
   <div class="header mb-2">
-    <div class="title mr-3">مراقبة الانبعاثات من محطات توليد الكهرباء</div>
+    <div class="title mr-3" >{{project.title}}</div>
     <div class="description mr-3">
-      متابعة ومراقبة الانبعاثات الصادرة من محطات توليد الكهرباء بمدينة الرياض
-      وتطبيق إجراءات الحد من آثارها السلبية
+        {{project.content}}
     </div>
   </div>
   <div class="flex gap-5">
@@ -120,149 +119,17 @@
 
       <!-- قرارات اللجنة العليا لحماية البيئة -->
 
-      <app-decisions-list
-        [decisions]="decisionsList"
-        [showMorebutton]="true"
-      ></app-decisions-list>
+      <app-decisions-list  [showMoreButton]="true" [decisions]="decisions$ | async"></app-decisions-list>
+
 
       <!-- إجراءات تنفيذ البرنامج -->
 
-      <div class="procedures my-6">
-        <div class="header flex p-3 justify-between items-center">
-          <div class="title">إجراءات تنفيذ البرنامج</div>
-          <div class="flex gap-2 items-center">
-            <div class="tasks flex gap-1 pt-2">
-              الجميع
-              <p><mat-slide-toggle></mat-slide-toggle></p>
-              مهامي
-            </div>
-            <button class="add-list-btn">اضافة قائمة</button>
-          </div>
-        </div>
-        <div class="procedures-list pt-8 p-3 mb-5">
-          <div class="title mb-5">إجراءات تنفيذ البرنامج</div>
-          <div class="procedures-inprogress">
-            <div class="procedure-type-title">الاجراءات قيد التنفيذ</div>
-            <div
-              class="procedures-wrapper flex gap-2 items-center relative"
-              *ngFor="let procedures of procedures"
-            >
-              <input
-                type="checkbox"
-                class="status-input"
-                #checkbox
-                (click)="changeProceduresStatus(checkbox)"
-              />
-              <a
-                [routerLink]="[procedures.id]"
-                class="procedures-name block my-2"
-                (mouseenter)="showToolTip(procedures.id)"
-                (mouseleave)="startHideTimeout()"
-              >
-                {{ procedures.title }}
-              </a>
-
-              <!-- Tooltip -->
-              <div
-                *ngIf="tooltipVisible == procedures.id"
-                class="custom-tooltip absolute bg-white shadow-md flex items-center justify-center gap-1 p-2"
-                (mouseenter)="cancelHideTimeout()"
-                (mouseleave)="startHideTimeout()"
-              >
-                <i
-                  class="bi bi-trash3 trash-i"
-                  (click)="delete(procedures.id)"
-                ></i>
-                <i class="bi bi-pencil-square edit-i"></i>
-              </div>
-
-              <span class="procedures-date" *ngIf="procedures.progress_percentage">
-                % {{ procedures.progress_percentage }}
-              </span>
-              <span class="procedures-date" *ngIf="procedures.comments">
-                <i class="bi bi-chat"></i>
-                {{ procedures.comments }}
-              </span>
-              <span class="procedures-date" *ngIf="procedures.userImage">
-                <img src="{{ procedures.userImage }}" alt="" />
-              </span>
-            </div>
-            <button class="add-procedures-btn my-2" routerLink="/main/programs/{{projectId}}/procedures/create">اضافة اجراء</button>
-          </div>
-          <hr />
-
-          <div class="procedures-done">
-            <div class="procedure-type-title">الاجراءات قيد التنفيذ</div>
-            <div
-              class="procedures-wrapper flex gap-2 items-center relative"
-              *ngFor="let procedures of procedures"
-            >
-              <input
-                type="checkbox"
-                class="status-input"
-                #checkbox
-                checked
-                (click)="changeProceduresStatus(checkbox)"
-              />
-              <a
-                [routerLink]="[procedures.id]"
-                class="procedures-name done block my-2"
-                (mouseenter)="showToolTip(procedures.id)"
-                (mouseleave)="startHideTimeout()"
-              >
-                {{ procedures.title }}
-              </a>
-
-              <span class="procedures-date" *ngIf="procedures.progress_percentage">
-                % {{ procedures.progress_percentage }}
-              </span>
-              <span class="procedures-date" *ngIf="procedures.comments">
-                <i class="bi bi-chat"></i>
-                {{ procedures.comments }}
-              </span>
-              <span class="procedures-date" *ngIf="procedures.userImage">
-                <img src="{{ procedures.userImage }}" alt="" />
-              </span>
-            </div>
-          </div>
-          <hr />
-
-          <div class="procedures-lated">
-            <div class="procedure-type-title">الاجراءات قيد التنفيذ</div>
-            <div
-              class="procedures-wrapper flex gap-2 items-center relative"
-              *ngFor="let procedures of procedures"
-            >
-              <input
-                type="checkbox"
-                class="status-input"
-                #checkbox
-                checked
-                (click)="changeProceduresStatus(checkbox)"
-              />
-              <a
-                [routerLink]="[procedures.id]"
-                class="procedures-name done block my-2"
-                (mouseenter)="showToolTip(procedures.id)"
-                (mouseleave)="startHideTimeout()"
-              >
-                {{ procedures.title }}
-              </a>
-
-              <span class="procedures-date" *ngIf="procedures.progress_percentage">
-                % {{ procedures.progress_percentage }}
-              </span>
-              <span class="procedures-date" *ngIf="procedures.comments">
-                <i class="bi bi-chat"></i>
-                {{ procedures.comments }}
-              </span>
-              <span class="procedures-date" *ngIf="procedures.userImage">
-                <img src="{{ procedures.userImage }}" alt="" />
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <app-procedures-list
+        *ngIf="inProgressProcedures && completedProcedures && stalledProcedures"
+        [inProgressProcedures]="inProgressProcedures"
+        [completedProcedures]="completedProcedures"
+        [stalledProcedures]="stalledProcedures"
+      ></app-procedures-list>
     </div>
 
 
@@ -299,9 +166,9 @@
           <button class="more-btn">المزيد</button>
         </div>
         <div class="member-list p-3 flex flex-wrap gap-2">
-          <div class="user-info flex gap-2 mr-1" *ngFor="let member of members">
-            <img src="{{ member.memberImage }}" class="user-image" alt="" />
-            {{ member.memberName }}
+          <div class="user-info flex gap-2 mr-1" *ngFor="let member of project?.members">
+            <img src="{{ member.user?.image }}" class="user-image" alt="" />
+            {{ member.user?.name }}
           </div>
         </div>
         <div class="flex justify-center p-4">

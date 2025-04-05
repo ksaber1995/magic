@@ -51,6 +51,7 @@ import { CreateProceduresComponent } from './components/programs/procedures/crea
 import { EditUserRolesComponent } from './components/users/edit-user-roles/edit-user-roles.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ProceduresListComponent } from './components/programs/procedures/procedures-list/procedures-list.component';
+import { AddProjectComponent } from './components/programs/add-project/add-project.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { ProceduresListComponent } from './components/programs/procedures/proced
     EditUserRolesComponent,
     ResetPasswordComponent,
     ProceduresListComponent,
+    AddProjectComponent,
   ],
   imports: [
     CommonModule,

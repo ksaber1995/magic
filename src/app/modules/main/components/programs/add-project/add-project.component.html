@@ -1,0 +1,47 @@
+<app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
+<form *ngIf="form" (submit)="takeAction()" class=" flex gap-7 px-8" [formGroup]="form">
+  <div class="container header p-4 form-item w-3/4">
+    <div class="  ">
+      <div class="header">برنامج جديد</div>
+      <div class="input-field">
+        <label>العنوان </label>
+        <input formControlName="title" placeholder="العنوان" type="text" />
+      </div>
+
+      <div class="input-field">
+        <label>التفاصيل</label>
+        <textarea formControlName="content" class="textarea" placeholder="التفاصيل" type="text"> </textarea>
+      </div>
+
+    </div>
+
+
+
+    <button class="add-btn" [disabled]="form.invalid || isUpdating" [class.loading-btn]="isUpdating">
+      <span *ngIf="id">تعديل برنامج</span>
+      <span *ngIf="!id"> اضافة برنامج</span>
+    </button>
+  </div>
+
+  <div class="w-1/4 header p-4 container">
+    <div class=" ">
+      <div class="header "> صورة البرنامج</div>
+
+      <img width="100%" [src]="imageUrl" alt="">
+
+
+      <div class="text-center mt-4">
+        <label for="file-upload"
+          class="cursor-pointer inline-block bg-gray-300  text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+          تعيين صورة البرنامج
+        </label>
+
+        <input id="file-upload" type="file" class="hidden" (change)="onFileSelected($event)" />
+      </div>
+    </div>
+
+
+  </div>
+
+
+</form>

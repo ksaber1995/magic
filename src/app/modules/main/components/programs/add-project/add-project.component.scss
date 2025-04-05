@@ -1,0 +1,33 @@
+.container{
+  background-color: white;
+  border-radius: 7px;
+  box-shadow: 0px 0px 2px 1px rgba(204, 204, 204, 0.49);
+  color: #858585;
+  margin-bottom: 60px;
+
+  .header {
+    font-weight: 500;
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 15px;
+  }
+
+  .input-field {
+    margin-bottom: 20px;
+    label {
+      display: block;
+      color: #2e2e2e;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    input {
+      display: block;
+      width: 100%;
+      height: 40px;
+      padding: 6px 12px;
+      font-size: 14px;
+      color: #555;
+      background-color: #fff;
+      border: 1px solid #c4c4c4;
+    }
+  }
+}

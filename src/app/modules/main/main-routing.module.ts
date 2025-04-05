@@ -35,6 +35,7 @@ import { UserFilesComponent } from './components/users/user-files/user-files.com
 import { UserInformationComponent } from './components/users/user-information/user-information.component';
 import { UsersListComponent } from './components/users/users-list/users-list.component';
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
+import { AddProjectComponent } from './components/programs/add-project/add-project.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,8 @@ const routes: Routes = [
 
       //programs
       { path: 'programs', component: ProgramsListComponent },
+      { path: 'programs/create', component: AddProjectComponent },
+      { path: 'programs/update/:id', component: AddProjectComponent },
       { path: 'programs/:id/procedures', component: ProceduresComponent },
       { path: 'programs/:id/procedures/create', component: CreateProceduresComponent },
       { path: 'programs/:id/files', component: FilesComponent },

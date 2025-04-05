@@ -9,6 +9,7 @@ import {
 import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { ChangeStatusRequestComponent } from './change-status-request/change-status-request.component';
 import { Procedure } from '../../../../../../model/procedure';
+import { Project } from '../../../../../../model/project';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -31,6 +32,7 @@ export class ProceduresComponent implements OnInit {
   public proceduresChartOptions: Partial<ChartOptions>;
   tooltipVisible: string | null = null;
   projectId: string;
+  project: Project;
   hideTimeout: any;
   dialog = inject(MatDialog);
   lastUpdates = [
@@ -59,37 +61,13 @@ export class ProceduresComponent implements OnInit {
       userId: '545',
     },
   ];
-  decisionsList = [
-    {
-      project_id: '545',
-      title: 'asdsdsadsad ',
-      content: '',
-      progress_percentage: 10,
-      status_id: '15643',
-      date: '2021-01-26',
-      id: '121',
-    },
-    {
-      project_id: '545',
-      title: 'asdsdsadsad ',
-      content: '',
-      progress_percentage: 10,
-      status_id: '15643',
-      date: '2021-01-26',
-      id: '121',
-    },
-    {
-      project_id: '545',
-      title: 'asdsdsadsad ',
-      content: '',
-      progress_percentage: 10,
-      status_id: '15643',
-      date: '2021-01-26',
-      id: '121',
-    },
-  ];
 
-  procedures: Procedure[] = [];
+  decisions$
+
+
+  stalledProcedures: Procedure[] = [];
+  completedProcedures: Procedure[] = [];
+  inProgressProcedures: Procedure[] = [];
 
   constructor(
     private swagger : SwaggerService,
@@ -199,40 +177,19 @@ export class ProceduresComponent implements OnInit {
     }
   ]
 
-  members = [
-    {
-      memberName: 'admin',
-      memberImage: 'assets/images/user-image.jpg',
-      memberId: '545',
-    },
-    {
-      memberName: 'admin',
-      memberImage: 'assets/images/user-image.jpg',
-      memberId: '545',
-    },
-    {
-      memberName: 'admin',
-      memberImage: 'assets/images/user-image.jpg',
-      memberId: '545',
-    },
-    {
-      memberName: 'admin',
-      memberImage: 'assets/images/user-image.jpg',
-      memberId: '545',
-    },
-    {
-      memberName: 'admin',
-      memberImage: 'assets/images/user-image.jpg',
-      memberId: '545',
-    },
 
-  ]
   ngOnInit() {
+    this.decisions$ = this.swagger.getAllDecisions();
     this.projectId = this.route.snapshot.paramMap.get('id')
     console.log(this.projectId)
     this.swagger.getProcedureByProjectId(+this.projectId).subscribe(res=>{
-      this.procedures = res;
-      console.log(res)
+      this.stalledProcedures = res.filter(res => +res.progress_percentage <= 50);
+      this.inProgressProcedures = res.filter(res => +res.progress_percentage > 50 && +res.progress_percentage < 100);
+      this.completedProcedures = res.filter(res => +res.progress_percentage >= 100);
+    })
+
+    this.swagger.getOneProject(this.projectId).subscribe(res=>{
+      this.project = res
     })
   }
 

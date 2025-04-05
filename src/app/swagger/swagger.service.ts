@@ -113,19 +113,19 @@ export class SwaggerService {
     .pipe(finalize(()=>this.spinner.hideSpinner()),map(res => res.data), shareReplay(1));
   }
 
-  getOneProject(id: string) {
+  getOneProject(id) {
     this.spinner.showSpinner()
-    return this.http.get(ENDPOINT_URI + `projects/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
+    return this.http.get<ResponseItem<Project>>(ENDPOINT_URI + `projects/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()), map(res=> res.data));
   }
 
-  createProject(project: { title: string, content: string, image: File, status_id: string }) {
+  createProject(project: Partial<Project> ) {
     const formData = createFormData(project)
     return this.http.post(ENDPOINT_URI + `projects`, formData);
   }
 
-  updateProject(id: string, project: { title: string, content: string, status_id: string }) {
+  updateProject(project: Partial<Project>) {
     const formData = createFormData(project)
-    return this.http.put(ENDPOINT_URI + `projects/${id}`, formData);
+    return this.http.put(ENDPOINT_URI + `projects/${project.id}`, formData);
   }
 
 

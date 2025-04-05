@@ -12,7 +12,7 @@ import { SnackbarService } from '../../../../../services/snackbar.service';
 })
 export class DecisionsListComponent  {
   @Input() decisions : Decision[];
-  @Input() showMorebutton: boolean = false ;
+  @Input() showMoreButton: boolean = false ;
 
   readonly dialog = inject(MatDialog);
   tooltipVisible: string | null = null;
