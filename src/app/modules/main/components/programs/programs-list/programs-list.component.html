@@ -1,7 +1,7 @@
 <!-- ng for here  -->
 <app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
-<div *ngIf="projects$ | async as projects" class="grid grid-cols-4 gap-10 ">
-  <div *ngFor="let project of projects" routerLink="{{project.id}}/procedures"> 
-    <app-program-item [project]="project"> </app-program-item>
+<div *ngIf="projects as projects" class="grid grid-cols-4 gap-10 ">
+  <div *ngFor="let project of projects">
+    <app-program-item (delete)="deleteProject($event.id)" [project]="project"> </app-program-item>
   </div>
 </div>

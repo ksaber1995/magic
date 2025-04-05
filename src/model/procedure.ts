@@ -1,11 +1,20 @@
+import { Member } from "./member";
+import { Project } from "./project";
+
 export interface Procedure{
-  project_id: number,
-  procedure_group_id: number,
-  // members_ids[0]: number,
+  id: number,
+  procedure_group: number,
+  project: Project,
+  members: Member[],
   title: string,
   content: string,
-  progress_percentage: number,
+  files: string[],
+  // comments: {},
+  progress_percentage: string,
   status_id: number,
-  procedure_date: string
+  status: null,
+  procedure_date: null,
+  created_at: string,
+  updated_at: string
 
 }

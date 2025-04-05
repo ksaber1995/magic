@@ -14,14 +14,14 @@
 
   <mat-card-footer>
     <div class="grid grid-cols-2">
-      <button class="flex" mat-button>
+      <button routerLink="{{project.id}}/edit" class="flex" mat-button>
         <mat-icon>
           edit
         </mat-icon>
         تعديل
       </button>
 
-      <button class="flex" mat-button>
+      <button (click)="deleteProject(project.id)" class="flex" mat-button>
         <mat-icon>
           delete
         </mat-icon>

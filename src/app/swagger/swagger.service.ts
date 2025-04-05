@@ -129,20 +129,26 @@ export class SwaggerService {
   }
 
 
-  deleteProject(id: string) {
+  deleteProject(id) {
     return this.http.delete(ENDPOINT_URI + `projects/${id}`);
   }
 
   // Procedures
   getAllProcedures() {
     this.spinner.showSpinner()
-    return this.http.get(ENDPOINT_URI + 'procedures').pipe(finalize(()=>this.spinner.hideSpinner()));
+    return this.http.get<ResponseData<Procedure>>(ENDPOINT_URI + 'procedures').pipe(finalize(()=>this.spinner.hideSpinner()), map(res => res.data));
   }
 
   getOneProcedure(id: string) {
     this.spinner.showSpinner()
     return this.http.get(ENDPOINT_URI + `procedures/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
+
+  getProcedureByProjectId(id: number) {
+    this.spinner.showSpinner()
+    return this.getAllProcedures().pipe(map(procedures => procedures.filter(procedure => procedure.project.id == id)));
+  }
+
 
   createProcedure(procedure: Procedure) {
     const formData = createFormData(procedure)

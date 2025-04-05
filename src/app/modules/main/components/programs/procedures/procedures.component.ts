@@ -1,18 +1,14 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { SwaggerService } from '../../../../../swagger/swagger.service';
-import { ChartComponent } from 'ng-apexcharts';
-import {
-  ApexChart,
-  ApexLegend,
-  ApexDataLabels,
-  ApexFill,
-  ApexNonAxisChartSeries,
-  ApexResponsive,
-  ApexOptions,
-} from 'ng-apexcharts';
 import { MatDialog } from '@angular/material/dialog';
-import { ChangeStatusRequestComponent } from './change-status-request/change-status-request.component';
 import { ActivatedRoute } from '@angular/router';
+import {
+  ApexChart, ApexDataLabels,
+  ApexFill, ApexLegend, ApexNonAxisChartSeries,
+  ApexResponsive, ChartComponent
+} from 'ng-apexcharts';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
+import { ChangeStatusRequestComponent } from './change-status-request/change-status-request.component';
+import { Procedure } from '../../../../../../model/procedure';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -34,7 +30,7 @@ export class ProceduresComponent implements OnInit {
   public desicionChartOptions: Partial<ChartOptions>;
   public proceduresChartOptions: Partial<ChartOptions>;
   tooltipVisible: string | null = null;
-  id: string;
+  projectId: string;
   hideTimeout: any;
   dialog = inject(MatDialog);
   lastUpdates = [
@@ -93,36 +89,7 @@ export class ProceduresComponent implements OnInit {
     },
   ];
 
-  proceduresList = [
-    {
-      name: 'تطبيق إجراءات الحد من الانبعاثات ووضع برنامج زمني لتنفيذه ',
-      percent: 10,
-      comments: 4,
-      userImage: 'assets/images/user-image.jpg',
-      id: '555',
-    },
-    {
-      name: 'تطبيق إجراءات الحد من الانبعاثات ووضع برنامج زمني لتنفيذه ',
-      percent: 10,
-      comments: 4,
-      userImage: 'assets/images/user-image.jpg',
-      id: '555',
-    },
-    {
-      name: 'تطبيق إجراءات الحد من الانبعاثات ووضع برنامج زمني لتنفيذه ',
-      percent: 10,
-      comments: 4,
-      userImage: 'assets/images/user-image.jpg',
-      id: '555',
-    },
-    {
-      name: 'تطبيق إجراءات الحد من الانبعاثات ووضع برنامج زمني لتنفيذه ',
-      percent: 10,
-      comments: 4,
-      userImage: 'assets/images/user-image.jpg',
-      id: '555',
-    },
-  ];
+  procedures: Procedure[] = [];
 
   constructor(
     private swagger : SwaggerService,
@@ -261,11 +228,11 @@ export class ProceduresComponent implements OnInit {
 
   ]
   ngOnInit() {
-
-    this.id = this.route.snapshot.paramMap.get('id')
-    console.log(this.id)
-    this.swagger.getOneProcedure(this.id).subscribe(res=>{
-      console.log(this.id)
+    this.projectId = this.route.snapshot.paramMap.get('id')
+    console.log(this.projectId)
+    this.swagger.getProcedureByProjectId(+this.projectId).subscribe(res=>{
+      this.procedures = res;
+      console.log(res)
     })
   }
 
@@ -289,7 +256,7 @@ export class ProceduresComponent implements OnInit {
       .open(ChangeStatusRequestComponent)
       .afterClosed()
       .subscribe(() => {
-        checkbox.checked = false; 
+        checkbox.checked = false;
       });
   }
 }

@@ -145,7 +145,7 @@
             <div class="procedure-type-title">الاجراءات قيد التنفيذ</div>
             <div
               class="procedures-wrapper flex gap-2 items-center relative"
-              *ngFor="let procedures of proceduresList"
+              *ngFor="let procedures of procedures"
             >
               <input
                 type="checkbox"
@@ -159,7 +159,7 @@
                 (mouseenter)="showToolTip(procedures.id)"
                 (mouseleave)="startHideTimeout()"
               >
-                {{ procedures.name }}
+                {{ procedures.title }}
               </a>
 
               <!-- Tooltip -->
@@ -176,8 +176,8 @@
                 <i class="bi bi-pencil-square edit-i"></i>
               </div>
 
-              <span class="procedures-date" *ngIf="procedures.percent">
-                % {{ procedures.percent }}
+              <span class="procedures-date" *ngIf="procedures.progress_percentage">
+                % {{ procedures.progress_percentage }}
               </span>
               <span class="procedures-date" *ngIf="procedures.comments">
                 <i class="bi bi-chat"></i>
@@ -187,14 +187,15 @@
                 <img src="{{ procedures.userImage }}" alt="" />
               </span>
             </div>
-            <button class="add-procedures-btn my-2" routerLink="/main/programs/{{id}}/procedures/create">اضافة اجراء</button>
+            <button class="add-procedures-btn my-2" routerLink="/main/programs/{{projectId}}/procedures/create">اضافة اجراء</button>
           </div>
           <hr />
+
           <div class="procedures-done">
             <div class="procedure-type-title">الاجراءات قيد التنفيذ</div>
             <div
               class="procedures-wrapper flex gap-2 items-center relative"
-              *ngFor="let procedures of proceduresList"
+              *ngFor="let procedures of procedures"
             >
               <input
                 type="checkbox"
@@ -209,11 +210,11 @@
                 (mouseenter)="showToolTip(procedures.id)"
                 (mouseleave)="startHideTimeout()"
               >
-                {{ procedures.name }}
+                {{ procedures.title }}
               </a>
 
-              <span class="procedures-date" *ngIf="procedures.percent">
-                % {{ procedures.percent }}
+              <span class="procedures-date" *ngIf="procedures.progress_percentage">
+                % {{ procedures.progress_percentage }}
               </span>
               <span class="procedures-date" *ngIf="procedures.comments">
                 <i class="bi bi-chat"></i>
@@ -230,7 +231,7 @@
             <div class="procedure-type-title">الاجراءات قيد التنفيذ</div>
             <div
               class="procedures-wrapper flex gap-2 items-center relative"
-              *ngFor="let procedures of proceduresList"
+              *ngFor="let procedures of procedures"
             >
               <input
                 type="checkbox"
@@ -245,11 +246,11 @@
                 (mouseenter)="showToolTip(procedures.id)"
                 (mouseleave)="startHideTimeout()"
               >
-                {{ procedures.name }}
+                {{ procedures.title }}
               </a>
 
-              <span class="procedures-date" *ngIf="procedures.percent">
-                % {{ procedures.percent }}
+              <span class="procedures-date" *ngIf="procedures.progress_percentage">
+                % {{ procedures.progress_percentage }}
               </span>
               <span class="procedures-date" *ngIf="procedures.comments">
                 <i class="bi bi-chat"></i>
@@ -263,6 +264,9 @@
         </div>
       </div>
     </div>
+
+
+
     <div class="latest-reports w-[33%]">
       <button class="send-report-btn mb-3" routerLink="create">
         إرسال تقرير عن البرامج الي اللجنة العليا
