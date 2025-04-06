@@ -11,11 +11,12 @@ import { CreateMessageComponent } from './components/messages/create-message/cre
 import { ListMessagesComponent } from './components/messages/list-messages/list-messages.component';
 import { CreatePermissionComponent } from './components/permissions-list/create-permission/create-permission.component';
 import { PermissionsListComponent } from './components/permissions-list/permissions-list.component';
-import { FilesComponent } from './components/programs/files/files.component';
+import { AddProjectComponent } from './components/programs/add-project/add-project.component';
 import { EditMemberComponent } from './components/programs/members/edit-member/edit-member.component';
 import { MembersComponent } from './components/programs/members/members.component';
 import { CreateProceduresComponent } from './components/programs/procedures/create-procedures/create-procedures.component';
 import { ProceduresComponent } from './components/programs/procedures/procedures.component';
+import { ProgramFilesComponent } from './components/programs/programs-files/programs-files.component';
 import { ProgramsListComponent } from './components/programs/programs-list/programs-list.component';
 import { EditReportComponent } from './components/programs/reports/edit-report/edit-report.component';
 import { ReportDetailsComponent } from './components/programs/reports/report-details/report-details.component';
@@ -27,15 +28,13 @@ import { RolesComponent } from './components/roles/roles.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CreateDecisionComponent } from './components/supreme-committee/create-decision/create-decision.component';
 import { DecisionDetailsComponent } from './components/supreme-committee/decision-details/decision-details.component';
+import { DecisionsListComponent } from './components/supreme-committee/desicions-list/decisions-list.component';
 import { CreateUserComponent } from './components/users/create-user/create-user.component';
 import { EditUserRolesComponent } from './components/users/edit-user-roles/edit-user-roles.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
-import { UserFilesComponent } from './components/users/user-files/user-files.component';
 import { UserInformationComponent } from './components/users/user-information/user-information.component';
 import { UsersListComponent } from './components/users/users-list/users-list.component';
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
-import { AddProjectComponent } from './components/programs/add-project/add-project.component';
-import { DecisionsListComponent } from './components/supreme-committee/desicions-list/decisions-list.component';
 
 const routes: Routes = [
   {
@@ -54,7 +53,7 @@ const routes: Routes = [
       { path: 'programs/update/:id', component: AddProjectComponent },
       { path: 'programs/:id/procedures', component: ProceduresComponent },
       { path: 'programs/:id/procedures/create', component: CreateProceduresComponent },
-      { path: 'programs/:id/files', component: FilesComponent },
+      { path: 'programs/:id/files', component: ProgramFilesComponent },
       { path: 'programs/:id/members', component: MembersComponent },
       { path: 'programs/:id/members/:memberId/edit', component: EditMemberComponent },
       { path: 'programs/:id/reports', component: ReportsComponent },
@@ -94,7 +93,7 @@ const routes: Routes = [
       {path:'users/:email/reset-password', component:ResetPasswordComponent},
       {path:'users/:id/edit', component:EditUserComponent},
       {path:'users/:id/edit-roles', component:EditUserRolesComponent},
-      {path:'users/:id/files', component:UserFilesComponent},
+      {path:'users/:id/files', component:ProgramFilesComponent},
       {path:'create-user', component:CreateUserComponent},
       {path:'users-setting', component:UsersSettingsComponent},
       {path:'users/:id/delete' , component:DeleteNewsPageComponent},

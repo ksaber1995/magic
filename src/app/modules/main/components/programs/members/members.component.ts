@@ -29,7 +29,7 @@ export class MembersComponent implements OnInit {
   selectedMemberIds: Set<string> = new Set();
 
   constructor(
-    private swagger : SwaggerService, 
+    private swagger : SwaggerService,
     private route : ActivatedRoute
   ){
 
@@ -38,7 +38,7 @@ export class MembersComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id')
     this.swagger.getOneProject(this.id).subscribe((res:any)=>{
-      this.members = res.data.members
+      this.members = res.members
       console.log(this.members)
     })
   }
@@ -51,6 +51,6 @@ export class MembersComponent implements OnInit {
     }
   }
   deleteMember(member){
-    
+
   }
 }

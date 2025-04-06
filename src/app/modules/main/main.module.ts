@@ -18,7 +18,7 @@ import { ListMessagesComponent } from './components/messages/list-messages/list-
 import { CreatePermissionComponent } from './components/permissions-list/create-permission/create-permission.component';
 import { PermissionsListComponent } from './components/permissions-list/permissions-list.component';
 import { AddProjectComponent } from './components/programs/add-project/add-project.component';
-import { FilesComponent } from './components/programs/files/files.component';
+import { ProgramFilesComponent } from './components/programs/programs-files/programs-files.component';
 import { EditMemberComponent } from './components/programs/members/edit-member/edit-member.component';
 import { MembersComponent } from './components/programs/members/members.component';
 import { AddMembersToProjectDialogComponent } from './components/programs/procedures/add-members-to-project-dialog/add-members-to-project-dialog.component';
@@ -37,6 +37,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { CreateRoleComponent } from './components/roles/create-role/create-role.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { FilesListComponent } from './components/shared/files-list/files-list.component';
 import { SidebarItemComponent } from './components/sidebar/sidebar-item/sidebar-item.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CreateDecisionComponent } from './components/supreme-committee/create-decision/create-decision.component';
@@ -47,12 +48,10 @@ import { CreateUserComponent } from './components/users/create-user/create-user.
 import { EditUserRolesComponent } from './components/users/edit-user-roles/edit-user-roles.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { FileDetailsComponent } from './components/users/file-details/file-details.component';
-import { UserFilesComponent } from './components/users/user-files/user-files.component';
 import { UserInformationComponent } from './components/users/user-information/user-information.component';
 import { UsersListComponent } from './components/users/users-list/users-list.component';
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
 import { MainRoutingModule } from './main-routing.module';
-import { FilesListComponent } from './components/shared/files-list/files-list.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +63,7 @@ import { FilesListComponent } from './components/shared/files-list/files-list.co
     CreateMessageComponent,
     ListMessagesComponent,
     ProceduresComponent,
-    FilesComponent,
+    ProgramFilesComponent,
     MembersComponent,
     ReportsComponent,
     SidebarItemComponent,
@@ -86,7 +85,6 @@ import { FilesListComponent } from './components/shared/files-list/files-list.co
     CreateUserComponent,
     UsersSettingsComponent,
     UserInformationComponent,
-    UserFilesComponent,
     FileDetailsComponent,
     EditUserComponent,
     MeetingsListComponent,
