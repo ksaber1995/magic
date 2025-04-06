@@ -29,7 +29,6 @@ import { ProceduresComponent } from './components/programs/procedures/procedures
 import { ProgramItemComponent } from './components/programs/programs-list/program-item/program-item.component';
 import { ProgramsListComponent } from './components/programs/programs-list/programs-list.component';
 import { CreateReportComponent } from './components/programs/reports/create-report/create-report.component';
-import { EditReportComponent } from './components/programs/reports/edit-report/edit-report.component';
 import { ReportDetailsComponent } from './components/programs/reports/report-details/report-details.component';
 import { ReportsComponent } from './components/programs/reports/reports.component';
 import { ProjectDecisionsComponent } from './components/project-decisions/project-decisions.component';
@@ -90,7 +89,6 @@ import { MainRoutingModule } from './main-routing.module';
     MeetingsListComponent,
     CreateMeetingComponent,
     ReportDetailsComponent,
-    EditReportComponent,
     EditMemberComponent,
     ChangeStatusRequestComponent,
     CreateReportComponent,

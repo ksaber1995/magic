@@ -18,7 +18,6 @@ import { CreateProceduresComponent } from './components/programs/procedures/crea
 import { ProceduresComponent } from './components/programs/procedures/procedures.component';
 import { ProgramFilesComponent } from './components/programs/programs-files/programs-files.component';
 import { ProgramsListComponent } from './components/programs/programs-list/programs-list.component';
-import { EditReportComponent } from './components/programs/reports/edit-report/edit-report.component';
 import { ReportDetailsComponent } from './components/programs/reports/report-details/report-details.component';
 import { ReportsComponent } from './components/programs/reports/reports.component';
 import { ProjectDecisionsComponent } from './components/project-decisions/project-decisions.component';
@@ -35,6 +34,7 @@ import { EditUserComponent } from './components/users/edit-user/edit-user.compon
 import { UserInformationComponent } from './components/users/user-information/user-information.component';
 import { UsersListComponent } from './components/users/users-list/users-list.component';
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
+import { CreateReportComponent } from './components/programs/reports/create-report/create-report.component';
 
 const routes: Routes = [
   {
@@ -56,9 +56,11 @@ const routes: Routes = [
       { path: 'programs/:id/files', component: ProgramFilesComponent },
       { path: 'programs/:id/members', component: MembersComponent },
       { path: 'programs/:id/members/:memberId/edit', component: EditMemberComponent },
+
       { path: 'programs/:id/reports', component: ReportsComponent },
+      { path: 'programs/:id/reports/create', component: CreateReportComponent },
+      { path: 'programs/:id/reports/:reportId/edit', component: CreateReportComponent },
       { path: 'programs/:id/reports/:reportId', component: ReportDetailsComponent },
-      { path: 'programs/:id/reports/:reportId/edit', component: EditReportComponent },
 
       { path: 'programs/:id/supreme-committee-decisions', component: ProjectDecisionsComponent },
       // supereme-committee
