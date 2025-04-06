@@ -1,0 +1,52 @@
+.files-wrapper {
+  padding: 20px;
+  .title {
+    color: #5b5b5b;
+    font-size: 18px;
+    margin-bottom: 25px;
+    margin-top: 0;
+    font-weight: 500;
+  }
+  div {
+    .file {
+      width: calc(20% - 10px);
+      background: #fff;
+      overflow: hidden;
+      padding: 13px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      cursor: pointer;
+      height: 150px;
+      &:hover{
+        border: 1px solid #ebe9e9;
+      }
+      .file-header {
+        .header-title {
+          color: #5b5b5b;
+          font-size: 16px;
+          margin-top: 0;
+          font-weight: 500;
+        }
+        .date {
+          color: #858585;
+          font-weight: 500;
+        }
+      }
+      .file-icon {
+        img {
+          width: 42px;
+          height: 42px;
+          margin: auto;
+        }
+      }
+      .file-name {
+        color: #8bb81f;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { FileItem } from "./filte";
 import { Project } from "./project";
 
 export interface Post{
@@ -7,5 +8,5 @@ export interface Post{
   content: string;
   title: string;
   id: number
-  files: string[] | File[]
+  files: string[] | File[] | FileItem[]
 }

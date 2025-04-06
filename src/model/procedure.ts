@@ -1,3 +1,4 @@
+import { FileItem } from "./filte";
 import { Member } from "./member";
 import { Project } from "./project";
 
@@ -8,7 +9,7 @@ export interface Procedure{
   members: Member[],
   title: string,
   content: string,
-  files: string[],
+  files: string[] | File[] | FileItem[],
   // comments: {},
   progress_percentage: string,
   status_id: number,

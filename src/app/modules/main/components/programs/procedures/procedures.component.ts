@@ -14,17 +14,13 @@ import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { ChangeStatusRequestComponent } from './change-status-request/change-status-request.component';
 import { Procedure } from '../../../../../../model/procedure';
 import { Project } from '../../../../../../model/project';
-import { map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, finalize } from 'rxjs';
 import { Post } from '../../../../../../model/post';
 import { Decision } from '../../../../../../model/decision';
 import { AddMembersToProjectDialogComponent } from './add-members-to-project-dialog/add-members-to-project-dialog.component';
+import { FileItem } from '../../../../../../model/filte';
 
-interface File {
-    title: string,
-    date: string,
-    fileType: string,
-    name: string,
-}
+
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -41,6 +37,7 @@ export type ChartOptions = {
   styleUrl: './procedures.component.scss',
 })
 export class ProceduresComponent implements OnInit {
+
   @ViewChild('chart') chart: ChartComponent;
   public desicionChartOptions: Partial<ChartOptions>;
   public proceduresChartOptions: Partial<ChartOptions>;
@@ -76,8 +73,8 @@ export class ProceduresComponent implements OnInit {
     },
   ];
 
-  decisions$: Observable<Decision[]>;
-  posts$: Observable<Post[]>;
+  decisions: Decision[] = [];
+  posts: Post[] = [];
 
   stalledProcedures: Procedure[] = [];
   completedProcedures: Procedure[] = [];
@@ -145,37 +142,56 @@ export class ProceduresComponent implements OnInit {
     };
   }
 
-  files: File[] = [];
+  files: FileItem[] = [];
 
   ngOnInit() {
-    this.decisions$ = this.swagger
+
+
+    this.projectId = this.route.snapshot.paramMap.get('id');
+    console.log(this.projectId);
+
+
+    this.getData();
+    this.getProject();
+  }
+
+  getData() {
+    const decisions$ = this.swagger
       .getAllDecisions()
       .pipe(
         map((res) => res.filter((res) => res.project?.id == +this.projectId))
       );
-    this.posts$ = this.swagger
+
+     const posts$ = this.swagger
       .getAllPosts()
       .pipe(
         map((res) => res.filter((res) => res.project?.id == +this.projectId))
       );
 
-    this.projectId = this.route.snapshot.paramMap.get('id');
-    console.log(this.projectId);
-    this.swagger.getProcedureByProjectId(+this.projectId).subscribe((res) => {
-      this.stalledProcedures = res.filter(
-        (res) => +res.progress_percentage <= 50
-      );
-      this.inProgressProcedures = res.filter(
-        (res) => +res.progress_percentage > 50 && +res.progress_percentage < 100
-      );
-      this.completedProcedures = res.filter(
-        (res) => +res.progress_percentage >= 100
-      );
-    });
+      const procedures$ = this.swagger.getProcedureByProjectId(+this.projectId);
 
-    this.getProject()
+      combineLatest([decisions$, posts$, procedures$]).subscribe(([decisions, posts, procedures]) => {
+        this.decisions = decisions;
+        this.posts = posts;
+        this.stalledProcedures = procedures.filter(
+          (res) => +res.progress_percentage <= 0
+        );
+        this.inProgressProcedures = procedures.filter(
+          (res) => +res.progress_percentage > 0 && +res.progress_percentage < 100
+        );
+        this.completedProcedures = procedures.filter(
+          (res) => +res.progress_percentage >= 100
+        );
+
+        const decisionsFiles  = this.decisions.map((res) => res.files as FileItem[])?.flat();
+        const postsFiles = this.posts.map((res) => res.files as FileItem[]).flat();
+        const proceduresFiles = procedures.map((res) => res.files as FileItem[]).flat();
+
+        this.files = [...decisionsFiles, ...postsFiles, ...proceduresFiles].map(res=> ({...res, size: res.size / 1024, fileType: res.name.split('.').pop()}));
+        console.log({ files: this.files})
+      })
+
   }
-
   getProject(){
     this.swagger.getOneProject(this.projectId).subscribe((res) => {
       this.project = res;

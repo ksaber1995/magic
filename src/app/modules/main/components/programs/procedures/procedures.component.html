@@ -110,7 +110,7 @@
 
       <!-- قرارات اللجنة العليا لحماية البيئة -->
 
-      <app-decisions-list [showMore]="true"  [decisions]="decisions$ | async"></app-decisions-list>
+      <app-decisions-list [showMore]="true"  [decisions]="decisions"></app-decisions-list>
 
 
       <!-- إجراءات تنفيذ البرنامج -->
@@ -133,7 +133,7 @@
         </div>
         <div class="committee-list p-3 flex flex-col gap-2">
           <div [routerLink]="'/main/committee-updates-list/' + post?.id" class="committee flex gap-4"
-            *ngFor="let post of posts$ | async">
+            *ngFor="let post of posts">
             <img class="committee-image" src="{{ post.image }}" alt="" />
             <div class="committee-details">
               <div class="mb-3">{{ post.title }}</div>
@@ -165,5 +165,5 @@
     </div>
   </div>
   <!-- ملفات تم رفعها مؤخرا -->
-  <app-user-files [inputFiles]="files"></app-user-files>
+  <app-files-list [files]="files"></app-files-list>
 </div>
