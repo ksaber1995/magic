@@ -1,11 +1,11 @@
-import { SnackbarService } from './../../../../../../services/snackbar.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { SwaggerService } from '../../../../../../swagger/swagger.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Permission } from '../../../../../../../model/permission';
-import { User } from '../../../../../../../model/user';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Member } from '../../../../../../../model/member';
+import { Role } from '../../../../../../../model/role';
+import { User } from '../../../../../../../model/user';
+import { SwaggerService } from '../../../../../../swagger/swagger.service';
+import { SnackbarService } from './../../../../../../services/snackbar.service';
 
 interface DialogData {
   projectId: string;
@@ -17,11 +17,11 @@ interface DialogData {
 })
 export class AddMembersToProjectDialogComponent implements OnInit {
   activeTab: 'new' | 'members' | 'groups' = 'groups';
-  permissions: Permission[];
+  roles: Role[];
   users: User[];
   projectId: string;
 
-  permissionsControl = new FormControl([]);
+  rolesControl = new FormControl([]);
   membersControl = new FormControl([]);
   isUpdating = false;
   newMemberForm = this.fb.group({
@@ -40,8 +40,8 @@ export class AddMembersToProjectDialogComponent implements OnInit {
     this.projectId = data.projectId;
   }
   ngOnInit() {
-    this.swagger.getAllPermissions().subscribe((res) => {
-      this.permissions = res;
+    this.swagger.getAllRoles(false).subscribe((res) => {
+      this.roles = res;
     });
 
     this.swagger.getAllUsers(false).subscribe((res) => {
@@ -67,5 +67,15 @@ export class AddMembersToProjectDialogComponent implements OnInit {
     }
   }
 
-  submit() {}
+  addRoles(){
+    const selectedRoles = this.rolesControl.value;
+
+    console.log(selectedRoles)
+  }
+
+  addMembers() {
+    const selectedMembers = this.membersControl.value;
+    console.log(selectedMembers)
+
+  }
 }
