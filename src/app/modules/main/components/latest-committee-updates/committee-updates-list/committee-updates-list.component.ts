@@ -4,6 +4,7 @@ import { Post } from '../../../../../../model/post';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../../supreme-committee/delete-dialog/delete-dialog.component';
 import { SnackbarService } from '../../../../../services/snackbar.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,11 +13,12 @@ import { SnackbarService } from '../../../../../services/snackbar.service';
   styleUrl: './committee-updates-list.component.scss'
 })
 export class CommitteeUpdatesListComponent implements OnInit{
-
+  projectId = +this.route.snapshot.paramMap.get('projectId');
   constructor(
     private swagger: SwaggerService,
     private dialog: MatDialog,
-    private snackbar: SnackbarService
+    private snackbar: SnackbarService,
+    private route: ActivatedRoute
   ){}
 
   breadcrumbs = [
@@ -28,6 +30,9 @@ export class CommitteeUpdatesListComponent implements OnInit{
 
   ngOnInit(): void {
     this.swagger.getAllPosts().subscribe(res=>{
+      if(this.projectId){
+        res = res.filter(res=> res.project?.id == this.projectId)
+      }
       this.posts = res;
     })
   }

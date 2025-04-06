@@ -1,14 +1,23 @@
-<div *ngIf="post" class="news-details-details m-10 p-5">
+<app-bread-crumb *ngIf="breadcrumbs" [breadcrumbs]="breadcrumbs"></app-bread-crumb>
+<div *ngIf="post" class="news-details-details p-5">
     <div class="date mb-1">{{post.created_at | date}}</div>
     <div class="name mb-3">{{post.title}}</div>
     <div class="see-wrapper flex justify-between">
-        <div class="see-files">يمكنكم الاطلاع على {{post.title}} من خلال تحميل الملف المرفق.</div>
+      <div class="">
+        <div class="mb-4 see-files">
+          {{post.content}}
+        </div>
+
+
+      </div>
+
         <img width="350" src="{{post.image}}" class="news-image" alt="">
     </div>
 
     <div class="files-wrapper">
-        <div class="title">المرفقات</div>
-        <app-file-list [files]="post.files"></app-file-list>
 
-    </div>
+      <div class="title">المرفقات</div>
+      <app-file-list [files]="post.files"></app-file-list>
+
+  </div>
 </div>

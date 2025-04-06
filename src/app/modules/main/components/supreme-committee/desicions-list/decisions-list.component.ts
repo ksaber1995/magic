@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Decision } from '../../../../../../model/decision';
@@ -10,29 +11,38 @@ import { SnackbarService } from '../../../../../services/snackbar.service';
   templateUrl: './decisions-list.component.html',
   styleUrl: './decisions-list.component.scss',
 })
-export class DecisionsListComponent  {
-  @Input() decisions : Decision[];
-  @Input() showMoreButton: boolean = false ;
-
+export class DecisionsListComponent implements OnInit {
+  decisions: Decision[];
+  projectId: number = +this.route.snapshot.paramMap.get('projectId');
+  @Input() showMore = false;
   readonly dialog = inject(MatDialog);
   tooltipVisible: string | null = null;
   hideTimeout: any;
 
   breadcrumbs = [
     {
-      label:'بوابة البرامج',
-      url:'/'
+      label: 'بوابة البرامج',
+      url: '/',
     },
     {
-      label:'قرارات اللجنة العليا'
-    }
-  ]
+      label: 'قرارات اللجنة العليا',
+    },
+  ];
 
   constructor(
     private swagger: SwaggerService,
     private snackbar: SnackbarService,
+    private route: ActivatedRoute,
   ) {}
 
+  ngOnInit(): void {
+    this.swagger.getAllDecisions().subscribe((res) => {
+      if (this.projectId) {
+        res = res.filter((res) => res.project?.id == this.projectId);
+      }
+      this.decisions = res;
+    });
+  }
 
   showToolTip(decisionId) {
     this.tooltipVisible = decisionId;

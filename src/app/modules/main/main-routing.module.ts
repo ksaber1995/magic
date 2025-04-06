@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContainerComponent } from './components/container/container.component';
-import { DecisionsComponent } from './components/decisions/decisions.component';
 import { CommitteeUpdatesListComponent } from './components/latest-committee-updates/committee-updates-list/committee-updates-list.component';
 import { CreateNewNewsComponent } from './components/latest-committee-updates/create-new-news/create-new-news.component';
 import { DeleteNewsPageComponent } from './components/latest-committee-updates/delete-news-page/delete-news-page.component';
@@ -36,6 +35,7 @@ import { UserInformationComponent } from './components/users/user-information/us
 import { UsersListComponent } from './components/users/users-list/users-list.component';
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
 import { AddProjectComponent } from './components/programs/add-project/add-project.component';
+import { DecisionsListComponent } from './components/supreme-committee/desicions-list/decisions-list.component';
 
 const routes: Routes = [
   {
@@ -63,13 +63,16 @@ const routes: Routes = [
 
       { path: 'programs/:id/supreme-committee-decisions', component: ProjectDecisionsComponent },
       // supereme-committee
-      { path: 'decisions', component: DecisionsComponent },
-      { path: 'decisions/:id', component: DecisionDetailsComponent },
+      { path: 'decisions', component: DecisionsListComponent },
+      { path: 'decisions/:projectId', component: DecisionsListComponent },
+      { path: 'decision-details/:id', component: DecisionDetailsComponent },
       { path: 'new-decision', component: CreateDecisionComponent },
       { path: 'new-decision/:id', component: CreateDecisionComponent },
+
       //latest-committee-updates
       {path:'committee-updates-list' , component:CommitteeUpdatesListComponent},
-      {path:'committee-updates-list/:id' , component:NewsDetailsComponent},
+      {path:'committee-updates-list/:projectId' , component:CommitteeUpdatesListComponent},
+      {path:'committee-updates-details/:id' , component:NewsDetailsComponent},
       {path:'create-new-news' , component:CreateNewNewsComponent},
       {path:'update-post/:id' , component:CreateNewNewsComponent},
 

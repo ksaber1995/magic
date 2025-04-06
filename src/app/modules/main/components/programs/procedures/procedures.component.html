@@ -1,8 +1,8 @@
 <div class="procedures-container p-3" *ngIf="project">
   <div class="header mb-2">
-    <div class="title mr-3" >{{project.title}}</div>
+    <div class="title mr-3">{{project.title}}</div>
     <div class="description mr-3">
-        {{project.content}}
+      {{project.content}}
     </div>
   </div>
   <div class="flex gap-5">
@@ -41,14 +41,9 @@
             </div>
           </div>
           <div id="chart">
-            <apx-chart
-              [series]="desicionChartOptions.series"
-              [chart]="desicionChartOptions.chart"
-              [labels]="desicionChartOptions.labels"
-              [fill]="desicionChartOptions.fill"
-              [dataLabels]="desicionChartOptions.dataLabels"
-              [responsive]="desicionChartOptions.responsive"
-            ></apx-chart>
+            <apx-chart [series]="desicionChartOptions.series" [chart]="desicionChartOptions.chart"
+              [labels]="desicionChartOptions.labels" [fill]="desicionChartOptions.fill"
+              [dataLabels]="desicionChartOptions.dataLabels" [responsive]="desicionChartOptions.responsive"></apx-chart>
           </div>
         </div>
         <!-- مؤشرات الاداء للاجراءات -->
@@ -84,14 +79,10 @@
             </div>
           </div>
           <div id="chart">
-            <apx-chart
-              [series]="proceduresChartOptions.series"
-              [chart]="proceduresChartOptions.chart"
-              [labels]="proceduresChartOptions.labels"
-              [fill]="proceduresChartOptions.fill"
+            <apx-chart [series]="proceduresChartOptions.series" [chart]="proceduresChartOptions.chart"
+              [labels]="proceduresChartOptions.labels" [fill]="proceduresChartOptions.fill"
               [dataLabels]="proceduresChartOptions.dataLabels"
-              [responsive]="proceduresChartOptions.responsive"
-            ></apx-chart>
+              [responsive]="proceduresChartOptions.responsive"></apx-chart>
           </div>
         </div>
       </div>
@@ -119,17 +110,14 @@
 
       <!-- قرارات اللجنة العليا لحماية البيئة -->
 
-      <app-decisions-list  [showMoreButton]="true" [decisions]="decisions$ | async"></app-decisions-list>
+      <app-decisions-list [showMore]="true"  [decisions]="decisions$ | async"></app-decisions-list>
 
 
       <!-- إجراءات تنفيذ البرنامج -->
 
-      <app-procedures-list
-        *ngIf="inProgressProcedures && completedProcedures && stalledProcedures"
-        [inProgressProcedures]="inProgressProcedures"
-        [completedProcedures]="completedProcedures"
-        [stalledProcedures]="stalledProcedures"
-      ></app-procedures-list>
+      <app-procedures-list *ngIf="inProgressProcedures && completedProcedures && stalledProcedures"
+        [inProgressProcedures]="inProgressProcedures" [completedProcedures]="completedProcedures"
+        [stalledProcedures]="stalledProcedures"></app-procedures-list>
     </div>
 
 
@@ -141,21 +129,15 @@
       <div class="latest-committee-list mb-3">
         <div class="header flex justify-between p-3">
           <div class="latest-committee-title">أخر مستجدات اللجنة</div>
-          <button class="more-btn">المزيد</button>
+          <button class="more-btn" [routerLink]="'/main/committee-updates-list/' + project.id">المزيد</button>
         </div>
         <div class="committee-list p-3 flex flex-col gap-2">
-          <div
-            class="committee flex gap-4"
-            *ngFor="let committee of committeeList"
-          >
-            <img
-              class="committee-image"
-              src="{{ committee.imagePath }}"
-              alt=""
-            />
+          <div [routerLink]="'/main/committee-updates-list/' + post?.id" class="committee flex gap-4"
+            *ngFor="let post of posts$ | async">
+            <img class="committee-image" src="{{ post.image }}" alt="" />
             <div class="committee-details">
-              <div class="mb-3">{{ committee.name }}</div>
-              <div>{{ committee.date }}</div>
+              <div class="mb-3">{{ post.title }}</div>
+              <div>{{ post.created_at | date }}</div>
             </div>
           </div>
         </div>
@@ -173,10 +155,7 @@
         </div>
         <div class="flex justify-center p-4">
           <button class="add-member-btn">
-            <i
-              class="bi bi-plus"
-              style="color: #8bb81f; font-size: 20px; font-weight: 700"
-            ></i>
+            <i class="bi bi-plus" style="color: #8bb81f; font-size: 20px; font-weight: 700"></i>
             اضافة
           </button>
         </div>

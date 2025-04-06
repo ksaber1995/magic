@@ -39,6 +39,6 @@
         {{ decision.date }}
       </span>
     </div>
-    <button class="more-btn mx-3" *ngIf="showMoreButton">المزيد</button>
+    <button class="more-btn mx-3" *ngIf="showMore" [routerLink]="'/main/decisions/' + projectId">المزيد</button>
   </div>
 </div>

@@ -2,14 +2,21 @@ import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import {
-  ApexChart, ApexDataLabels,
-  ApexFill, ApexLegend, ApexNonAxisChartSeries,
-  ApexResponsive, ChartComponent
+  ApexChart,
+  ApexDataLabels,
+  ApexFill,
+  ApexLegend,
+  ApexNonAxisChartSeries,
+  ApexResponsive,
+  ChartComponent,
 } from 'ng-apexcharts';
 import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { ChangeStatusRequestComponent } from './change-status-request/change-status-request.component';
 import { Procedure } from '../../../../../../model/procedure';
 import { Project } from '../../../../../../model/project';
+import { map, Observable } from 'rxjs';
+import { Post } from '../../../../../../model/post';
+import { Decision } from '../../../../../../model/decision';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -62,18 +69,14 @@ export class ProceduresComponent implements OnInit {
     },
   ];
 
-  decisions$
-
+  decisions$: Observable<Decision[]>;
+  posts$: Observable<Post[]>;
 
   stalledProcedures: Procedure[] = [];
   completedProcedures: Procedure[] = [];
   inProgressProcedures: Procedure[] = [];
 
-  constructor(
-    private swagger : SwaggerService,
-    private route : ActivatedRoute
-  ) {
-
+  constructor(private swagger: SwaggerService, private route: ActivatedRoute) {
     this.desicionChartOptions = {
       series: [44, 55, 41],
       labels: ['منجز', 'متعثر', 'قيد التنفيذ'],
@@ -156,41 +159,36 @@ export class ProceduresComponent implements OnInit {
       name: 'pdf1',
     },
   ];
-  committeeList = [
-    {
-      imagePath: 'assets/images/user-image.jpg',
-      name:'سعادة الأستاذ',
-      date:'2021-01-29 14:45:53',
-      id:'151'
-    },
-    {
-      imagePath: 'assets/images/user-image.jpg',
-      name:'سعادة الأستاذ',
-      date:'2021-01-29 14:45:53',
-      id:'151'
-    },
-    {
-      imagePath: 'assets/images/user-image.jpg',
-      name:'سعادة الأستاذ',
-      date:'2021-01-29 14:45:53',
-      id:'151'
-    }
-  ]
-
 
   ngOnInit() {
-    this.decisions$ = this.swagger.getAllDecisions();
-    this.projectId = this.route.snapshot.paramMap.get('id')
-    console.log(this.projectId)
-    this.swagger.getProcedureByProjectId(+this.projectId).subscribe(res=>{
-      this.stalledProcedures = res.filter(res => +res.progress_percentage <= 50);
-      this.inProgressProcedures = res.filter(res => +res.progress_percentage > 50 && +res.progress_percentage < 100);
-      this.completedProcedures = res.filter(res => +res.progress_percentage >= 100);
-    })
+    this.decisions$ = this.swagger
+      .getAllDecisions()
+      .pipe(
+        map((res) => res.filter((res) => res.project?.id == +this.projectId))
+      );
+    this.posts$ = this.swagger
+      .getAllPosts()
+      .pipe(
+        map((res) => res.filter((res) => res.project?.id == +this.projectId))
+      );
 
-    this.swagger.getOneProject(this.projectId).subscribe(res=>{
-      this.project = res
-    })
+    this.projectId = this.route.snapshot.paramMap.get('id');
+    console.log(this.projectId);
+    this.swagger.getProcedureByProjectId(+this.projectId).subscribe((res) => {
+      this.stalledProcedures = res.filter(
+        (res) => +res.progress_percentage <= 50
+      );
+      this.inProgressProcedures = res.filter(
+        (res) => +res.progress_percentage > 50 && +res.progress_percentage < 100
+      );
+      this.completedProcedures = res.filter(
+        (res) => +res.progress_percentage >= 100
+      );
+    });
+
+    this.swagger.getOneProject(this.projectId).subscribe((res) => {
+      this.project = res;
+    });
   }
 
   showToolTip(decisionId) {
