@@ -1,5 +1,5 @@
-<ng-select class="flex-grow" [formControl]="control" [multiple]="true">
-  <ng-option  [value]="magicValue">{{magicLabel}}</ng-option>
+<ng-select [appendTo]="'body'" class="flex-grow" [formControl]="control" [multiple]="true">
+  <ng-option *ngIf="magicValue"  [value]="magicValue">{{magicLabel}}</ng-option>
 
   @for (item of items; track item.id) {
   <ng-option [disabled]="isDisabledOption(item.id)" [value]="item.id">{{item?.name}}</ng-option>

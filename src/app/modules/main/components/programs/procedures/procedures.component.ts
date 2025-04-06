@@ -17,7 +17,14 @@ import { Project } from '../../../../../../model/project';
 import { map, Observable } from 'rxjs';
 import { Post } from '../../../../../../model/post';
 import { Decision } from '../../../../../../model/decision';
+import { AddMembersToProjectDialogComponent } from './add-members-to-project-dialog/add-members-to-project-dialog.component';
 
+interface File {
+    title: string,
+    date: string,
+    fileType: string,
+    name: string,
+}
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -138,27 +145,7 @@ export class ProceduresComponent implements OnInit {
     };
   }
 
-  files = [
-    {
-      title: 'M 0',
-      date: '2017-12-04',
-      fileType: 'pdf',
-      name: 'pdf1',
-    },
-
-    {
-      title: 'M 0',
-      date: '2017-12-04',
-      fileType: 'pdf',
-      name: 'pdf1',
-    },
-    {
-      title: 'M 0',
-      date: '2017-12-04',
-      fileType: 'pdf',
-      name: 'pdf1',
-    },
-  ];
+  files: File[] = [];
 
   ngOnInit() {
     this.decisions$ = this.swagger
@@ -186,6 +173,10 @@ export class ProceduresComponent implements OnInit {
       );
     });
 
+    this.getProject()
+  }
+
+  getProject(){
     this.swagger.getOneProject(this.projectId).subscribe((res) => {
       this.project = res;
     });
@@ -213,5 +204,17 @@ export class ProceduresComponent implements OnInit {
       .subscribe(() => {
         checkbox.checked = false;
       });
+  }
+
+  openAddMemberModal(){
+    const dialogRef = this.dialog.open(AddMembersToProjectDialogComponent, {
+      data: {
+        projectId: this.projectId
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(res=>{
+      this.getProject();
+    })
   }
 }

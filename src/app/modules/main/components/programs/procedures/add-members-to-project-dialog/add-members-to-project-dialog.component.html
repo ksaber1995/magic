@@ -1,0 +1,70 @@
+<div class="main-dialog">
+  <div class="header flex justify-between items-center p-2">
+    <div class="title">
+      اضافة اعضاء للبرنامج
+    </div>
+    <i class="bi bi-x close-i" mat-dialog-close=""></i>
+  </div>
+
+  <div class=" mb-3 p-3">
+    <div class="tabs">
+      <button (click)="activeTab = 'groups'" [class.active]="activeTab === 'groups'" class="tab">المجموعات</button>
+      <button (click)="activeTab = 'members'" [class.active]="activeTab === 'members'" class="tab">الأعضاء</button>
+      <button (click)="activeTab = 'new'" [class.active]="activeTab === 'new'" class="tab active">جديد</button>
+    </div>
+
+    <div class="invite-form-container">
+
+
+      <form [formGroup]="newMemberForm" (submit)="createNewMember()" *ngIf="activeTab === 'new'" class="invite-form">
+        <div class="form-group">
+          <label for="name">الاسم</label>
+          <input formControlName="name" type="text" id="name" placeholder="محمد أحمد">
+        </div>
+
+        <div class="form-group">
+          <label for="position">المنصب</label>
+          <input formControlName="position" type="text" id="position" placeholder="مثلاً : مدير عام">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">جوال</label>
+          <input formControlName="mobile" type="text" id="phone" placeholder="0566000000">
+        </div>
+
+        <div class="form-group">
+          <label for="email">البريد الإلكتروني</label>
+          <input formControlName="email" type="email" id="email" placeholder="Email@example.com">
+        </div>
+
+        <button [disabled]="newMemberForm.invalid || isUpdating" [class.loading-btn]="isUpdating" type="submit" class="submit-btn">اضافة </button>
+      </form>
+    </div>
+
+    <!-- permissions  -->
+    <div *ngIf="activeTab === 'groups'" class="invite-form-container">
+      <form *ngIf="permissions" (submit)="submit()" class="invite-form">
+        <label for="permissions"> اضافة مجموعة</label>
+        <magic-select [items]="permissions" [control]="permissionsControl">
+
+        </magic-select>
+
+        <button [disabled]="newMemberForm.invalid || isUpdating" [class.loading-btn]="isUpdating" type="submit" class="submit-btn">اضافة </button>
+      </form>
+    </div>
+
+    <!-- members  -->
+    <div *ngIf="activeTab === 'members'" class="invite-form-container">
+      <form *ngIf="users" (submit)="submit()" class="invite-form">
+        <label for="users"> اضافة عضو</label>
+        <magic-select [items]="users" [control]="membersControl">
+
+        </magic-select>
+
+        <button [disabled]="newMemberForm.invalid || isUpdating" [class.loading-btn]="isUpdating" type="submit" class="submit-btn">اضافة </button>
+      </form>
+    </div>
+
+  </div>
+
+</div>

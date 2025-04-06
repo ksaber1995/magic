@@ -21,6 +21,7 @@ import { AddProjectComponent } from './components/programs/add-project/add-proje
 import { FilesComponent } from './components/programs/files/files.component';
 import { EditMemberComponent } from './components/programs/members/edit-member/edit-member.component';
 import { MembersComponent } from './components/programs/members/members.component';
+import { AddMembersToProjectDialogComponent } from './components/programs/procedures/add-members-to-project-dialog/add-members-to-project-dialog.component';
 import { ChangeStatusRequestComponent } from './components/programs/procedures/change-status-request/change-status-request.component';
 import { CreateProceduresComponent } from './components/programs/procedures/create-procedures/create-procedures.component';
 import { ProceduresListComponent } from './components/programs/procedures/procedures-list/procedures-list.component';
@@ -100,6 +101,7 @@ import { MainRoutingModule } from './main-routing.module';
     ResetPasswordComponent,
     ProceduresListComponent,
     AddProjectComponent,
+    AddMembersToProjectDialogComponent,
   ],
   imports: [
     CommonModule,

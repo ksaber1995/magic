@@ -1,13 +1,14 @@
-.hover:hover{
+.hover:hover {
   cursor: pointer;
 }
 
-mat-error{
- color: rgb(239 68 68 / var(--tw-text-opacity, 1)) !important;
+mat-error {
+  color: rgb(239 68 68 / var(--tw-text-opacity, 1)) !important;
 }
 
 .mat-mdc-snack-bar-container {
-  background-color: #4caf50 !important; /* Green Background */
+  background-color: #4caf50 !important;
+  /* Green Background */
   color: white !important;
   font-weight: bold;
   text-align: center;
@@ -15,8 +16,26 @@ mat-error{
 }
 
 .mat-mdc-snack-bar-container::before {
-  background-color: #4caf50 !important; /* Green Background */
-  content: '✔'; /* Green Title */
+  background-color: #4caf50 !important;
+  /* Green Background */
+  content: '✔';
+  /* Green Title */
   font-weight: bold;
   padding: 0 1rem;
+}
+
+
+.main-dialog {
+  color: #858585;
+  font-weight: 500;
+  height: fit-content;
+
+  .header {
+    border-bottom: 1px solid #eeeeee;
+
+    .close-i {
+      font-size: 24px;
+      cursor: pointer;
+    }
+  }
 }

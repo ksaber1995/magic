@@ -15,6 +15,7 @@ import { Sms } from '../../model/sms';
 import { Group, ProceduresGroup } from '../../model/group';
 import { Project } from '../../model/project';
 import { SpinnerService } from '../services/spinner.service';
+import { Member } from '../../model/member';
 
 
 interface ResponseData<T = any> {
@@ -210,7 +211,7 @@ export class SwaggerService {
     return this.http.get(ENDPOINT_URI + `members/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
-  createMember(member: User) {
+  createMember(member: Partial< Member >) {
     const formData = createFormData(member)
     return this.http.post(ENDPOINT_URI + `members`, formData);
   }
@@ -348,8 +349,11 @@ export class SwaggerService {
   // }
 
   // Users
-  getAllUsers() {
-    this.spinner.showSpinner()
+  getAllUsers(spinner = true) {
+    if(spinner){
+
+      this.spinner.showSpinner()
+    }
     return this.http.get<ResponseData<User>>(ENDPOINT_URI + 'users').pipe(finalize(() => this.spinner.hideSpinner()),map(res => res.data));
   }
 
