@@ -317,6 +317,10 @@ export class SwaggerService {
 
   assignRolesToUser(body: {user_id: any, roles: any[]}) {
     return this.http.post(ENDPOINT_URI + 'users/assign-role', body)
+  }
+
+  removeRolesFromUser(body: {user_id: any, role: string}) {
+    return this.http.post(ENDPOINT_URI + 'users/remove-role', body)
 
   }
 
