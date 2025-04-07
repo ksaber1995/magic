@@ -4,20 +4,36 @@
   <div class="role-form p-10">
     <form (submit)="submit()" [formGroup]="roleForm">
       <div class="input-field">
-        <label for="name">الاسم المختصر</label>
+        <label for="name">
+          الاسم المختصر
+          <i class="bi bi-asterisk asterisk"></i>
+        </label>
         <input id="name" formControlName="name" [class.error]="
-            !roleForm.get('name')?.invalid && roleForm.get('name')?.touched
+            roleForm.get('name')?.invalid && roleForm.get('name')?.touched
           " placeholder="الاسم المختصر" />
+          <div
+          class="error-message"
+          *ngIf="roleForm.get('name')?.errors?.['required'] && roleForm.get('name')?.touched"
+        >
+        الاسم المختصر مطلوب
+      </div>
       </div>
       <div class="input-field">
-        <label> اللون </label>
+        <label> اللون 
+          <i class="bi bi-asterisk asterisk"></i>
+        </label>
         <select formControlName="color" [ngStyle]="{ color: formValue?.color}" class="select-color"
           pleceholder="اختر اللون">
           <option [style.color]="color.value" class="font-bold" *ngFor="let color of colors" value="{{color.value}}">
             {{ color.color }}
           </option>
         </select>
+        <div
+        class="error-message"
+        *ngIf="roleForm.get('name')?.errors?.['required'] && roleForm.get('name')?.touched"
+      >
       </div>
+    </div>
       <!-- <div class="status-toggle-wraper">
         <div class="toggle-wrapper">
           <p>

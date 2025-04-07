@@ -39,3 +39,20 @@
 
   }
 }
+
+
+
+:host::ng-deep .mdc-switch:enabled .mdc-switch__track::after{
+  background-color: #8bb81f !important;
+}
+
+:host::ng-deep .mdc-elevation-overlay{
+  background-color: #8bb81f !important;
+}
+
+.accept-btn{
+  &:disabled{
+    cursor: not-allowed;
+    opacity: .5;
+  }
+}

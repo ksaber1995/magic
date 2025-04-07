@@ -32,7 +32,7 @@
         </td>
         <td colspan="2">
           عدد الأذونات :
-          {{ role.roles }}
+          {{ role?.permissions?.length }}
         </td>
         <td colspan="5">
           <button [routerLink]="['/main/update-role/' + role.id]" class="edit-role">

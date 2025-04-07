@@ -1,17 +1,43 @@
 <app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
-<div *ngIf="form" class="container w-100 h-full flex items-center justify-center">
+<div
+  *ngIf="form"
+  class="container w-100 h-full flex items-center justify-center"
+>
   <div class="permission-form p-10">
     <form (submit)="submit()" [formGroup]="form">
       <div class="input-field">
-        <label for="name">الاسم المختصر</label>
-        <input id="name" formControlName="name" [class.error]="!form.get('name')?.invalid && form.get('name')?.touched"
-          placeholder="الاسم المختصر" />
+        <label for="name"
+          >الاسم المختصر
+          <i class="bi bi-asterisk asterisk"></i>
+        </label>
+        <input
+          id="name"
+          formControlName="name"
+          [class.error]="form.get('name')?.invalid && form.get('name')?.touched"
+          placeholder="الاسم المختصر"
+        />
+        <div
+          class="error-message"
+          *ngIf="form.get('name')?.errors?.['required'] && form.get('name')?.touched"
+        >
+          الاسم المختصر مطلوب
+        </div>
       </div>
 
       <div class="input-field">
-        <label for="description">الوصف</label>
-        <textarea class="textarea" formControlName="description">
-        </textarea>
+        <label for="description"
+          >الوصف
+          <i class="bi bi-asterisk asterisk"></i>
+        </label>
+        <textarea class="textarea" formControlName="description"
+        [class.erorr]="form.get('description')?.errors?.['required'] && form.get('description')?.touched"
+        > </textarea>
+        <div
+          class="error-message"
+          *ngIf="form.get('description')?.errors?.['required'] && form.get('description')?.touched"
+        >
+           الوصف مطلوب
+        </div>
       </div>
 
       <!-- <div class="status-toggle-wraper">
@@ -20,7 +46,14 @@
               class="mx-10">التحويل</mat-slide-toggle></p>
         </div>
       </div> -->
-      <button [disabled]="isUpdating" [class.loading-btn]="isUpdating" class="accept-btn" [disabled]="form.invalid">موافق</button>
+      <button
+        [disabled]="isUpdating"
+        [class.loading-btn]="isUpdating"
+        class="accept-btn"
+        [disabled]="form.invalid"
+      >
+        موافق
+      </button>
     </form>
   </div>
 </div>

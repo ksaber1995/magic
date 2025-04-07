@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateSuccessDialogComponent } from '../../../../shared/components/create-succss-dialog/create-succss-dialog.component';
 import { SwaggerService } from '../../../../../swagger/swagger.service';
@@ -53,10 +53,10 @@ export class CreateNewNewsComponent implements OnInit {
       this.swagger.getOnePost(this.id).subscribe((res) => {
         debugger
         this.newsForm = this.fb.group({
-          title: [res.title],
-          project_id: [res.project.id],
-          image: [res.image],
-          content: [res.content],
+          title: [res.title , [Validators.required]],
+          project_id: [res.project.id ],
+          image: [res.image , [Validators.required]],
+          content: [res.content , [Validators.required]],
           files: [[]],
         });
 
@@ -67,17 +67,17 @@ export class CreateNewNewsComponent implements OnInit {
 
     } else {
       this.newsForm = this.fb.group({
-        title: [null],
-        project_id: [null],
-        image: [null],
-        content: [null],
+        title: [null , [Validators.required]],
+        project_id: [null ],
+        image: [null , [Validators.required]],
+        content: [null, [Validators.required]],
         files: [[]],
       });
     }
   }
   createNews() {
     this.isUpdating = true;
-
+    debugger
     const news = {
       project_id: this.formValue.project_id,
       title: this.formValue.title,

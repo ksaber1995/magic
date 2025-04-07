@@ -54,6 +54,7 @@ export class LoginComponent {
       })
       .subscribe(
         (res: any) => {
+          debugger
           this.isUpdating = false;
 
           localStorage.setItem('token', res.token);

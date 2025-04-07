@@ -141,7 +141,9 @@ export class CreateRoleComponent {
   update(role: Partial<Role>) {
     role.id = this.id;
     this.swagger.updateRole(role).subscribe(
+    
       (res) => {
+        debugger
         this.snackbar.showSuccess('تم تعديل الصلاحية', '/main/roles');
       },
       (error) => {

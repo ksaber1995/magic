@@ -14,18 +14,22 @@
                 <input
                 id="site_name"
                 formControlName="site_name"
-                [class.error]="!settingForm.get('site_name')?.invalid && settingForm.get('site_name')?.touched"
+                [class.error]="settingForm.get('site_name')?.invalid && settingForm.get('site_name')?.touched"
                 placeholder="اسم الموقع"
                 />
+                <div class="error-message" *ngIf="settingForm.get('site_name')?.errors?.['required']" > اسم الموقع مطلوب</div>
             </div>
+
             <div class="input-field">
                 <label for="email">البريد الإلكتروني</label>
                 <input
                 id="email"
                 formControlName="email"
-                [class.error]="!settingForm.get('email')?.invalid && settingForm.get('email')?.touched"
+                [class.error]="settingForm.get('email')?.invalid && settingForm.get('email')?.touched"
                 placeholder="البريد الإلكتروني"
                 />
+                <div class="error-message mt-2" *ngIf="settingForm.get('email')?.errors?.['required'] && settingForm.get('email')?.touched">البريد الإلكتروني مطلوب.</div>
+                <div class="error-message mt-2" *ngIf="settingForm.get('email')?.errors?.['email'] && settingForm.get('email')?.touched">البريد الالكتروني غير صحيح.</div>
             </div>
 
             <div class="status-toggle-wraper">

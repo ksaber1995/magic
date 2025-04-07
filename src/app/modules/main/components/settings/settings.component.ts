@@ -28,15 +28,11 @@ export class SettingsComponent implements OnInit {
     private swagger: SwaggerService,
     private snackbar: SnackbarService
   ) {}
-  //TODO, Add Validator Here
-  //TODO, make disable button obvious when it is disabled
-  //TODO, invalid buttons colors
-
   ngOnInit() {
     this.swagger.getSetting().subscribe((settings) => {
       this.settingForm = this.fb.group({
         site_name: [settings.site_name, [Validators.required]],
-        email: [settings.email, [Validators.required]],
+        email: [settings.email, [Validators.required , Validators.email]],
         email_status: [settings.email_status],
         sms_status: [settings.sms_status],
       });

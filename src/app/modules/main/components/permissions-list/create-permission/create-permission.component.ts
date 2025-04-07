@@ -13,15 +13,7 @@ export class CreatePermissionComponent {
   form: FormGroup;
   isUpdating: boolean = false;
   id = this.route.snapshot.paramMap.get('id');
-  breadcrumbs = [
-    {
-      label: 'قائمة الأذونات',
-      url: '/main/permissions',
-    },
-    {
-      label: ' انشاء إذن',
-    },
-  ];
+  breadcrumbs ;
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -35,14 +27,34 @@ export class CreatePermissionComponent {
           name: [res.name, [Validators.required]],
           description: [res.description, [Validators.required]],
           transformation: [res.transformation || false],
+          color:[null]
         });
       });
+      this.breadcrumbs = [
+        {
+          label: 'قائمة الأذونات',
+          url: '/main/permissions',
+        },
+        {
+          label: ' تحرير إذن',
+        },
+      ];
     } else {
       this.form = this.fb.group({
         name: ['', [Validators.required]],
         description: ['', [Validators.required]],
         transformation: [false],
+        color:[null]
       });
+      this.breadcrumbs = [
+        {
+          label: 'قائمة الأذونات',
+          url: '/main/permissions',
+        },
+        {
+          label: ' انشاء إذن',
+        },
+      ];
     }
   }
   submit() {
@@ -58,6 +70,7 @@ export class CreatePermissionComponent {
     const body = {
       ...this.form.value,
       transformation: this.form.value.transformation || false,
+      color: 'red'
     };
     this.swagger.createPermission(body).subscribe(
       (res) => {

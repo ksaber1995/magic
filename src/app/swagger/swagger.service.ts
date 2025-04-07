@@ -290,11 +290,13 @@ export class SwaggerService {
 
   // Permissions
   getAllPermissions() {
-    return this.http.get<Permission[]>(ENDPOINT_URI + 'permissions');
+    this.spinner.showSpinner()
+    return this.http.get<Permission[]>(ENDPOINT_URI + 'permissions').pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   getOnePermission(id: string) {
-    return this.http.get<Permission>(ENDPOINT_URI + `permissions/${id}`);
+    this.spinner.showSpinner()
+    return this.http.get<Permission>(ENDPOINT_URI + `permissions/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   createPermission(permission: Permission) {
@@ -307,7 +309,8 @@ export class SwaggerService {
 
 
   deletePermission(id: number) {
-    return this.http.delete(ENDPOINT_URI + `permissions/${id}`);
+    this.spinner.showSpinner()
+    return this.http.delete(ENDPOINT_URI + `permissions/${id}`).pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 
   // Roles

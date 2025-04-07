@@ -4,13 +4,33 @@
     <div class="  ">
       <div class="header">برنامج جديد</div>
       <div class="input-field">
-        <label>العنوان </label>
-        <input formControlName="title" placeholder="العنوان" type="text" />
+        <label>العنوان 
+          <i class="bi bi-asterisk asterisk"></i>
+        </label>
+        <input formControlName="title" placeholder="العنوان" type="text" 
+        [class.error]="form.get('title')?.errors?.['required'] && form.get('title')?.touched"
+        />
+        <div
+          class="error-message"
+          *ngIf="form.get('title')?.errors?.['required'] && form.get('title')?.touched"
+        >
+         العنوان مطلوب
+      </div>
       </div>
 
       <div class="input-field">
-        <label>التفاصيل</label>
-        <textarea formControlName="content" class="textarea" placeholder="التفاصيل" type="text"> </textarea>
+        <label>التفاصيل
+          <i class="bi bi-asterisk asterisk"></i>
+        </label>
+        <textarea formControlName="content" class="textarea" placeholder="التفاصيل" type="text"
+        [class.error]="form.get('content')?.errors?.['required'] && form.get('content')?.touched"
+        > </textarea>
+        <div
+        class="error-message"
+        *ngIf="form.get('content')?.errors?.['required'] && form.get('content')?.touched"
+      >
+       التفاصيل مطلوبة
+    </div>
       </div>
 
     </div>
@@ -25,7 +45,9 @@
 
   <div class="w-1/4 header p-4 container">
     <div class=" ">
-      <div class="header "> صورة البرنامج</div>
+      <div class="header "> صورة البرنامج
+        <i class="bi bi-asterisk asterisk"></i>
+      </div>
 
       <img width="100%" [src]="imageUrl" alt="">
 

@@ -7,7 +7,7 @@
       <div class="message-date">{{ message.created_at }}</div>
       <div class="message-details  p-2 flex" >
         <div class="message-card" >
-          <div class="message-status">تم ارسال الرسالة</div>
+          <div class="message-status mb-2">تم ارسال الرسالة</div>
           <div class="message-body mb-3"  >
             <div class="message-text-content w-100">
               <div class="message-text">{{ message.message }}</div>
@@ -16,7 +16,7 @@
                 الموقع: {{ message.location ?? "لا يوجد" }}
               </div>
             </div>
-            <div class="message-recipients flex flex-wrap items-center gap-2">
+            <div class="message-recipients mb-2 flex flex-wrap items-center gap-2">
               <span class="recipients-title">مرسلة الي</span>
               <div
                 class="recipient-item flex gap-2"

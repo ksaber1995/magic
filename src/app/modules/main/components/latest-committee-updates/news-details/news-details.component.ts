@@ -19,6 +19,7 @@ export class NewsDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.swagger.getOnePost(this.id).subscribe(post => {
+      debugger
       this.post = post;
       this.breadcrumbs = [{'label': 'آخر مستجدات اللجنة', 'url': '/'}, {'label': post.title}];
     });

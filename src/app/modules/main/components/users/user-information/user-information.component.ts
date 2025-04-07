@@ -20,8 +20,8 @@ export class UserInformationComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')
     this.swagger.getOneUser(this.id).subscribe((res:any) => {
-      this.user  = res.data
-      console.log(this.user)
+      debugger
+      this.user  = res
     })
   }
 }

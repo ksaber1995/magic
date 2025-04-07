@@ -42,3 +42,22 @@ input{
     height: 100%;
   }
 }
+
+.error{
+  border-color: red !important;
+}
+.error-message{
+  color: red;
+}
+.asterisk{
+  color: red;
+  font-size: 7px;
+}
+
+button{
+  &:disabled{
+    cursor: not-allowed !important;
+    opacity: .5 !important;
+  }
+}
+

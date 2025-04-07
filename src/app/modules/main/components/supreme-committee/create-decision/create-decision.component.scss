@@ -15,6 +15,7 @@
   }
   .input-field {
     align-items: center;
+    margin-bottom: 10px;
     .select-program,
     .title-input,
     .select-status,
@@ -28,7 +29,6 @@
       border-radius: 3px;
       border: 1px solid transparent;
       font-weight: 500;
-      margin-bottom: 20px;
       label{
         width: 130px;
 
@@ -44,7 +44,6 @@
       border-radius: 3px;
       border: 1px solid transparent;
       font-weight: 500;
-      margin-bottom: 20px;
       label{
         width: 130px;
 

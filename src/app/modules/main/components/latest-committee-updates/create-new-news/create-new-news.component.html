@@ -1,42 +1,87 @@
 <app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
-<div *ngIf="newsForm" class="create-news-container  h-full p-4">
+<div *ngIf="newsForm" class="create-news-container h-full p-4">
   <form action="" class="p-4" [formGroup]="newsForm">
     <div class="input-field flex mb-3">
-      <label> العنوان </label>
-      <input formControlName="title" placeholder="العنوان" type="text" class="address-input" />
+      <label>
+        العنوان
+        <i class="bi bi-asterisk asterisk"></i>
+      </label>
+
+      <input
+        formControlName="title"
+        placeholder="العنوان"
+        type="text"
+        class="address-input"
+        [class.error]="newsForm.get('title')?.errors?.['required'] && newsForm.get('title')?.touched"
+      />
+      <div
+        class="error-message"
+        *ngIf="newsForm.get('title')?.errors?.['required'] && newsForm.get('title')?.touched"
+      >
+        العنوان مطلوب
+      </div>
     </div>
 
     <div class="input-field flex mb-3">
-        <label> البرامج </label>
-
-
-
-      <ng-select  formControlName="project_id" class="flex-grow"  >
-        <ng-option  [value]="'all_projects'">جميع البرامج</ng-option>
+      <label> البرامج </label>
+      <ng-select formControlName="project_id" class="flex-grow">
+        <ng-option [value]="'all_projects'">جميع البرامج</ng-option>
 
         @for (item of (projects$ | async); track item.id) {
-        <ng-option  [value]="item.id">{{item?.name}}</ng-option>
+        <ng-option [value]="item.id">{{ item?.name }}</ng-option>
         }
       </ng-select>
-
     </div>
     <div class="input-field flex mb-3">
-      <label> الصورة</label>
-      <input (change)="onFileSelected($event)" type="file"  accept="webp,png,jpg" formControlName="image" class="image-input" />
+      <label>
+        الصورة
+        <i class="bi bi-asterisk asterisk"></i>
+      </label>
+      <input
+        (change)="onFileSelected($event)"
+        type="file"
+        accept="webp,png,jpg"
+        formControlName="image"
+        class="image-input"
+        [class.error]="newsForm.get('image-input')?.errors?.['required'] && newsForm.get('image-input')?.touched"
+      />
+      <div
+        class="error-message"
+        *ngIf="newsForm.get('image-input')?.errors?.['required'] && newsForm.get('image-input')?.touched"
+      >
+        الصورة مطلوبة
+      </div>
     </div>
     <div class="input-field mb-3">
-      <label>التفاصيل</label>
+      <label
+        >التفاصيل
+        <i class="bi bi-asterisk asterisk"></i>
+      </label>
       <textarea
         formControlName="content"
         class="description"
         placeholder="التفاصيل"
+        [class.error]="newsForm.get('content')?.errors?.['required'] && newsForm.get('content')?.touched"
+
       ></textarea>
+      <div
+        class="error-message"
+        *ngIf="newsForm.get('content')?.errors?.['required'] && newsForm.get('content')?.touched"
+      >
+        التفاصيل مطلوبة
+      </div>
     </div>
     <div class="uploaded-files input-field">
       <label class="title">ملفات مرفقة</label>
-      <app-files-upload  [control]="filesControl"></app-files-upload>
-
+      <app-files-upload [control]="filesControl"></app-files-upload>
     </div>
-    <button [disabled]="newsForm.invalid || isUpdating" [class.loading-btn]="isUpdating"   class="accept-btn" (click)="takeAction()">موافق</button>
+    <button
+      [disabled]="newsForm.invalid || isUpdating"
+      [class.loading-btn]="isUpdating"
+      class="accept-btn"
+      (click)="takeAction()"
+    >
+      موافق
+    </button>
   </form>
 </div>
