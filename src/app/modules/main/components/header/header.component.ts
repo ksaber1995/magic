@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { TechnicalSupportComponent } from './technical-support/technical-support.component';
 
 @Component({
   selector: 'app-header',
@@ -6,6 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
- x  = ''
-    y =''
+  dialog = inject(MatDialog);
+    openTechnicalSupport(){
+    this.dialog.open(TechnicalSupportComponent);
+    }
+
 }
