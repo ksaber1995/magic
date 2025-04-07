@@ -13,7 +13,7 @@ import { Role } from '../../model/role';
 import { Setting } from '../../model/setting';
 import { Sms } from '../../model/sms';
 import { Group, ProceduresGroup } from '../../model/group';
-import { Project } from '../../model/project';
+import { Project, ProjectHistory } from '../../model/project';
 import { SpinnerService } from '../services/spinner.service';
 import { Member } from '../../model/member';
 
@@ -129,9 +129,13 @@ export class SwaggerService {
     return this.http.put(ENDPOINT_URI + `projects/${project.id}`, formData);
   }
 
-
   deleteProject(id) {
     return this.http.delete(ENDPOINT_URI + `projects/${id}`);
+  }
+
+  getProjectHistory(id){
+    return this.http.get<ProjectHistory[]>(ENDPOINT_URI + `history/${id}/Project`);
+
   }
 
   // Procedures
@@ -246,21 +250,24 @@ export class SwaggerService {
 
   // Reports
   getAllReports() {
-    return this.http.get(ENDPOINT_URI + 'reports');
+    this.spinner.showSpinner()
+    return this.http.get<ResponseData<IReport>>(ENDPOINT_URI + 'reports').pipe(map(res=> res.data), finalize(()=>this.spinner.hideSpinner()));
   }
 
-  getOneReport(id: string) {
-    return this.http.get(ENDPOINT_URI + `reports/${id}`);
+  getOneReport(id) {
+    this.spinner.showSpinner()
+
+    return this.http.get<ResponseItem<IReport>>(ENDPOINT_URI + `reports/${id}`).pipe(map(res=> res.data), finalize(()=>this.spinner.hideSpinner()));
   }
 
-  createReport(report: IReport) {
+  createReport(report: Partial< IReport>) {
     const formData = createFormData(report);
     return this.http.post(ENDPOINT_URI + `reports`, formData);
   }
 
-  updateReport(id: string, report: IReport) {
+  updateReport( report:Partial< IReport >) {
     const formData = createFormData(report);
-    return this.http.put(ENDPOINT_URI + `reports/${id}`, formData);
+    return this.http.put(ENDPOINT_URI + `reports/${report.id}`, formData);
   }
 
   // Posts

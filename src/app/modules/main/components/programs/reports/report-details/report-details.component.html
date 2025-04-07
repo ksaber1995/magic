@@ -1,17 +1,17 @@
-<div class="report-details-container p-4 mb-4">
+<div *ngIf="report" class="report-details-container p-4 mb-4">
   <div class="report-image-wrapper w-full p-1 mb-1">
-    <img src="{{ report.imagePath }}" class="report-image" />
+    <img src="{{ report.image }}" class="report-image" />
   </div>
   <div class="reportTitle w-full flex items-center justify-between mb-5">
-    <div class="report-name">{{ report.name }}</div>
-    <div class="report-date">{{ report.date }}</div>
+    <div class="report-name">{{ report.title }}</div>
+    <div class="report-date">{{ report.created_at | date }}</div>
   </div>
   <div class="description mb-3">
-    {{ report.description }}
+    {{ report.content }}
   </div>
   <div class="report-details p-3 mb-6">
     <div class="flex justify-between mb-5">
-      <div class="last-update">اخر تحديث كان قبل {{ report.lastUpdate }}</div>
+      <div class="last-update">اخر تحديث كان : {{ report.updated_at | date }}</div>
       <div class="report-status flex items-center gap-2">
         <label for=""> حالة التقرير </label>
         <div class="input-wrapper flex items-center gap-2">
@@ -27,15 +27,15 @@
     <div class="files-wrapper">
       <div class="title mb-2">المرفقات</div>
       <div class="uploadedFiles flex items-center gap-2 p-2">
-        <div class="file flex gap-2" *ngFor="let file of report.uploadedFiles">
-          <img src="{{ file.path }}" alt="" class="icon" />
+        <div class="file flex gap-2" *ngFor="let file of report.files">
+          <img src="{{ file.url }}" alt="" class="icon" />
           <div class="file-name">{{ file.name }}</div>
         </div>
       </div>
     </div>
   </div>
-  
-  <div class="admin-comment p-3" *ngIf="isUserHasAdminRole">
+
+  <div class="admin-comment p-3" >
     <form [formGroup]="adminCommentForm" class="w-full">
     <div class="title my-3">Admin</div>
     <div class="input-field">
@@ -70,7 +70,7 @@
     <div class="flex justify-end">
       <button class="accept-btn">موافق</button>
     </div>
-    
+
     </form>
   </div>
 </div>

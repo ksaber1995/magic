@@ -70,7 +70,7 @@ export class CreateMeetingComponent implements OnInit {
           files: [[]],
           reminder_time: [res.reminder_time],
         });
-        updateFilesFromUrls(res.files as string[], this.filesControl);
+        updateFilesFromUrls(res.files.map(res=> res.url), this.filesControl);
       });
     } else {
       this.breadcrumbs = [

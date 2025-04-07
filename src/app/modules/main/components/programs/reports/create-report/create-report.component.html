@@ -1,42 +1,63 @@
-<div class="create-report-container p-7 flex gap-3">
-  <form class="report-form w-[70%]">
+<form *ngIf="form" [formGroup]="form" (submit)="takeAction()" class="create-report-container p-7 flex gap-3">
+  <div class="report-form w-[70%]">
     <div class="header p-3">تقرير جديد</div>
     <div class="p-3">
       <div class="input-field flex justify-between items-center mb-3">
         <label> العنوان </label>
-        <input type="text" class="title-input" />
+        <input formControlName="title" type="text" class="title-input" />
       </div>
-      <textarea class="description mb-3" placeholder="التفاصيل"></textarea>
+      <textarea formControlName="content" class="description mb-3" placeholder="التفاصيل"></textarea>
 
 
       <app-files-upload [control]="filesControl"></app-files-upload>
 
 
-      <button class="add-report-button my-5">اضافة التقرير</button>
-      <div class="note-wrapper">
+      <button [class.loading-btn]="isUpdating" [disabled]="isUpdating || form.invalid"
+        class="add-report-button my-5">
+        <span *ngIf="reportId">تعديل التقرير</span>
+        <span *ngIf="!reportId"> اضافة التقرير</span>
+      </button>
+
+
+        <div class="note-wrapper">
         ملاحظة: سيتم اضافة التقرير بشكل مسودة وسيتم مراجعته من اللجنة المختصة
         قبل الارسال الى اللجنة العليا ويمكنك متابعة التقرير من خلال التعليقات
       </div>
     </div>
 
-  </form>
-  <div class="report-image w-[30%] p-4">
-    <div class=" ">
-      <div class="header "> صورة البرنامج</div>
+  </div>
+  <div class="w-[30%] p-4">
 
-      <img width="100%" [src]="imageUrl" alt="">
+    <div class="report-image p-4">
+      <div class=" ">
+        <div class="header "> صورة البرنامج</div>
+
+        <img width="100%" [src]="imageUrl" alt="">
 
 
-      <div class="text-center mt-4">
-        <label for="file-upload"
-          class="cursor-pointer inline-block bg-gray-300  text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-          تعيين صورة البرنامج
-        </label>
+        <div class="text-center mt-4">
+          <label for="file-upload"
+            class="cursor-pointer inline-block bg-gray-300  text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+            تعيين صورة البرنامج
+          </label>
 
-        <input id="file-upload" type="file" class="hidden" (change)="onFileSelected($event)" />
+          <input id="file-upload" type="file" class="hidden" (change)="onFileSelected($event)" />
+        </div>
       </div>
+
+
     </div>
 
+    <div *ngIf="reportId" class="report-image  p-4 mt-7">
+      <div class="header "> حالة التقرير </div>
 
+      <mat-form-field class="w-full">
+        <mat-label>حالة التقرير</mat-label>
+        <mat-select formControlName="status_id">
+          <mat-option [value]="1" selected> منشور</mat-option>
+          <mat-option [value]="2">مسودة</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
-</div>
+</form>

@@ -57,10 +57,10 @@ const routes: Routes = [
       { path: 'programs/:id/members', component: MembersComponent },
       { path: 'programs/:id/members/:memberId/edit', component: EditMemberComponent },
 
-      { path: 'programs/:id/reports', component: ReportsComponent },
-      { path: 'programs/:id/reports/create', component: CreateReportComponent },
-      { path: 'programs/:id/reports/:reportId/edit', component: CreateReportComponent },
-      { path: 'programs/:id/reports/:reportId', component: ReportDetailsComponent },
+      { path: 'programs/:projectId/reports', component: ReportsComponent },
+      { path: 'programs/:projectId/reports/create', component: CreateReportComponent },
+      { path: 'programs/:projectId/reports/:reportId/edit', component: CreateReportComponent },
+      { path: 'programs/:projectId/reports/:reportId', component: ReportDetailsComponent },
 
       { path: 'programs/:id/supreme-committee-decisions', component: ProjectDecisionsComponent },
       // supereme-committee

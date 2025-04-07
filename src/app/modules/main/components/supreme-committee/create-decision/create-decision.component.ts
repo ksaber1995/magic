@@ -66,7 +66,7 @@ export class CreateDecisionComponent implements OnInit {
           decision_date: [ new Date(res.decision_date) ]
         });
 
-        updateFilesFromUrls(res.files as string[], this.filesControl);
+        updateFilesFromUrls(res.files.map(res=> res.url), this.filesControl);
       })
     }else{
       this.decisionForm = this.fb.group({

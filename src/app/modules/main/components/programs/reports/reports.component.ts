@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { OnInit } from '@angular/core';
+import { map } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { IReport } from '../../../../../../model/report';
 
 @Component({
   selector: 'app-reports',
@@ -8,23 +11,21 @@ import { OnInit } from '@angular/core';
   styleUrl: './reports.component.scss'
 })
 export class ReportsComponent implements OnInit{
-  reports$ = this.swagger.getAllReports();
+  reports: IReport[] = [];
+
+  projectId = +this.route.snapshot.paramMap.get('projectId');
   constructor(
-    private swagger: SwaggerService
+    private swagger: SwaggerService,
+    private route: ActivatedRoute
   ){}
-  reports =[
-    {
-      name:'karim saber',
-      date:'2021-01-19',
-      reportCreator:'Admin',
-      reportStatus:'مسودة',
-      id:'111'
-    }
-  ]
+
 
   ngOnInit(): void {
-    this.reports$.subscribe(res=>{
-      debugger;
-    })
+    this.swagger.getAllReports().pipe(map(res=> res.filter(res=> res.project_id == this.projectId)))
+    .subscribe(res=>{
+      this.reports = res;
+
+    });
+
   }
 }

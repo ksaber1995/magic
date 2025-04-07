@@ -10,15 +10,15 @@ import {
   ApexResponsive,
   ChartComponent,
 } from 'ng-apexcharts';
-import { SwaggerService } from '../../../../../swagger/swagger.service';
-import { ChangeStatusRequestComponent } from './change-status-request/change-status-request.component';
-import { Procedure } from '../../../../../../model/procedure';
-import { Project } from '../../../../../../model/project';
-import { combineLatest, map, Observable, finalize } from 'rxjs';
-import { Post } from '../../../../../../model/post';
+import { combineLatest, map } from 'rxjs';
 import { Decision } from '../../../../../../model/decision';
-import { AddMembersToProjectDialogComponent } from './add-members-to-project-dialog/add-members-to-project-dialog.component';
 import { FileItem } from '../../../../../../model/filte';
+import { Post } from '../../../../../../model/post';
+import { Procedure } from '../../../../../../model/procedure';
+import { Project, ProjectHistory } from '../../../../../../model/project';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
+import { AddMembersToProjectDialogComponent } from './add-members-to-project-dialog/add-members-to-project-dialog.component';
+import { ChangeStatusRequestComponent } from './change-status-request/change-status-request.component';
 
 
 export type ChartOptions = {
@@ -46,32 +46,7 @@ export class ProceduresComponent implements OnInit {
   project: Project;
   hideTimeout: any;
   dialog = inject(MatDialog);
-  lastUpdates = [
-    {
-      date: 'March 24, 2025, 6:46 AM',
-      reportName: 'ahmed alkhairy',
-      reportId: '101',
-      userName: 'admin',
-      userImage: 'assets/images/user-image.jpg',
-      userId: '545',
-    },
-    {
-      date: 'March 24, 2025, 6:46 AM',
-      reportName: 'ahmed alkhairy',
-      reportId: '101',
-      userName: 'admin',
-      userImage: 'assets/images/user-image.jpg',
-      userId: '545',
-    },
-    {
-      date: 'March 24, 2025, 6:46 AM',
-      reportName: 'ahmed alkhairy',
-      reportId: '101',
-      userName: 'admin',
-      userImage: 'assets/images/user-image.jpg',
-      userId: '545',
-    },
-  ];
+  histories: ProjectHistory[] = [];
 
   decisions: Decision[] = [];
   posts: Post[] = [];
@@ -169,10 +144,12 @@ export class ProceduresComponent implements OnInit {
       );
 
       const procedures$ = this.swagger.getProcedureByProjectId(+this.projectId);
+      const history$ = this.swagger.getProjectHistory(+this.projectId);
 
-      combineLatest([decisions$, posts$, procedures$]).subscribe(([decisions, posts, procedures]) => {
+      combineLatest([decisions$, posts$, procedures$, history$]).subscribe(([decisions, posts, procedures, history]) => {
         this.decisions = decisions;
         this.posts = posts;
+        this.histories = history;
         this.stalledProcedures = procedures.filter(
           (res) => +res.progress_percentage <= 0
         );

@@ -91,26 +91,33 @@
 
       <div class="last-updates mb-3 pb-2">
         <div class="title p-3">آخر التحديثات</div>
-        <div class="update-details p-3" *ngFor="let update of lastUpdates">
-          <div class="date mb-1">{{ update.date }}</div>
-          <div class="details flex items-center">
-            تم تغيير حالة التقرير
-            <span class="report-name mx-1">
-              {{ update.reportName }}
-            </span>
-            بواسطة
-            <div class="user-info flex gap-2 mr-1">
-              <img src="{{ update.userImage }}" class="user-image" alt="" />
-              {{ update.userName }}
+        <div class="update-details p-3" *ngFor="let history of histories; index as i">
+          <ng-container *ngIf="i < 6">
+
+            <div class="date mb-1">{{ history.created_at | date }}</div>
+            <div class="details flex items-center">
+              <span *ngIf="history.action === 'create'">
+                تم اضافة المشروع بواسطة
+              </span>
+
+              <span *ngIf="history.action === 'update'">
+                تم تعديل المشروع بواسطة
+              </span>
+
+              <div class="user-info flex gap-2 mr-1">
+                <img *ngIf="history.user?.image" src="{{ history.user?.image }}" class="user-image" alt="" />
+                <mat-icon *ngIf="!history.user?.image">person</mat-icon>
+                {{ history.user?.name }}
+              </div>
             </div>
-          </div>
+          </ng-container>
         </div>
         <button class="more-btn m-3">المزيد</button>
       </div>
 
       <!-- قرارات اللجنة العليا لحماية البيئة -->
 
-      <app-decisions-list [showMore]="true"  [decisions]="decisions"></app-decisions-list>
+      <app-decisions-list [showMore]="true" [decisions]="decisions"></app-decisions-list>
 
 
       <!-- إجراءات تنفيذ البرنامج -->

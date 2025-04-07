@@ -1,46 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SwaggerService } from '../../../../../../swagger/swagger.service';
+import { ActivatedRoute } from '@angular/router';
+import { IReport } from '../../../../../../../model/report';
 
 @Component({
   selector: 'app-report-details',
   templateUrl: './report-details.component.html',
   styleUrl: './report-details.component.scss',
 })
+
+//TODO: add breadCrumb
 export class ReportDetailsComponent implements OnInit{
   isReportPosted: boolean;
-  isUserHasAdminRole:boolean = true
   adminCommentForm: FormGroup
+
+  projectId = +this.route.snapshot.paramMap.get('projectId');
+  reportId = +this.route.snapshot.paramMap.get('reportId');
+  report : IReport;
+
   constructor(
-    private fb:FormBuilder
+    private fb:FormBuilder,
+        private swagger: SwaggerService,
+        private route: ActivatedRoute
   ){
-    
+
   }
   ngOnInit() {
+
+    this.swagger.getOneReport(this.reportId).subscribe((res: any) => {
+      this.report = res;
+
+    });
+
     this.adminCommentForm = this.fb.group({
-      description:[null], 
+      description:[null],
       uploadedFiles: this.fb.array([])
     })
   }
-  report = {
-    imagePath: 'assets/images/report-image.jpg',
-    name: 'karim saber',
-    date: '09/11/2021',
-    reportStatus: 'مسودة',
-    lastUpdate: ' 3 ساعات',
-    description: 'ccccc',
-    uploadedFiles: [
-      {
-        name: 'karim saber phf',
-        path: 'assets/images/pdf.svg',
-      },
-      {
-        name: 'karim saber phf',
-        path: 'assets/images/pdf.svg',
-      },
-      {
-        name: 'karim saber phf',
-        path: 'assets/images/pdf.svg',
-      },
-    ],
-  };
 }

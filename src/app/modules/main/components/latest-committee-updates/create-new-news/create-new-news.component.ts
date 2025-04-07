@@ -60,7 +60,7 @@ export class CreateNewNewsComponent implements OnInit {
           files: [[]],
         });
 
-        updateFilesFromUrls(res.files as string[], this.filesControl);
+        updateFilesFromUrls(res.files.map(res=> res.url), this.filesControl);
 
       })
 
