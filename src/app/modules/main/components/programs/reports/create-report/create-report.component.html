@@ -7,41 +7,36 @@
         <input type="text" class="title-input" />
       </div>
       <textarea class="description mb-3" placeholder="التفاصيل"></textarea>
-      <div class="uploaded-files mb-3 input-field">
-        <label class="title">ملفات مرفقة</label>
-        <input type="file" multiple id="fileInput" hidden />
-        <div
-          class="upload-files-button p-4"
-          onclick="document.getElementById('fileInput').click()"
-        >
-          <label>اسحب الملف هنا...</label>
-          <div class="choose-file">
-            أو قم باختيار الملف..
-            <i class="bi bi-upload"></i>
-          </div>
-        </div>
-        <div class="selected-files"></div>
-      </div>
-      <button class="add-report-button mb-3">اضافة التقرير</button>
+
+
+      <app-files-upload [control]="filesControl"></app-files-upload>
+
+
+      <button class="add-report-button my-5">اضافة التقرير</button>
       <div class="note-wrapper">
         ملاحظة: سيتم اضافة التقرير بشكل مسودة وسيتم مراجعته من اللجنة المختصة
         قبل الارسال الى اللجنة العليا ويمكنك متابعة التقرير من خلال التعليقات
       </div>
     </div>
+
   </form>
-  <div class="report-image w-[30%]">
-    <div class="header p-3">صورة التقرير</div>
-    <div class="p-4">
-        <img src="assets/images/user-image.jpg" class="image-preview" alt="">
+  <div class="report-image w-[30%] p-4">
+    <div class=" ">
+      <div class="header "> صورة البرنامج</div>
+
+      <img width="100%" [src]="imageUrl" alt="">
+
+
+      <div class="text-center mt-4">
+        <label for="file-upload"
+          class="cursor-pointer inline-block bg-gray-300  text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+          تعيين صورة البرنامج
+        </label>
+
+        <input id="file-upload" type="file" class="hidden" (change)="onFileSelected($event)" />
+      </div>
     </div>
-    <input type="file" id="imgaeInput" hidden />
-    <div class="flex justify-center mb-3">
-      <button
-        class="set-image-btn"
-        onclick="document.getElementById('imgaeInput').click()"
-      >
-        تعيين صورة للتقرير
-      </button>
-    </div>
+
+
   </div>
 </div>

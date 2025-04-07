@@ -1,5 +1,5 @@
 .file-details{
-    width: 600px;
+    width: 700px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
     .header{
         border: 1px solid #e5e5e5;
@@ -19,7 +19,9 @@
             font-size: 18px;
             color: #858585;
             font-weight: 700;
-            margin-bottom: 15px;            
+            margin-bottom: 15px;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
         label{
             color: #bbbbbb;

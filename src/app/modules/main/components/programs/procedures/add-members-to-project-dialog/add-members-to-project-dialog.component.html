@@ -41,27 +41,27 @@
       </form>
     </div>
 
-    <!-- permissions  -->
+    <!-- roles  -->
     <div *ngIf="activeTab === 'groups'" class="invite-form-container">
-      <form *ngIf="permissions" (submit)="submit()" class="invite-form">
-        <label for="permissions"> اضافة مجموعة</label>
-        <magic-select [items]="permissions" [control]="permissionsControl">
+      <form *ngIf="roles" (submit)="addRoles()" class="invite-form">
+        <label for="roles"> اضافة مجموعة</label>
+        <magic-select [items]="roles" [control]="rolesControl">
 
         </magic-select>
 
-        <button [disabled]="newMemberForm.invalid || isUpdating" [class.loading-btn]="isUpdating" type="submit" class="submit-btn">اضافة </button>
+        <button [disabled]="  isUpdating" [class.loading-btn]="isUpdating" type="submit" class="submit-btn">اضافة </button>
       </form>
     </div>
 
     <!-- members  -->
     <div *ngIf="activeTab === 'members'" class="invite-form-container">
-      <form *ngIf="users" (submit)="submit()" class="invite-form">
+      <form *ngIf="users" (submit)="addMembers()" class="invite-form">
         <label for="users"> اضافة عضو</label>
         <magic-select [items]="users" [control]="membersControl">
 
         </magic-select>
 
-        <button [disabled]="newMemberForm.invalid || isUpdating" [class.loading-btn]="isUpdating" type="submit" class="submit-btn">اضافة </button>
+        <button [disabled]="isUpdating" [class.loading-btn]="isUpdating" type="submit" class="submit-btn">اضافة </button>
       </form>
     </div>
 

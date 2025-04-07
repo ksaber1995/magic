@@ -314,8 +314,10 @@ export class SwaggerService {
   }
 
   // Roles
-  getAllRoles() {
-    this.spinner.showSpinner()
+  getAllRoles(spinner = true) {
+    if(spinner){
+      this.spinner.showSpinner()
+    }
     return this.http.get<Role[]>(ENDPOINT_URI + 'roles').pipe(finalize(()=>this.spinner.hideSpinner()));
   }
 

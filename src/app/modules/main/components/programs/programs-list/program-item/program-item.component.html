@@ -1,15 +1,18 @@
 
 <mat-card class="hover shadow-md hover:shadow-2xl transition-shadow duration-300">
-  <h2 class="main-title">
-    <mat-icon [class.star-color] ="true">star</mat-icon>
-    <!-- <mat-icon>star</mat-icon> -->
-    <!-- <mat-icon [class.star-bg] ="true">star_border</mat-icon> -->
+  <div [routerLink]="'/main/programs/' + project.id + '/procedures'" class="">
 
-    {{project.title}}
-  </h2>
+    <h2 class="main-title">
+      <mat-icon [class.star-color] ="true">star</mat-icon>
+      <!-- <mat-icon>star</mat-icon> -->
+      <!-- <mat-icon [class.star-bg] ="true">star_border</mat-icon> -->
 
-  <div class="overflow-hidden">
-    <img class="transition-transform duration-500 ease-in-out hover:scale-125" [src]="project.image"  alt="">
+      {{project.title}}
+    </h2>
+
+    <div class="overflow-hidden">
+      <img class="transition-transform duration-500 ease-in-out hover:scale-125" [src]="project.image"  alt="">
+    </div>
   </div>
 
   <mat-card-footer>
