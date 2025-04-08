@@ -9,7 +9,7 @@
       <textarea formControlName="content" class="description mb-3" placeholder="التفاصيل"></textarea>
 
 
-      <app-files-upload [control]="filesControl"></app-files-upload>
+      <app-files-upload [oldFiles]="oldFiles" [control]="filesControl"></app-files-upload>
 
 
       <button [class.loading-btn]="isUpdating" [disabled]="isUpdating || form.invalid"

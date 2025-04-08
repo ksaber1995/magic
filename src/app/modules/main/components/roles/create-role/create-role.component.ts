@@ -33,7 +33,7 @@ export class CreateRoleComponent {
 
   permissions: Permission[];
   isPermissionsLoaded = false;
-  breadcrumbs;
+  breadCrumbs;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -43,7 +43,7 @@ export class CreateRoleComponent {
 
   ngOnInit() {
     if (this.id) {
-      this.breadcrumbs = [
+      this.breadCrumbs = [
         {
           label: ' الأذونات',
           url: '/main/roles',
@@ -53,7 +53,7 @@ export class CreateRoleComponent {
         },
       ];
     } else {
-      this.breadcrumbs = [
+      this.breadCrumbs = [
         {
           label: ' الأذونات',
           url: '/main/roles',
@@ -141,7 +141,7 @@ export class CreateRoleComponent {
   update(role: Partial<Role>) {
     role.id = this.id;
     this.swagger.updateRole(role).subscribe(
-    
+
       (res) => {
         debugger
         this.snackbar.showSuccess('تم تعديل الصلاحية', '/main/roles');

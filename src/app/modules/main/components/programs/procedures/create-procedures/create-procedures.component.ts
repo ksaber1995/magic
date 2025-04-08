@@ -15,11 +15,11 @@ export class CreateProceduresComponent implements OnInit {
   isUpdating: boolean;
 
   constructor(
-    private route : ActivatedRoute, 
+    private route : ActivatedRoute,
     private fb: FormBuilder,
     private swagger : SwaggerService
   ){
-    this.id = this.route.snapshot.paramMap.get('id'); 
+    this.id = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit() {
@@ -29,10 +29,10 @@ export class CreateProceduresComponent implements OnInit {
     })
     this.procedureForm = this.fb.group({
       files: [[]],
-    
+
     })
   }
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label:'البرامج',
       url:'/'

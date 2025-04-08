@@ -10,7 +10,7 @@ import { SwaggerService } from '../../../../../swagger/swagger.service';
 })
 export class NewsDetailsComponent implements OnInit {
   post: Post;
-  breadcrumbs;
+  breadCrumbs;
   id = this.route.snapshot.paramMap.get('id');
   constructor(
     private route: ActivatedRoute,
@@ -21,7 +21,7 @@ export class NewsDetailsComponent implements OnInit {
     this.swagger.getOnePost(this.id).subscribe(post => {
       debugger
       this.post = post;
-      this.breadcrumbs = [{'label': 'آخر مستجدات اللجنة', 'url': '/'}, {'label': post.title}];
+      this.breadCrumbs = [{'label': 'آخر مستجدات اللجنة', 'url': '/'}, {'label': post.title}];
     });
 
   }

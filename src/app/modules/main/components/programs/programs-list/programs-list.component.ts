@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './programs-list.component.scss',
 })
 export class ProgramsListComponent implements OnInit {
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label: 'بوابة البرامج',
       url: '/',

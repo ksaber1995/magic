@@ -21,7 +21,7 @@ export class CommitteeUpdatesListComponent implements OnInit{
     private route: ActivatedRoute
   ){}
 
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label:'قائمة أخر مستجدات اللجنة '
     }

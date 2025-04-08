@@ -1,31 +1,33 @@
-<div class="reports-container w-full p-4" *ngIf="reports.length >0 ">
-  <div class="report-wrapper p-4" *ngFor="let report of reports">
-    <div class="reportTitle w-full flex items-center justify-between mb-5">
-      <div class="report-name">{{ report.title }}</div>
-      <div class="report-date">{{ report.created_at | date }}</div>
-    </div>
-    <div class="w-full flex items-center justify-between">
-      <div class="report-info flex items-center gap-4">
-        <div class="report-creator">
-          معد التقرير
-          <span class="creator-name">{{ report.user?.name }}</span>
-        </div>
-        <div class="report-status">
-          حالة التقرير
-          <span class="status-name">{{ report.status_id === 1 ? "منشور" : "مسودة" }}</span>
-        </div>
+<app-bread-crumb [breadCrumbs]="breadCrumbs" [breadCrumbButton]="breadCrumbButton"></app-bread-crumb>
+<div *ngIf="isLoaded" class="reports-container">
+
+  <div class=" w-full p-4 report-wrapper" *ngIf="reports.length > 0 ">
+    <div class=" " *ngFor="let report of reports">
+      <div class="reportTitle w-full flex items-center justify-between mb-5">
+        <div class="report-name">{{ report.title }}</div>
+        <div class="report-date">{{ report.created_at | date }}</div>
       </div>
-      <div class="report-action">
-        <button class="see-report-btn mx-2" [routerLink]="[report.id]"> مشاهدة التقرير</button>
-        <button class="edit" [routerLink]="[report.id] + '/edit'">تعديل</button>
+      <div class="w-full flex items-center justify-between">
+        <div class="report-info flex items-center gap-4">
+          <div class="report-creator">
+            معد التقرير
+            <span class="creator-name">{{ report.user?.name }}</span>
+          </div>
+          <div class="report-status">
+            حالة التقرير
+            <span class="status-name">{{ report.status_id === 1 ? "منشور" : "مسودة" }}</span>
+          </div>
+        </div>
+        <div class="report-action">
+          <button class="see-report-btn mx-2" [routerLink]="[report.id]"> مشاهدة التقرير</button>
+          <button class="edit" [routerLink]="[report.id] + '/edit'">تعديل</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-<div class="p-5">
-    <div class="empty-state w-full" *ngIf="reports.length == 0">
-        لا يوجد تقارير حاليا لهذا المشروع
-    </div>
+    <div class="empty-state" *ngIf="reports.length == 0">
+      لا يوجد تقارير حاليا لهذا المشروع
+  </div>
 </div>

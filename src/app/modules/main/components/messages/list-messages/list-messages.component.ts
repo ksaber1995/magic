@@ -13,7 +13,7 @@ type GroupedSMS = {
 })
 export class ListMessagesComponent  implements OnInit{
   messages : SMS[];
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label:' الرسائل القصيرة',
     },

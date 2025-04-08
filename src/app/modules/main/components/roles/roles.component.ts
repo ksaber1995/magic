@@ -20,7 +20,7 @@ interface role {
 export class RolesComponent implements OnInit {
   roles: Role[] = [];
 
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label:' الأذونات'
     }

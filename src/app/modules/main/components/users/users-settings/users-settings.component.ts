@@ -11,7 +11,7 @@ export class UsersSettingsComponent implements OnInit {
   constructor(
     private fb : FormBuilder
   ){}
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label: ' قائمة المستخدمين',
       url: '/main/users',

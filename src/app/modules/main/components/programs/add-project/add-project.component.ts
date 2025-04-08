@@ -21,7 +21,7 @@ export class AddProjectComponent implements OnInit{
     private snackbar: SnackbarService
   ){}
 
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label: ' قائمة البرامج',
       url: '/',

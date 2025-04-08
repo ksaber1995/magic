@@ -1,11 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FileItem } from '../../../../../../model/filte';
 import { Meeting } from '../../../../../../model/meeting';
 import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { SnackbarService } from './../../../../../services/snackbar.service';
-import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { updateFilesFromUrls } from '../../../../../../utlities/file-helper';
 function formatDate(date: Date): string {
   if (date instanceof Date) {
     const year = date.getFullYear();
@@ -29,11 +28,12 @@ export class CreateMeetingComponent implements OnInit {
 
   users$ = this.swagger.getAllUsers();
   projects$ = this.swagger.getAllProjects();
-  breadcrumbs;
+  breadCrumbs;
   form: FormGroup;
   times = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
   isUpdating = false;
   id = +this.route.snapshot.paramMap.get('id');
+  oldFiles: FileItem[];
   constructor(
     private fb: FormBuilder,
     private swagger: SwaggerService,
@@ -44,7 +44,7 @@ export class CreateMeetingComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.id) {
-      this.breadcrumbs = [
+      this.breadCrumbs = [
         {
           label: 'الاجتماعات',
           url: '/main/meetings',
@@ -70,10 +70,10 @@ export class CreateMeetingComponent implements OnInit {
           files: [[]],
           reminder_time: [res.reminder_time],
         });
-        updateFilesFromUrls(res.files.map(res=> res.url), this.filesControl);
+        this.oldFiles = (res.files as FileItem[])
       });
     } else {
-      this.breadcrumbs = [
+      this.breadCrumbs = [
         {
           label: 'الاجتماعات',
           url: '/main/meetings',

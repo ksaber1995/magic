@@ -1,40 +1,39 @@
-<app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
-<div class="members-container p-8">
-    <div class="title">اعضاء البرنامج</div>
-    <div class="members-wrapper flex gap-3 flex-wrap">
-      <div
-        class="member flex flex-col items-center py-2 w-[24%]"
-        *ngFor="let member of members"
-      >
-        <div class="name">
-          {{ member.user.name }}
-        </div>
-        <div class="job-title">
-          {{ member.user.job ? member.user.job : " غير محدد" }}
-        </div>
-        <div
-         class="member-details" 
-         *ngIf="selectedMemberIds.has(member.id)">
-          <div class="email">{{ member.user.email }}</div>
-          <div class="phone-number">
-            {{ member.user.phone ? member.user.phone : "غير محدد" }}
-          </div>
-          <div class="code">{{ member.user.id }}</div>
-          <div class="actions flex justify-between" >
-            <button routerLink="{{member.user.id}}/edit">
-              <i class="bi bi-pencil-square"></i>
-              تعديل
-            </button>
-            <button (click)="deleteMember(member.user.id)">
-              <i class="bi bi-trash3-fill"></i>
-              حذف
-            </button>
-          </div>
-        </div>
-        <button class="details-btn" (click)="showDetails(member.id)">
-          تفاصيل
-        </button>
+<app-bread-crumb [breadCrumbs]="breadCrumbs"></app-bread-crumb>
+<div class="members-container p-4">
+  <div class="title">اعضاء البرنامج</div>
+  <div *ngIf="members?.length > 0" class="members-wrapper flex gap-3 flex-wrap">
+    <div class="member flex flex-col items-center py-2 w-[24%]" *ngFor="let member of members">
+      <div class="name">
+        {{ member.user.name }}
       </div>
+      <div class="job-title">
+        {{ member.user.job ? member.user.job : " غير محدد" }}
+      </div>
+      <div class="member-details" *ngIf="selectedMemberIds.has(member.id)">
+        <div class="email">{{ member.user.email }}</div>
+        <div class="phone-number">
+          {{ member.user.phone ? member.user.phone : "غير محدد" }}
+        </div>
+        <div class="code">{{ member.user.id }}</div>
+        <div class="actions flex justify-between">
+          <button routerLink="{{member.user.id}}/edit">
+            <i class="bi bi-pencil-square"></i>
+            تعديل
+          </button>
+          <button (click)="deleteMemberDialog(member.id)">
+            <i class="bi bi-trash3-fill"></i>
+            حذف
+          </button>
+        </div>
+      </div>
+      <button class="details-btn" (click)="showDetails(member.id)">
+        تفاصيل
+      </button>
     </div>
   </div>
-  
+
+
+  <div *ngIf="members.length == 0" class="empty-state">
+    لا يوجد أعضاء لهذا البرنامج
+  </div>
+</div>

@@ -1,12 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { SwaggerService } from '../../../../../swagger/swagger.service';
-import { SnackbarService } from '../../../../../services/snackbar.service';
-import { Decision } from '../../../../../../model/decision';
-import { FormControl } from '@angular/forms';
-import { map } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { setFileBinaryFromURL, updateFilesFromUrls } from '../../../../../../utlities/file-helper';
+import { map } from 'rxjs';
+import { Decision } from '../../../../../../model/decision';
+import { FileItem } from '../../../../../../model/filte';
+import { SnackbarService } from '../../../../../services/snackbar.service';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
 function formatDate(date: Date): string {
   const year = date.getFullYear();
   const month = date.getMonth() + 1; // Months are 0-based, so add 1
@@ -21,6 +20,7 @@ function formatDate(date: Date): string {
 })
 export class CreateDecisionComponent implements OnInit {
   @ViewChild('dateInput') dateInput!: ElementRef;
+  oldFiles: FileItem[];
   formatLabel(value: number): string {
     return `${value} %`;
   }
@@ -31,7 +31,7 @@ export class CreateDecisionComponent implements OnInit {
 
   id = +this.route.snapshot.paramMap.get('id');
 
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label:'بوابة البرامج',
       url:'/'
@@ -66,7 +66,7 @@ export class CreateDecisionComponent implements OnInit {
           decision_date: [ new Date(res.decision_date) ]
         });
 
-        updateFilesFromUrls(res.files.map(res=> res.url), this.filesControl);
+        this.oldFiles = (res.files as FileItem[])
       })
     }else{
       this.decisionForm = this.fb.group({

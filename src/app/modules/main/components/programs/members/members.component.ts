@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { ActivatedRoute } from '@angular/router';
 import { Member } from '../../../../../../model/member';
+import { MatDialog } from '@angular/material/dialog';
+import { SnackbarService } from '../../../../../services/snackbar.service';
+import { DeleteDialogComponent } from '../../supreme-committee/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-members',
@@ -11,7 +14,7 @@ import { Member } from '../../../../../../model/member';
 export class MembersComponent implements OnInit {
   members : Member[] = []
 
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label:'البرامج',
       url:''
@@ -30,7 +33,9 @@ export class MembersComponent implements OnInit {
 
   constructor(
     private swagger : SwaggerService,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private dialog: MatDialog,
+    private snackbar: SnackbarService
   ){
 
   }
@@ -50,7 +55,28 @@ export class MembersComponent implements OnInit {
       this.selectedMemberIds.add(memberId); // Show details
     }
   }
-  deleteMember(member){
 
+  deleteMemberDialog(id: string){
+    const dialogRef = this.dialog.open(DeleteDialogComponent);
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.deleteMember(id)
+      }
+    });
+
+
+  }
+
+  deleteMember(id: string){
+    this.swagger.deleteMember(id).subscribe((res:any)=>{
+      this.snackbar.showSuccessSnackbar('تم حذف العضو بنجاح')
+      this.swagger.getOneProject(this.id).subscribe((res:any)=>{
+        this.members = res.members
+        console.log(this.members)
+      }, error=>{
+        this.snackbar.showError(error.message)
+      })
+    })
   }
 }

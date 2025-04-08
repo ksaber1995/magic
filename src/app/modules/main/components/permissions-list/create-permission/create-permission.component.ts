@@ -13,7 +13,7 @@ export class CreatePermissionComponent {
   form: FormGroup;
   isUpdating: boolean = false;
   id = this.route.snapshot.paramMap.get('id');
-  breadcrumbs ;
+  breadCrumbs ;
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -30,7 +30,7 @@ export class CreatePermissionComponent {
           color:[null]
         });
       });
-      this.breadcrumbs = [
+      this.breadCrumbs = [
         {
           label: 'قائمة الأذونات',
           url: '/main/permissions',
@@ -46,7 +46,7 @@ export class CreatePermissionComponent {
         transformation: [false],
         color:[null]
       });
-      this.breadcrumbs = [
+      this.breadCrumbs = [
         {
           label: 'قائمة الأذونات',
           url: '/main/permissions',

@@ -1,3 +1,4 @@
+import { FileItem } from "./filte";
 import { Project } from "./project";
 
 export interface Meeting{
@@ -9,7 +10,7 @@ export interface Meeting{
   reminder_time: string;
   members_ids: number[];
   projects_ids: number[];
-  files: File[] | string[];
+  files: File[] | FileItem[];
   coordinator_user?: {
     name: string
   };

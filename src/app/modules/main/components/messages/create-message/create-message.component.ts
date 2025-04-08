@@ -17,7 +17,7 @@ export class CreateMessageComponent implements OnInit{
     members_ids :[[], [Validators.required]],
     message: [null, [Validators.required]]
   });
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label:'بوابة البرامج',
       url:'/'

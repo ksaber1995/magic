@@ -54,6 +54,7 @@ export class ProceduresComponent implements OnInit {
   stalledProcedures: Procedure[] = [];
   completedProcedures: Procedure[] = [];
   inProgressProcedures: Procedure[] = [];
+  isLoaded: boolean;
 
   constructor(private swagger: SwaggerService, private route: ActivatedRoute) {
     this.desicionChartOptions = {
@@ -166,6 +167,8 @@ export class ProceduresComponent implements OnInit {
 
         this.files = [...decisionsFiles, ...postsFiles, ...proceduresFiles].map(res=> ({...res, size: res.size / 1024, fileType: res.name.split('.').pop()}));
         console.log({ files: this.files})
+
+        this.isLoaded = true;
       })
 
   }

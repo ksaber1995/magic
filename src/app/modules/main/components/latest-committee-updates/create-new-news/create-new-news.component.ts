@@ -1,12 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateSuccessDialogComponent } from '../../../../shared/components/create-succss-dialog/create-succss-dialog.component';
-import { SwaggerService } from '../../../../../swagger/swagger.service';
-import { map } from 'rxjs';
-import { SnackbarService } from '../../../../../services/snackbar.service';
 import { ActivatedRoute } from '@angular/router';
-import { updateFilesFromUrls } from '../../../../../../utlities/file-helper';
+import { map } from 'rxjs';
+import { FileItem } from '../../../../../../model/filte';
+import { SnackbarService } from '../../../../../services/snackbar.service';
+import { SwaggerService } from '../../../../../swagger/swagger.service';
 
 @Component({
   selector: 'app-create-new-news',
@@ -25,7 +29,7 @@ export class CreateNewNewsComponent implements OnInit {
     );
   id = +this.route.snapshot.paramMap.get('id');
 
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label: 'البرامج',
       url: '/',
@@ -38,6 +42,7 @@ export class CreateNewNewsComponent implements OnInit {
       label: 'انشاء خبر',
     },
   ];
+  oldFiles: FileItem[] = [];
   isUpdating = false;
   constructor(
     private fb: FormBuilder,
@@ -51,25 +56,23 @@ export class CreateNewNewsComponent implements OnInit {
   ngOnInit(): void {
     if (this.id) {
       this.swagger.getOnePost(this.id).subscribe((res) => {
-        debugger
+        debugger;
         this.newsForm = this.fb.group({
-          title: [res.title , [Validators.required]],
-          project_id: [res.project.id ],
-          image: [res.image , [Validators.required]],
-          content: [res.content , [Validators.required]],
+          title: [res.title, [Validators.required]],
+          project_id: [res.project.id],
+          image: [res.image, [Validators.required]],
+          content: [res.content, [Validators.required]],
           files: [[]],
         });
 
-        updateFilesFromUrls(res.files.map(res=> res.url), this.filesControl);
+        this.oldFiles = (res.files as FileItem[])
 
-      })
-
-
+      });
     } else {
       this.newsForm = this.fb.group({
-        title: [null , [Validators.required]],
-        project_id: [null ],
-        image: [null , [Validators.required]],
+        title: [null, [Validators.required]],
+        project_id: [null],
+        image: [null, [Validators.required]],
         content: [null, [Validators.required]],
         files: [[]],
       });
@@ -77,7 +80,7 @@ export class CreateNewNewsComponent implements OnInit {
   }
   createNews() {
     this.isUpdating = true;
-    debugger
+    debugger;
     const news = {
       project_id: this.formValue.project_id,
       title: this.formValue.title,
@@ -131,7 +134,7 @@ export class CreateNewNewsComponent implements OnInit {
     );
   }
 
-  takeAction(){
+  takeAction() {
     if (this.id) {
       this.updateNews();
     } else {
@@ -150,5 +153,4 @@ export class CreateNewNewsComponent implements OnInit {
   get filesControl() {
     return this.newsForm.get('files') as FormControl;
   }
-
 }

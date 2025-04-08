@@ -9,16 +9,23 @@
   </div>
 
   <!-- Selected Files List -->
-  <div class="selected-files mt-3" *ngIf="selectedFiles?.length > 0">
+  <div class="selected-files mt-3" *ngIf="selectedFiles?.length > 0 || oldFiles?.length > 0">
 
     <p>📂 الملفات المختارة:</p>
 
     <ul>
+      <li class="file-item my-3 font-bold text-base" *ngFor="let file of oldFiles">
+        <span class="file-icon">{{ getFileIcon(file.name) }}</span>
+        {{ file.name }}
+
+        <button type="button" (click)="deleteOldFile(file.id)" class="delete-button">❌</button>
+      </li>
+
       <li class="file-item my-3 font-bold text-base" *ngFor="let file of selectedFiles">
         <span class="file-icon">{{ getFileIcon(file.name) }}</span>
         {{ file.name }}
 
-        <button (click)="removeFile(i)" class="delete-button">❌</button>
+        <button type="button" (click)="removeFile(i)" class="delete-button">❌</button>
       </li>
     </ul>
   </div>

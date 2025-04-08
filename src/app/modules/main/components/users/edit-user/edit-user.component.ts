@@ -32,7 +32,7 @@ export class EditUserComponent implements OnInit {
     private route: ActivatedRoute,
     private snackbar: SnackbarService
   ) {}
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label: ' قائمة المستخدمين',
       url: '/main/users',

@@ -13,7 +13,7 @@ import { DeleteDialogComponent } from '../../supreme-committee/delete-dialog/del
 })
 export class MeetingsListComponent implements OnInit  {
 
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label: ' بوابة البرامج',
       url: '/',

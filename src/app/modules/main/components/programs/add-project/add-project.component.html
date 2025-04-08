@@ -1,13 +1,13 @@
-<app-bread-crumb [breadcrumbs]="breadcrumbs"></app-bread-crumb>
+<app-bread-crumb [breadCrumbs]="breadCrumbs"></app-bread-crumb>
 <form *ngIf="form" (submit)="takeAction()" class=" flex gap-7 px-8" [formGroup]="form">
   <div class="container header p-4 form-item w-3/4">
     <div class="  ">
       <div class="header">برنامج جديد</div>
       <div class="input-field">
-        <label>العنوان 
+        <label>العنوان
           <i class="bi bi-asterisk asterisk"></i>
         </label>
-        <input formControlName="title" placeholder="العنوان" type="text" 
+        <input formControlName="title" placeholder="العنوان" type="text"
         [class.error]="form.get('title')?.errors?.['required'] && form.get('title')?.touched"
         />
         <div

@@ -14,7 +14,7 @@ export class EditUserRolesComponent {
   roles: (Role & { checked?: boolean })[] = [];
   id = this.route.snapshot.paramMap.get('id');
 
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label: ' قائمة المستخدمين',
       url: '/main/users',

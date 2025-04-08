@@ -14,7 +14,7 @@ export class SettingsComponent implements OnInit {
   updating = false;
   canUpdate = false;
   error: string;
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label:'بوابة البرامج',
       url:'/'

@@ -9,33 +9,54 @@ import { IReport } from '../../../../../../../model/report';
   templateUrl: './report-details.component.html',
   styleUrl: './report-details.component.scss',
 })
-
-//TODO: add breadCrumb
-export class ReportDetailsComponent implements OnInit{
+export class ReportDetailsComponent implements OnInit {
+  adminCommentForm: FormGroup;
   isReportPosted: boolean;
-  adminCommentForm: FormGroup
-
   projectId = +this.route.snapshot.paramMap.get('projectId');
   reportId = +this.route.snapshot.paramMap.get('reportId');
-  report : IReport;
-
+  report: IReport;
+  breadCrumbs = [
+    {
+      label: 'البرامج',
+      url: '/',
+    },
+  ];
   constructor(
-    private fb:FormBuilder,
-        private swagger: SwaggerService,
-        private route: ActivatedRoute
-  ){
-
-  }
+    private fb: FormBuilder,
+    private swagger: SwaggerService,
+    private route: ActivatedRoute
+  ) {}
   ngOnInit() {
-
     this.swagger.getOneReport(this.reportId).subscribe((res: any) => {
       this.report = res;
-
+      this.isReportPosted = res.status_id == 1;
+      this.breadCrumbs.push({
+        label: res.project?.title,
+        url: `/main/programs/${this.projectId}/procedures`,
+      });
+      this.breadCrumbs.push({
+        label: 'التقارير',
+        url: `/main/programs/${this.projectId}/reports`,
+      });
+      this.breadCrumbs.push({
+        label: res.title,
+        url: `/main/programs/${this.projectId}/procedures/${this.reportId}`,
+      });
     });
 
     this.adminCommentForm = this.fb.group({
-      description:[null],
-      uploadedFiles: this.fb.array([])
-    })
+      description: [null],
+      uploadedFiles: this.fb.array([]),
+    });
+  }
+
+  updateReportStatus() {
+    this.isReportPosted = !this.isReportPosted;
+    this.swagger
+      .updateReport({
+        id: this.reportId,
+        status_id: this.isReportPosted ? 1 : 2,
+      })
+      .subscribe(res=> {});
   }
 }

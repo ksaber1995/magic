@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './bread-crumb.component.scss'
 })
 export class BreadCrumbComponent {
-  @Input() breadcrumbs: { label: string; url?: string }[] = [];
+  @Input() breadCrumbs: { label: string; url?: string }[] = [];
   @Input() breadCrumbButton:{label: string , url:string}
 }

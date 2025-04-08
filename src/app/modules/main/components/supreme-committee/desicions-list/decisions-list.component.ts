@@ -12,14 +12,14 @@ import { SnackbarService } from '../../../../../services/snackbar.service';
   styleUrl: './decisions-list.component.scss',
 })
 export class DecisionsListComponent implements OnInit {
-  decisions: Decision[];
+  @Input() decisions: Decision[];
   projectId: number = +this.route.snapshot.paramMap.get('projectId');
   @Input() showMore = false;
   readonly dialog = inject(MatDialog);
   tooltipVisible: string | null = null;
   hideTimeout: any;
 
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label: 'بوابة البرامج',
       url: '/',
@@ -36,12 +36,15 @@ export class DecisionsListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.swagger.getAllDecisions().subscribe((res) => {
-      if (this.projectId) {
-        res = res.filter((res) => res.project?.id == this.projectId);
-      }
-      this.decisions = res;
-    });
+    if(!this.decisions?.length){
+
+      this.swagger.getAllDecisions().subscribe((res) => {
+        if (this.projectId) {
+          res = res.filter((res) => res.project?.id == this.projectId);
+        }
+        this.decisions = res;
+      });
+    }
   }
 
   showToolTip(decisionId) {

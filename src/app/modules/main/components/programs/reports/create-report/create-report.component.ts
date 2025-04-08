@@ -6,9 +6,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { SwaggerService } from '../../../../../../swagger/swagger.service';
+import { getBlobFromUrl } from '../../../../../../../utlities/file-helper';
 import { SnackbarService } from '../../../../../../services/snackbar.service';
-import { getBlobFromUrl, updateFilesFromUrls } from '../../../../../../../utlities/file-helper';
+import { SwaggerService } from '../../../../../../swagger/swagger.service';
+import { FileItem } from '../../../../../../../model/filte';
 
 //TODO: add breadCrumb
 @Component({
@@ -22,18 +23,9 @@ export class CreateReportComponent implements OnInit {
   reportId = +this.route.snapshot.paramMap.get('reportId');
   projectId = +this.route.snapshot.paramMap.get('projectId');
   isUpdating = false;
+  oldFiles: FileItem[];
 
-/*************  ✨ Windsurf Command ⭐  *************/
-/**
- * Constructor
- *
- * @param fb The form builder for the form of the component
- * @param snackbar The snackbar service for displaying the messages
- * @param swagger The swagger service for calling the swagger API
- * @param route The ActivatedRoute service for getting the route parameters
- */
-
-/*******  b0a59d23-ac5f-4c44-b24d-f6cfc5bccc88  *******/  constructor(
+  constructor(
     private fb: FormBuilder,
     private snackbar: SnackbarService,
     private swagger: SwaggerService,
@@ -49,10 +41,10 @@ export class CreateReportComponent implements OnInit {
           status_id: [res.status_id],
           content: [res.content, Validators.required],
           image: [[]],
-          files: [[], Validators.required],
+          files: [[]],
         });
         this.imageUrl = res.image as string;
-        updateFilesFromUrls(res.files.map(res=> res.url), this.filesControl);
+        this.oldFiles = (res.files as FileItem[])
       });
     } else {
     }
@@ -102,7 +94,7 @@ export class CreateReportComponent implements OnInit {
         this.isUpdating = false;
         this.snackbar.showSuccess(
           'تم اضافة التقرير بنجاح',
-          `/main/programs/${this.projectId}/procedures`
+          `/main/programs/${this.projectId}/reports`
         );
       },
       (error) => {
@@ -121,7 +113,7 @@ export class CreateReportComponent implements OnInit {
         this.isUpdating = false;
         this.snackbar.showSuccess(
           'تم تعديل التقرير بنجاح',
-          `/main/programs/${this.projectId}/procedures`
+          `/main/programs/${this.projectId}/reports`
         );
       },
       (error) => {

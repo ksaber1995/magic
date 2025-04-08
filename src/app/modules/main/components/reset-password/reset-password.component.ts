@@ -22,7 +22,7 @@ export class ResetPasswordComponent {
   isUpdating = false;
   passwordMismatch = false;
 
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label: ' قائمة المستخدمين',
       url: '/main/users',

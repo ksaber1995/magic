@@ -1,5 +1,8 @@
 import { FormControl } from '@angular/forms';
 import { Component, Input } from '@angular/core';
+import { FileItem } from '../../../../../model/filte';
+import { SwaggerService } from '../../../../swagger/swagger.service';
+import { SnackbarService } from '../../../../services/snackbar.service';
 
 @Component({
   selector: 'app-files-upload',
@@ -8,7 +11,14 @@ import { Component, Input } from '@angular/core';
 })
 export class FilesUploadComponent {
   @Input() control: FormControl = new FormControl([]);
+  @Input() oldFiles: FileItem[] = [];
 
+  constructor(
+    private swagger: SwaggerService,
+    private snackbar: SnackbarService,
+  ){
+
+  }
   getFileIcon(fileName: string): string {
     const extension = fileName.split('.').pop()?.toLowerCase();
 
@@ -67,4 +77,16 @@ export class FilesUploadComponent {
   get selectedFiles(): File[] {
     return this.control.value as File[]
   };
+
+  deleteOldFile(id){
+    const index = this.oldFiles.findIndex(res => res.id == id);
+    this.oldFiles.splice(index, 1);
+
+    this.swagger.deleteFile(id)
+    .subscribe(res=>{
+      this.snackbar.showSuccessSnackbar('تم حذف الملف بنجاح');
+    }, error=>{
+      this.snackbar.showError(error.message);
+    })
+  }
 }

@@ -21,7 +21,7 @@ export class PermissionsListComponent implements OnInit {
   }
   permissions: Permission[];
 
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label:'قائمة الأذونات'
     }

@@ -1,6 +1,6 @@
-<nav *ngIf="breadcrumbs.length" class="breadcrumb-container  flex justify-between">
+<nav *ngIf="breadCrumbs?.length" class="breadcrumb-container  flex justify-between">
     <ul class="breadcrumb">
-      <li *ngFor="let breadcrumb of breadcrumbs; let last = last">
+      <li *ngFor="let breadcrumb of breadCrumbs; let last = last">
         <a *ngIf="!last" [routerLink]="breadcrumb.url">{{ breadcrumb.label}} ></a>
         <span class="last-item" *ngIf="last">{{ breadcrumb.label }}</span>
       </li>

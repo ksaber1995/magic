@@ -4,4 +4,5 @@ export interface FileItem {
     size: number,
     created_at: string,
     fileType: string,
+    id: number
 }

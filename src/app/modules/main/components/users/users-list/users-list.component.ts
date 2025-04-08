@@ -11,7 +11,7 @@ import { User } from '../../../../../../model/user';
 export class UsersListComponent implements OnInit {
   users: User[] = [];
   // TODO,  اللجان المنتسب لها
-  breadcrumbs = [
+  breadCrumbs = [
     {
       label: ' قائمة المستخدمين',
     },
