@@ -8,7 +8,6 @@ export interface Project {
   updated_at: string,
   created_at: string,
   id: number,
-
   members: Member[]
 }
 

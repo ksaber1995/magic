@@ -131,7 +131,8 @@ export class SwaggerService {
 
   updateProject(project: Partial<Project>) {
     const formData = createFormData(project);
-    return this.http.put(ENDPOINT_URI + `projects/${project.id}`, formData);
+    formData.append('_method', 'PUT');
+    return this.http.post(ENDPOINT_URI + `projects/${project.id}`, formData);
   }
 
   deleteProject(id) {

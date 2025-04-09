@@ -8,7 +8,7 @@ import { SwaggerService } from '../../../../../../swagger/swagger.service';
 import { SnackbarService } from './../../../../../../services/snackbar.service';
 
 interface DialogData {
-  projectId: string;
+  projectId: number;
 }
 @Component({
   selector: 'app-add-members-to-project-dialog',
@@ -19,7 +19,7 @@ export class AddMembersToProjectDialogComponent implements OnInit {
   activeTab: 'new' | 'members' | 'groups' = 'groups';
   roles: Role[];
   users: User[];
-  projectId: string;
+  projectId: number;
 
   rolesControl = new FormControl([]);
   membersControl = new FormControl([]);
@@ -37,7 +37,7 @@ export class AddMembersToProjectDialogComponent implements OnInit {
     private snackbar: SnackbarService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
-    this.projectId = data.projectId;
+    this.projectId = +data.projectId;
   }
   ngOnInit() {
     this.swagger.getAllRoles(false).subscribe((res) => {
@@ -70,12 +70,22 @@ export class AddMembersToProjectDialogComponent implements OnInit {
   addRoles(){
     const selectedRoles = this.rolesControl.value;
 
-    console.log(selectedRoles)
+    const usersWithSelectedRoles = this.users.filter(user => user.roles.some(role => selectedRoles.includes(role.id)));
+
+    const members = usersWithSelectedRoles.map(res=> res.id);
+
+    this.addMembers(members);
   }
 
-  addMembers() {
-    const selectedMembers = this.membersControl.value;
-    console.log(selectedMembers)
+  addMembers(members) {
+
+    console.log(members)
+
+    this.swagger.updateProject({id: this.projectId, members: members}).subscribe((res) => {
+      this.snackbar.showSuccessSnackbar('تم اضافة العضويات بنجاح');
+    }, error=>{
+      this.snackbar.showError(error.message);
+    });
 
   }
 }

@@ -28,7 +28,7 @@
     <div class="files-wrapper">
       <div class="title mb-2">المرفقات</div>
       <div class="uploadedFiles flex items-center gap-2 p-2">
-        <div class="file flex gap-2" *ngFor="let file of report.files">
+        <div class="file flex gap-2 items-center" *ngFor="let file of report.files">
           <img src="{{ file.url }}" alt="" class="icon" />
           <div class="file-name">{{ file.name }}</div>
         </div>

@@ -3,7 +3,7 @@
   <div class="description">
     {{decisionDetails.content}}
     <div class="uploaded-files p-2">
-      <div class="file flex gap-2" *ngFor="let file of decisionDetails.files">
+      <div class="file flex gap-2 items-center" *ngFor="let file of decisionDetails.files">
         <img width="20" [src]="getFileIcon(file)" alt="" />
 
 

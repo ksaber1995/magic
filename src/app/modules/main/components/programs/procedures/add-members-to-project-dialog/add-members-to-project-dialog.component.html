@@ -55,7 +55,7 @@
 
     <!-- members  -->
     <div *ngIf="activeTab === 'members'" class="invite-form-container">
-      <form *ngIf="users" (submit)="addMembers()" class="invite-form">
+      <form *ngIf="users" (submit)="addMembers(membersControl.value)" class="invite-form">
         <label for="users"> اضافة عضو</label>
         <magic-select [items]="users" [control]="membersControl">
 
