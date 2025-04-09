@@ -77,6 +77,7 @@ export class AddMembersToProjectDialogComponent implements OnInit {
     this.addMembers(members);
   }
 
+
   addMembers(members) {
 
     console.log(members)

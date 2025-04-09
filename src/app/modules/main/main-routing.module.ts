@@ -51,7 +51,7 @@ const routes: Routes = [
       { path: 'programs', component: ProgramsListComponent },
       { path: 'programs/create', component: AddProjectComponent },
       { path: 'programs/update/:id', component: AddProjectComponent },
-      { path: 'programs/:id/procedures', component: ProceduresComponent },
+      { path: 'programs/:projectId/procedures', component: ProceduresComponent },
       { path: 'programs/:id/procedures/create', component: CreateProceduresComponent },
       { path: 'programs/:id/files', component: ProgramFilesComponent },
       { path: 'programs/:id/members', component: MembersComponent },

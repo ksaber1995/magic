@@ -19,14 +19,16 @@
             <div class="message-recipients mb-2 flex flex-wrap items-center gap-2">
               <span class="recipients-title">مرسلة الي</span>
               <div
-                class="recipient-item flex gap-2"
+                class="recipient-item flex gap-2 items-center"
                 *ngFor="let member of message.members"
               >
                 <img
+                  *ngIf="member?.user?.image"
                   src="{{ member?.user?.image }}"
                   alt=""
                   class="recipient-photo"
                 />
+                <mat-icon *ngIf="!member?.user?.image">person</mat-icon>
                 <div class="recipient-name">{{ member.user.name }}</div>
               </div>
             </div>

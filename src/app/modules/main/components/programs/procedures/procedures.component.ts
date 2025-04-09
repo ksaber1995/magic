@@ -55,6 +55,7 @@ export class ProceduresComponent implements OnInit {
   completedProcedures: Procedure[] = [];
   inProgressProcedures: Procedure[] = [];
   isLoaded: boolean;
+  allProceduresLength: number;
 
   constructor(private swagger: SwaggerService, private route: ActivatedRoute) {
     this.desicionChartOptions = {
@@ -123,7 +124,7 @@ export class ProceduresComponent implements OnInit {
   ngOnInit() {
 
 
-    this.projectId = this.route.snapshot.paramMap.get('id');
+    this.projectId = this.route.snapshot.paramMap.get('projectId');
     console.log(this.projectId);
 
 
@@ -161,6 +162,7 @@ export class ProceduresComponent implements OnInit {
           (res) => +res.progress_percentage >= 100
         );
 
+        this.allProceduresLength = procedures.length;
         const decisionsFiles  = this.decisions.map((res) => res.files as FileItem[])?.flat();
         const postsFiles = this.posts.map((res) => res.files as FileItem[]).flat();
         const proceduresFiles = procedures.map((res) => res.files as FileItem[]).flat();

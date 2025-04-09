@@ -214,7 +214,8 @@ export class SwaggerService {
 
   updateDecision(decision: Partial<Decision>) {
     const formData = createFormData(decision);
-    return this.http.put(ENDPOINT_URI + `decisions/${decision.id}`, formData);
+    formData.append('_method', 'PUT');
+    return this.http.post(ENDPOINT_URI + `decisions/${decision.id}`, formData);
   }
 
   deleteDecision(id: number) {
@@ -246,7 +247,7 @@ export class SwaggerService {
   deleteMember(id: string) {
     return this.http.delete(ENDPOINT_URI + `members/${id}`);
   }
-  0.0;
+
   // Meetings
   getAllMeetings() {
     this.spinner.showSpinner();
@@ -361,7 +362,8 @@ export class SwaggerService {
   }
 
   updatePermission(permission: Permission) {
-    return this.http.put(
+    permission['_method'] = 'PUT';
+    return this.http.post(
       ENDPOINT_URI + `permissions/${permission.id}`,
       permission
     );

@@ -65,7 +65,6 @@ export class CreateDecisionComponent implements OnInit {
           status_id: [res.status_id],
           decision_date: [ new Date(res.decision_date) ]
         });
-
         this.oldFiles = (res.files as FileItem[])
       })
     }else{

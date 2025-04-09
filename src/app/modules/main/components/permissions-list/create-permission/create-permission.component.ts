@@ -27,7 +27,7 @@ export class CreatePermissionComponent {
           name: [res.name, [Validators.required]],
           description: [res.description, [Validators.required]],
           transformation: [res.transformation || false],
-          color:[null]
+          color:['#ffffff']
         });
       });
       this.breadCrumbs = [
@@ -44,7 +44,7 @@ export class CreatePermissionComponent {
         name: ['', [Validators.required]],
         description: ['', [Validators.required]],
         transformation: [false],
-        color:[null]
+        color:['#ffffff']
       });
       this.breadCrumbs = [
         {

@@ -1,4 +1,4 @@
-<app-bread-crumb [breadCrumbs]="breadCrumbs"></app-bread-crumb>
+<app-bread-crumb [breadCrumbs]="breadCrumbs" [breadCrumbButton]="breadCrumbButton"></app-bread-crumb>
 <div class="roles-container ">
   <table class="roles-table">
     <thead>
@@ -13,18 +13,18 @@
       <tr *ngFor="let role of roles">
         <td colspan="3" [routerLink]="[role.id]">
           {{ role.name }}
-          <div class="tooltip-container">
+          <!-- <div class="tooltip-container">
             <button [class]="role.roleId == 1 ? rolesClasses.upperPermission.className :  rolesClasses.projects.className">
               {{role.roleId == 1 ? rolesClasses.upperPermission.name :  rolesClasses.projects.name}}
             </button>
 
-            <!-- <div class="custom-tooltip">
+            <div class="custom-tooltip">
               <div class="tooltip-header">
               {{role.roleId == 1 ? rolesClasses.upperPermission.name :  rolesClasses.projects.name}}
               </div>
               <div class="tooltip-content">one two three</div>
-            </div> -->
-          </div>
+            </div>
+          </div> -->
         </td>
         <td colspan="2">
           عدد المستخدمين :
