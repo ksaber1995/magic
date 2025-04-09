@@ -442,9 +442,10 @@ export class SwaggerService {
 
   // Settings
   getSetting() {
+    this.spinner.showSpinner();
     return this.http
       .get<ResponseItem<Setting>>(ENDPOINT_URI + `settings/1`)
-      .pipe(map((res) => res.data));
+      .pipe(map((res) => res.data) , finalize(() => this.spinner.hideSpinner()));
   }
 
   updateSetting(setting: Setting) {
@@ -461,7 +462,8 @@ export class SwaggerService {
   }
 
   getOneSms(id: string) {
-    return this.http.get(ENDPOINT_URI + `sms/${id}`);
+    this.spinner.showSpinner();
+    return this.http.get(ENDPOINT_URI + `sms/${id}`).pipe(finalize(() => this.spinner.hideSpinner()));
   }
 
   createSms(sms: Partial<Sms>) {
