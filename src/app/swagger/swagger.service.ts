@@ -407,7 +407,8 @@ export class SwaggerService {
 
   updateRole(role: Partial<Role>) {
     const formData = createFormData(role);
-    return this.http.put(ENDPOINT_URI + `roles/${role.id}`, formData);
+    formData.append('_method', 'PUT');
+    return this.http.post(ENDPOINT_URI + `roles/${role.id}`, formData);
   }
 
   deleteRole(id: number) {

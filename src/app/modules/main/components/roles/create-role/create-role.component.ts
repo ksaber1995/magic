@@ -15,7 +15,7 @@ import { combineLatest } from 'rxjs';
 export class CreateRoleComponent {
   roleForm: FormGroup;
   id = this.route.snapshot.paramMap.get('id');
-
+  isUpdating = false;
   colors = [
     { color: 'اللون الأحمر', value: '#FF0000' }, // Red
     { color: 'اللون البرتقالي', value: '#FFA500' }, // Orange
@@ -66,8 +66,8 @@ export class CreateRoleComponent {
     this.roleForm = this.fb.group({
       name: ['', [Validators.required]],
       color: ['', [Validators.required]],
-      transformation: [false],
-      edit_permission: [false],
+      transformation: [true],
+      edit_permission: [true],
       permissions: this.fb.group({}),
     });
 
@@ -78,8 +78,8 @@ export class CreateRoleComponent {
         this.roleForm = this.fb.group({
           name: [role.name, [Validators.required]],
           color: [role.color, [Validators.required]],
-          transformation: [role.transformation],
-          edit_permission: [role.edit_permission],
+          transformation: [ true],
+          edit_permission: [ true],
           permissions: this.fb.group({}),
         });
         this.permissions = permissions.map((res) => ({
@@ -127,26 +127,30 @@ export class CreateRoleComponent {
   }
 
   create(role: Partial<Role>) {
+    this.isUpdating = true;
     this.swagger.createRole(role).subscribe(
       (res) => {
         this.snackbar.showSuccess('تم اضافة الصلاحية', '/main/roles');
         this.roleForm.reset();
+        this.isUpdating = false;
       },
       (error) => {
+        this.isUpdating = false;
         this.snackbar.showError(error.message);
       }
     );
   }
 
   update(role: Partial<Role>) {
+    this.isUpdating = true;
     role.id = this.id;
     this.swagger.updateRole(role).subscribe(
-
       (res) => {
-        debugger
+        this.isUpdating = false;
         this.snackbar.showSuccess('تم تعديل الصلاحية', '/main/roles');
       },
       (error) => {
+        this.isUpdating = false;
         this.snackbar.showError(error.message);
       }
     );
@@ -156,8 +160,8 @@ export class CreateRoleComponent {
     const role: Partial<Role> = {
       name: this.formValue.name,
       color: this.formValue.color,
-      transformation: this.formValue.transformation || false,
-      edit_permission: this.formValue.edit_permission || false,
+      // transformation: this.formValue.transformation || true,
+      // edit_permission: this.formValue.edit_permission || true,
       permission_ids: this.selectedPermissions,
     };
 
