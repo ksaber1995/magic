@@ -72,8 +72,8 @@ const routes: Routes = [
 
       //latest-committee-updates
       {path:'committee-updates-list' , component:CommitteeUpdatesListComponent},
+      {path:'committee-updates-list/:id' , component:NewsDetailsComponent},
       {path:'committee-updates-list/:projectId' , component:CommitteeUpdatesListComponent},
-      {path:'committee-updates-details/:id' , component:NewsDetailsComponent},
       {path:'create-new-news' , component:CreateNewNewsComponent},
       {path:'update-post/:id' , component:CreateNewNewsComponent},
 

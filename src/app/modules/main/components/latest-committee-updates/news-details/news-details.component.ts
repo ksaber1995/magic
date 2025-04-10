@@ -21,7 +21,7 @@ export class NewsDetailsComponent implements OnInit {
     this.swagger.getOnePost(this.id).subscribe(post => {
       debugger
       this.post = post;
-      this.breadCrumbs = [{'label': 'آخر مستجدات اللجنة', 'url': '/'}, {'label': post.title}];
+      this.breadCrumbs = [{'label': ' ادارة آخر مستجدات اللجنة ' , 'url': '/main/committee-updates-list'}, {'label': post.title}];
     });
 
   }
