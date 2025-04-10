@@ -19,8 +19,8 @@ export class CreateMessageComponent implements OnInit{
   });
   breadCrumbs = [
     {
-      label:'بوابة البرامج',
-      url:'/'
+      label:'الرسائل القصيرة',
+      url:'/main/list-messages'
     },
     {
       label:'ارسال رسالة جديدة للاعضاء'
