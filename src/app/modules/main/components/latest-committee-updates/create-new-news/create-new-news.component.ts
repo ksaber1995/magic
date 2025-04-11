@@ -39,7 +39,7 @@ export class CreateNewNewsComponent implements OnInit {
       url: '/main/committee-updates-list',
     },
     {
-      label: 'انشاء خبر',
+      label: this.id ? 'تعديل القسم'  :'انشاء خبر' ,
     },
   ];
   oldFiles: FileItem[] = [];
@@ -56,10 +56,9 @@ export class CreateNewNewsComponent implements OnInit {
   ngOnInit(): void {
     if (this.id) {
       this.swagger.getOnePost(this.id).subscribe((res) => {
-        debugger;
         this.newsForm = this.fb.group({
           title: [res.title, [Validators.required]],
-          project_id: [res.project.id],
+          id: [res.id],
           image: [res.image, [Validators.required]],
           content: [res.content, [Validators.required]],
           files: [[]],
@@ -71,7 +70,7 @@ export class CreateNewNewsComponent implements OnInit {
     } else {
       this.newsForm = this.fb.group({
         title: [null, [Validators.required]],
-        project_id: [null],
+        id: [null],
         image: [null, [Validators.required]],
         content: [null, [Validators.required]],
         files: [[]],

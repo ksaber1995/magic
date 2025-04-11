@@ -47,9 +47,9 @@ export class ProceduresComponent implements OnInit {
   hideTimeout: any;
   dialog = inject(MatDialog);
   histories: ProjectHistory[] = [];
-
   decisions: Decision[] = [];
   posts: Post[] = [];
+  breadCrumbs
 
   stalledProcedures: Procedure[] = [];
   completedProcedures: Procedure[] = [];
@@ -125,9 +125,6 @@ export class ProceduresComponent implements OnInit {
 
 
     this.projectId = this.route.snapshot.paramMap.get('projectId');
-    console.log(this.projectId);
-
-
     this.getData();
     this.getProject();
   }
@@ -177,6 +174,15 @@ export class ProceduresComponent implements OnInit {
   getProject(){
     this.swagger.getOneProject(this.projectId).subscribe((res) => {
       this.project = res;
+      this.breadCrumbs = [
+        {
+          label:"البرامج", 
+          url:'/'
+        }, 
+        {
+          label: this.project.title
+        }
+      ]
     });
   }
 

@@ -23,6 +23,10 @@ export class CommitteeUpdatesListComponent implements OnInit{
 
   breadCrumbs = [
     {
+      label:'بوابة البرامج',
+      url:'/'
+    },
+    {
       label:'قائمة أخر مستجدات اللجنة '
     }
   ]

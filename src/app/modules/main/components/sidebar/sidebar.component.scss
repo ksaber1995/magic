@@ -32,6 +32,7 @@
       }
     }
     .actions {
+      position: relative;
       button {
         border: none;
         &:hover {
@@ -42,8 +43,8 @@
     }
   }
 
-  .setting-item{
-    background-color: #c3c3c3;
+  .setting-item {
+    background-color: rgb(157, 157, 157);
     font-size: 1rem;
     font-weight: bold;
     display: flex;
@@ -54,18 +55,62 @@
   width: 28px;
 }
 
-.search-wrapper{
+.search-wrapper {
   position: relative;
-  .search-input{
+  .search-input {
     height: 50px;
     padding-right: 5px;
-
   }
-  .search-icon{
+  .search-icon {
     position: absolute;
     left: 12px;
     top: 13px;
     color: #858585;
     font-size: 25px;
+  }
+}
+
+.notifications-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  background-color: white;
+  max-height: 370px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  padding: 5px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  z-index: 1000;
+  border-left: 10px solid #ccc;
+  line-height: 37px;
+  border-bottom: 1px solid #ccc;
+  padding: 4px;
+  font-size: 13px;
+  color: black;
+  display: none;
+  .program-name {
+    color: #1e70bf;
+  }
+  .user-info {
+    background: #eeeeee;
+    color: #666;
+    border-radius: 15px;
+    font-size: 14px;
+    padding: 2px;
+    width: fit-content;
+    &:hover {
+      background: #8bb81f;
+      color: #fff;
+    }
+    .user-image {
+      width: 8px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    &:hover {
+      color: #fff;
+      background: #d0d0d0;
+      cursor: pointer;
+    }
   }
 }

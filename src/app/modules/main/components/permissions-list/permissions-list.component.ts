@@ -23,6 +23,10 @@ export class PermissionsListComponent implements OnInit {
   breadCrumbButton = {label:'اضافة اذن' , url:'/main/permissions/create'}
   breadCrumbs = [
     {
+      label:'بوابة البرامج',
+      url:'/'
+    },
+    {
       label:'قائمة الأذونات'
     }
   ]

@@ -35,6 +35,7 @@ import { UserInformationComponent } from './components/users/user-information/us
 import { UsersListComponent } from './components/users/users-list/users-list.component';
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
 import { CreateReportComponent } from './components/programs/reports/create-report/create-report.component';
+import { MeetingDetialsComponent } from './components/meetings/meeting-detials/meeting-detials.component';
 
 const routes: Routes = [
   {
@@ -102,6 +103,7 @@ const routes: Routes = [
 
       //meetings
       {path:'meetings', component:MeetingsListComponent},
+      {path:'meetings/:id', component:MeetingDetialsComponent},
       {path:'create-meeting', component:CreateMeetingComponent},
       {path:'update-meeting/:id', component:CreateMeetingComponent},
 

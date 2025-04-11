@@ -1,9 +1,9 @@
 
-<mat-card class="hover shadow-md hover:shadow-2xl transition-shadow duration-300">
-  <div [routerLink]="'/main/programs/' + project.id + '/procedures'" class="">
+<mat-card [ngClass]="viewMode == viewEnum.ViewOne ? 'hover shadow-md hover:shadow-2xl transition-shadow duration-300' : 'program-row'">
+  <div [routerLink]="'/main/programs/' + project.id + '/procedures'" class="title-container">
 
     <h2 class="main-title">
-      <!-- <mat-icon [class.star-color] ="true">star</mat-icon> -->
+      <mat-icon [class.star-color] ="true" class="mx-2">star</mat-icon>
       <!-- <mat-icon>star</mat-icon> -->
       <!-- <mat-icon [class.star-bg] ="true">star_border</mat-icon> -->
 
@@ -15,8 +15,8 @@
     </div>
   </div>
 
-  <mat-card-footer>
-    <div class="grid grid-cols-2">
+  <mat-card-footer >
+    <div class="grid grid-cols-2 footer-view-one">
       <button [routerLink]="'/main/programs/update/' + project.id" class="flex hover:[background-color:#7ea71d]" mat-button>
         <mat-icon>
           edit

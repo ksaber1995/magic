@@ -3,7 +3,11 @@ import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { Project } from '../../../../../../model/project';
 import { SnackbarService } from '../../../../../services/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
-
+enum viewType{
+  ViewOne, 
+  viewTwo, 
+  viewThree
+ }
 @Component({
   selector: 'app-programs-list',
   templateUrl: './programs-list.component.html',
@@ -25,7 +29,8 @@ export class ProgramsListComponent implements OnInit {
     label: 'اضافة برنامج',
     url: '/main/programs/create',
   };
-
+  viewMode: viewType 
+  viewEnum = viewType
   constructor(
     private swagger: SwaggerService,
     private snackbar: SnackbarService,
@@ -37,7 +42,7 @@ export class ProgramsListComponent implements OnInit {
       this.projects = res;
     });
   }
-
+  
   deleteProject(id: number) {
     this.swagger.deleteProject(id).subscribe(
       (res) => {
@@ -49,5 +54,8 @@ export class ProgramsListComponent implements OnInit {
         this.snackbar.showError(error.message);
       }
     );
+  }
+  switchView(viewMode){
+    this.viewMode = viewMode
   }
 }

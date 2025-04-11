@@ -17,20 +17,29 @@
         <i class="bi bi-person-fill"></i>
         تسحيل الخروج
       </button>
+      <div class="notifications-wrapper">
+        <div class="notification flex">
+          تم اضافتك الى البرنامج <span class="program-name" [routerLink]="['/programs/' + 1]" >برنامج واحد</span> بواسطة
+          <div class="user-info flex gap-2 mr-1" >
+            <img  src="assets/images/user-image.png" class="user-image" alt="" />
+            {{ 'Aymin'}}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <ul>
     <li class="sidebar-item text-white">
       <app-sidebar-item [item]="programsParent">
+        <div class="search-wrapper ">
+          <input class="w-full search-input px-2" type="search"  placeholder="بحث في المشاريع" />
+          <i class="bi bi-search search-icon"></i>
+        </div>
         <li *ngFor="let item of programsParent.programs" class="text-white">
           <app-sidebar-item [item]="item" [background]="'#e0e0e0'">
           </app-sidebar-item>
         </li>
-        <div class="search-wrapper ">
-          <input class="w-full search-input" type="search"  placeholder="ابحث في البرامج" />
-          <i class="bi bi-search search-icon"></i>
-        </div>
       </app-sidebar-item>
     </li>
 

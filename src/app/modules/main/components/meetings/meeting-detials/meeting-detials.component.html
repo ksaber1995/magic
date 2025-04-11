@@ -1,0 +1,110 @@
+<app-bread-crumb [breadCrumbs]="breadCrumbs" ></app-bread-crumb>
+<div class="meeting-container flex gap-10 ">
+    <div class="right-side w-[70%]">
+
+        <div class="meeting-details ">
+            <div class="header p-4">{{meeting?.meeting_address}}</div>
+            <div class="details p-4">
+                <div class="row mb-5 flex ">
+                    <div class="name">
+                        منظم الاجتماع:
+                    </div>
+                    <div class="value">
+                        <div class="user-info flex gap-2 mr-1" >
+                            <img *ngIf="meeting?.coordinator_user?.image" src="{{ meeting?.coordinator_user?.image }}" class="user-image" alt="" />
+                            <mat-icon *ngIf="!meeting?.coordinator_user?.image">person</mat-icon>
+                
+                            {{ meeting?.coordinator_user?.name }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-5 flex ">
+                    <div class="name">
+                        البرامج المتعلقة:
+                    </div>
+                    <div class="value">
+                        <div class="user-info flex gap-2 mr-1" *ngFor="let project of meeting?.projects" >
+                            {{project?.title }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-5 flex ">
+                    <div class="name">
+                        تاريخ الاجتماع:
+                    </div>
+                    <div class="value">
+                        {{meeting?.meeting_date}}
+                    </div>
+                </div>
+                <div class="row mb-5 flex ">
+                    <div class="name">
+                        وقت الاجتماع:
+                    </div>
+                    <div class="value">
+                        {{meeting?.meeting_time}}
+
+                    </div>
+                </div>
+                <div class="row mb-5 flex ">
+                    <div class="name">
+                        نهاية الاجتماع:
+                    </div>
+                    <div class="value">
+                        {{meeting?.end_meeting_time ? meeting?.end_meeting_time : 'لا يوجد'  }}
+
+                    </div>
+                </div>
+                <div class="row mb-5 flex ">
+                    <div class="name">
+                        موقع الاجتماع:
+                    </div>
+                    <div class="value">
+                        {{meeting?.meeting_address}}
+
+                    </div>
+                </div>
+                <div class="row mb-5 flex flex-wrap gap-3 ">
+                    <div class="name">
+                        التفاصيل:
+                    </div>
+                    <div class="value">
+                        {{meeting?.content}}
+                    </div>
+                </div>
+                <div class="row mb-5 flex flex-wrap gap-3 ">
+                    <div class="name">
+                        المرفقات:
+                    </div>
+                    <div class="value">
+                        <div class="uploadedFiles flex items-center gap-2 p-2">
+                            <div class="file flex gap-2 items-center" *ngFor="let file of meeting?.files" (click)="openFileDetails(file)" >
+                              <img src="{{ file.url }}" alt="" class="icon" />
+                              <div class="file-name">{{ file.name }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="members-list w-[30%] ">
+        <div class="header flex justify-between p-3 mb-3">
+          <div class="members-title">الأعضاء</div>
+          <button class="more-btn">المزيد</button>
+        </div>
+        <div class="member-list p-3 flex flex-wrap gap-2">
+          <div class="user-info flex gap-2 mr-1" *ngFor="let member of meeting?.members">
+            <img *ngIf="member.user?.image" src="{{ member.user?.image }}" class="user-image" alt="" />
+            <mat-icon *ngIf="!member.user?.image">person</mat-icon>
+
+            {{ member.user?.name }}
+          </div>
+        </div>
+        <div class="flex justify-center p-4">
+          <button (click)="openAddMemberModal()" class="add-member-btn">
+            <i class="bi bi-plus" style="color: #8bb81f; font-size: 20px; font-weight: 700"></i>
+            اضافة
+          </button>
+        </div>
+      </div>
+</div>

@@ -8,11 +8,13 @@ export interface Meeting{
   meeting_date: string;
   meeting_time: string;
   reminder_time: string;
+  end_meeting_time?:string;
   members_ids: number[];
   projects_ids: number[];
   files: File[] | FileItem[];
   coordinator_user?: {
-    name: string
+    name: string, 
+    image: string
   };
 
   members?: any[],

@@ -52,6 +52,7 @@ import { UsersListComponent } from './components/users/users-list/users-list.com
 import { UsersSettingsComponent } from './components/users/users-settings/users-settings.component';
 import { MainRoutingModule } from './main-routing.module';
 import { TechnicalSupportComponent } from './components/header/technical-support/technical-support.component';
+import { MeetingDetialsComponent } from './components/meetings/meeting-detials/meeting-detials.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { TechnicalSupportComponent } from './components/header/technical-support
     AddMembersToProjectDialogComponent,
     FilesListComponent,
     TechnicalSupportComponent,
+    MeetingDetialsComponent,
   ],
   imports: [
     CommonModule,

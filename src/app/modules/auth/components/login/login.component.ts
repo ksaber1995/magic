@@ -56,7 +56,6 @@ export class LoginComponent {
         (res: any) => {
           debugger
           this.isUpdating = false;
-
           localStorage.setItem('token', res.token);
           localStorage.setItem('user', JSON.stringify(res.user));
           this.router.navigate(['/']);

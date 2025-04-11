@@ -18,6 +18,10 @@ export class RolesComponent implements OnInit {
 
   breadCrumbs = [
     {
+      label:'بوابة البرامج',
+      url:'/'
+    },
+    {
       label: ' الصلاحيات',
     },
   ];

@@ -1,1 +1,17 @@
-<p>technical-support works!</p>
+<div class="support-form">
+    <div class="header flex justify-between p-3">
+        <div class="title">الدعم الفني </div>
+        <i class="bi bi-x-lg close-icon" (click)="closeDialog()"></i>
+    </div>
+    <form [formGroup]="techincalForm" class="p-3" (ngSubmit)="sendTechincalMessage()">
+        <div class="input-field flex flex-col gap-2 my-3">
+            <label class="input-label">عنوان الرسالة </label>
+            <input class="input-control" formControlName="title">
+        </div>
+        <div class="input-field flex flex-col gap-2 mb-3">
+            <label class="input-label" >الرجاء اضافة الرسالة هنا وسيتم الرد عليك باسرع وقت ممكن</label>
+            <textarea formControlName="message" class="textarea-input" rows="5"></textarea>
+        </div>
+        <button class="send-message mb-3">ارسال الرسالة</button>
+    </form>
+</div>

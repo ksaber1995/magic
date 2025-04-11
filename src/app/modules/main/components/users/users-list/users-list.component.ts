@@ -13,6 +13,10 @@ export class UsersListComponent implements OnInit {
   // TODO,  اللجان المنتسب لها
   breadCrumbs = [
     {
+      label:'بوابة البرامج',
+      url:'/'
+    },
+    {
       label: ' قائمة المستخدمين',
     },
   ];
