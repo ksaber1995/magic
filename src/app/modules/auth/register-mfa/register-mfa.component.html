@@ -1,52 +1,58 @@
-<div class="wrapper veryLightGray-bg">
+<div class="wrapper veryLightGray-bg" dir="rtl">
   <a [queryParamsHandling]="'merge'" routerLink="/">
     <img class="logo" src="assets/images/logo.png" alt="">
   </a>
 </div>
 
-<div class="mfa-container">
-  <h1 class="container-title">Keep your account secure</h1>
-
+<div class="mfa-container" dir="rtl">
+  <h1 class="container-title">حافظ على أمان حسابك</h1>
 
   <div class="microsoft">
-    <div class="microsoft-title">Microsoft Authenticator</div>
+    <div class="microsoft-title">تطبيق Microsoft Authenticator</div>
     <div class="content-wrapper">
       <img class="auth-image" src="/assets/images/microsoft-authenticator.png">
       <div class="content">
-        <p class="content-title">Start by getting the app</p>
-        <p>On your phone , install Microsoft Authenticator app. <span class="dawnload"><a
-              href="https://play.google.com/store/apps/details?id=com.azure.authenticator" target="_blank">Download now
-            </a></span>.</p>
-
-        <p>After you install Microsoft Authenticator app on your device, choose "Next".</p>
+        <p class="content-title">ابدأ بتنزيل التطبيق</p>
+        <p>
+          قم بتثبيت تطبيق Microsoft Authenticator على هاتفك.
+          <span class="dawnload">
+            <a href="https://play.google.com/store/apps/details?id=com.azure.authenticator" target="_blank">
+              تنزيل الآن
+            </a>
+          </span>.
+        </p>
+        <p>بعد تثبيت التطبيق على جهازك، اختر "التالي".</p>
       </div>
     </div>
     <div class="next">
-      <button routerLink="/login/set-authenticator">Next</button>
+      <button routerLink="/login/set-authenticator">التالي</button>
     </div>
   </div>
 
-
   <div class="or-wrapper">
-    <div class="or">or</div>
+    <div class="or">أو</div>
   </div>
 
   <div class="microsoft">
-    <div class="microsoft-title">Google Authenticator</div>
+    <div class="microsoft-title">تطبيق Google Authenticator</div>
     <div class="content-wrapper">
       <img class="auth-image" src="assets/images/google.webp">
       <div class="content">
-        <p class="content-title">Start by getting the app</p>
-
-        <p> On your phone, install the Google Authenticator app. <span class="dawnload"><a
-              href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&pli=1"
-              target="_blank">Download now </a></span>.</p>
+        <p class="content-title">ابدأ بتنزيل التطبيق</p>
+        <p>
+          قم بتثبيت تطبيق Google Authenticator على هاتفك.
+          <span class="dawnload">
+            <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&pli=1"
+               target="_blank">
+              تنزيل الآن
+            </a>
+          </span>.
+        </p>
       </div>
     </div>
 
     <div class="next">
-      <button routerLink="/login/set-authenticator">Next</button>
+      <button routerLink="/login/set-authenticator">التالي</button>
     </div>
   </div>
-
 </div>

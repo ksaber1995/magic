@@ -64,7 +64,7 @@ export class SwaggerService {
     return this.http.post(url, body);
   }
 
-  generateMfaSecret() {
+  generateMfaSecret() : any {
     const url = ENDPOINT_URI + 'generate-2fa-secret';
     return this.http.post(url, {});
   }
