@@ -54,7 +54,6 @@ export class LoginComponent {
       })
       .subscribe(
         (res: any) => {
-          debugger
           this.isUpdating = false;
           localStorage.setItem('token', res.token);
           localStorage.setItem('user', JSON.stringify(res.user));
@@ -67,7 +66,6 @@ export class LoginComponent {
 
 
           if(error.error == '2FA code is required'){
-            // debugger
             this.router.navigate(['/login/register-mfa'], {
               queryParams: {
                 email: this.loginForm.value.email,

@@ -10,10 +10,9 @@ import {
 import { Project } from '../../../../../../../model/project';
 import { DeleteDialogComponent } from '../../../supreme-committee/delete-dialog/delete-dialog.component';
 
-enum viewType {
-  ViewOne,
-  viewTwo,
-  viewThree,
+export enum viewType {
+  ViewOne = 1,
+  viewTwo = 2,
 }
 @Component({
   selector: 'app-program-item',
@@ -23,7 +22,7 @@ enum viewType {
 export class ProgramItemComponent implements OnInit {
   @Output() delete = new EventEmitter<{ id: number }>();
   @Input() project: Project;
-  @Input() viewMode: viewType;
+  @Input() viewMode: viewType = 1;
   viewEnum = viewType;
   constructor(private dialog: MatDialog) {}
   ngOnInit() {}

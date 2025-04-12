@@ -26,6 +26,7 @@ import { FilesUploadComponent } from './components/files-upload/files-upload.com
 import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { FileListComponent } from './components/file-list/file-list.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 const declarationsImports = [
   CardComponent,
@@ -34,7 +35,9 @@ const declarationsImports = [
   CreateSuccessDialogComponent,
   BreadCrumbComponent,
   SpinnerComponent,
-  FileListComponent
+  FileListComponent,
+  CommentsComponent,
+
 ]
 const imports = [
   ReactiveFormsModule,

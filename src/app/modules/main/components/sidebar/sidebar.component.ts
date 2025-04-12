@@ -3,6 +3,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
 import { SwaggerService } from '../../../../swagger/swagger.service';
 import { User } from '../../../../../model/user';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 
 interface SidebarChild {
@@ -26,7 +27,7 @@ interface ProgramsItem {
 }
 
 
-function getProgramRoutes(id):SidebarChild[] {
+function getProgramRoutes(id): SidebarChild[] {
   return [ // id will be dynamic
     { name: ' الاجراءات', path: `/main/programs/${id}/procedures`, icon: 'assets/images/list-mt.png' }, //TODO, add icon here
     { name: 'الملفات', path: `/main/programs/${id}/files`, icon: 'assets/images/new-meet.png' }, //TODO, add icon here
@@ -116,12 +117,14 @@ const routes: SideBarItem[] = [
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent implements OnInit{
+export class SidebarComponent implements OnInit {
   routes = routes;
-  userInfo = JSON.parse(localStorage.getItem('user') || '{}') as User;
-   showChildren = false;
+  userInfo = this.auth.getCurrentUser();
+  showChildren = false;
   notificationsCount = 2;
   programsParent = programsParent;
+  filteredPrograms = [];
+  textSearch$ = new Subject();
 
   constructor(
     private auth: AuthService,
@@ -131,25 +134,37 @@ export class SidebarComponent implements OnInit{
   }
 
 
-  ngOnInit(): void {
-     this.getPrograms();
-     console.log(this.userInfo)
+  onSearchInput(term: string) {
+    this.textSearch$.next(term);
   }
 
-  getPrograms(){
-    this.swagger.getAllProjects()
-      .subscribe(res=>{
-        const programs: SideBarItem[] = res.map(res=>{
-            return{
-              name: res.title,
-              icon: res.image,
-              showChildren: false,
 
-              childrens: getProgramRoutes(res.id),
-            }
+  ngOnInit(): void {
+    this.getPrograms();
+    console.log(this.userInfo)
+
+    // aa aa
+    this.textSearch$.pipe(debounceTime(300), distinctUntilChanged()).subscribe((text:string)=>{
+
+      this.filteredPrograms = this.programsParent.programs.filter(res=> res.name.includes(text));
+    })
+  }
+
+  getPrograms() {
+    this.swagger.getAllProjects()
+      .subscribe(res => {
+        const programs: SideBarItem[] = res.map(res => {
+          return {
+            name: res.title,
+            icon: res.image,
+            showChildren: false,
+
+            childrens: getProgramRoutes(res.id),
+          }
         })
 
         programsParent.programs = programs;
+        this.filteredPrograms = programs.map(res=>res)
       })
   }
 

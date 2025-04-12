@@ -4,6 +4,7 @@ import { User } from './user';
 export interface Member {
   id: number;
   user: User;
+  user_id: number;
   projects: Project;
   project_id: number;
   name: string,

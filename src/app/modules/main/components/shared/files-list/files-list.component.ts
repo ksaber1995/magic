@@ -11,13 +11,14 @@ import { FileDetailsComponent } from '../../users/file-details/file-details.comp
 export class FilesListComponent implements OnInit , OnChanges{
   @Input() files: FileItem[] = [];
   @Input() programName!: string
-  breadCrumbs 
+  breadCrumbs
   ngOnInit() {
   }
   ngOnChanges() {
     this.breadCrumbs = [
       { label: 'البرامج', url: '/' },
-      { label: this.programName }
+      { label: this.programName, url: '/' },
+      { label: 'الملفات', url: '/' },
     ];
   }
 

@@ -8,9 +8,9 @@
     <div class="actions-wrapper flex gap-3">
       <button *ngIf="breadCrumbButton" class="bread-crumb-button" [routerLink]="breadCrumbButton.url">{{breadCrumbButton.label}}</button>
       <div class="view-icons-container flex gap-3 items-center " *ngIf="showViewIcons">
-        <img src="assets/images/v1-h.png" (click)="switchView(1)" class="view-icon">  
-        <img src="assets/images/v2-h.png" (click)="switchView(2)" class="view-icon">  
-        <img src="assets/images/v3-h.png" (click)="switchView(3)" class="view-icon">  
+        <img src="assets/images/v3-h.png" (click)="switchView(1)" [class.active]="activeIcon === 1" class=" view-icon">
+        <img src="assets/images/v1-h.png" (click)="switchView(2)" [class.active]="activeIcon === 2" class="view-icon">
+        <!-- <img src="assets/images/v2-h.png" (click)="switchView(2)" class="view-icon">   -->
       </div>
     </div>
 </nav>

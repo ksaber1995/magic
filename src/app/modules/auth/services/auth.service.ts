@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { SwaggerService } from '../../../swagger/swagger.service';
+import { User } from '../../../../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,13 @@ export class AuthService {
     const token = localStorage.getItem('token');
     return of(token);
     // return this.isTokenValid(token) ? of(token) : of(null);
+  }
+
+  getCurrentUser(): User{
+    localStorage.setItem('user', JSON.stringify({name: 'karim'}))
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
+
+    return user;
   }
 
   isTokenValid(token: string | null): boolean {

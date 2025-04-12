@@ -10,7 +10,7 @@ export class ForgetPasswordComponent {
   email: string;
   constructor(private swagger: SwaggerService) {}
   sendLink() {
-    debugger
+
     this.swagger.forgetPassword( this.email ).subscribe((res) => {});
   }
 }

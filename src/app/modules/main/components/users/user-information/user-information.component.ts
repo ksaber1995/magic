@@ -9,10 +9,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './user-information.component.scss'
 })
 export class UserInformationComponent implements OnInit {
-  user : User 
+  user : User
   id: string;
   constructor(
-    private swagger : SwaggerService, 
+    private swagger : SwaggerService,
     private route : ActivatedRoute
   ){
 
@@ -20,7 +20,6 @@ export class UserInformationComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')
     this.swagger.getOneUser(this.id).subscribe((res:any) => {
-      debugger
       this.user  = res
     })
   }

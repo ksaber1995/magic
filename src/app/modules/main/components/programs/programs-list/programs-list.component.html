@@ -1,5 +1,6 @@
 <!-- ng for here  -->
 <app-bread-crumb [breadCrumbButton]="breadCrumbButton" (setView)="switchView($event)" [showViewIcons]="true" [breadCrumbs]="breadCrumbs"></app-bread-crumb>
+
 <div *ngIf="projects as projects" [class]="viewMode == viewEnum.ViewOne ?  'grid grid-cols-4 gap-10' : '' ">
   <div *ngFor="let project of projects">
     <app-program-item (delete)="deleteProject($event.id)" [project]="project" [viewMode]="viewMode"> </app-program-item>

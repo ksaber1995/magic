@@ -79,7 +79,6 @@ export class CreateNewNewsComponent implements OnInit {
   }
   createNews() {
     this.isUpdating = true;
-    debugger;
     const news = {
       project_id: this.formValue.project_id,
       title: this.formValue.title,

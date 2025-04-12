@@ -7,6 +7,7 @@ import { SwaggerService } from '../../../../swagger/swagger.service';
   styleUrl: './bread-crumb.component.scss'
 })
 export class BreadCrumbComponent {
+  activeIcon = 1;
   constructor(
     private swagger : SwaggerService
   ){
@@ -17,6 +18,7 @@ export class BreadCrumbComponent {
   @Input() showViewIcons: boolean;
   @Output() setView = new EventEmitter<number>()
   switchView(viewType){
+    this.activeIcon = viewType;
     this.setView.emit(viewType)
   }
 }

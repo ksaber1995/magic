@@ -1,3 +1,4 @@
+import { combineLatest, map } from 'rxjs';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -50,7 +51,7 @@ export class AddMembersToProjectDialogComponent implements OnInit {
   }
 
   createNewMember() {
-    this.isUpdating  = true;
+    this.isUpdating = true;
 
     const newMember: Partial<Member> = this.newMemberForm.value;
     if (newMember && this.newMemberForm.valid) {
@@ -59,32 +60,38 @@ export class AddMembersToProjectDialogComponent implements OnInit {
       this.swagger.createMember(newMember).subscribe((res) => {
         this.snackbar.showSuccessSnackbar('تم اضافة العضو بنجاح');
         this.newMemberForm.reset();
-        this.isUpdating  = false;
-      }, error=>{
-        this.isUpdating  = false;
+        this.isUpdating = false;
+      }, error => {
+        this.isUpdating = false;
         this.snackbar.showError(error.message);
       });
     }
   }
 
-  addRoles(){
+  addRoles() {
     const selectedRoles = this.rolesControl.value;
+    this.isUpdating = true;
 
     const usersWithSelectedRoles = this.users.filter(user => user.roles.some(role => selectedRoles.includes(role.id)));
 
-    const members = usersWithSelectedRoles.map(res=> res.id);
+    const members = usersWithSelectedRoles.map(res => res.id);
 
     this.addMembers(members);
   }
 
 
-  addMembers(members) {
-
-    console.log(members)
-
-    this.swagger.updateProject({id: this.projectId, members: members}).subscribe((res) => {
+  addMembers(members: number[]) {
+    this.isUpdating = true;
+    const requests$ = members.map(res => this.swagger.createMember({ user_id: res, project_id: this.projectId }))
+    combineLatest([...requests$]).subscribe((res) => {
+      this.isUpdating = false;
       this.snackbar.showSuccessSnackbar('تم اضافة العضويات بنجاح');
-    }, error=>{
+      this.rolesControl.reset();
+      this.membersControl.reset();
+    }, error => {
+      this.rolesControl.reset();
+      this.membersControl.reset();
+      this.isUpdating = false;
       this.snackbar.showError(error.message);
     });
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { SwaggerService } from '../../../../../../swagger/swagger.service';
 import { ActivatedRoute } from '@angular/router';
 import { IReport } from '../../../../../../../model/report';
+import { SnackbarService } from '../../../../../../services/snackbar.service';
 
 @Component({
   selector: 'app-report-details',
@@ -10,7 +11,11 @@ import { IReport } from '../../../../../../../model/report';
   styleUrl: './report-details.component.scss',
 })
 export class ReportDetailsComponent implements OnInit {
-  adminCommentForm: FormGroup;
+  commentForm = this.fb.group({
+    comment: [null],
+    files: [[]],
+  });;
+
   isReportPosted: boolean;
   projectId = +this.route.snapshot.paramMap.get('projectId');
   reportId = +this.route.snapshot.paramMap.get('reportId');
@@ -24,7 +29,8 @@ export class ReportDetailsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private swagger: SwaggerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackbar: SnackbarService
   ) {}
   ngOnInit() {
     this.swagger.getOneReport(this.reportId).subscribe((res: any) => {
@@ -44,10 +50,7 @@ export class ReportDetailsComponent implements OnInit {
       });
     });
 
-    this.adminCommentForm = this.fb.group({
-      description: [null],
-      uploadedFiles: this.fb.array([]),
-    });
+
   }
 
   updateReportStatus() {
@@ -58,5 +61,23 @@ export class ReportDetailsComponent implements OnInit {
         status_id: this.isReportPosted ? 1 : 2,
       })
       .subscribe(res=> {});
+  }
+
+
+  addComment(){
+    console.log(this.commentForm)
+    const body = {
+      id: this.reportId,
+      comment: this.commentForm.value.comment,
+      comment_files: this.commentForm.value.files,
+      project_id : this.projectId
+    }
+    this.swagger
+    .updateReport(body)
+    .subscribe(res=> {
+      this.snackbar.showSuccessSnackbar('تم اضافة التعليق بنجاح')
+    },error=>{
+      this.snackbar.showError(error.message);
+    });
   }
 }

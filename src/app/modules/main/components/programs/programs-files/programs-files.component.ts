@@ -12,6 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ProgramFilesComponent implements OnInit{
  files: FileItem[] = [];
  projectId= +this.route.snapshot.paramMap.get('id');
+ programName: string;
+
  constructor(
   private route: ActivatedRoute,
   private swagger: SwaggerService
@@ -35,13 +37,14 @@ export class ProgramFilesComponent implements OnInit{
        );
 
        const procedures$ = this.swagger.getProcedureByProjectId(+this.projectId);
+       const project$ = this.swagger.getOneProject(+this.projectId);
 
-       combineLatest([decisions$, posts$, procedures$]).subscribe(([decisions, posts, procedures]) => {
+       combineLatest([decisions$, posts$, procedures$, project$]).subscribe(([decisions, posts, procedures, project]) => {
 
          const decisionsFiles  = decisions.map((res) => res.files as FileItem[])?.flat();
          const postsFiles = posts.map((res) => res.files as FileItem[]).flat();
          const proceduresFiles = procedures.map((res) => res.files as FileItem[]).flat();
-
+         this.programName = project.title
          this.files = [...decisionsFiles, ...postsFiles, ...proceduresFiles].map(res=> ({...res, size: res.size / 1024, fileType: res.name.split('.').pop()}));
          console.log({ files: this.files})
        })

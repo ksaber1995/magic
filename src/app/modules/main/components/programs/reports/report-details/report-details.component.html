@@ -1,5 +1,5 @@
 <div *ngIf="report" class="report-details-container p-4 mb-4">
-  <app-bread-crumb [breadCrumbs]="breadCrumbs" ></app-bread-crumb>
+  <app-bread-crumb [breadCrumbs]="breadCrumbs"></app-bread-crumb>
   <div class="report-image-wrapper w-full p-1 mb-1">
     <img src="{{ report.image }}" class="report-image" />
   </div>
@@ -16,11 +16,7 @@
       <div class="report-status flex items-center gap-2">
         <label for=""> حالة التقرير </label>
         <div class="input-wrapper flex items-center gap-2">
-          <input
-            (change)="updateReportStatus()"
-            type="checkbox"
-            class="status-input"
-          />
+          <input (change)="updateReportStatus()" type="checkbox" class="status-input" />
           <span>{{ isReportPosted ? "منشور" : "مسودة" }}</span>
         </div>
       </div>
@@ -34,44 +30,12 @@
         </div>
       </div>
     </div>
+
   </div>
 
-  <div class="admin-comment p-3" >
-    <form [formGroup]="adminCommentForm" class="w-full">
-    <div class="title my-3">Admin</div>
-    <div class="input-field">
-      <label for="" class="description-title mb-2">تعليق</label>
-      <textarea
-      name=""
-      id=""
-      class="details"
-      formControlName="description"
-      ></textarea>
-    </div>
-    <div class="uploaded-files input-field mb-3">
-      <input
-      formArrayName="uploadedFiles"
-      type="file"
-      multiple
-      id="fileInput"
-      hidden
-      />
-      <div
-      class="upload-files-button p-4"
-      onclick="document.getElementById('fileInput').click()"
-      >
-      <label>اسحب الملف هنا...</label>
-      <div class="choose-file">
-        أو قم باختيار الملف..
-        <i class="bi bi-upload"></i>
-      </div>
-    </div>
-      <div class="selected-files"></div>
-    </div>
-    <div class="flex justify-end">
-      <button class="accept-btn">موافق</button>
-    </div>
 
-    </form>
-  </div>
+
+
+  <app-comments (addComment)="addComment()" [form]="commentForm"></app-comments>
+
 </div>
