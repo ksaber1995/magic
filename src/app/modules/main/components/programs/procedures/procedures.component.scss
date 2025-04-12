@@ -83,6 +83,7 @@
             border-radius: 15px;
             font-size: 16px;
             padding: 5px;
+            
             .user-image {
               width: 20px;
               height: 20px;
@@ -222,4 +223,12 @@ input[type="checkbox"] {
 
 input[type="checkbox"]:checked {
   background-color: #9acc23 !important;
+}
+
+
+.member-list{
+  .user-info:hover{
+    background: #8bb81f !important;
+    color: #fff !important;
+  }
 }

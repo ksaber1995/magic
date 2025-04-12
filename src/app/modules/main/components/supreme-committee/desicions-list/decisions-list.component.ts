@@ -47,8 +47,8 @@ export class DecisionsListComponent implements OnInit {
     }
   }
 
-  showToolTip(decisionId) {
-    this.tooltipVisible = decisionId;
+  showToolTip(userId) {
+    this.tooltipVisible = userId;
     clearTimeout(this.hideTimeout); // Stop any pending hide action
   }
 

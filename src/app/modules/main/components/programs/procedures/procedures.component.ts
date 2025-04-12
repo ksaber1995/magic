@@ -221,4 +221,5 @@ export class ProceduresComponent implements OnInit {
       this.getProject();
     })
   }
+  
 }

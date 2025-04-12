@@ -17,6 +17,7 @@
       <div
         class="procedures-wrapper flex gap-2 items-center relative"
         *ngFor="let procedures of inProgressProcedures"
+        [routerLink]="['/procedures/' + procedures.id]"
       >
         <input
           type="checkbox"
