@@ -1,23 +1,23 @@
-<div class="wrapper veryLightGray-bg">
+<div class="wrapper veryLightGray-bg" dir="rtl">
   <a [queryParamsHandling]="'merge'" routerLink="/">
     <img class="logo" src="assets/images/logo.png" alt="">
   </a>
 </div>
-<div class="set-auth-container">
-  <h1 class="container-title">Keep your account secure</h1>
+
+<div class="set-auth-container" dir="rtl">
+  <h1 class="container-title">حافظ على أمان حسابك</h1>
   <div class="microsoft">
-    <div class="microsoft-title">App Authenticator</div>
+    <div class="microsoft-title">تطبيق المصادقة</div>
     <div class="content-wrapper">
       <!-- <img class="auth-image" src="../../../../../../assets/icons/icons8-microsoft-authenticator-50.png"> -->
       <div class="content">
-        <p class="content-title">Set up your account</p>
-        <p>.if prompted. all notifications. Then add an account</p>
+        <p class="content-title">إعداد حسابك</p>
+        <p>إذا طُلب منك ذلك، فعّل كل الإشعارات، ثم أضف حسابًا.</p>
       </div>
     </div>
     <div class="actions">
-      <button routerLink="/login/register-mfa" class="back">Back</button>
-      <button routerLink="/login/qr-authenticator" class="next">Next</button>
-
+      <button routerLink="/login/register-mfa" class="back">رجوع</button>
+      <button routerLink="/login/qr-authenticator" class="next">التالي</button>
     </div>
   </div>
 </div>

@@ -29,6 +29,7 @@
 
     <div *ngIf="type == 'generate'" style="display: flex; gap: 30px">
       <button
+
         mat-raised-button
         routerLink="/login/qr-authenticator"
         class="back"
@@ -39,7 +40,7 @@
       <button
         mat-raised-button
         class="next"
-        (click)="enterCode()"
+        (click)="siginInOtp()"
         color="primary"
       >
         Next

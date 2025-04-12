@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
 import { OtpModalComponent } from '../../otp-modal/otp-modal.component';
 import { SwaggerService } from '../../../../swagger/swagger.service';
+import { SnackbarService } from '../../../../services/snackbar.service';
 
 @Component({
   selector: 'app-code-authenticator',
@@ -25,7 +26,7 @@ export class CodeAuthenticatorComponent {
     private router: Router,
     // private auth: AuthService,
     private swagger: SwaggerService,
-    private snackbar: MatSnackBar,
+    private snackbar: SnackbarService,
     private dialog: MatDialog
   ) {
 
@@ -58,28 +59,11 @@ export class CodeAuthenticatorComponent {
   }
 
   siginInOtp() {
-    // const body = {
-    //   otp: this.otpValue,
-    //   ticket: this.ticket,
-    // };
-
-    // this.auth.signinOtp(body).subscribe(res => {
-    //   if (res.session?.accessToken) {
-    //     localStorage.setItem('token', res.session.accessToken);
-    //     localStorage.setItem('refreshToken', res.session.refreshToken || '');
-
-    //     this.router.navigate(['/']);
-    //   }
-
-    //   if (res.error) {
-    //     this.error = res.error?.message
-    //   }
-
-    // },
-    //   (err) => {
-    //     console.log(err.error.message);
-    //   }
-    // );
+    this.swagger.verifyMfa({one_time_password: +this.otpValue}).subscribe(res=>{
+      if(res){
+        this.snackbar.showSuccess('تم اضافة الكود بنجاح', "/login")
+      }
+    })
   }
 
   onOtpChange(event: any) {
