@@ -1,4 +1,4 @@
-<div class="login-container flex items-center justify-center h-screen">
+<div *ngIf="!showMFAValidator" class="login-container flex items-center justify-center h-screen">
   <div class="side-right w-1/2 h-screen">
     <a href="" class="logo">
       <img src="assets/images/logo.png" alt="بيئة الرياض" />
@@ -45,10 +45,13 @@
       <button
         [class.loading-btn]="isUpdating"
         class="enter-btn"
-        (click)="validateCaptcha()"
+        (click)="checkIfEmailRequiredMFA()"
       >
         دخول
       </button>
     </div>
   </div>
 </div>
+
+
+<app-code-authenticator [type]="'signin'" (mfaEntered)="validateCaptcha($event)"  (dismiss)="showMFAValidator = false" *ngIf="showMFAValidator"></app-code-authenticator>

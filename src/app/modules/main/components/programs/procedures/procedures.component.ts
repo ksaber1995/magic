@@ -19,6 +19,8 @@ import { Project, ProjectHistory } from '../../../../../../model/project';
 import { SwaggerService } from '../../../../../swagger/swagger.service';
 import { AddMembersToProjectDialogComponent } from './add-members-to-project-dialog/add-members-to-project-dialog.component';
 import { ChangeStatusRequestComponent } from './change-status-request/change-status-request.component';
+import { DeleteDialogComponent } from '../../supreme-committee/delete-dialog/delete-dialog.component';
+import { SnackbarService } from '../../../../../services/snackbar.service';
 
 
 export type ChartOptions = {
@@ -57,7 +59,11 @@ export class ProceduresComponent implements OnInit {
   isLoaded: boolean;
   allProceduresLength: number;
 
-  constructor(private swagger: SwaggerService, private route: ActivatedRoute) {
+  constructor(
+    private swagger: SwaggerService,
+    private snackBar: SnackbarService,
+    private route: ActivatedRoute
+  ) {
     this.desicionChartOptions = {
       series: [44, 55, 41],
       labels: ['منجز', 'متعثر', 'قيد التنفيذ'],
@@ -176,9 +182,9 @@ export class ProceduresComponent implements OnInit {
       this.project = res;
       this.breadCrumbs = [
         {
-          label:"البرامج", 
+          label:"البرامج",
           url:'/'
-        }, 
+        },
         {
           label: this.project.title
         }
@@ -186,8 +192,8 @@ export class ProceduresComponent implements OnInit {
     });
   }
 
-  showToolTip(decisionId) {
-    this.tooltipVisible = decisionId;
+  showToolTip(id) {
+    this.tooltipVisible = id;
     clearTimeout(this.hideTimeout); // Stop any pending hide action
   }
 
@@ -221,5 +227,23 @@ export class ProceduresComponent implements OnInit {
       this.getProject();
     })
   }
-  
+
+  openDeleteMemberDialog(id:number){
+    const ref = this.dialog.open(DeleteDialogComponent)
+
+    ref.afterClosed().subscribe(res=>{
+      if(res){
+        this.swagger.deleteMember(id)
+          .subscribe(res=>{
+            const index = this.project.members.findIndex(res=> res.id == id);
+
+            if(index > -1){
+              this.project.members.splice(index, 1)
+            }
+            this.snackBar.showSuccessSnackbar('تم حذف العضو بنجاح')
+          })
+      }
+    })
+  }
+
 }

@@ -54,9 +54,15 @@ function createFormData(item: any): FormData {
 export class SwaggerService {
   constructor(private http: HttpClient, private spinner: SpinnerService) {}
 
-  login(body: { email: string; password: string; recaptcha_token: string }) {
+  login(body: { email: string; password: string; recaptcha_token: string, one_time_password?: number }) {
     const url = ENDPOINT_URI + 'login';
     return this.http.post(url, body);
+  }
+
+  isEmailRequiredMFA(email: string){
+    const url = ENDPOINT_URI + 'check2FA';
+    return this.http.post<{message: string}>(url, {email});
+
   }
 
   verifyMfa(body: { one_time_password: number }) {
@@ -244,7 +250,7 @@ export class SwaggerService {
     return this.http.post(ENDPOINT_URI + `members`, formData);
   }
 
-  deleteMember(id: string) {
+  deleteMember(id: number) {
     return this.http.delete(ENDPOINT_URI + `members/${id}`);
   }
 

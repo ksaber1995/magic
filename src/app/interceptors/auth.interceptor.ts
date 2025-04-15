@@ -13,18 +13,19 @@ export class AuthInterceptor implements HttpInterceptor {
     return this.authService.getValidToken().pipe(
       switchMap(token => {
 
-        // if (token) {
+        if (token) {
           req = req.clone({
-            setHeaders: { Authorization: `Bearer ${'Hs8akLHKGVJrmxwVzDVBb0iPmuD1TXac3jHM7eKPedbc0ff7'}` }
+            // setHeaders: { Authorization: `Bearer ${'Hs8akLHKGVJrmxwVzDVBb0iPmuD1TXac3jHM7eKPedbc0ff7'}` }
+            setHeaders: { Authorization: `Bearer ${token}` }
           });
-        // }
+        }
         return next.handle(req);
       }),
       catchError((error: HttpErrorResponse) => {
-        // if (error.status === 401) {
-        //   this.authService.logout();
-        //   this.router.navigate(['/login/']);
-        // }
+        if (error.status === 401) {
+          this.authService.logout();
+          this.router.navigate(['/login/']);
+        }
         return throwError(() => error.error);
       })
     );

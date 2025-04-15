@@ -19,7 +19,6 @@ export class AuthService {
   }
 
   getCurrentUser(): User{
-    localStorage.setItem('user', JSON.stringify({name: 'karim'}))
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
 
     return user;

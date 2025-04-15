@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwaggerService } from '../../../../swagger/swagger.service';
+import { SnackbarService } from '../../../../services/snackbar.service';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +15,13 @@ export class LoginComponent {
   errors: any;
   errorMessage: string;
   isUpdating;
+  showMFAValidator: boolean;
+
   constructor(
     private fb: FormBuilder,
     private swagger: SwaggerService,
-    private router: Router
+    private router: Router,
+    private snackbar: SnackbarService
   ) {
     this.loginForm = this.fb.group({
       email: ['karim@gmail.com', [Validators.required, Validators.email]],
@@ -25,7 +29,7 @@ export class LoginComponent {
     });
   }
 
-  validateCaptcha() {
+  validateCaptcha(otp?: number) {
     if (window['grecaptcha']) {
       grecaptcha.ready(() => {
         grecaptcha
@@ -34,7 +38,7 @@ export class LoginComponent {
           })
           .then((token: string) => {
             console.log('reCAPTCHA Token:', token);
-            this.login(token);
+            this.login(token, otp);
           });
       });
     } else {
@@ -42,7 +46,18 @@ export class LoginComponent {
     }
   }
 
-  login(recaptcha_token: string) {
+  checkIfEmailRequiredMFA(){
+    this.swagger.isEmailRequiredMFA(this.loginForm.value.email)
+    .subscribe(res=>{
+      if(res.message === '2FA code required'){
+        this.showMFAValidator = true;
+      }else{
+        this.validateCaptcha();
+      }
+    })
+  }
+
+  login(recaptcha_token: string, one_time_password?: number) {
     this.isUpdating = true;
 
     this.errors = null;
@@ -51,6 +66,7 @@ export class LoginComponent {
         email: this.loginForm.value.email,
         password: this.loginForm.value.password,
         recaptcha_token,
+        one_time_password
       })
       .subscribe(
         (res: any) => {
@@ -63,26 +79,14 @@ export class LoginComponent {
           this.isUpdating = false;
           console.log(error.error);
           // handle errors
-
-
-          if(error.error == '2FA code is required'){
-            this.router.navigate(['/login/register-mfa'], {
-              queryParams: {
-                email: this.loginForm.value.email,
-              },
-            })
-          }
-
-
-
           this.errors = error.message || error.error;
-          if (error.errors?.email) {
+
+          if(typeof error.error === 'string'){
+            this.snackbar.showError(error.error);
+          }else if (error.errors?.email) {
             this.errorMessage = 'حقل البريد الالكتروني مطلوب.';
           } else if (error.errors?.password) {
             this.errorMessage = 'حقل كلمة المرور مطلوب.';
-          } else if (error.error == 'Unauthorized') {
-            this.errorMessage =
-              'بيانات الاعتماد هذه غير متطابقة مع البيانات المسجلة لدينا.';
           } else {
             this.errorMessage = 'خطأ في كود التحقق';
           }

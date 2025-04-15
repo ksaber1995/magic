@@ -1,11 +1,8 @@
-import { Component, Input, viewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from '../../services/auth.service';
-import { OtpModalComponent } from '../../otp-modal/otp-modal.component';
-import { SwaggerService } from '../../../../swagger/swagger.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SnackbarService } from '../../../../services/snackbar.service';
+import { SwaggerService } from '../../../../swagger/swagger.service';
 
 @Component({
   selector: 'app-code-authenticator',
@@ -16,8 +13,9 @@ export class CodeAuthenticatorComponent {
   otpValue: string;
 
 
-  type: 'generate' | 'signin' = (this.route.snapshot.queryParamMap.get('type') || 'generate') as 'signin' | 'generate';
-
+  @Input() type: 'generate' | 'signin' = (this.route.snapshot.queryParamMap.get('type') || 'generate') as 'signin' | 'generate';
+  @Output() dismiss = new EventEmitter();
+  @Output() mfaEntered = new EventEmitter<string>();
   ticket: string = this.route.snapshot.queryParamMap.get('ticket');
   error: any;
 
@@ -59,8 +57,8 @@ export class CodeAuthenticatorComponent {
   }
 
   siginInOtp() {
-    this.swagger.verifyMfa({one_time_password: +this.otpValue}).subscribe(res=>{
-      if(res){
+    this.swagger.verifyMfa({ one_time_password: +this.otpValue }).subscribe(res => {
+      if (res) {
         this.snackbar.showSuccess('تم اضافة الكود بنجاح', "/login")
       }
     })

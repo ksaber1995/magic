@@ -59,8 +59,6 @@
     }
 
     button {
-      width: 100px;
-      height: 40px;
       border: none;
       border-radius: 0;
       text-align: center;
@@ -73,6 +71,7 @@
     .next {
       background-color: rgb(6, 143, 255);
       color: white;
+      padding: 5px 15px;
     }
     .back {
       margin: 0 10px;

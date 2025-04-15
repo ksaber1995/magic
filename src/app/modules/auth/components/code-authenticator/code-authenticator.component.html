@@ -1,64 +1,68 @@
-<div class="wrapper veryLightGray-bg">
+<div class="wrapper veryLightGray-bg" dir="rtl">
   <a [queryParamsHandling]="'merge'" routerLink="/">
-    <img class="logo" src="assets/images/logo.png" alt="" />
+    <img class="logo" src="assets/images/logo.png" alt="الشعار" />
   </a>
 </div>
 
-<div class="code-container">
-  <h1 class="container-title">Enter your otp</h1>
+<div class="code-container" dir="rtl">
+  <h1 class="container-title">أدخل رمز التحقق (OTP)</h1>
 
   <div class="microsoft">
-    <div class="microsoft-title">App Authenticator</div>
+    <div class="microsoft-title">تطبيق المصادقة</div>
+
     <div class="content-wrapper">
       <div class="img-wrapper mb-3">
-        <mat-label class="content-title"
-          >Enter the code you received in App Authenticator</mat-label
-        >
+        <mat-label class="content-title">
+          أدخل الرمز الذي استلمته في تطبيق المصادقة
+        </mat-label>
         <img
           class="auth-image"
           src="assets/images/microsoft-authenticator.png"
+          alt="تطبيق المصادقة"
         />
       </div>
-      <mat-form-field class="otp-field">
-        <input [(ngModel)]="otpValue" matInput />
-      </mat-form-field>
-      <mat-error *ngIf="error">{{ error }}</mat-error>
 
-      <!-- <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6}"></ng-otp-input> -->
+      <mat-form-field class="otp-field">
+        <input [(ngModel)]="otpValue" matInput placeholder="أدخل الرمز" />
+      </mat-form-field>
+
+      <mat-error *ngIf="error">{{ error }}</mat-error>
     </div>
 
     <div *ngIf="type == 'generate'" style="display: flex; gap: 30px">
       <button
-
         mat-raised-button
         routerLink="/login/qr-authenticator"
         class="back"
       >
-        Back
+        رجوع
       </button>
 
       <button
         mat-raised-button
-        class="next"
+        class="add-btn"
         (click)="siginInOtp()"
         color="primary"
       >
-        Next
+        التالي
       </button>
     </div>
 
     <div *ngIf="type === 'signin'" style="display: flex; gap: 30px">
+
+
+      <button mat-button (click)="dismiss.emit(true)">
+        رجوع
+      </button>
+
       <button
-        mat-raised-button
-        class="next"
-        (click)="enterCode()"
-        color="primary"
-      >
-        Validate code
-      </button>
-      <button mat-raised-button class="next" routerLink="/login">
-        Login with different account
-      </button>
+      mat-raised-button
+      class="next"
+      (click)="mfaEntered.emit(otpValue)"
+      color="primary"
+    >
+      تسجيل الدخول
+    </button>
     </div>
   </div>
 </div>
