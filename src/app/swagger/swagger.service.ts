@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ENDPOINT_URI } from './utlity';
 import { User } from '../../model/user';
 import { finalize, map, Observable, shareReplay } from 'rxjs';
-import { Procedure } from '../../model/procedure';
+import { Procedure, ProcedureGroup } from '../../model/procedure';
 import { Decision } from '../../model/decision';
 import { Meeting } from '../../model/meeting';
 import { IReport } from '../../model/report';
@@ -12,7 +12,7 @@ import { Permission } from '../../model/permission';
 import { Role } from '../../model/role';
 import { Setting } from '../../model/setting';
 import { Sms } from '../../model/sms';
-import { Group, ProceduresGroup } from '../../model/group';
+import { Group} from '../../model/group';
 import { Project, ProjectHistory } from '../../model/project';
 import { SpinnerService } from '../services/spinner.service';
 import { Member } from '../../model/member';
@@ -178,20 +178,31 @@ export class SwaggerService {
     );
   }
 
-  createProcedure(procedure: Procedure) {
+  createProcedure(procedure: Partial< Procedure>) {
     const formData = createFormData(procedure);
     return this.http.post(ENDPOINT_URI + `procedures`, formData);
   }
 
-  updateProcedure(id: string, procedure: Procedure) {
+  updateProcedure(procedure: Partial < Procedure >) {
+    debugger;
     const formData = createFormData(procedure);
-    return this.http.put(ENDPOINT_URI + `procedures/${id}`, formData);
+    formData.append('_method', 'PUT');
+
+    return this.http.post(ENDPOINT_URI + `procedures/${procedure.id}`, formData);
   }
 
   deleteProcedure(id: string) {
     return this.http.delete(ENDPOINT_URI + `procedures/${id}`);
   }
 
+
+  getAllProcedureGroupsByProjectId(projectId: number){
+    return this.http.get<ResponseData<ProcedureGroup>>(ENDPOINT_URI + `procedures-groups`).pipe(map(res=> res.data.filter(res=> res.project_id == projectId)));
+  }
+
+  createProcedureGroup(body: {project_id: number, name: string}){
+    return this.http.post(ENDPOINT_URI + `procedures-groups`, body);
+  }
   // Decisions
   getAllDecisions(): Observable<Decision[]> {
     this.spinner.showSpinner();
@@ -520,12 +531,12 @@ export class SwaggerService {
       .pipe(finalize(() => this.spinner.hideSpinner()));
   }
 
-  createProceduresGroup(proceduresGroup: ProceduresGroup) {
+  createProceduresGroup(proceduresGroup: ProcedureGroup) {
     const formData = createFormData(proceduresGroup);
     return this.http.post(ENDPOINT_URI + `procedures-groups`, formData);
   }
 
-  updateProceduresGroup(id: string, proceduresGroup: ProceduresGroup) {
+  updateProceduresGroup(id: string, proceduresGroup: ProcedureGroup) {
     const formData = createFormData(proceduresGroup);
     return this.http.put(ENDPOINT_URI + `procedures-groups/${id}`, formData);
   }

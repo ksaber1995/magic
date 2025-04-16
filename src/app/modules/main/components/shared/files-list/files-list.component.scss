@@ -9,7 +9,7 @@
   }
   div {
     .file {
-      width: calc(20% - 10px);
+      max-width: 50%;
       background: #fff;
       overflow: hidden;
       padding: 13px;

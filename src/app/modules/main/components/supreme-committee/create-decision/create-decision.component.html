@@ -37,9 +37,9 @@
     <div class="input-field flex flex-col date-input-field my-4">
       <label class="mb-1">الحالة</label>
       <mat-select class="select-status w-100" formControlName="status_id">
-        <mat-option value="1" selected>تحت الإجراء</mat-option>
-        <mat-option value="2">منجز</mat-option>
-        <mat-option value="3">متعثر</mat-option>
+        <mat-option [value]="1" selected>تحت الإجراء</mat-option>
+        <mat-option [value]="2">منجز</mat-option>
+        <mat-option [value]="3">متعثر</mat-option>
       </mat-select>
     </div>
 

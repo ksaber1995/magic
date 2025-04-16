@@ -1,0 +1,23 @@
+.user-info {
+  background: #eeeeee;
+  color: #666;
+  border-radius: 15px;
+  font-size: 16px;
+  padding: 5px;
+  max-width: 200px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  .user-image {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+  &:hover {
+    color: #fff;
+    background: #d0d0d0;
+    cursor: pointer;
+  }
+}

@@ -54,6 +54,7 @@ import { MainRoutingModule } from './main-routing.module';
 import { TechnicalSupportComponent } from './components/header/technical-support/technical-support.component';
 import { MeetingDetialsComponent } from './components/meetings/meeting-detials/meeting-detials.component';
 import { ProcedureDetailsComponent } from './components/programs/procedures/procedure-details/procedure-details.component';
+import { ProceduresGroupsCreationComponent } from './components/programs/procedures-groups-creation/procedures-groups-creation.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { ProcedureDetailsComponent } from './components/programs/procedures/proc
     TechnicalSupportComponent,
     MeetingDetialsComponent,
     ProcedureDetailsComponent,
+    ProceduresGroupsCreationComponent,
   ],
   imports: [
     CommonModule,

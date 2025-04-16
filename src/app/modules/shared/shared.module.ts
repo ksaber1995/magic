@@ -25,8 +25,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FilesUploadComponent } from './components/files-upload/files-upload.component';
 import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { FileListComponent } from './components/file-list/file-list.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { SingleSelectorComponent } from './components/single-selector/single-selector.component';
 
 const declarationsImports = [
   CardComponent,
@@ -35,7 +35,7 @@ const declarationsImports = [
   CreateSuccessDialogComponent,
   BreadCrumbComponent,
   SpinnerComponent,
-  FileListComponent,
+  SingleSelectorComponent,
   CommentsComponent,
 
 ]
@@ -65,8 +65,6 @@ const imports = [
 @NgModule({
   declarations: [
     ...declarationsImports,
-
-
   ],
   imports: [
     CommonModule,

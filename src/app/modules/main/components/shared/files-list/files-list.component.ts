@@ -8,18 +8,18 @@ import { FileDetailsComponent } from '../../users/file-details/file-details.comp
   templateUrl: './files-list.component.html',
   styleUrl: './files-list.component.scss',
 })
-export class FilesListComponent implements OnInit , OnChanges{
+export class FilesListComponent implements OnInit {
   @Input() files: FileItem[] = [];
   @Input() programName!: string
   breadCrumbs
   ngOnInit() {
-  }
-  ngOnChanges() {
-    this.breadCrumbs = [
-      { label: 'البرامج', url: '/' },
-      { label: this.programName, url: '/' },
-      { label: 'الملفات', url: '/' },
-    ];
+    if(this.programName){
+      this.breadCrumbs = [
+        { label: 'البرامج', url: '/' },
+        { label: this.programName, url: '/' },
+        { label: 'الملفات', url: '/' },
+      ];
+    }
   }
 
   readonly dialog = inject(MatDialog);

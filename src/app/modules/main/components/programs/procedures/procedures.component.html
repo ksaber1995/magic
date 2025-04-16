@@ -1,7 +1,7 @@
 <app-bread-crumb [breadCrumbs]="breadCrumbs"></app-bread-crumb>
 
 <div *ngIf="isLoaded" class="procedures-container p-3">
-  <div class="header mb-2">
+  <div *ngIf="project" class="header mb-2">
     <div class="title mr-3">{{ project.title }}</div>
     <div class="description mr-3">
       {{ project.content }}
@@ -22,8 +22,8 @@
               </div>
               <div class="status-precent">
                 {{
-                  (completedProcedures?.length / allProceduresLength) * 100
-                    | number : ".0-2"
+                (completedProcedures?.length / allProceduresLength) * 100
+                | number : ".0-2"
                 }}
                 {{ "%" }}
               </div>
@@ -35,8 +35,8 @@
               </div>
               <div class="status-precent">
                 {{
-                  (stalledProcedures?.length / allProceduresLength) * 100
-                    | number : ".0-2"
+                (stalledProcedures?.length / allProceduresLength) * 100
+                | number : ".0-2"
                 }}
                 {{ "%" }}
               </div>
@@ -48,22 +48,17 @@
               </div>
               <div class="status-precent">
                 {{
-                  (inProgressProcedures?.length / allProceduresLength) * 100
-                    | number : ".0-2"
+                (inProgressProcedures?.length / allProceduresLength) * 100
+                | number : ".0-2"
                 }}
                 {{ "%" }}
               </div>
             </div>
           </div>
           <div id="chart">
-            <apx-chart
-              [series]="desicionChartOptions.series"
-              [chart]="desicionChartOptions.chart"
-              [labels]="desicionChartOptions.labels"
-              [fill]="desicionChartOptions.fill"
-              [dataLabels]="desicionChartOptions.dataLabels"
-              [responsive]="desicionChartOptions.responsive"
-            ></apx-chart>
+            <apx-chart [series]="desicionChartOptions.series" [chart]="desicionChartOptions.chart"
+              [labels]="desicionChartOptions.labels" [fill]="desicionChartOptions.fill"
+              [dataLabels]="desicionChartOptions.dataLabels" [responsive]="desicionChartOptions.responsive"></apx-chart>
           </div>
         </div>
         <!-- مؤشرات الاداء للاجراءات -->
@@ -77,8 +72,8 @@
               </div>
               <div class="status-precent">
                 {{
-                  (completedProcedures?.length / allProceduresLength) * 100
-                    | number : ".0-2"
+                (completedProcedures?.length / allProceduresLength) * 100
+                | number : ".0-2"
                 }}
                 {{ "%" }}
               </div>
@@ -90,8 +85,8 @@
               </div>
               <div class="status-precent">
                 {{
-                  (stalledProcedures?.length / allProceduresLength) * 100
-                    | number : ".0-2"
+                (stalledProcedures?.length / allProceduresLength) * 100
+                | number : ".0-2"
                 }}
                 {{ "%" }}
               </div>
@@ -103,22 +98,18 @@
               </div>
               <div class="status-precent">
                 {{
-                  (inProgressProcedures?.length / allProceduresLength) * 100
-                    | number : ".0-2"
+                (inProgressProcedures?.length / allProceduresLength) * 100
+                | number : ".0-2"
                 }}
                 {{ "%" }}
               </div>
             </div>
           </div>
           <div id="chart">
-            <apx-chart
-              [series]="proceduresChartOptions.series"
-              [chart]="proceduresChartOptions.chart"
-              [labels]="proceduresChartOptions.labels"
-              [fill]="proceduresChartOptions.fill"
+            <apx-chart [series]="proceduresChartOptions.series" [chart]="proceduresChartOptions.chart"
+              [labels]="proceduresChartOptions.labels" [fill]="proceduresChartOptions.fill"
               [dataLabels]="proceduresChartOptions.dataLabels"
-              [responsive]="proceduresChartOptions.responsive"
-            ></apx-chart>
+              [responsive]="proceduresChartOptions.responsive"></apx-chart>
           </div>
         </div>
       </div>
@@ -127,10 +118,7 @@
 
       <div class="last-updates mb-3 pb-2">
         <div class="title p-3">آخر التحديثات</div>
-        <div
-          class="update-details p-3"
-          *ngFor="let history of histories; index as i"
-        >
+        <div class="update-details p-3" *ngFor="let history of histories; index as i">
           <ng-container *ngIf="i < 6">
             <div class="date mb-1">{{ history.created_at | date }}</div>
             <div class="details flex items-center">
@@ -143,12 +131,7 @@
               </span>
 
               <div class="user-info flex gap-2 mr-1">
-                <img
-                  *ngIf="history.user?.image"
-                  src="{{ history.user?.image }}"
-                  class="user-image"
-                  alt=""
-                />
+                <img *ngIf="history.user?.image" src="{{ history.user?.image }}" class="user-image" alt="" />
                 <mat-icon *ngIf="!history.user?.image">person</mat-icon>
                 {{ history.user?.name }}
               </div>
@@ -160,44 +143,29 @@
 
       <!-- قرارات اللجنة العليا لحماية البيئة -->
 
-      <app-decisions-list
-        [showMore]="true"
-        [decisions]="decisions"
-      ></app-decisions-list>
+      <app-decisions-list [showMore]="true" [decisions]="decisions"></app-decisions-list>
 
       <!-- إجراءات تنفيذ البرنامج -->
 
-      <app-procedures-list
-        *ngIf="inProgressProcedures && completedProcedures && stalledProcedures"
-        [inProgressProcedures]="inProgressProcedures"
-        [completedProcedures]="completedProcedures"
-        [stalledProcedures]="stalledProcedures"
-      ></app-procedures-list>
+      <app-procedures-list *ngIf="inProgressProcedures && completedProcedures && stalledProcedures"
+        [inProgressProcedures]="inProgressProcedures" [completedProcedures]="completedProcedures"
+        [stalledProcedures]="stalledProcedures" [project]="project"></app-procedures-list>
     </div>
 
     <div class="latest-reports w-1/4">
-      <button
-        class="send-report-btn mb-3"
-        [routerLink]="'/main/programs/' + project.id + '/reports/create'"
-      >
+      <button class="send-report-btn mb-3" [routerLink]="'/main/programs/' + project.id + '/reports/create'">
         إرسال تقرير عن البرامج الي اللجنة العليا
       </button>
       <div class="latest-committee-list mb-3">
         <div class="header flex justify-between p-3">
           <div class="latest-committee-title">أخر مستجدات اللجنة</div>
-          <button
-            class="more-btn"
-            [routerLink]="'/main/committee-updates-list/' + project.id"
-          >
+          <button class="more-btn" [routerLink]="'/main/committee-updates-list/' + project.id">
             المزيد
           </button>
         </div>
         <div class="committee-list p-3 flex flex-col gap-2">
-          <div
-            [routerLink]="'/main/committee-updates-list/' + post?.id"
-            class="committee flex gap-4"
-            *ngFor="let post of posts"
-          >
+          <div [routerLink]="'/main/committee-updates-list/' + post?.id" class="committee flex gap-4"
+            *ngFor="let post of posts">
             <img class="committee-image" src="{{ post.image }}" alt="" />
             <div class="committee-details">
               <div class="mb-3">{{ post.title }}</div>
@@ -215,40 +183,33 @@
 
 
       <div class="members-list p-3 flex flex-wrap gap-2">
-        <div
-          class="user-info flex gap-2 mr-1 relative items-center"
-          *ngFor="let member of project?.members"
-          (mouseenter)="showToolTip(member?.id)"
-          (mouseleave)="startHideTimeout()"
-        >
-          <img
-            *ngIf="member.user?.image"
-            [src]="member.user?.image"
-            class="user-image"
-            alt="User image"
-          />
-          <mat-icon *ngIf="!member.user?.image">person</mat-icon>
 
-          {{ member.user?.name }}
+        <div class="w-100 flex justify-between items-center border-b pb-2 mb-2">
+          <span class="text-sm text-gray-700 font-semibold">  الأعضاء</span>
+          <button [routerLink]="'/main/programs/' + projectId + '/members'" class="text-sm text-blue-500 hover:underline">المزيد</button>
+        </div>
 
-          <div
-            *ngIf="tooltipVisible === member?.id"
-            class="custom-tooltip absolute bg-white shadow-md flex items-center justify-center gap-1 p-2"
-            (mouseenter)="cancelHideTimeout()"
-            (mouseleave)="startHideTimeout()"
-          >
-            <mat-icon class="cursor-pointer text-red-500" (click)="openDeleteMemberDialog(member?.id)">
-              delete
-            </mat-icon>
+        <div class="p-3 flex flex-wrap gap-2">
+
+          <div class="user-info flex gap-2 mr-1 relative items-center" *ngFor="let member of project?.members"
+            (mouseenter)="showToolTip(member?.id)" (mouseleave)="startHideTimeout()">
+            <img *ngIf="member.user?.image" [src]="member.user?.image" class="user-image" alt="User image" />
+            <mat-icon *ngIf="!member.user?.image">person</mat-icon>
+
+            {{ member.user?.name }}
+
+            <div *ngIf="tooltipVisible === member?.id"
+              class="custom-tooltip absolute bg-white shadow-md flex items-center justify-center gap-1 p-2"
+              (mouseenter)="cancelHideTimeout()" (mouseleave)="startHideTimeout()">
+              <mat-icon class="cursor-pointer text-red-500" (click)="openDeleteMemberDialog(member?.id)">
+                delete
+              </mat-icon>
+            </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
   <!-- ملفات تم رفعها مؤخرا -->
-  <app-files-list
-    [files]="files"
-    [programName]="project.title"
-  ></app-files-list>
+  <app-files-list [files]="files" [programName]="project.title"></app-files-list>
 </div>

@@ -24,8 +24,11 @@ export class LoginComponent {
     private snackbar: SnackbarService
   ) {
     this.loginForm = this.fb.group({
-      email: ['karim@gmail.com', [Validators.required, Validators.email]],
-      password: ['123456', [Validators.required]],
+      // email: ['karim@gmail.com', [Validators.required, Validators.email]],
+      // password: ['123456', [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]],
+
     });
   }
 

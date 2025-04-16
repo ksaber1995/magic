@@ -7,7 +7,7 @@
         <p><mat-slide-toggle></mat-slide-toggle></p>
         مهامي
       </div>
-      <button class="add-list-btn">اضافة قائمة</button>
+      <button [routerLink]="'/main/programs/create-procedure-group/' + project?.id + '/' + project.title " class="add-list-btn">اضافة قائمة</button>
     </div>
   </div>
   <div class="procedures-list pt-8 p-3 mb-5">
@@ -16,8 +16,7 @@
       <div class="procedure-type-title">الاجراءات قيد التنفيذ</div>
       <div
         class="procedures-wrapper flex gap-2 items-center relative"
-        *ngFor="let procedures of inProgressProcedures"
-        [routerLink]="['/procedures/' + procedures.id]"
+        *ngFor="let procedure of inProgressProcedures"
       >
         <input
           type="checkbox"
@@ -26,40 +25,41 @@
           (click)="changeProceduresStatus(checkbox)"
         />
         <a
-          [routerLink]="[procedures.id]"
+          [routerLink]="'/main/programs/' + project.id + '/procedures/' + '/details/' + procedure.id"
           class="procedures-name block my-2"
-          (mouseenter)="showToolTip(procedures.id)"
+          (mouseenter)="showToolTip(procedure.id)"
           (mouseleave)="startHideTimeout()"
         >
-          {{ procedures.title }}
+          {{ procedure.title }}
         </a>
 
         <!-- Tooltip -->
         <div
-          *ngIf="tooltipVisible == procedures.id"
+          *ngIf="tooltipVisible == procedure.id"
           class="custom-tooltip absolute bg-white shadow-md flex items-center justify-center gap-1 p-2"
           (mouseenter)="cancelHideTimeout()"
           (mouseleave)="startHideTimeout()"
         >
           <i
             class="bi bi-trash3 trash-i"
-            (click)="delete(procedures.id)"
+            (click)="delete(procedure.id)"
           ></i>
-          <i class="bi bi-pencil-square edit-i"></i>
+
+          <i routerLink="/main/programs/{{project.id}}/procedures/update/{{procedure.id}}" class="bi bi-pencil-square edit-i"></i>
         </div>
 
-        <span class="procedures-date" *ngIf="procedures.progress_percentage">
-          % {{ procedures.progress_percentage }}
+        <span class="procedures-date" *ngIf="procedure.progress_percentage">
+          % {{ procedure.progress_percentage }}
         </span>
-        <span class="procedures-date" *ngIf="procedures.comments">
+        <span class="procedures-date" *ngIf="procedure.comments">
           <i class="bi bi-chat"></i>
-          {{ procedures.comments }}
+          {{ procedure.comments }}
         </span>
-        <span class="procedures-date" *ngIf="procedures.userImage">
-          <img src="{{ procedures.userImage }}" alt="" />
+        <span class="procedures-date" *ngIf="procedure.userImage">
+          <img src="{{ procedure.userImage }}" alt="" />
         </span>
       </div>
-      <button class="add-procedures-btn my-2" routerLink="/main/programs/{{projectId}}/procedures/create">اضافة اجراء</button>
+      <button class="add-procedures-btn my-2" routerLink="/main/programs/{{project.id}}/procedures/create">اضافة اجراء</button>
     </div>
     <hr />
 
@@ -67,7 +67,7 @@
       <div class="procedure-type-title"> الإجراءات التي تم تنفيذها </div>
       <div
         class="procedures-wrapper flex gap-2 items-center relative"
-        *ngFor="let procedures of completedProcedures"
+        *ngFor="let procedure of completedProcedures"
       >
         <input
           type="checkbox"
@@ -77,23 +77,23 @@
           (click)="changeProceduresStatus(checkbox)"
         />
         <a
-          [routerLink]="[procedures.id]"
+          [routerLink]="[procedure.id]"
           class="procedures-name done block my-2"
-          (mouseenter)="showToolTip(procedures.id)"
+          (mouseenter)="showToolTip(procedure.id)"
           (mouseleave)="startHideTimeout()"
         >
-          {{ procedures.title }}
+          {{ procedure.title }}
         </a>
 
-        <span class="procedures-date" *ngIf="procedures.progress_percentage">
-          % {{ procedures.progress_percentage }}
+        <span class="procedures-date" *ngIf="procedure.progress_percentage">
+          % {{ procedure.progress_percentage }}
         </span>
-        <span class="procedures-date" *ngIf="procedures.comments">
+        <span class="procedures-date" *ngIf="procedure.comments">
           <i class="bi bi-chat"></i>
-          {{ procedures.comments }}
+          {{ procedure.comments }}
         </span>
-        <span class="procedures-date" *ngIf="procedures.userImage">
-          <img src="{{ procedures.userImage }}" alt="" />
+        <span class="procedures-date" *ngIf="procedure.userImage">
+          <img src="{{ procedure.userImage }}" alt="" />
         </span>
       </div>
     </div>
@@ -103,7 +103,7 @@
       <div class="procedure-type-title"> الإجراءات المتعثرة </div>
       <div
         class="procedures-wrapper flex gap-2 items-center relative"
-        *ngFor="let procedures of stalledProcedures"
+        *ngFor="let procedure of stalledProcedures"
       >
         <input
           type="checkbox"
@@ -113,23 +113,23 @@
           (click)="changeProceduresStatus(checkbox)"
         />
         <a
-          [routerLink]="[procedures.id]"
+          [routerLink]="[procedure.id]"
           class="procedures-name done block my-2"
-          (mouseenter)="showToolTip(procedures.id)"
+          (mouseenter)="showToolTip(procedure.id)"
           (mouseleave)="startHideTimeout()"
         >
-          {{ procedures.title }}
+          {{ procedure.title }}
         </a>
 
-        <span class="procedures-date" *ngIf="procedures.progress_percentage">
-          % {{ procedures.progress_percentage }}
+        <span class="procedures-date" *ngIf="procedure.progress_percentage">
+          % {{ procedure.progress_percentage }}
         </span>
-        <span class="procedures-date" *ngIf="procedures.comments">
+        <span class="procedures-date" *ngIf="procedure.comments">
           <i class="bi bi-chat"></i>
-          {{ procedures.comments }}
+          {{ procedure.comments }}
         </span>
-        <span class="procedures-date" *ngIf="procedures.userImage">
-          <img src="{{ procedures.userImage }}" alt="" />
+        <span class="procedures-date" *ngIf="procedure.userImage">
+          <img src="{{ procedure.userImage }}" alt="" />
         </span>
       </div>
     </div>

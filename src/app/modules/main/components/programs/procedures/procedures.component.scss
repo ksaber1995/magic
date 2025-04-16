@@ -178,6 +178,11 @@
         font-size: 16px;
         padding: 5px;
         width: fit-content;
+        max-width: 200px;
+        margin-bottom: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         &:hover {
           background: #8bb81f;
           color: #fff;

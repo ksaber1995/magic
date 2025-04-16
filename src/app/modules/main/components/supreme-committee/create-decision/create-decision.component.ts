@@ -74,7 +74,7 @@ export class CreateDecisionComponent implements OnInit {
         content: [null],
         files: [[]],
         progress_percentage: [null],
-        status_id: [null],
+        status_id: [1],
         decision_date: [null]
       })
     }

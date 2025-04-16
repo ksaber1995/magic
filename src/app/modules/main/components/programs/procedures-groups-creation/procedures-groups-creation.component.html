@@ -1,0 +1,24 @@
+<app-bread-crumb [breadCrumbs]="breadCrumbs"></app-bread-crumb>
+
+<div *ngIf="form" class="new-decision-container  h-full">
+  <div class="header p-4">انشاء اجراء</div>
+  <form action="" class="p-4" [formGroup]="form">
+
+
+    <div class="input-field flex justify-between items-center">
+      <label> العنوان </label>
+      <input formControlName="name" type="text" class="title-input" />
+    </div>
+
+
+
+
+    <button [class.loading-btn]="isUpdating" class="add-btn" [disabled]="form.invalid || isUpdating"
+      (click)="takeAction()">
+      <span *ngIf="id">تعديل الإجراء</span>
+      <span *ngIf="!id">
+        اضافة قائمة
+      </span>
+    </button>
+  </form>
+</div>
