@@ -1,4 +1,36 @@
-<div class="admin-comment p-3">
+<!-- list comments  -->
+<ng-container *ngFor="let comment of comments">
+
+  <div class="bg-white mt-4 rounded-md shadow p-4 w-100  text-right flex flex-col gap-2 relative" dir="rtl">
+    <!-- Delete icon -->
+    <button class="absolute top-2 left-2 text-gray-400 hover:text-red-500">
+      <mat-icon>delete</mat-icon>
+    </button>
+
+    <!-- Header: User Info and Image -->
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="text-lg font-medium text-gray-800"> {{comment.user_data?.name}}</div>
+        <img *ngIf="comment.user_data?.image" [src]="comment.user_data?.image" alt="User image"
+          class="w-10 h-10 rounded-full object-cover" />
+
+        <mat-icon *ngIf="!comment.user_data?.image" class="w-10 h-10 rounded-full object-cover">person</mat-icon>
+        </div>
+      </div>
+
+  <!-- Timestamp -->
+  <div class="text-sm text-gray-500">{{comment.created_at | date}}</div>
+
+  <!-- Body -->
+  <p class="text-sm text-gray-700 leading-relaxed">
+    {{ comment.comment }}
+  </p>
+
+  <app-files-list *ngIf="comment.files" [files]="comment.files"></app-files-list>
+  </div>
+</ng-container>
+
+<div class="admin-comment mt-6 p-3">
   <form (submit)="submit()" [formGroup]="form" class="w-full">
     <div class="title my-3">{{user?.name}}</div>
     <div class="input-field">
@@ -8,7 +40,7 @@
 
     <app-files-upload [control]="form.get('files')"></app-files-upload>
 
-    <button  class="add-btn">
+    <button class="add-btn">
       اضافة تعليق
     </button>
   </form>

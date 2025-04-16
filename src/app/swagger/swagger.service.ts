@@ -184,11 +184,10 @@ export class SwaggerService {
   }
 
   updateProcedure(procedure: Partial < Procedure >) {
-    debugger;
     const formData = createFormData(procedure);
     formData.append('_method', 'PUT');
 
-    return this.http.post(ENDPOINT_URI + `procedures/${procedure.id}`, formData);
+    return this.http.post<ResponseItem<Procedure>>(ENDPOINT_URI + `procedures/${procedure.id}`, formData).pipe(map(res=> res.data));
   }
 
   deleteProcedure(id: string) {
@@ -325,7 +324,7 @@ export class SwaggerService {
   updateReport(report: Partial<IReport>) {
     const formData = createFormData(report);
     formData.append('_method', 'PUT');
-    return this.http.post(ENDPOINT_URI + `reports/${report.id}`, formData);
+    return this.http.post<ResponseItem<IReport>>(ENDPOINT_URI + `reports/${report.id}`, formData).pipe(map(res=> res.data));
   }
 
   // Posts

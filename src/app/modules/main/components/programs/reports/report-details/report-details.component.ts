@@ -76,6 +76,10 @@ export class ReportDetailsComponent implements OnInit {
     .updateReport(body)
     .subscribe(res=> {
       this.snackbar.showSuccessSnackbar('تم اضافة التعليق بنجاح')
+
+      this.commentForm.get('comment').reset();
+      this.commentForm.get('files').reset();
+      this.report =res;
     },error=>{
       this.snackbar.showError(error.message);
     });

@@ -9,7 +9,7 @@
       <app-files-list *ngIf="procedure?.files?.length > 0" [files]="procedure.files"></app-files-list>
     </mat-card>
 
-    <app-comments (addComment)="addComment()" [form]="commentForm"></app-comments>
+    <app-comments [comments]="procedure.comments" (addComment)="addComment()" [form]="commentForm"></app-comments>
   </div>
 
 

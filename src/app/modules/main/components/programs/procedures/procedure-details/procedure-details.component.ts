@@ -66,7 +66,12 @@ export class ProcedureDetailsComponent implements OnInit {
     this.swagger
     .updateProcedure(body)
     .subscribe(res=> {
-      this.snackbar.showSuccessSnackbar('تم اضافة التعليق بنجاح')
+      this.snackbar.showSuccessSnackbar('تم اضافة التعليق بنجاح');
+      this.commentForm.get('comment').reset();
+      this.commentForm.get('files').reset();
+
+      this.procedure = res;
+
     },error=>{
       this.snackbar.showError(error.message);
     });
