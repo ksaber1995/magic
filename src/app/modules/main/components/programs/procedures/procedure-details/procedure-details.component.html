@@ -1,1 +1,20 @@
-<p>procedure-details works!</p>
+<app-bread-crumb [breadCrumbs]="breadCrumbs"></app-bread-crumb>
+<div *ngIf="isLoaded" class="procedures-container flex gap-5 pv-5 w-full">
+  <div class="procedure-details w-[67%]">
+    <mat-card class="p-4">
+      <h2>
+        {{procedure.content}}
+      </h2>
+
+      <app-file-list [files]="procedure.files"></app-file-list>
+    </mat-card>
+  </div>
+
+  <div class="latest-reports w-[33%]">
+    <mat-card class="p-4">
+
+
+      Karim
+    </mat-card>
+  </div>
+</div>

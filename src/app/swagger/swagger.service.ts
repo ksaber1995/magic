@@ -162,11 +162,11 @@ export class SwaggerService {
       );
   }
 
-  getOneProcedure(id: string) {
+  getOneProcedure(id: number) {
     this.spinner.showSpinner();
     return this.http
-      .get(ENDPOINT_URI + `procedures/${id}`)
-      .pipe(finalize(() => this.spinner.hideSpinner()));
+      .get<ResponseItem<Procedure>>(ENDPOINT_URI + `procedures/${id}`)
+      .pipe(map(res=>res.data), finalize(() => this.spinner.hideSpinner()));
   }
 
   getProcedureByProjectId(id: number) {

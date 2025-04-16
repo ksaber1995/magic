@@ -56,7 +56,7 @@ export class MembersComponent implements OnInit {
     }
   }
 
-  deleteMemberDialog(id: string){
+  deleteMemberDialog(id: number){
     const dialogRef = this.dialog.open(DeleteDialogComponent);
 
     dialogRef.afterClosed().subscribe((res) => {
@@ -68,7 +68,7 @@ export class MembersComponent implements OnInit {
 
   }
 
-  deleteMember(id: string){
+  deleteMember(id: number){
     this.swagger.deleteMember(id).subscribe((res:any)=>{
       this.snackbar.showSuccessSnackbar('تم حذف العضو بنجاح')
       this.swagger.getOneProject(this.id).subscribe((res:any)=>{

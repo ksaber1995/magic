@@ -1,6 +1,6 @@
 <app-bread-crumb [breadCrumbs]="breadCrumbs"></app-bread-crumb>
 
-<div class="new-procedure-container h-full">
+<div *ngIf="procedureForm" class="new-procedure-container h-full">
   <div class="header p-4">اضافة اجراء جديد</div>
   <form action="" class="p-4" [formGroup]="procedureForm">
     <div class="input-field flex justify-between items-center">

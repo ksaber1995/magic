@@ -7,8 +7,9 @@
       {{ project.content }}
     </div>
   </div>
+
   <div class="flex gap-5">
-    <div class="procedure-details w-[67%]">
+    <div class="procedure-details w-3/4">
       <div class="status-wrapper flex gap-6 mb-4">
         <!-- مؤشرات الاداء للقرارات -->
         <div class="status w-[50%] flex gap-2">
@@ -174,7 +175,7 @@
       ></app-procedures-list>
     </div>
 
-    <div class="latest-reports w-[33%]">
+    <div class="latest-reports w-1/4">
       <button
         class="send-report-btn mb-3"
         [routerLink]="'/main/programs/' + project.id + '/reports/create'"
